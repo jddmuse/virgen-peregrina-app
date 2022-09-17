@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "306802145610",
+    "project_id": "virgen-peregrina-app",
+    "storage_bucket": "virgen-peregrina-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:306802145610:android:cb5740f2c22298b897a9b3",
+        "android_client_info": {
+          "package_name": "com.virgen.peregrina"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "306802145610-lu5nsijl64n1o57viuk7kqo5uknecto2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1yg5_MXCoIG5hDhzCvcEDfiYJw7CM8M0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "306802145610-lu5nsijl64n1o57viuk7kqo5uknecto2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

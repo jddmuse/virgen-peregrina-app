@@ -1,0 +1,14 @@
+<resources>
+    <string name="api_url">https://virgen-peregrina-app.herokuapp.com/</string>
+    <string name="app_name">virgen-peregrina-app</string>
+    <string name="login_button">Continue</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="button_action_continue">Continue</string>
+    <string name="error_generic">Something was wrong, please, try again</string>
+    <string name="error_login">Email or Password wrong, please, check it again</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="label_register">Type the following data to continue.</string>
+    <string name="label_country">Country</string>
+    <string name="error_invalid_user">There is no user record corresponding to this identifier. The user may have been deleted</string>
+</resources>
