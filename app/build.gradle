@@ -80,6 +80,10 @@ dependencies {
     //country picker dialog
     implementation 'com.hbb20:ccp:2.6.0'
 
+    // navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.0-alpha01")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.0-alpha01") 
+
 }
 
 apply plugin: 'com.google.gms.google-services'
