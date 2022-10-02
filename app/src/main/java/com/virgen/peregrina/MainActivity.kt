@@ -1,16 +1,11 @@
 package com.virgen.peregrina
 
-import android.app.Notification
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
-import com.example.virgen_peregrina_app.R
+import androidx.appcompat.app.AppCompatActivity
 import com.example.virgen_peregrina_app.databinding.ActivityMainBinding
-import com.virgen.peregrina.ui.home.HomeFragment
-import com.virgen.peregrina.ui.notification.NotificationFragment
-import com.virgen.peregrina.ui.profile.ProfileFragment
+import com.virgen.peregrina.ui.peregrinacion.PeregrinacionActivity
 import com.virgen.peregrina.util.UIBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,7 +26,11 @@ class MainActivity : AppCompatActivity(), UIBehavior {
     }
 
     override fun initUI() {
-        initBottomNavigationView()
+        try {
+            initListeners()
+        } catch (ex: Exception) {
+            Log.e(TAG, "initUI(): Exception -> $ex")
+        }
     }
 
     override fun initObservers() {
@@ -39,56 +38,17 @@ class MainActivity : AppCompatActivity(), UIBehavior {
     }
 
     override fun initListeners() {
-        TODO("Not yet implemented")
-    }
-
-    private fun initBottomNavigationView() {
         try {
-            with(supportFragmentManager) {
-                // initializing
-                val navigation = binding.bottomNavigation
-                val hostFragment = R.id.nav_host_fragment
-
-                // set navController
-                navigation.setupWithNavController(
-                    // getting navController
-                    (findFragmentById(hostFragment) as NavHostFragment).run { navController }
+            binding.peregrinacionCardView.setOnClickListener {
+                Log.i(TAG, "peregrinacionCardView.onClick()")
+                startActivity(
+                    Intent(this, PeregrinacionActivity::class.java)
                 )
-
-                // set Listener
-                navigation.setOnItemSelectedListener { item ->
-                    when (item.itemId) {
-                        R.id.home_fragment -> {
-                            beginTransaction().apply {
-                                replace(hostFragment, HomeFragment.instance)
-                                addToBackStack(null)
-                                commit()
-                            }
-                            true
-                        }
-                        R.id.inbox_fragment -> {
-                            beginTransaction().apply {
-                                replace(hostFragment, NotificationFragment.instance)
-                                addToBackStack(null)
-                                commit()
-                            }
-                            true
-                        }
-                        R.id.profile_fragment -> {
-                            beginTransaction().apply {
-                                replace(hostFragment, ProfileFragment.instance)
-                                addToBackStack(null)
-                                commit()
-                            }
-                            true
-                        }
-                        else -> false
-                    }
-                }
             }
-        } catch (ex:Exception) {
-            Log.e(TAG, "initBottomNavigationView(): Exception -> $ex")
+        } catch (ex: Exception) {
+            Log.e(TAG, "initListeners(): Exception -> $ex")
         }
     }
+
 
 }

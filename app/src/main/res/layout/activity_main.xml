@@ -4,27 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/dp_16"
     tools:context="com.virgen.peregrina.MainActivity">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/nav_host_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:navGraph="@navigation/nav_main_graph"
-        tools:ignore="NotSibling" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="0dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/notification_card_view"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="@dimen/dp_8"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:drawableStart="@drawable/ic_notification"
+            android:gravity="start|center_vertical"
+            android:paddingHorizontal="@dimen/dp_16"
+            android:paddingVertical="@dimen/dp_8"
+            android:text="Tienes notificaciones pendientes" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/peregrinacion_card_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_184"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/dp_8"
+        app:layout_constraintEnd_toStartOf="@id/ajustes_card_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/nav_main_menu" />
+        app:layout_constraintTop_toBottomOf="@id/notification_card_view">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:gravity="center"
+                android:text="Peregrinación"
+                app:layout_constraintTop_toTopOf="@id/virgen_image_view" />
+
+            <ImageView
+                android:id="@+id/virgen_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:paddingTop="@dimen/dp_32"
+                android:paddingBottom="@dimen/dp_16"
+                android:scaleType="fitXY"
+                android:src="@drawable/virgen" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/ajustes_card_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_184"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_16"
+        app:cardCornerRadius="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/peregrinacion_card_view"
+        app:layout_constraintTop_toBottomOf="@id/notification_card_view">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:gravity="center"
+                android:text="Ajustes"
+                app:layout_constraintTop_toTopOf="@id/profile_image_view" />
+
+            <ImageView
+                android:id="@+id/profile_image_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:paddingTop="@dimen/dp_32"
+                android:paddingBottom="@dimen/dp_16"
+                android:scaleType="fitXY"
+                android:src="@drawable/pastor" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

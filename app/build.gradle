@@ -84,6 +84,9 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0-alpha01")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0-alpha01")
 
+    //circular image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

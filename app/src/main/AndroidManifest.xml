@@ -10,6 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Virgenperegrinaapp">
         <activity
+            android:name="com.virgen.peregrina.ui.peregrinacion.PeregrinacionActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name="com.virgen.peregrina.ui.register.RegisterActivity"
             android:exported="false" />
         <activity
