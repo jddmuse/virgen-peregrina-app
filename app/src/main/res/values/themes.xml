@@ -12,13 +12,29 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:colorBackground">@color/color_background</item>
         <item name="buttonStyle">@style/CustomButtonStyle</item>
+        <item name="materialButtonStyle">@style/CustomButtonStyle</item>
+        <item name="textInputStyle">@style/CustomTextInputLayoutStyle</item>
+        <!--        <item name="editTextStyle">@style/CustomTextInputEdiTextStyle</item>-->
     </style>
 
     <style name="CustomButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="cornerRadius">@dimen/dp_64</item>
         <item name="android:height">@dimen/dp_56</item>
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Body1</item>
+    </style>
+
+    <style name="CustomTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxCornerRadiusBottomEnd">@dimen/dp_8</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/dp_8</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/dp_8</item>
+        <item name="boxCornerRadiusTopStart">@dimen/dp_8</item>
+    </style>
+
+    <style name="DialogAnimation" parent="Theme.MaterialComponents">
+        <item name="android:windowEnterAnimation">@anim/slide_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_bottom</item>
     </style>
 
 </resources>

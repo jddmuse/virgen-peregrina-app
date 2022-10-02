@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
+import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.data.request.SignUpRequest
 import com.virgen.peregrina.domain.signup.SignUpWithVirgenPeregrinaUseCase
 import com.virgen.peregrina.util.EMPTY_STRING
@@ -40,6 +41,11 @@ class RegisterViewModel @Inject constructor(
     private var setCity: String = EMPTY_STRING
     private var setAddress: String = EMPTY_STRING
 
+    private val setReplicas = mutableListOf<ReplicaModel>()
+    private var setCodeReplica: String = EMPTY_STRING
+    private var setReceivedDateReplica: String = EMPTY_STRING
+    private var setRepairRequired: Boolean = false
+
     private val _startMainActivity = MutableLiveData<Boolean>()
     val startMainActivity: LiveData<Boolean> get() = _startMainActivity
 
@@ -64,6 +70,15 @@ class RegisterViewModel @Inject constructor(
     private val _cellphoneErrorMsg = MutableLiveData<String?>()
     val cellphoneErrorMsg: LiveData<String?> get() = _cellphoneErrorMsg
 
+    private val _codeReplicaErrorMsg = MutableLiveData<String?>()
+    val codeReplicaErrorMsg: LiveData<String?> get() = _codeReplicaErrorMsg
+
+    private val _receivedDateErrorMsg = MutableLiveData<String?>()
+    val receivedDateErrorMsg: LiveData<String?> get() = _receivedDateErrorMsg
+
+    private val _onCloseDatePickerDialog = MutableLiveData<Boolean>()
+    val onCloseDatePickerDialog: LiveData<Boolean> get() = _onCloseDatePickerDialog
+
 
     fun onCreate() {
         with(preferencesManager) {
@@ -74,8 +89,10 @@ class RegisterViewModel @Inject constructor(
 
     fun onValueChanged(value: Any?, inputType: RegisterInputType) {
         try {
-            Log.i(TAG, "METHOD CALLED: onValueChanged()")
-            Log.i(TAG, "PARAMS: $value, $inputType")
+            Log.i(
+                TAG, "METHOD CALLED: onValueChanged() " +
+                        "PARAMS: $value, $inputType"
+            )
             val valueAux = value?.toString() ?: EMPTY_STRING
             when (inputType) {
                 RegisterInputType.NAME -> setName = valueAux
@@ -91,6 +108,65 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
+    fun onValueChanged(value: Any?, inputType: ReplicaDialogInputType) {
+        try {
+            Log.i(
+                TAG, "METHOD CALLED: onValueChanged() " +
+                        "PARAMS: $value, $inputType"
+            )
+            when (inputType) {
+                ReplicaDialogInputType.CODE -> {
+                    val valueAux = value?.toString() ?: EMPTY_STRING
+                    setCodeReplica = valueAux
+                }
+                ReplicaDialogInputType.DATE -> {
+                    val valueAux = value?.toString() ?: EMPTY_STRING
+                    setReceivedDateReplica = valueAux
+                }
+                ReplicaDialogInputType.REPAIR_REQUIRED -> {
+                    val valueAux = value as Boolean? ?: false
+                    setRepairRequired = valueAux
+                }
+            }
+        } catch (ex: Exception) {
+            Log.e(TAG, "onValueChanged() -> $ex")
+        }
+    }
+
+    fun onReplicaSaved() {
+        try {
+            if (noReplicaErrorExists()) {
+                setReplicas.add(
+                    ReplicaModel(
+                        code = setCodeReplica,
+                        received_date = setReceivedDateReplica,
+                        repair_required = setRepairRequired
+                    )
+                )
+                setCodeReplica = EMPTY_STRING
+                setReceivedDateReplica = EMPTY_STRING
+                setRepairRequired = false
+                _onCloseDatePickerDialog.value = !(_onCloseDatePickerDialog.value ?: false)
+            }
+        } catch (ex: Exception) {
+            Log.e(TAG, "onReplicaSaved() -> $ex")
+        }
+    }
+
+    private fun noReplicaErrorExists(): Boolean = when {
+        setCodeReplica.isEmpty() -> {
+            _codeReplicaErrorMsg.value =
+                resourceProvider.getStringResource(R.string.error_field_required)
+            false
+        }
+        setReceivedDateReplica.isEmpty() -> {
+            _receivedDateErrorMsg.value =
+                resourceProvider.getStringResource(R.string.error_field_required)
+            false
+        }
+        else -> true
+    }
+
     fun onActionButton() {
         try {
             Log.i(TAG, "$METHOD_CALLED onActionButton()")
@@ -103,7 +179,8 @@ class RegisterViewModel @Inject constructor(
                     city = setCity,
                     country = setCountry,
                     cellphone = getCellphone(setCountryCode, setCellphone),
-                    address = setAddress
+                    address = setAddress,
+                    replicas = setReplicas
                 )
                 viewModelScope.launch {
                     when (val result = signUpWithVirgenPeregrinaUseCase(signUpRequest)) {
@@ -129,7 +206,8 @@ class RegisterViewModel @Inject constructor(
             false
         }
         setLastName.isEmpty() -> {
-            _lastNameErrorMsg.value = resourceProvider.getStringResource(R.string.error_field_required)
+            _lastNameErrorMsg.value =
+                resourceProvider.getStringResource(R.string.error_field_required)
             false
         }
         setEmail.isEmpty() -> {
@@ -140,18 +218,21 @@ class RegisterViewModel @Inject constructor(
             false
         }
         setCountry.isEmpty() -> {
-            _countryErrorMsg.value = resourceProvider.getStringResource(R.string.error_field_required)
+            _countryErrorMsg.value =
+                resourceProvider.getStringResource(R.string.error_field_required)
             false
         }
         setCountryCode.isEmpty() -> {
             false
         }
         setCellphone.isEmpty() -> {
-            _cellphoneErrorMsg.value = resourceProvider.getStringResource(R.string.error_field_required)
+            _cellphoneErrorMsg.value =
+                resourceProvider.getStringResource(R.string.error_field_required)
             false
         }
         setAddress.isEmpty() -> {
-            _addressErrorMsg.value = resourceProvider.getStringResource(R.string.error_field_required)
+            _addressErrorMsg.value =
+                resourceProvider.getStringResource(R.string.error_field_required)
             false
         }
         else -> true

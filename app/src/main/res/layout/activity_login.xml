@@ -7,14 +7,15 @@
     android:paddingHorizontal="@dimen/dp_32"
     tools:context="com.virgen.peregrina.ui.login.LoginActivity">
 
-    <!--    <TextView-->
-    <!--        style="@style/TextAppearance.AppCompat.Title"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:gravity="center"-->
-    <!--        android:text=""-->
-    <!--        app:layout_constraintBottom_toTopOf="@id/email_input_layout"-->
-    <!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <TextView
+        android:id="@+id/register_label"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="ir a register activity"
+        app:layout_constraintBottom_toTopOf="@id/email_input_layout"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_input_layout"

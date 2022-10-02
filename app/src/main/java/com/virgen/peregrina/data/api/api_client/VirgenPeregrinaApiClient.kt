@@ -11,7 +11,7 @@ import retrofit2.http.POST
 
 interface VirgenPeregrinaApiClient {
 
-    @GET("user/login")
+    @POST("user/login")
     suspend fun loginWithVirgenPeregrina(
         @Body loginRequest: LoginRequest
     ): BaseResponseApi<LoginResponse>

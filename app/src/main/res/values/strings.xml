@@ -11,6 +11,10 @@
     <string name="label_register">Type the following data to continue.</string>
     <string name="label_country">Country</string>
     <string name="error_invalid_user">There is no user record corresponding to this identifier. The user may have been deleted</string>
+    <string name="label_have_replica">Do you have a replica?</string>
+    <string name="label_positive_action">Yes</string>
+    <string name="label_negative_action">No</string>
+    <string name="button_action_add_replica">Add new</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
