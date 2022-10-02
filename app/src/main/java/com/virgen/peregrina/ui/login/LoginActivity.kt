@@ -119,4 +119,13 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
             Log.e(TAG, "initListeners(): Exception -> $ex")
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+        with(binding) {
+            loginButton.isEnabled = true
+            progressBar.visibility = View.GONE
+        }
+    }
+
 }

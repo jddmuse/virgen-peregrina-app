@@ -125,15 +125,16 @@ class LoginViewModel @Inject constructor(
                                 } else {
                                     _errorMsg.value = resourceProvider
                                         .getStringResource(R.string.error_login)
+                                    _enableButton.value = true
                                 }
                             }
                         }
                         is BaseResultUseCase.NullOrEmptyData -> {
-//                            _errorMsg.value = resourceProvider
-//                                .getStringResource(R.string.error_generic)
+                            _errorMsg.value = resourceProvider
+                                .getStringResource(R.string.error_generic)
+                            _enableButton.value = true
                         }
                     }
-                    _enableButton.value = true
                 }
             }
         } catch (ex: Exception) {
@@ -189,6 +190,7 @@ class LoginViewModel @Inject constructor(
 
     private fun loginWithVirgenPeregrina() {
         try {
+            _enableButton.value = false
             viewModelScope.launch {
                 val result = loginWithVirgenPeregrinaUseCase(
                     LoginRequest(setUUID, setEmail)
@@ -197,8 +199,16 @@ class LoginViewModel @Inject constructor(
                     is BaseResultUseCase.Success -> {
                         _startMainActivity.value = !(_startMainActivity.value ?: false)
                     }
-                    is BaseResultUseCase.NullOrEmptyData -> {}
-                    is BaseResultUseCase.Error -> {}
+                    is BaseResultUseCase.NullOrEmptyData -> {
+                        _errorMsg.value = resourceProvider
+                            .getStringResource(R.string.error_generic)
+                        _enableButton.value = true
+                    }
+                    is BaseResultUseCase.Error -> {
+                        _errorMsg.value = resourceProvider
+                            .getStringResource(R.string.error_generic)
+                        _enableButton.value = true
+                    }
                 }
             }
         } catch (ex: Exception) {
