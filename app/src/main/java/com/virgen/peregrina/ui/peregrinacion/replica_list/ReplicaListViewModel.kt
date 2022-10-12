@@ -1,4 +1,4 @@
-package com.virgen.peregrina.ui.peregrinacion
+package com.virgen.peregrina.ui.peregrinacion.replica_list
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -16,9 +16,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PeregrinacionViewModel @Inject constructor(
+class ReplicaListViewModel @Inject constructor(
     private val resourceProvider: ResourceProvider,
-    private val getAvailableReplicasUseCase: GetAvailableReplicasUseCase
+    private val getAvailableReplicasUseCase: GetAvailableReplicasUseCase,
 ) : ViewModel() {
 
     companion object {

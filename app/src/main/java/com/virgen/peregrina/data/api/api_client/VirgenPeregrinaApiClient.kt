@@ -1,6 +1,7 @@
 package com.virgen.peregrina.data.api.api_client
 
 import com.virgen.peregrina.data.model.ReplicaModel
+import com.virgen.peregrina.data.model.TestimonyModel
 import com.virgen.peregrina.data.request.LoginRequest
 import com.virgen.peregrina.data.request.SignUpRequest
 import com.virgen.peregrina.data.response.LoginResponse
@@ -9,6 +10,7 @@ import com.virgen.peregrina.util.base.BaseResponseApi
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface VirgenPeregrinaApiClient {
 
@@ -27,5 +29,10 @@ interface VirgenPeregrinaApiClient {
     suspend fun getAllReplicas(
 
     ): BaseResponseApi<List<ReplicaModel>>
+
+    @GET("testimony/get-all/")
+    suspend fun getTestimoniesByReplica(
+        @Path("replica_id") replica_id: Long
+    ): BaseResponseApi<List<TestimonyModel>>
 
 }

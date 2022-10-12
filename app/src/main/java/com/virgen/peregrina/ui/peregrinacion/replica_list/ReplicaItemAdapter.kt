@@ -1,4 +1,4 @@
-package com.virgen.peregrina.ui.peregrinacion
+package com.virgen.peregrina.ui.peregrinacion.replica_list
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ItemAvailableReplicaBinding
 import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.util.METHOD_CALLED
+import com.virgen.peregrina.util.OnItemActionListener
 
 class ReplicaItemAdapter : RecyclerView.Adapter<ReplicaItemAdapter.ViewHolder>() {
 
@@ -17,6 +18,7 @@ class ReplicaItemAdapter : RecyclerView.Adapter<ReplicaItemAdapter.ViewHolder>()
     }
 
     private val list = mutableListOf<ReplicaModel>()
+    private var observer: OnItemActionListener<ReplicaModel>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -27,7 +29,11 @@ class ReplicaItemAdapter : RecyclerView.Adapter<ReplicaItemAdapter.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        val item = list[position]
+        holder.bind(item)
+        holder.itemView.setOnClickListener {
+            observer?.onClick(item)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -39,6 +45,10 @@ class ReplicaItemAdapter : RecyclerView.Adapter<ReplicaItemAdapter.ViewHolder>()
         list.clear()
         list.addAll(data)
         notifyDataSetChanged()
+    }
+
+    fun addObserver(data: OnItemActionListener<ReplicaModel>) {
+        observer = data
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
