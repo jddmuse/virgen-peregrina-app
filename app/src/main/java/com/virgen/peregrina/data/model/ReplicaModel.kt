@@ -7,4 +7,8 @@ data class ReplicaModel(
     val repair_required: Boolean,
     val user_id: Int? = null,
     val user_name: String? = null,
+    var user_cellphone: String? = null,
+    var user_country: String? = null,
+    var user_city: String? = null,
+    var user_email: String? = null
 ) : java.io.Serializable

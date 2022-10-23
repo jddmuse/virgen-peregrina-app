@@ -1,4 +1,4 @@
-package com.virgen.peregrina.ui.peregrinacion.replica_details
+package com.virgen.peregrina.ui.replica_details
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.virgen.peregrina.data.model.TestimonyModel
-import com.virgen.peregrina.domain.peregrinacion.GetTestimoniesByReplicaUseCase
+import com.virgen.peregrina.domain.pilgrimage.GetTestimoniesByReplicaUseCase
 import com.virgen.peregrina.util.base.BaseResultUseCase
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,6 +22,8 @@ class ReplicaDetailsViewModel @Inject constructor(
     private val _testimonies = MutableLiveData<List<TestimonyModel>>()
     val testimonies: LiveData<List<TestimonyModel>> get() = _testimonies
 
+    var getReplicaId: Long = -1
+
     companion object {
         private const val TAG = "ReplicaDetailsViewModel"
     }
@@ -30,7 +32,8 @@ class ReplicaDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 if (replica_id != null)
-                    when (val result = getTestimoniesByReplicaUseCase(replica_id)) {
+                    getReplicaId = replica_id
+                    when (val result = getTestimoniesByReplicaUseCase(getReplicaId)) {
                         is BaseResultUseCase.Success -> {
                             _testimonies.value = result.data ?: emptyList()
                         }

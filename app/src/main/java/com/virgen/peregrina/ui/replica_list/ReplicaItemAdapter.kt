@@ -1,4 +1,4 @@
-package com.virgen.peregrina.ui.peregrinacion.replica_list
+package com.virgen.peregrina.ui.replica_list
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -56,7 +56,11 @@ class ReplicaItemAdapter : RecyclerView.Adapter<ReplicaItemAdapter.ViewHolder>()
         private val binding = ItemAvailableReplicaBinding.bind(view)
 
         fun bind(item: ReplicaModel) {
-            binding.codeTextView.text = item.code
+            with(binding) {
+                codeTextView.text = item.code
+                cityTextView.text = item.user_country + ", " + item.user_city
+                ownerTextView.text = item.user_name
+            }
         }
     }
 

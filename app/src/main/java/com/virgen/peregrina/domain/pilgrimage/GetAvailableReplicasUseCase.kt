@@ -1,4 +1,4 @@
-package com.virgen.peregrina.domain.peregrinacion
+package com.virgen.peregrina.domain.pilgrimage
 
 import android.util.Log
 import com.virgen.peregrina.data.model.ReplicaModel

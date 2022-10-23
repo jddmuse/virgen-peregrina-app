@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.virgen_peregrina_app.databinding.ActivityMainBinding
-import com.virgen.peregrina.ui.peregrinacion.replica_list.ReplicasListActivity
+import com.virgen.peregrina.ui.replica_list.ReplicasListActivity
 import com.virgen.peregrina.util.UIBehavior
 import dagger.hilt.android.AndroidEntryPoint
 

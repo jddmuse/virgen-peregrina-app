@@ -26,7 +26,6 @@ class RegisterViewModel @Inject constructor(
     private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
-
     companion object {
         private const val TAG = "RegisterViewModel"
     }
@@ -180,7 +179,8 @@ class RegisterViewModel @Inject constructor(
                     country = setCountry,
                     cellphone = getCellphone(setCountryCode, setCellphone),
                     address = setAddress,
-                    replicas = setReplicas
+                    replicas = setReplicas,
+                    isPilgrim = true
                 )
                 viewModelScope.launch {
                     when (val result = signUpWithVirgenPeregrinaUseCase(signUpRequest)) {

@@ -5,17 +5,19 @@
     android:layout_height="wrap_content"
     android:layout_marginVertical="@dimen/dp_4"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    app:cardCornerRadius="@dimen/dp_16">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/dp_16"
+        android:paddingVertical="@dimen/dp_16">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/icon_image_view"
             android:layout_width="@dimen/dp_64"
             android:layout_height="@dimen/dp_64"
-            android:padding="@dimen/dp_8"
             android:scaleType="centerCrop"
             android:src="@drawable/virgen_icon"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,9 +27,41 @@
             android:id="@+id/code_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Replica"
+            android:layout_marginStart="@dimen/dp_16"
+            android:text="Code"
             app:layout_constraintStart_toEndOf="@id/icon_image_view"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:textColor="@color/design_default_color_primary"
+            android:id="@+id/available_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:text="Available"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icon_image_view"
+            app:layout_constraintTop_toBottomOf="@id/code_text_view" />
+
+        <TextView
+            android:id="@+id/city_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:text="city"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icon_image_view"
+            app:layout_constraintTop_toBottomOf="@id/available_text_view" />
+
+        <TextView
+            android:id="@+id/owner_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_16"
+            android:text="Owner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icon_image_view"
+            app:layout_constraintTop_toBottomOf="@id/city_text_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,4 +1,4 @@
-package com.virgen.peregrina.ui.peregrinacion.replica_list
+package com.virgen.peregrina.ui.replica_list
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
 import com.virgen.peregrina.data.model.ReplicaModel
-import com.virgen.peregrina.domain.peregrinacion.GetAvailableReplicasUseCase
+import com.virgen.peregrina.domain.pilgrimage.GetAvailableReplicasUseCase
 import com.virgen.peregrina.util.METHOD_CALLED
 import com.virgen.peregrina.util.base.BaseResultUseCase
 import com.virgen.peregrina.util.provider.ResourceProvider

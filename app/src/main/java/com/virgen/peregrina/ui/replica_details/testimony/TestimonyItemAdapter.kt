@@ -1,4 +1,4 @@
-package com.virgen.peregrina.ui.peregrinacion.replica_details.testimony
+package com.virgen.peregrina.ui.replica_details.testimony
 
 import android.view.LayoutInflater
 import android.view.View

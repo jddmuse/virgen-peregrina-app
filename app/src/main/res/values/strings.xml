@@ -17,4 +17,9 @@
     <string name="button_action_add_replica">Add new</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_who_receive">Who receive data</string>
+    <string name="label_attendant_pilgrim">Who attendant the Pilgrimage</string>
+    <string name="label_intention">Intention</string>
+    <string name="label_pilgrimage_success">Pilgrimage started successfully</string>
+    <string name="action_button_yes">Yes</string>
 </resources>

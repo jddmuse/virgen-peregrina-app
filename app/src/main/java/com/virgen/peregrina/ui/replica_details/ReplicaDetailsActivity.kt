@@ -1,5 +1,6 @@
-package com.virgen.peregrina.ui.peregrinacion.replica_details
+package com.virgen.peregrina.ui.replica_details
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.virgen_peregrina_app.databinding.ActivityReplicaDetailsBinding
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.ReplicaModel
-import com.virgen.peregrina.ui.peregrinacion.replica_details.testimony.TestimonyItemAdapter
+import com.virgen.peregrina.ui.pilgrimage.PilgrimageActivity
+import com.virgen.peregrina.ui.replica_details.testimony.TestimonyItemAdapter
 import com.virgen.peregrina.util.UIBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -41,7 +43,10 @@ class ReplicaDetailsActivity : AppCompatActivity(), UIBehavior {
             with(binding) {
                 codeTextView.text = data.code
                 oldTextView.text = data.received_date
-                ownerTextView.text = data.user_name
+                ownerNameTextView.text = data.user_name
+                ownerPhoneTextView.text = data.user_cellphone
+                ownerEmailTextView.text = data.user_email
+                ownerCityTextView.text = data.user_country +", " + data.user_city
             }
             viewModel.onCreate(
                 replica_id = data.id
@@ -76,6 +81,16 @@ class ReplicaDetailsActivity : AppCompatActivity(), UIBehavior {
     }
 
     override fun initListeners() {
-        // implementing
+        try {
+            binding.pilgrimageButton.setOnClickListener {
+                startActivity(
+                    Intent(this, PilgrimageActivity::class.java).apply {
+                        putExtra("replica_id", viewModel.getReplicaId)
+                    }
+                )
+            }
+        } catch (ex: Exception) {
+            Log.e(TAG, "initListeners(): Exception -> $ex")
+        }
     }
 }

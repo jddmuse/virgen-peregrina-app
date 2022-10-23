@@ -35,10 +35,10 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
 
     override fun initUI() {
         try {
-            viewModel.onCreate()
             dialog = ReplicaDialog(this)
             initListeners()
             initObservers()
+            viewModel.onCreate()
         } catch (ex: Exception) {
             Log.e(TAG, "initUI(): Exception -> $ex")
         }
@@ -170,18 +170,15 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
 
     override fun onCountrySelected() {
         with(binding) {
-
             countryEditText.setText(countryCodePicker.selectedCountryName)
             viewModel.onValueChanged(
                 countryCodePicker.selectedCountryName,
                 RegisterInputType.COUNTRY
             )
-
             viewModel.onValueChanged(
                 countryCodePicker.selectedCountryCode,
                 RegisterInputType.COUNTRY_CODE
             )
-
         }
     }
 

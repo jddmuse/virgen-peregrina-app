@@ -1,9 +1,7 @@
-package com.virgen.peregrina.data.response
+package com.virgen.peregrina.data.model
 
-import com.virgen.peregrina.data.model.ReplicaModel
-
-data class LoginResponse(
-    val id: Int,
+data class UserModel(
+    val id: Long,
     val uuid: String,
     val name: String,
     val last_name: String,

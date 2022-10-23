@@ -1,4 +1,4 @@
-package com.virgen.peregrina.ui.peregrinacion.replica_list
+package com.virgen.peregrina.ui.replica_list
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +11,7 @@ import com.example.virgen_peregrina_app.databinding.ActivityPeregrinacionBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.ReplicaModel
-import com.virgen.peregrina.ui.peregrinacion.replica_details.ReplicaDetailsActivity
+import com.virgen.peregrina.ui.replica_details.ReplicaDetailsActivity
 import com.virgen.peregrina.util.METHOD_CALLED
 import com.virgen.peregrina.util.OnItemActionListener
 import com.virgen.peregrina.util.UIBehavior

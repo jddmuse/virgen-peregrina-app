@@ -31,16 +31,26 @@ class UserRepository @Inject constructor(
             }
         }
 
-    suspend fun signUp(singUpRequest: SignUpRequest) =
-        withContext(Dispatchers.IO) {
-            try {
-                Log.i(TAG, "$METHOD_CALLED signUp()")
-                val result = virgenPeregrinaApiClient.signUpWithVirgenPeregrina(singUpRequest)
-                BaseResultRepository.Success(result.data)
-            } catch (ex: Exception) {
-                Log.e(TAG, "signUp(): Exception -> $ex")
-                BaseResultRepository.Error(ex)
-            }
+    suspend fun signUp(singUpRequest: SignUpRequest) = withContext(Dispatchers.IO) {
+        try {
+            Log.i(TAG, "$METHOD_CALLED signUp()")
+            val result = virgenPeregrinaApiClient.signUpWithVirgenPeregrina(singUpRequest)
+            BaseResultRepository.Success(result.data)
+        } catch (ex: Exception) {
+            Log.e(TAG, "signUp(): Exception -> $ex")
+            BaseResultRepository.Error(ex)
         }
+    }
+
+    suspend fun getAllPilgrims() = withContext(Dispatchers.IO) {
+        try {
+            Log.i(TAG, "$METHOD_CALLED getAllPilgrims()")
+            val result = virgenPeregrinaApiClient.getAllPilgrims()
+            BaseResultRepository.Success(result.data)
+        } catch (ex: Exception) {
+            Log.e(TAG, "getAllPilgrims(): Exception -> $ex")
+            BaseResultRepository.Error(ex)
+        }
+    }
 
 }
