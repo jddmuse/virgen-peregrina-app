@@ -34,7 +34,7 @@
 
         <TextView
             android:textColor="@color/design_default_color_primary"
-            android:id="@+id/available_text_view"
+            android:id="@+id/state_text_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_16"
@@ -51,7 +51,7 @@
             android:text="city"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/icon_image_view"
-            app:layout_constraintTop_toBottomOf="@id/available_text_view" />
+            app:layout_constraintTop_toBottomOf="@id/state_text_view" />
 
         <TextView
             android:id="@+id/owner_text_view"

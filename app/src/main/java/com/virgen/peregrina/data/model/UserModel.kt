@@ -14,5 +14,6 @@ data class UserModel(
     val role: String,
     val address: String,
     val replicas: List<ReplicaModel>,
-    val isPilgrim: Boolean
+    val isPilgrim: Boolean,
+    val pilgrimages: List<PilgrimageModel> = emptyList()
 )

@@ -25,7 +25,8 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
     }
 
     private lateinit var binding: ActivityPeregrinacionBinding
-    private lateinit var replicaItemAdapter: ReplicaItemAdapter
+    private lateinit var allReplicaItemAdapter: ReplicaItemAdapter
+    private lateinit var yourReplicaItemAdapter: ReplicaItemAdapter
 
     private val viewModel: ReplicaListViewModel by viewModels()
 
@@ -40,14 +41,22 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
 
     override fun initUI() {
         try {
-            replicaItemAdapter = ReplicaItemAdapter()
-            binding.replicasRecyclerView.apply {
-                layoutManager = LinearLayoutManager(
+            yourReplicaItemAdapter = ReplicaItemAdapter()
+            allReplicaItemAdapter = ReplicaItemAdapter()
+
+            binding.replicasRecyclerView.let {
+                it.layoutManager = LinearLayoutManager(
                     this@ReplicasListActivity,
                     RecyclerView.VERTICAL,
                     false
                 )
-                adapter = replicaItemAdapter
+                it.adapter = allReplicaItemAdapter
+            }
+            binding.yourReplicasRecyclerView.let {
+                it.layoutManager = LinearLayoutManager(
+                    this, RecyclerView.VERTICAL, false
+                )
+                it.adapter = yourReplicaItemAdapter
             }
             viewModel.onCreate()
         } catch (ex: Exception) {
@@ -60,13 +69,16 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
             with(viewModel) {
                 replicas.observe(this@ReplicasListActivity) { list ->
                     Log.i(TAG, "Change Observed: $list")
-                    replicaItemAdapter.updateData(list)
+                    allReplicaItemAdapter.updateData(list)
                 }
                 errorMsg.observe(this@ReplicasListActivity) { msg ->
                     Snackbar.make(
                         binding.replicasRecyclerView,
                         msg.toString(), Snackbar.LENGTH_SHORT
                     ).show()
+                }
+                userData.observe(this@ReplicasListActivity) { data ->
+                    yourReplicaItemAdapter.updateData(data.replicas)
                 }
             }
         } catch (ex: Exception) {
@@ -76,7 +88,7 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
 
     override fun initListeners() {
         try {
-            replicaItemAdapter.addObserver(object : OnItemActionListener<ReplicaModel> {
+            allReplicaItemAdapter.addObserver(object : OnItemActionListener<ReplicaModel> {
                 override fun onClick(item: ReplicaModel) {
                     Log.i(TAG, "$METHOD_CALLED onClick() PARAMS: $item")
                     startActivity(

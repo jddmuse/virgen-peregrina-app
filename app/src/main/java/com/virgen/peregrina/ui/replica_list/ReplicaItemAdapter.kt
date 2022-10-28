@@ -60,6 +60,7 @@ class ReplicaItemAdapter : RecyclerView.Adapter<ReplicaItemAdapter.ViewHolder>()
                 codeTextView.text = item.code
                 cityTextView.text = item.user_country + ", " + item.user_city
                 ownerTextView.text = item.user_name
+                stateTextView.text = if(item.isAvailable) "Available" else "Busy"
             }
         }
     }

@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
-import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import com.virgen.peregrina.MainActivity
@@ -88,6 +87,10 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
                     loginButton.isEnabled = response
                     progressBar.visibility = if (response) View.GONE else View.VISIBLE
                 }
+            }
+
+            viewModel.userData.observe(this) { response ->
+                viewModel.onSaveUserData(response)
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")

@@ -11,4 +11,14 @@
     <color name="color_background">#f5f5f5</color>
     <color name="color_surface">#ffffff</color>
     <color name="color_error">#d50000</color>
+
+
+    <color name="primaryColor">#b3e5fc</color>
+    <color name="primaryLightColor">#e6ffff</color>
+    <color name="primaryDarkColor">#82b3c9</color>
+    <color name="secondaryColor">#874c3e</color>
+    <color name="secondaryLightColor">#b97969</color>
+    <color name="secondaryDarkColor">#572217</color>
+    <color name="primaryTextColor">#000000</color>
+    <color name="secondaryTextColor">#ffffff</color>
 </resources>

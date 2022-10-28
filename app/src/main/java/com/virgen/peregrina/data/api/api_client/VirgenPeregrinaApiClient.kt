@@ -1,6 +1,5 @@
 package com.virgen.peregrina.data.api.api_client
 
-import android.os.UserManager
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.data.model.TestimonyModel
@@ -37,6 +36,11 @@ interface VirgenPeregrinaApiClient {
         @Path("replica_id") replica_id: Long
     ): BaseResponseApi<List<TestimonyModel>>
 
+    @POST("testimony/create")
+    suspend fun sendTestimony(
+        @Body data: TestimonyModel
+    ): BaseResponseApi<TestimonyModel>
+
     @GET("user/get-all-pilgrims")
     suspend fun getAllPilgrims(): BaseResponseApi<List<UserModel>>
 
@@ -44,5 +48,8 @@ interface VirgenPeregrinaApiClient {
     suspend fun createPilgrimage(
         @Body pilgrimageModel: PilgrimageModel
     ): BaseResponseApi<PilgrimageModel>
+
+    @GET("pilgrimage/get-all")
+    suspend fun getAllPilgrimages(): BaseResponseApi<List<PilgrimageModel>>
 
 }

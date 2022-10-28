@@ -7,7 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
+import com.google.gson.Gson
 import com.virgen.peregrina.data.request.LoginRequest
+import com.virgen.peregrina.data.response.LoginResponse
 import com.virgen.peregrina.util.base.BaseResultUseCase
 import com.virgen.peregrina.domain.login.LoginWithFirebaseUseCase
 import com.virgen.peregrina.domain.login.LoginWithVirgenPeregrinaUseCase
@@ -16,6 +18,7 @@ import com.virgen.peregrina.domain.signup.SignUpWithVirgenPeregrinaUseCase
 import com.virgen.peregrina.util.EMPTY_STRING
 import com.virgen.peregrina.util.METHOD_CALLED
 import com.virgen.peregrina.util.manager.PreferencesManager
+import com.virgen.peregrina.util.provider.GlobalProvider
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -26,9 +29,9 @@ class LoginViewModel @Inject constructor(
     private val loginWithFirebaseUseCase: LoginWithFirebaseUseCase,
     private val signUpWithFirebaseUseCase: SignUpWithFirebaseUseCase,
     private val loginWithVirgenPeregrinaUseCase: LoginWithVirgenPeregrinaUseCase,
-    private val signUpWithVirgenPeregrinaUseCase: SignUpWithVirgenPeregrinaUseCase,
     private val resourceProvider: ResourceProvider,
-    private val preferencesManager: PreferencesManager
+    private val preferencesManager: PreferencesManager,
+    private val globalProvider: GlobalProvider
 ) : ViewModel() {
 
     companion object {
@@ -39,6 +42,9 @@ class LoginViewModel @Inject constructor(
     private var setPassword: String = EMPTY_STRING
     private var setUUID: String = EMPTY_STRING
     private var setRememberData: Boolean = false
+
+    private val _userData = MutableLiveData<LoginResponse>()
+    val userData: LiveData<LoginResponse> get() = _userData
 
     private val _startMainActivity = MutableLiveData<Boolean>()
     val startMainActivity: LiveData<Boolean> get() = _startMainActivity
@@ -197,6 +203,8 @@ class LoginViewModel @Inject constructor(
                 )
                 when (result) {
                     is BaseResultUseCase.Success -> {
+                        if (result.data != null)
+                            _userData.value = result.data!!
                         _startMainActivity.value = !(_startMainActivity.value ?: false)
                     }
                     is BaseResultUseCase.NullOrEmptyData -> {
@@ -213,6 +221,16 @@ class LoginViewModel @Inject constructor(
             }
         } catch (ex: Exception) {
             Log.e(TAG, "loginWithVirgenPeregrina() -> Exception: $ex")
+        }
+    }
+
+    fun onSaveUserData(response: LoginResponse) {
+        try {
+//            preferencesManager.userData = Gson().toJson(response)
+            Log.i(TAG, "$METHOD_CALLED onSaveUserData() PARAMS: $response")
+            globalProvider.userData = response
+        } catch (ex: Exception) {
+            Log.e(TAG, "saveUserData() -> Exception: $ex")
         }
     }
 

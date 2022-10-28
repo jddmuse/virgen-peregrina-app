@@ -22,4 +22,8 @@
     <string name="label_intention">Intention</string>
     <string name="label_pilgrimage_success">Pilgrimage started successfully</string>
     <string name="action_button_yes">Yes</string>
+    <string name="label_pilgrimage_finished">La peregrinación que acompañas ha finalizado, por favor, describe la experiencia</string>
+    <string name="action_button_send">Enviar</string>
+    <string name="error_no_internet_connection">You don not have internet, please connect to a Internet and try again</string>
+    <string name="info_testimony_send_successfully">Testimony send successfully</string>
 </resources>

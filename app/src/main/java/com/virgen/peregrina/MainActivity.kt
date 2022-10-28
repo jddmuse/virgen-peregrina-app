@@ -3,10 +3,18 @@ package com.virgen.peregrina
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.virgen_peregrina_app.databinding.ActivityMainBinding
+import com.virgen.peregrina.data.model.PilgrimageModel
+import com.virgen.peregrina.data.response.LoginResponse
+import com.virgen.peregrina.ui.home.HomeViewModel
+import com.virgen.peregrina.ui.home.PilgrimagesAdapter
+import com.virgen.peregrina.ui.home.dialogs.SendTestimonyDialog
 import com.virgen.peregrina.ui.replica_list.ReplicasListActivity
-import com.virgen.peregrina.util.UIBehavior
+import com.virgen.peregrina.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,6 +25,8 @@ class MainActivity : AppCompatActivity(), UIBehavior {
     }
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var pilgrimagesAdapter: PilgrimagesAdapter
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +37,33 @@ class MainActivity : AppCompatActivity(), UIBehavior {
 
     override fun initUI() {
         try {
+            initRecyclerView()
             initListeners()
+            initObservers()
+            viewModel.onCreate()
+            askForNotifications()
         } catch (ex: Exception) {
             Log.e(TAG, "initUI(): Exception -> $ex")
         }
     }
 
     override fun initObservers() {
-        TODO("Not yet implemented")
+        try {
+            viewModel.errorMsg.observe(this) { msg ->
+                getToast(this, msg ?: EMPTY_STRING)
+            }
+            viewModel.pilgrimages.observe(this) { data ->
+                Log.i(TAG, "viewModel.pilgrimages.observe = $data")
+                pilgrimagesAdapter.updateData(data)
+            }
+            viewModel.userData.observe(this) { data: LoginResponse? ->
+                Log.i(TAG, "Change observed = $data")
+                binding.welcomeTextView.text =
+                    "Bienvenid@ ${data?.name ?: EMPTY_STRING} ${data?.last_name ?: EMPTY_STRING}"
+            }
+        } catch (ex: Exception) {
+            Log.e(TAG, "initObservers(): Exception -> $ex")
+        }
     }
 
     override fun initListeners() {
@@ -47,6 +76,75 @@ class MainActivity : AppCompatActivity(), UIBehavior {
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initListeners(): Exception -> $ex")
+        }
+    }
+
+    private fun initRecyclerView() {
+        try {
+            pilgrimagesAdapter = PilgrimagesAdapter()
+            binding.pilgrimagesRecyclerView.let {
+                it.layoutManager = LinearLayoutManager(
+                    this, RecyclerView.VERTICAL, false
+                )
+                it.adapter = pilgrimagesAdapter
+            }
+        } catch (ex: Exception) {
+            Log.e(TAG, "initRecyclerView(): Exception -> $ex")
+        }
+    }
+
+    private fun askForNotifications() {
+        try {
+            Log.i(TAG, "$METHOD_CALLED askForNotifications()")
+            viewModel.userData.value?.let { user ->
+                user.pilgrimages.forEach { pilgrimage ->
+                    askForReturningReplicaAndTestimony(pilgrimage, Pilgrimage.ATTENDANT)
+                }
+                user.replicas.forEach { replica ->
+                    replica.pilgrimages.forEach { pilgrimage ->
+                        askForReturningReplicaAndTestimony(pilgrimage, Pilgrimage.OWNER)
+                    }
+                }
+            }
+        } catch (ex: Exception) {
+            getExceptionLog(TAG, "askForNotifications", ex)
+        }
+    }
+
+    private fun askForReturningReplicaAndTestimony(pilgrimage: PilgrimageModel, type: Int) {
+        try {
+            Log.i(
+                TAG, "$METHOD_CALLED askForReturningReplicaAndTestimony() " +
+                        "params: pilgrimage=$pilgrimage, type=$type"
+            )
+            if (!pilgrimage.have_testimony && type == Pilgrimage.ATTENDANT) {
+                SendTestimonyDialog(this) { testimony ->
+                    viewModel.onSendTestimony(
+                        testimonyMsg = testimony,
+                        replica_id = pilgrimage.replica_id,
+                        user_id = pilgrimage.user_id,
+                        pilgrimage_id = pilgrimage.id!!
+                    )
+                }.show()
+            }
+
+            if (!pilgrimage.replica_is_returned) {
+                viewModel.userData.value?.id?.let { userID ->
+                    // NO soy dueño de la replica y soy el acompañante de la peregrinacion
+                    if (userID != pilgrimage.user_id && type == Pilgrimage.ATTENDANT) {
+                        // pending
+                    // soy dueño de la replica y NO soy acompañante de la peregrinacion
+                    } else if (userID != pilgrimage.user_id && type == Pilgrimage.OWNER) {
+                        // pending
+                    // Soy dueño de la replica y acompañante de la peregrinacion
+                    } else if(userID == pilgrimage.user_id && type == Pilgrimage.OWNER){
+                        // pending
+                    }
+                }
+            }
+
+        } catch (ex: Exception) {
+            getExceptionLog(TAG, "askForReturningReplica", ex)
         }
     }
 

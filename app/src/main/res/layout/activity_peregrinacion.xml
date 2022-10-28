@@ -7,11 +7,37 @@
     android:padding="@dimen/dp_16"
     tools:context="com.virgen.peregrina.ui.replica_list.ReplicasListActivity">
 
+    <TextView
+        android:id="@+id/your_replicas_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tus Replicas"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/your_replicas_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/your_replicas_text_view" />
+
+    <TextView
+        android:id="@+id/all_replicas_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="Todas"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintTop_toBottomOf="@id/your_replicas_recycler_view" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/replicas_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/all_replicas_text_view" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

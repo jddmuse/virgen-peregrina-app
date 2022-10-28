@@ -15,6 +15,7 @@ class PreferencesManager @Inject constructor(
         private const val KEY_UUID = "uuid"
         private const val KEY_EMAIL = "email"
         private const val KEY_PASSWORD = "password"
+        private const val KEY_USER_DATA = "user_data"
     }
 
     private val sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME_PROD, 0)
@@ -63,6 +64,10 @@ class PreferencesManager @Inject constructor(
     var uuid: String?
         get() = sharedPreferences.getString(KEY_UUID, "") ?: ""
         set(value) = putString(KEY_UUID, value ?: "")
+
+    var userData: String?
+        get() = sharedPreferences.getString(KEY_USER_DATA, "") ?: ""
+        set(value) = putString(KEY_USER_DATA, "")
 
 
 }

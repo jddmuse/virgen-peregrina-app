@@ -1,9 +1,10 @@
 package com.virgen.peregrina.data.response
 
+import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.model.ReplicaModel
 
 data class LoginResponse(
-    val id: Int,
+    val id: Long,
     val uuid: String,
     val name: String,
     val last_name: String,
@@ -16,5 +17,6 @@ data class LoginResponse(
     val role: String,
     val address: String,
     val replicas: List<ReplicaModel>,
-    val isPilgrim: Boolean
+    val isPilgrim: Boolean,
+    val pilgrimages: List<PilgrimageModel> = emptyList()
 )
