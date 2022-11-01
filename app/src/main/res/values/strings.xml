@@ -1,29 +1,53 @@
 <resources>
     <string name="api_url">https://virgen-peregrina-app.herokuapp.com/</string>
     <string name="app_name">virgen-peregrina-app</string>
-    <string name="login_button">Continue</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="button_action_continue">Continue</string>
-    <string name="error_generic">Something was wrong, please, try again</string>
-    <string name="error_login">Email or Password wrong, please, check it again</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="label_register">Type the following data to continue.</string>
-    <string name="label_country">Country</string>
-    <string name="error_invalid_user">There is no user record corresponding to this identifier. The user may have been deleted</string>
-    <string name="label_have_replica">Do you have a replica?</string>
-    <string name="label_positive_action">Yes</string>
-    <string name="label_negative_action">No</string>
-    <string name="button_action_add_replica">Add new</string>
+    <string name="login_button" translatable="true">Continue</string>
+    <string name="email" translatable="true">Email</string>
+    <string name="password" translatable="true">Password</string>
+    <string name="button_action_continue" translatable="true">Continue</string>
+    <string name="error_generic" translatable="true">Something was wrong, please, try again</string>
+    <string name="error_login" translatable="true">Email or Password wrong, please, check it again</string>
+    <string name="error_field_required" translatable="true">This field is required</string>
+    <string name="label_register" translatable="true">Type the following data to continue.</string>
+    <string name="label_country" translatable="true">Country</string>
+    <string name="error_invalid_user" translatable="true">There is no user record corresponding to this identifier. The user may have been deleted</string>
+    <string name="label_have_replica" translatable="true">Do you have a replica?</string>
+    <string name="label_positive_action" translatable="true">Yes</string>
+    <string name="label_negative_action" translatable="true">No</string>
+    <string name="button_action_add_replica" translatable="true">Add new</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="label_who_receive">Who receive data</string>
-    <string name="label_attendant_pilgrim">Who attendant the Pilgrimage</string>
-    <string name="label_intention">Intention</string>
-    <string name="label_pilgrimage_success">Pilgrimage started successfully</string>
-    <string name="action_button_yes">Yes</string>
-    <string name="label_pilgrimage_finished">La peregrinación que acompañas ha finalizado, por favor, describe la experiencia</string>
-    <string name="action_button_send">Enviar</string>
-    <string name="error_no_internet_connection">You don not have internet, please connect to a Internet and try again</string>
-    <string name="info_testimony_send_successfully">Testimony send successfully</string>
+
+
+    <string name="label_who_receive" translatable="true">Who receive data</string>
+    <string name="label_attendant_pilgrim" translatable="true">Who attendant the Pilgrimage</string>
+    <string name="label_intention" translatable="true">Intention</string>
+    <string name="label_pilgrimage_success" translatable="true">Pilgrimage started successfully</string>
+    <string name="action_button_yes" translatable="true">Yes</string>
+    <string name="label_pilgrimage_finished" translatable="true">The pilgrimage you are accompanying has ended, please describe the experience</string>
+    <string name="action_button_send" translatable="true">Send</string>
+    <string name="error_no_internet_connection" translatable="true">You don not have internet, please connect to a Internet and try again</string>
+    <string name="info_testimony_send_successfully" translatable="true">Testimony send successfully</string>
+    <string name="label_pilgrimages" translatable="true">Pilgrimages</string>
+    <string name="label_profile" translatable="true">My Profile</string>
+    <string name="label_replicas" translatable="true">Replicas</string>
+    <string name="label_pilgrimage_details" translatable="true">Pilgrimage Details</string>
+    <string name="label_pilgrimage_in_progress">in Pilgrimage</string>
+
+
+    <string name="month_january" translatable="true">Jan</string>
+    <string name="month_february" translatable="true">Feb</string>
+    <string name="month_april" translatable="true">Apr</string>
+    <string name="month_march" translatable="true">Mar</string>
+    <string name="month_may" translatable="true">May</string>
+    <string name="month_june" translatable="true">June</string>
+    <string name="month_july" translatable="true">July</string>
+    <string name="month_august" translatable="true">Aug</string>
+    <string name="month_september" translatable="true">Sep</string>
+    <string name="month_october" translatable="true">Oct</string>
+    <string name="month_november" translatable="true">Nov</string>
+    <string name="month_december" translatable="true">Dec</string>
+
+
 </resources>

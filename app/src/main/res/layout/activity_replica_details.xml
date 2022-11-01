@@ -21,10 +21,10 @@
             android:paddingVertical="@dimen/dp_8">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:padding="@dimen/dp_16"
                 android:id="@+id/icon_image_view"
                 android:layout_width="@dimen/dp_144"
                 android:layout_height="@dimen/dp_144"
-
                 android:src="@drawable/virgen_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

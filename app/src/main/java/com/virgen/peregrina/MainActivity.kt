@@ -8,17 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virgen_peregrina_app.databinding.ActivityMainBinding
+import com.google.gson.Gson
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.response.LoginResponse
 import com.virgen.peregrina.ui.home.HomeViewModel
 import com.virgen.peregrina.ui.home.PilgrimagesAdapter
 import com.virgen.peregrina.ui.home.dialogs.SendTestimonyDialog
+import com.virgen.peregrina.ui.pilgrimage.PilgrimageDetailsActivity
 import com.virgen.peregrina.ui.replica_list.ReplicasListActivity
 import com.virgen.peregrina.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), UIBehavior {
+class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<PilgrimageModel> {
 
     companion object {
         private const val TAG = "MainActivity"
@@ -81,7 +83,7 @@ class MainActivity : AppCompatActivity(), UIBehavior {
 
     private fun initRecyclerView() {
         try {
-            pilgrimagesAdapter = PilgrimagesAdapter()
+            pilgrimagesAdapter = PilgrimagesAdapter(this)
             binding.pilgrimagesRecyclerView.let {
                 it.layoutManager = LinearLayoutManager(
                     this, RecyclerView.VERTICAL, false
@@ -145,6 +147,19 @@ class MainActivity : AppCompatActivity(), UIBehavior {
 
         } catch (ex: Exception) {
             getExceptionLog(TAG, "askForReturningReplica", ex)
+        }
+    }
+
+    override fun onClick(item: PilgrimageModel) {
+        try {
+            val jsonObject = Gson().toJson(item)
+            startActivity(
+                Intent(this, PilgrimageDetailsActivity::class.java).apply {
+                    putExtra("pilgrimage", jsonObject)
+                }
+            )
+        } catch (ex:Exception) {
+            getExceptionLog(TAG, "onClick", ex)
         }
     }
 

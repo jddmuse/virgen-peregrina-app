@@ -9,8 +9,11 @@ import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ItemPilgrimageBinding
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.util.METHOD_CALLED
+import com.virgen.peregrina.util.OnItemActionListener
+import com.virgen.peregrina.util.formatDateForView
 
 class PilgrimagesAdapter(
+    private val onItemActionListener: OnItemActionListener<PilgrimageModel>,
     private var list: List<PilgrimageModel> = emptyList()
 ) : RecyclerView.Adapter<PilgrimagesAdapter.ViewHolder>() {
 
@@ -27,7 +30,11 @@ class PilgrimagesAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        val item = list[position]
+        holder.bind(item)
+        holder.itemView.setOnClickListener {
+            onItemActionListener.onClick(item)
+        }
     }
 
     override fun getItemCount(): Int =
@@ -44,7 +51,7 @@ class PilgrimagesAdapter(
 
         fun bind(item: PilgrimageModel) {
             with(binding) {
-                startDateTextView.text = item.date_start
+                startDateTextView.text = formatDateForView(itemView.context, item.date_start)
                 intentionTextView.text = item.intention
                 cityTextView.text = "${item.city}, ${item.country}"
                 stateTextView.text = item.state

@@ -18,7 +18,7 @@ class ReplicaItemAdapter : RecyclerView.Adapter<ReplicaItemAdapter.ViewHolder>()
     }
 
     private val list = mutableListOf<ReplicaModel>()
-    private var observer: OnItemActionListener<ReplicaModel>? = null
+    private val observers: MutableList<OnItemActionListener<ReplicaModel>> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -32,7 +32,7 @@ class ReplicaItemAdapter : RecyclerView.Adapter<ReplicaItemAdapter.ViewHolder>()
         val item = list[position]
         holder.bind(item)
         holder.itemView.setOnClickListener {
-            observer?.onClick(item)
+            observers.forEach { it.onClick(item) }
         }
     }
 
@@ -48,7 +48,7 @@ class ReplicaItemAdapter : RecyclerView.Adapter<ReplicaItemAdapter.ViewHolder>()
     }
 
     fun addObserver(data: OnItemActionListener<ReplicaModel>) {
-        observer = data
+        observers.add(data)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -60,7 +60,7 @@ class ReplicaItemAdapter : RecyclerView.Adapter<ReplicaItemAdapter.ViewHolder>()
                 codeTextView.text = item.code
                 cityTextView.text = item.user_country + ", " + item.user_city
                 ownerTextView.text = item.user_name
-                stateTextView.text = if(item.isAvailable) "Available" else "Busy"
+                stateTextView.text = if (item.isAvailable) "Available" else "Busy"
             }
         }
     }

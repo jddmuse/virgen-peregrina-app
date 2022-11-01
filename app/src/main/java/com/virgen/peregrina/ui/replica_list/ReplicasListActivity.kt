@@ -88,6 +88,21 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
 
     override fun initListeners() {
         try {
+            yourReplicaItemAdapter.addObserver(object : OnItemActionListener<ReplicaModel> {
+                override fun onClick(item: ReplicaModel) {
+                    Log.i(TAG, "$METHOD_CALLED onClick() PARAMS: $item")
+                    startActivity(
+                        Intent(
+                            this@ReplicasListActivity,
+                            ReplicaDetailsActivity::class.java
+                        ).apply {
+                            putExtra("replica", Gson().toJson(item))
+                            putExtra("pilgrimage_enabled", true)
+                        }
+                    )
+                }
+            })
+
             allReplicaItemAdapter.addObserver(object : OnItemActionListener<ReplicaModel> {
                 override fun onClick(item: ReplicaModel) {
                     Log.i(TAG, "$METHOD_CALLED onClick() PARAMS: $item")
@@ -95,7 +110,10 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
                         Intent(
                             this@ReplicasListActivity,
                             ReplicaDetailsActivity::class.java
-                        ).apply { putExtra("replica", Gson().toJson(item)) }
+                        ).apply {
+                            putExtra("replica", Gson().toJson(item))
+                            putExtra("pilgrimage_enabled", false)
+                        }
                     )
                 }
             })

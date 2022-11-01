@@ -4,15 +4,19 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityReplicaDetailsBinding
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.ui.pilgrimage.PilgrimageActivity
 import com.virgen.peregrina.ui.replica_details.testimony.TestimonyItemAdapter
+import com.virgen.peregrina.util.EMPTY_STRING
 import com.virgen.peregrina.util.UIBehavior
+import com.virgen.peregrina.util.formatLocation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -39,6 +43,8 @@ class ReplicaDetailsActivity : AppCompatActivity(), UIBehavior {
         try {
             initRecyclerView()
             val jsonObject = intent.getStringExtra("replica")
+            val pilgrimageEnabled = intent.getBooleanExtra("pilgrimage_enabled", false)
+
             val data = Gson().fromJson(jsonObject, ReplicaModel::class.java)
             with(binding) {
                 codeTextView.text = data.code
@@ -46,7 +52,16 @@ class ReplicaDetailsActivity : AppCompatActivity(), UIBehavior {
                 ownerNameTextView.text = data.user_name
                 ownerPhoneTextView.text = data.user_cellphone
                 ownerEmailTextView.text = data.user_email
-                ownerCityTextView.text = data.user_country +", " + data.user_city
+                ownerCityTextView.text = formatLocation(
+                    city = data.user_city ?: EMPTY_STRING,
+                    country = data.user_country ?: EMPTY_STRING
+                )
+                pilgrimageButton.visibility = if (pilgrimageEnabled)
+                    View.VISIBLE else View.GONE
+                if (!data.isAvailable) {
+                    pilgrimageButton.text = getString(R.string.label_pilgrimage_in_progress)
+                    pilgrimageButton.isEnabled = false
+                }
             }
             viewModel.onCreate(
                 replica_id = data.id

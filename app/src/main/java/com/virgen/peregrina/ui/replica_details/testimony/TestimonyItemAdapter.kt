@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ItemTestimonyBinding
 import com.virgen.peregrina.data.model.TestimonyModel
+import com.virgen.peregrina.util.EMPTY_STRING
+import com.virgen.peregrina.util.formatDateForView
 
 class TestimonyItemAdapter(
     private var list: List<TestimonyModel> = emptyList()
@@ -42,6 +44,7 @@ class TestimonyItemAdapter(
             with(binding) {
                 nameTextView.text = item.user_name
                 testimonyTextView.text = item.value
+                dateTextView.text = formatDateForView(itemView.context, item.date ?: EMPTY_STRING)
             }
         }
 
