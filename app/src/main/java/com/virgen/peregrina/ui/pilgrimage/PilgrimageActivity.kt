@@ -55,7 +55,7 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
                 val adapter = PilgrimsAdapter(
                     this,
                     androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
-                    list.map { "${it.name} ${it.last_name} ${it.email}" }
+                    list.map { "${it.name} ${it.last_name}"}
                 )
                 with(binding.attendantPilgrimEditText) {
                     setAdapter(adapter)

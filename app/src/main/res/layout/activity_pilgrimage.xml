@@ -196,6 +196,7 @@
                         android:maxLines="1"
                         android:id="@+id/attendant_pilgrim_edit_text"
                         android:layout_width="match_parent"
+                        android:paddingHorizontal="@dimen/dp_16"
                         android:layout_height="wrap_content" />
 
                 </com.google.android.material.textfield.TextInputLayout>

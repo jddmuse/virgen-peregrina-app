@@ -34,6 +34,15 @@
     <string name="label_replicas" translatable="true">Replicas</string>
     <string name="label_pilgrimage_details" translatable="true">Pilgrimage Details</string>
     <string name="label_pilgrimage_in_progress">in Pilgrimage</string>
+    <string name="label_need_fix">do it need to fix?</string>
+    <string name="label_replica_state">Replica State</string>
+    <string name="label_has_container">Has it container?</string>
+    <string name="label_replica_data">Replica Data</string>
+
+    <string name="label_good">Good</string>
+    <string name="label_regular">Regular</string>
+    <string name="label_bad">Bad</string>
+
 
 
     <string name="month_january" translatable="true">Jan</string>

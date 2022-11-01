@@ -6,19 +6,35 @@
     android:layout_height="wrap_content"
     android:background="@drawable/shape_dialog_card">
 
+    <TextView
+        android:id="@+id/replica_title_text_view"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:gravity="center"
+        android:text="@string/label_replica_data"
+        app:layout_constraintTop_toBottomOf="@id/action_button" />
+
+    <Button
+        android:id="@+id/action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_16"
+        android:text="Ok"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/content_linear_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/action_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Ok" />
+        android:layout_marginTop="@dimen/dp_24"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/replica_title_text_view">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/code_input_layout"
@@ -38,6 +54,7 @@
             android:id="@+id/date_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
             android:hint="Date you received it"
             app:endIconMode="clear_text">
 
@@ -54,19 +71,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"
-            app:cardCornerRadius="@dimen/dp_8">
+            app:cardCornerRadius="@dimen/dp_16">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/dp_16"
-                android:paddingVertical="@dimen/dp_8">
+                android:paddingVertical="@dimen/dp_16">
 
                 <TextView
+                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="do it need to fix?" />
+                    android:text="@string/label_need_fix" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -81,6 +99,67 @@
 
                     <RadioButton
                         android:id="@+id/negative_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:text="@string/label_negative_action" />
+                </RadioGroup>
+
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/label_replica_state" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/good_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_good" />
+
+                    <RadioButton
+                        android:id="@+id/regular_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:text="@string/label_regular" />
+
+                    <RadioButton
+                        android:id="@+id/bad_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_8"
+                        android:text="@string/label_bad" />
+                </RadioGroup>
+
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:text="@string/label_has_container" />
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/positive_container_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_positive_action" />
+
+                    <RadioButton
+                        android:id="@+id/negative_container_radio_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_8"
