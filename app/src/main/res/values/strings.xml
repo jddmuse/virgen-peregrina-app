@@ -43,6 +43,9 @@
     <string name="label_regular">Regular</string>
     <string name="label_bad">Bad</string>
 
+    <string name="label_container_want">* If youu want to get a container send email to quinteromau@gmail.com</string>
+    <string name="label_send_email_generic">Send email to qinteromau@gmail.com</string>
+
 
 
     <string name="month_january" translatable="true">Jan</string>

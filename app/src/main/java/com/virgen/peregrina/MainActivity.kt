@@ -99,12 +99,12 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
         try {
             Log.i(TAG, "$METHOD_CALLED askForNotifications()")
             viewModel.userData.value?.let { user ->
-                user.pilgrimages.forEach { pilgrimage ->
-                    askForReturningReplicaAndTestimony(pilgrimage, Pilgrimage.ATTENDANT)
-                }
+//                user.pilgrimages.forEach { pilgrimage ->
+//                    askForReturningReplicaAndTestimony(pilgrimage, Pilgrimage.ATTENDANT)
+//                }
                 user.replicas.forEach { replica ->
                     replica.pilgrimages.forEach { pilgrimage ->
-                        askForReturningReplicaAndTestimony(pilgrimage, Pilgrimage.OWNER)
+                        askForReturningReplicaAndTestimony(pilgrimage)
                     }
                 }
             }
@@ -113,13 +113,9 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
         }
     }
 
-    private fun askForReturningReplicaAndTestimony(pilgrimage: PilgrimageModel, type: Int) {
+    private fun askForReturningReplicaAndTestimony(pilgrimage: PilgrimageModel) {
         try {
-            Log.i(
-                TAG, "$METHOD_CALLED askForReturningReplicaAndTestimony() " +
-                        "params: pilgrimage=$pilgrimage, type=$type"
-            )
-            if (!pilgrimage.have_testimony && type == Pilgrimage.ATTENDANT) {
+            if (!pilgrimage.have_testimony && pilgrimage.isFinished) {
                 SendTestimonyDialog(this) { testimony ->
                     viewModel.onSendTestimony(
                         testimonyMsg = testimony,
@@ -129,22 +125,6 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
                     )
                 }.show()
             }
-
-            if (!pilgrimage.replica_is_returned) {
-                viewModel.userData.value?.id?.let { userID ->
-                    // NO soy dueño de la replica y soy el acompañante de la peregrinacion
-                    if (userID != pilgrimage.user_id && type == Pilgrimage.ATTENDANT) {
-                        // pending
-                    // soy dueño de la replica y NO soy acompañante de la peregrinacion
-                    } else if (userID != pilgrimage.user_id && type == Pilgrimage.OWNER) {
-                        // pending
-                    // Soy dueño de la replica y acompañante de la peregrinacion
-                    } else if(userID == pilgrimage.user_id && type == Pilgrimage.OWNER){
-                        // pending
-                    }
-                }
-            }
-
         } catch (ex: Exception) {
             getExceptionLog(TAG, "askForReturningReplica", ex)
         }

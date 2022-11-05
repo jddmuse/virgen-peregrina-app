@@ -3,6 +3,7 @@ package com.virgen.peregrina.ui.register
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -11,6 +12,7 @@ import com.hbb20.CountryCodePicker
 import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.ui.date_picker_dialog.DatePickerFragment
 import com.virgen.peregrina.util.UIBehavior
+import com.virgen.peregrina.util.getExceptionLog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -95,13 +97,13 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
                 dialog.dismiss()
             }
             viewModel.codeReplicaErrorMsg.observe(this) { msg ->
-                with(dialog.binding.codeEditText){
+                with(dialog.binding.codeEditText) {
                     error = msg
                     requestFocus()
                 }
             }
             viewModel.receivedDateErrorMsg.observe(this) { msg ->
-                with(dialog.binding.dateEditText){
+                with(dialog.binding.dateEditText) {
                     error = msg
                     requestFocus()
                 }
@@ -139,32 +141,49 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
                 addReplicaButton.setOnClickListener {
                     dialog.show()
                 }
-                dialog.binding.also {
-                    it.codeEditText.addTextChangedListener { text ->
-                        viewModel.onValueChanged(text, ReplicaDialogInputType.CODE)
-                    }
-                    it.dateEditText.addTextChangedListener { text ->
-                        viewModel.onValueChanged(text, ReplicaDialogInputType.DATE)
-                    }
-                    it.dateEditText.setOnClickListener { view ->
-                        val picker = DatePickerFragment { year, month, day ->
-                            it.dateEditText.setText("$day/${month + 1}/$year")
-                        }
-                        picker.show(supportFragmentManager, TAG)
-                    }
-                    it.positiveRadioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
-                        if (isChecked)
-                            viewModel.onValueChanged(true, ReplicaDialogInputType.REPAIR_REQUIRED)
-                    }
-                    it.actionButton.setOnClickListener {
-                        viewModel.onReplicaSaved()
-                    }
-                }
+                initDialogListeners()
                 countryCodePicker.setOnCountryChangeListener(this@RegisterActivity)
 
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initListeners(): Exception -> $ex")
+        }
+    }
+
+
+    private fun initDialogListeners() {
+        try {
+            dialog.binding.also {
+                it.codeEditText.addTextChangedListener { text ->
+                    viewModel.onValueChanged(text, ReplicaDialogInputType.CODE)
+                }
+                it.dateEditText.addTextChangedListener { text ->
+                    viewModel.onValueChanged(text, ReplicaDialogInputType.DATE)
+                }
+                it.dateEditText.setOnClickListener { view ->
+                    val picker = DatePickerFragment { year, month, day ->
+                        it.dateEditText.setText("$day/${month + 1}/$year")
+                    }
+                    picker.show(supportFragmentManager, TAG)
+                }
+                it.positiveRadioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
+                    if (isChecked)
+                        viewModel.onValueChanged(true, ReplicaDialogInputType.REPAIR_REQUIRED)
+                }
+                it.actionButton.setOnClickListener {
+                    viewModel.onReplicaSaved()
+                }
+                it.positiveRadioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
+                    it.fixingGeneralLabelTextView.visibility =
+                        if (isChecked) View.VISIBLE else View.GONE
+                }
+                it.positiveContainerRadioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
+                    it.containerLabelTextView.visibility =
+                        if (isChecked) View.VISIBLE else View.GONE
+                }
+            }
+        } catch (ex: Exception) {
+            getExceptionLog(TAG, "initDialogListeners", ex)
         }
     }
 

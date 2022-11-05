@@ -107,6 +107,16 @@
 
 
                 <TextView
+                    android:id="@+id/fixing_general_label_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:text="@string/label_send_email_generic"
+                    android:textColor="@color/secondaryColor"
+                    android:visibility="gone" />
+
+
+                <TextView
                     style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -165,6 +175,15 @@
                         android:layout_marginStart="@dimen/dp_8"
                         android:text="@string/label_negative_action" />
                 </RadioGroup>
+
+                <TextView
+                    android:id="@+id/container_label_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_16"
+                    android:text="@string/label_container_want"
+                    android:textColor="@color/secondaryColor"
+                    android:visibility="gone" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
