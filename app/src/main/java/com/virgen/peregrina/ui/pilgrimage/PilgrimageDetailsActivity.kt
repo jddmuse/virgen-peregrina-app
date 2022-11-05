@@ -38,6 +38,13 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
                 cityTextView.text = formatLocation(
                     pilgrimageModel.city, pilgrimageModel.country
                 )
+                receiverUserNameTextView.text = pilgrimageModel.receiver_user_name
+                receiverUserTelephoneTextView.text = pilgrimageModel.receiver_user_telephone
+                receiverUserEmailTextView.text = pilgrimageModel.receiver_user_email
+
+                replicaOwnerUserNameTextView.text = pilgrimageModel.replica_owner_name_id
+                replicaOwnerUserEmailTextView.text = pilgrimageModel.replica_owner_user_email
+                replicaOwnerUserTelephoneTextView.text = pilgrimageModel.replica_owner_user_telephone
             }
         } catch (ex: Exception) {
             getExceptionLog(TAG, "initUI", ex)

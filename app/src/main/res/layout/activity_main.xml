@@ -20,6 +20,25 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/month_message_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            app:cardCornerRadius="@dimen/dp_16"
+            app:layout_constraintTop_toBottomOf="@id/welcome_text_view">
+
+            <TextView
+                android:id="@+id/month_message_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="3"
+                android:padding="@dimen/dp_16"
+                android:text="@string/label_month_message"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+        </com.google.android.material.card.MaterialCardView>
+
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/peregrinacion_card_view"
@@ -32,7 +51,7 @@
             app:cardCornerRadius="@dimen/dp_16"
             app:layout_constraintEnd_toStartOf="@id/ajustes_card_view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/welcome_text_view">
+            app:layout_constraintTop_toBottomOf="@id/month_message_card_view">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -72,7 +91,7 @@
             app:cardCornerRadius="@dimen/dp_16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/peregrinacion_card_view"
-            app:layout_constraintTop_toBottomOf="@id/welcome_text_view">
+            app:layout_constraintTop_toBottomOf="@id/month_message_card_view">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -123,11 +142,11 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    tools:listitem="@layout/item_pilgrimage"
                     android:id="@+id/pilgrimages_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/sp_8" />
+                    android:layout_marginTop="@dimen/sp_8"
+                    tools:listitem="@layout/item_pilgrimage" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

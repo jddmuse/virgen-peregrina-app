@@ -17,7 +17,7 @@
             android:id="@+id/label_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="La peregrinación que acompañas ha finalizado, por favor, describe la experiencia"
+            android:text="@string/label_pilgrimage_finished_2"
             android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -37,6 +37,32 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="3" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/label_replica_returned_same_state" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/positive_container_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_positive_action" />
+
+            <RadioButton
+                android:id="@+id/negative_container_radio_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:text="@string/label_negative_action" />
+        </RadioGroup>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/send_button"

@@ -18,6 +18,7 @@ import com.virgen.peregrina.ui.pilgrimage.PilgrimageDetailsActivity
 import com.virgen.peregrina.ui.replica_list.ReplicasListActivity
 import com.virgen.peregrina.util.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.max
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<PilgrimageModel> {
@@ -39,6 +40,15 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
 
     override fun initUI() {
         try {
+            var maxLinesActived = true
+            with(binding) {
+                monthMessageTextView.setOnClickListener {
+                    monthMessageTextView.apply {
+                        maxLinesActived = !maxLinesActived
+                        maxLines = if(maxLinesActived) 3 else Integer.MAX_VALUE
+                    }
+                }
+            }
             initRecyclerView()
             initListeners()
             initObservers()
@@ -61,7 +71,7 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
             viewModel.userData.observe(this) { data: LoginResponse? ->
                 Log.i(TAG, "Change observed = $data")
                 binding.welcomeTextView.text =
-                    "Bienvenid@ ${data?.name ?: EMPTY_STRING} ${data?.last_name ?: EMPTY_STRING}"
+                    "${data?.name ?: EMPTY_STRING} ${data?.last_name ?: EMPTY_STRING}"
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")
@@ -138,7 +148,7 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
                     putExtra("pilgrimage", jsonObject)
                 }
             )
-        } catch (ex:Exception) {
+        } catch (ex: Exception) {
             getExceptionLog(TAG, "onClick", ex)
         }
     }

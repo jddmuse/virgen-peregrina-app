@@ -112,11 +112,6 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
                 rememberDataSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
                     viewModel.onValueChanged(null, LoginInputType.REMEMBER)
                 }
-                registerLabel.setOnClickListener {
-                    startActivity(
-                        Intent(this@LoginActivity, RegisterActivity::class.java)
-                    )
-                }
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initListeners(): Exception -> $ex")

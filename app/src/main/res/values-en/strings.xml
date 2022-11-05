@@ -1,4 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
     <string name="api_url">https://virgen-peregrina-app.herokuapp.com/</string>
     <string name="app_name">virgen-peregrina-app</string>
     <string name="login_button" translatable="true">Continue</string>
@@ -15,10 +18,6 @@
     <string name="label_positive_action" translatable="true">Yes</string>
     <string name="label_negative_action" translatable="true">No</string>
     <string name="button_action_add_replica" translatable="true">Add new</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
     <string name="label_who_receive" translatable="true">Who receive data</string>
     <string name="label_attendant_pilgrim" translatable="true">Who attendant the Pilgrimage</string>
@@ -38,7 +37,6 @@
     <string name="label_replica_state">Replica State</string>
     <string name="label_has_container">Has it container?</string>
     <string name="label_replica_data">Replica Data</string>
-
     <string name="label_replica_returned_same_state" translatable="true">Is the replica in the same condition it was borrowed?</string>
     <string name="label_pilgrimage_finished_2" translatable="true">The accompanying pilgrimage has ended, please describe the experience</string>
 
@@ -76,6 +74,5 @@ Id en paz hijitos y llevad la paz a todos mis hijos confundidos y perdidos… En
     <string name="month_october" translatable="true">Oct</string>
     <string name="month_november" translatable="true">Nov</string>
     <string name="month_december" translatable="true">Dec</string>
-
 
 </resources>
