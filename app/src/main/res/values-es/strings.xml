@@ -54,8 +54,24 @@
     <string name="label_text_before_finsihing_rosary_item_2" translatable="true">4.2 Si es posible y dependiendo del tiempo de la visita que tengan disponible en el lugar de peregrinación, los encargados de la misión invitarán a que cada persona asistente pase al frente de la Imagen y de rodillas, pida, en el silencio de su corazón, por todas sus intenciones.</string>
     <string name="label_final_farewell">5. Despedida Final</string>
     <string name="label_text_final_farewell">Oración de consagración a María. Bendición final</string>
+    <string name="label_invitation" translatable="true">6. Invitación</string>
+    <string name="label_text_invitation" translatable="true">Informar a la familia que se visita sobre las redes sociales de la misión YouTube, Instagram, Facebook:
+@Carolina Name MDG y pagina oficial www.madredeladivinagracia.org
+Invitarlos a que se conecten a los rosarios de los lunes, rosario de aurora del primer sábado de mes y a las diferentes actividades que se programen</string>
+    <string name="label_virtual_pilgrimage">7. Peregrinación Virtual</string>
+    <string name="label_text_virtual_pilgrimage">Aplican los mismos pasos anteriores, teniendo en cuenta que la Imagen MDG y el libro de notas deben ser llevados previamente y recogidos (ambos de manera personal).</string>
+    <string name="label_how_to_care_replica" translatable="true">8. Como cuidar tu Replica</string>
+    <string name="label_text_how_to_care_replica" translatable="true">- Antes de una visita, limpiar en seco la imagen Peregrina con trapo y al transportarla ojalá utilizar un estuche oficial o uno que sea seguro para este fin.
 
+        \n\n- Para la restauración de las imágenes por deterioro de tiempo y/o manipulación, se debe informar a la cabeza de la misión en cada ciudad, quien así mismo coordinará con el Comité de Virgen Peregrina en Colombia.
 
+        \n\n- Si la virgen sufre alguna rotura o accidente informar también a la cabeza de la misión o al Comité de Virgen Peregrina. Por favor no reparar, lijar, pintar o hacerle alguna modificación a la imagen.
+
+        \n\n- Si la imagen fue extraviada, la persona que realizó la visita debe informar a la cabeza de la misión o al Comité de Virgen Peregrina.
+
+        \n\n- Es importante recordar que estas imágenes de la Madre de la Divina Gracia de la Rosa de la Paz, son solo peregrinas, es decir están de paso en los lugares y por lo tanto NO están a la venta.
+
+        \n\n- En caso de que alguien este interesado en la compra de la imagen pequeña pueden invitarlo a visitar @rositadegracia ó www.rositadegracia.com</string>
 
 
     <string name="label_good">Bueno</string>

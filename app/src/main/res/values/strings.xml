@@ -55,9 +55,24 @@
     <string name="label_text_before_finsihing_rosary_item_2" translatable="true">4.2 If possible and depending on the time of the visit that they have available in the place of pilgrimage, those in charge of the mission will invite each person attending to come in front of the Image and on their knees, ask, in the silence of their hearts, for all your intentions.</string>
     <string name="label_final_farewell">5. Final Farewell</string>
     <string name="label_text_final_farewell">Prayer of consecration to Mary. final blessing</string>
-    
-    
-    
+    <string name="label_invitation" translatable="true">6. Invitation</string>
+    <string name="label_text_invitation" translatable="true">Inform the family that is visited about the social networks of the mission YouTube, Instagram, Facebook:
+@Carolina Name MDG and official page www.madredeladivinagracia.org
+Invite them to connect to the Monday rosaries, the dawn rosary of the first Saturday of the month and to the different activities that are scheduled</string>
+    <string name="label_virtual_pilgrimage" translatable="true">7. Virtual Pilgrimage</string>
+    <string name="label_text_virtual_pilgrimage" translatable="true">The same previous steps apply, taking into account that the MDG Image and the notebook must be previously brought and collected (both personally).</string>
+    <string name="label_how_to_care_replica" translatable="true">8. How to take care of your Replica</string>
+    <string name="label_text_how_to_care_replica" translatable="true">- Before a visit, dry clean the Pilgrim image with a cloth and when transporting it, hopefully use an official case or one that is safe for this purpose.
+
+        \n\n- For the restoration of the images due to deterioration of time and/or manipulation, the head of the mission in each city must be informed, who will also coordinate with the Pilgrim Virgin Committee in Colombia.
+
+        \n\n- If the virgin suffers any breakage or accident, also inform the head of the mission or the Pilgrim Virgin Committee. Please do not repair, sand, paint or make any modifications to the image.
+
+        \n\n- If the image was lost, the person who made the visit must inform the head of the mission or the Pilgrim Virgin Committee.
+
+        \n\n- It is important to remember that these images of the Mother of Divine Grace of the Rose of Peace are only pilgrims, that is, they are passing through places and therefore are NOT for sale.
+
+        \n\n- In case someone is interested in buying the small image, they can invite them to visit @rositadegracia or www.rositadegracia.com</string>
     
 
     <string name="label_good">Good</string>
