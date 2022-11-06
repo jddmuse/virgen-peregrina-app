@@ -41,6 +41,24 @@
 
     <string name="label_replica_returned_same_state" translatable="true">Is the replica in the same condition it was borrowed?</string>
     <string name="label_pilgrimage_finished_2" translatable="true">The accompanying pilgrimage has ended, please describe the experience</string>
+    <string name="label_guidelines" translatable="true">Guidelines</string>
+    <string name="label_pilgrimage_guidelines" translatable="true">Pilgrimage Guidelines</string>
+    <string name="label_mobility_image_conditions" translatable="true">1. Image Mobility conditions</string>
+    <string name="label_text_mobility_image_conditions" translatable="true">The image must be taken to the place of the visit and retrieved personally. If this is not possible, they must coordinate with another person from the mission who can do it.</string>
+    <string name="label_visit_time" translatable="true">2. Visit Time</string>
+    <string name="label_text_visit_time" translatable="true">One (1) to fifteen (15) days</string>
+    <string name="label_prayer_of_rosary" translatable="true">3. Prayer of the Rosary</string>
+    <string name="label_text_prayer_of_rosary" translatable="true">Prior to the beginning of the Holy Rosary, light the candle arranged in the home visited with the flame of beautiful love. Follow the official format of the Rosary of the MDG Mission.</string>
+    <string name="label_before_finishing_rosary" translatable="true">4. Before finishing the Rosary:</string>
+    <string name="label_text_before_finishing_rosary" translatable="true">during the recitation of the Holy Rosary, after the prayer of Consecration to the Virgin Mary and before the final blessing, the pilgrims must guide two moments specials:</string>
+    <string name="label_text_before_finsihing_rosary_item_1" translatable="true">4.1 Tell the story of the Pilgrim Image and/or read some excerpts from the messages that Our Lady has given to Carolina Name and that are included in the brochure of the pilgrim mission.</string>
+    <string name="label_text_before_finsihing_rosary_item_2" translatable="true">4.2 If possible and depending on the time of the visit that they have available in the place of pilgrimage, those in charge of the mission will invite each person attending to come in front of the Image and on their knees, ask, in the silence of their hearts, for all your intentions.</string>
+    <string name="label_final_farewell">5. Final Farewell</string>
+    <string name="label_text_final_farewell">Prayer of consecration to Mary. final blessing</string>
+    
+    
+    
+    
 
     <string name="label_good">Good</string>
     <string name="label_regular">Regular</string>

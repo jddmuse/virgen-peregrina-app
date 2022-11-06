@@ -3,7 +3,6 @@ package com.virgen.peregrina.ui.pilgrimage
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import com.example.virgen_peregrina_app.R
@@ -11,7 +10,6 @@ import com.example.virgen_peregrina_app.databinding.ActivityPilgrimageBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hbb20.CountryCodePicker
 import com.virgen.peregrina.ui.date_picker_dialog.DatePickerFragment
-import com.virgen.peregrina.ui.register.RegisterActivity
 import com.virgen.peregrina.ui.register.RegisterInputType
 import com.virgen.peregrina.util.UIBehavior
 import com.virgen.peregrina.util.formatDate
@@ -55,7 +53,7 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
                 val adapter = PilgrimsAdapter(
                     this,
                     androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
-                    list.map { "${it.name} ${it.last_name}"}
+                    list.map { "${it.name} ${it.lastName}"}
                 )
                 with(binding.attendantPilgrimEditText) {
                     setAdapter(adapter)

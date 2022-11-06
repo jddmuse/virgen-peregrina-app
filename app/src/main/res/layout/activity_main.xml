@@ -49,7 +49,7 @@
             android:clickable="true"
             android:focusable="true"
             app:cardCornerRadius="@dimen/dp_16"
-            app:layout_constraintEnd_toStartOf="@id/ajustes_card_view"
+            app:layout_constraintEnd_toStartOf="@id/guidelines_card_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/month_message_card_view">
 
@@ -71,19 +71,18 @@
                     android:id="@+id/virgen_image_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/dp_16"
-                    android:paddingTop="@dimen/dp_32"
+                    android:layout_marginHorizontal="@dimen/dp_44"
+                    android:paddingTop="@dimen/dp_44"
                     android:paddingBottom="@dimen/dp_16"
                     android:scaleType="fitXY"
-                    android:src="@drawable/virgen" />
+                    android:src="@drawable/madre_divina" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/ajustes_card_view"
+            android:id="@+id/guidelines_card_view"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_184"
             android:layout_marginStart="@dimen/dp_8"
@@ -104,29 +103,68 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:gravity="center"
-                    android:text="@string/label_profile"
-                    app:layout_constraintTop_toTopOf="@id/profile_image_view" />
+                    android:text="@string/label_guidelines"
+                    app:layout_constraintTop_toTopOf="@id/guidelines_image_view" />
 
                 <ImageView
-                    android:id="@+id/profile_image_view"
+                    android:id="@+id/guidelines_image_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="@dimen/dp_16"
                     android:paddingTop="@dimen/dp_32"
                     android:paddingBottom="@dimen/dp_16"
                     android:scaleType="fitXY"
-                    android:src="@drawable/pastor" />
+                    android:src="@drawable/corazon_flores" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <!--        <com.google.android.material.card.MaterialCardView-->
+        <!--            android:id="@+id/ajustes_card_view"-->
+        <!--            android:layout_width="0dp"-->
+        <!--            android:layout_height="@dimen/dp_184"-->
+        <!--            android:layout_marginStart="@dimen/dp_8"-->
+        <!--            android:layout_marginTop="@dimen/dp_16"-->
+        <!--            app:cardCornerRadius="@dimen/dp_16"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toEndOf="@id/peregrinacion_card_view"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/month_message_card_view">-->
+
+        <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:orientation="vertical">-->
+
+        <!--                <TextView-->
+        <!--                    style="@style/TextAppearance.AppCompat.Body2"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="wrap_content"-->
+        <!--                    android:layout_marginTop="@dimen/dp_8"-->
+        <!--                    android:gravity="center"-->
+        <!--                    android:text="@string/label_profile"-->
+        <!--                    app:layout_constraintTop_toTopOf="@id/profile_image_view" />-->
+
+        <!--                <ImageView-->
+        <!--                    android:id="@+id/profile_image_view"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="match_parent"-->
+        <!--                    android:layout_marginHorizontal="@dimen/dp_16"-->
+        <!--                    android:paddingTop="@dimen/dp_32"-->
+        <!--                    android:paddingBottom="@dimen/dp_16"-->
+        <!--                    android:scaleType="fitXY"-->
+        <!--                    android:src="@drawable/pastor" />-->
+
+        <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        <!--        </com.google.android.material.card.MaterialCardView>-->
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"
             app:cardCornerRadius="@dimen/dp_16"
-            app:layout_constraintTop_toBottomOf="@id/ajustes_card_view">
+            app:layout_constraintTop_toBottomOf="@id/guidelines_card_view">
 
             <LinearLayout
                 android:layout_width="match_parent"

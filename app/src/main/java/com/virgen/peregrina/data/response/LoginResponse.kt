@@ -7,7 +7,7 @@ data class LoginResponse(
     val id: Long,
     val uuid: String,
     val name: String,
-    val last_name: String,
+    val lastName: String,
     val email: String,
     val city: String,
     val country: String,

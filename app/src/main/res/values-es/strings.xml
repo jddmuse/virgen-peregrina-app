@@ -40,6 +40,23 @@
     <string name="label_replica_data">Datos de Replica</string>
     <string name="label_replica_returned_same_state" translatable="true">¿La replica se encuentra en el mismo estado en que fue prestada?</string>
     <string name="label_pilgrimage_finished_2" translatable="true">La peregrinación que acompañas ha finalizado, por favor, describe la experiencia</string>
+    <string name="label_guidelines" translatable="true">Lineamientos</string>
+    <string name="label_pilgrimage_guidelines" translatable="true">Lineamientos de Peregrinación</string>
+    <string name="label_mobility_image_conditions" translatable="true">1. Condiciones de movilidad de la Imagen:</string>
+    <string name="label_text_mobility_image_conditions" translatable="true">La imagen debe ser llevada al lugar de la visita y recuperada personalmente. En caso de no ser posible, deberán coordinar con otra persona de la misión que lo pueda realizar.</string>
+    <string name="label_visit_time" translatable="true">2. Tiempo de Visita</string>
+    <string name="label_text_visit_time" translatable="true">Uno (1) a quince (15) días</string>
+    <string name="label_prayer_of_rosary" translatable="true">3. Rezo del Rosario</string>
+    <string name="label_text_prayer_of_rosary" translatable="true">Previo al inicio del Santo Rosario, encender la vela dispuesta en el hogar visitado con la llama del amor hermoso. Seguir formato oficial del Rosario de la Misión MDG.</string>
+    <string name="label_before_finishing_rosary" translatable="true">4. Antes de terminar el Rosario:</string>
+    <string name="label_text_before_finishing_rosary" translatable="true">durante el rezo del Santo Rosario, luego de la oración de Consagración a la Virgen María y antes de la bendición final, los peregrinos deberán guiar dos momentos especiales:</string>
+    <string name="label_text_before_finsihing_rosary_item_1" translatable="true">4.1 Contar la historia de la Imagen peregrina y/o leer algunos apartes de los mensajes que Nuestra Señora ha dado a Carolina Name y que están incluidos en el folleto de la misión peregrina.</string>
+    <string name="label_text_before_finsihing_rosary_item_2" translatable="true">4.2 Si es posible y dependiendo del tiempo de la visita que tengan disponible en el lugar de peregrinación, los encargados de la misión invitarán a que cada persona asistente pase al frente de la Imagen y de rodillas, pida, en el silencio de su corazón, por todas sus intenciones.</string>
+    <string name="label_final_farewell">5. Despedida Final</string>
+    <string name="label_text_final_farewell">Oración de consagración a María. Bendición final</string>
+
+
+
 
     <string name="label_good">Bueno</string>
     <string name="label_regular">Regular</string>
@@ -60,7 +77,6 @@ Hijos: Si vosotros queréis ser salvos, debéis caminar por el sendero que os ha
 Yo os amo y, desde estas tierras tan amadas, yo os bendigo a vosotros hijos de la tierra y os pido, como madre preocupada, volved vuestros ojos a Dios… ¡Ya no es tiempo de dudar!... Os amo y os bendigo… Bendiciones… Bendiciones… Bendiciones…
 
 Id en paz hijitos y llevad la paz a todos mis hijos confundidos y perdidos… En medio de la tempestad, sed fuente de calor, amor y ternura para tantos que viven en tristeza, desolación y soledad… Adiós mis hijos… Bendiciones… Bendiciones…</string>
-
 
 
     <string name="month_january" translatable="true">Ene</string>

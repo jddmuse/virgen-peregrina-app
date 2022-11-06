@@ -11,6 +11,7 @@ import com.example.virgen_peregrina_app.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.response.LoginResponse
+import com.virgen.peregrina.ui.guidelines.GuidelinesActivity
 import com.virgen.peregrina.ui.home.HomeViewModel
 import com.virgen.peregrina.ui.home.PilgrimagesAdapter
 import com.virgen.peregrina.ui.home.dialogs.SendTestimonyDialog
@@ -18,7 +19,6 @@ import com.virgen.peregrina.ui.pilgrimage.PilgrimageDetailsActivity
 import com.virgen.peregrina.ui.replica_list.ReplicasListActivity
 import com.virgen.peregrina.util.*
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.max
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<PilgrimageModel> {
@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
             viewModel.userData.observe(this) { data: LoginResponse? ->
                 Log.i(TAG, "Change observed = $data")
                 binding.welcomeTextView.text =
-                    "${data?.name ?: EMPTY_STRING} ${data?.last_name ?: EMPTY_STRING}"
+                    "${data?.name ?: EMPTY_STRING} ${data?.lastName ?: EMPTY_STRING}"
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")
@@ -84,6 +84,11 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
                 Log.i(TAG, "peregrinacionCardView.onClick()")
                 startActivity(
                     Intent(this, ReplicasListActivity::class.java)
+                )
+            }
+            binding.guidelinesCardView.setOnClickListener {
+                startActivity(
+                    Intent(this, GuidelinesActivity::class.java)
                 )
             }
         } catch (ex: Exception) {
