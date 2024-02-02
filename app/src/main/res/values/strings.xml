@@ -16,7 +16,7 @@
     <string name="label_negative_action" translatable="true">No</string>
     <string name="label_no_pilgrimage_able" translatable="true">No record of pilgrimages currently.</string>
     <string name="label_ur_replicas" translatable="true">Yours</string>
-    <string name="label_replicas_empty" translatable="true">You don't have Replicas recorded.</string>
+    <string name="label_replicas_empty" translatable="true">You don\'t have Replicas recorded.</string>
     <string name="label_replicas_empty_var" translatable="true">There is nor recorded Replicas</string>
     <string name="button_action_add_replica" translatable="true">Add new</string>
 
@@ -77,7 +77,7 @@ Invite them to connect to the Monday rosaries, the dawn rosary of the first Satu
         \n\n- It is important to remember that these images of the Mother of Divine Grace of the Rose of Peace are only pilgrims, that is, they are passing through places and therefore are NOT for sale.
 
         \n\n- In case someone is interested in buying the small image, they can invite them to visit @rositadegracia or www.rositadegracia.com</string>
-    
+
 
     <string name="label_good">Good</string>
     <string name="label_regular">Regular</string>
@@ -98,7 +98,6 @@ Hijos: Si vosotros queréis ser salvos, debéis caminar por el sendero que os ha
 Yo os amo y, desde estas tierras tan amadas, yo os bendigo a vosotros hijos de la tierra y os pido, como madre preocupada, volved vuestros ojos a Dios… ¡Ya no es tiempo de dudar!... Os amo y os bendigo… Bendiciones… Bendiciones… Bendiciones…
 
 Id en paz hijitos y llevad la paz a todos mis hijos confundidos y perdidos… En medio de la tempestad, sed fuente de calor, amor y ternura para tantos que viven en tristeza, desolación y soledad… Adiós mis hijos… Bendiciones… Bendiciones…</string>
-
 
 
     <string name="month_january" translatable="true">Jan</string>

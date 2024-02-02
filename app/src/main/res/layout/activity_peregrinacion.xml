@@ -9,10 +9,20 @@
 
     <TextView
         android:id="@+id/your_replicas_text_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_ur_replicas"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/add_replica_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_32"
+        android:text="Agregar Replica"
+        app:layout_constraintStart_toEndOf="@id/your_replicas_text_view"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -36,7 +46,7 @@
         android:id="@+id/all_replicas_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_44"
         android:text="Todas"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintTop_toBottomOf="@id/your_replicas_recycler_view" />

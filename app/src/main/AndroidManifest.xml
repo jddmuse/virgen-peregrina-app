@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Virgenperegrinaapp">
         <activity
+            android:name="com.virgen.peregrina.ui.replica_list.create.CreateReplicaActivity"
+            android:exported="false" />
+        <activity
             android:name="com.virgen.peregrina.ui.guidelines.GuidelinesActivity"
             android:exported="false">
             <meta-data

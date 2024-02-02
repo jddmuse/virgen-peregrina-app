@@ -136,6 +136,18 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
                     )
                 }
             })
+
+            binding.addReplicaButton.setOnClickListener {
+                startActivity(
+                    Intent(
+                        this@ReplicasListActivity,
+                        ::class.java
+                    ).apply {
+                        putExtra("replica", Gson().toJson(item))
+                        putExtra("pilgrimage_enabled", false)
+                    }
+                )
+            }
         } catch (ex: Exception) {
             Log.e(TAG, "initListeners(): Exception -> $ex")
         }

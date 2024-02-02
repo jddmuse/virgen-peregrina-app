@@ -67,6 +67,16 @@
             android:text="@string/button_action_continue"
             app:layout_constraintTop_toBottomOf="@id/remember_data_switch" />
 
+        <TextView
+            android:id="@+id/signup_text_view"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="¿No está registrado? Registrate aqui"
+            app:layout_constraintTop_toBottomOf="@id/login_button" />
+
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="@dimen/dp_44"

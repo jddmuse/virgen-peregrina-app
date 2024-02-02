@@ -56,8 +56,7 @@ class ReplicaDetailsActivity : AppCompatActivity(), UIBehavior {
                     city = data.user_city ?: EMPTY_STRING,
                     country = data.user_country ?: EMPTY_STRING
                 )
-                pilgrimageButton.visibility = if (pilgrimageEnabled)
-                    View.VISIBLE else View.GONE
+                pilgrimageButton.visibility = if (data.isAvailable) View.VISIBLE else View.GONE
                 if (!data.isAvailable) {
                     pilgrimageButton.text = getString(R.string.label_pilgrimage_in_progress)
                     pilgrimageButton.isEnabled = false

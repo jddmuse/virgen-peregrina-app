@@ -112,6 +112,9 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
                 rememberDataSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
                     viewModel.onValueChanged(null, LoginInputType.REMEMBER)
                 }
+                signupTextView.setOnClickListener {
+                    viewModel.onSignUpWithFirebase()
+                }
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initListeners(): Exception -> $ex")

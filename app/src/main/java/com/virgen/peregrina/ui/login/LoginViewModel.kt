@@ -124,7 +124,7 @@ class LoginViewModel @Inject constructor(
                                 loginWithVirgenPeregrina()
                             }
                         }
-                        is BaseResultUseCase.Error -> {
+                        /*is BaseResultUseCase.Error -> {
                             result.exception.message?.let { msg ->
                                 if (msg.contains(resourceProvider.getStringResource(R.string.error_invalid_user))) {
                                     onSignUpWithFirebase()
@@ -134,10 +134,9 @@ class LoginViewModel @Inject constructor(
                                     _enableButton.value = true
                                 }
                             }
-                        }
+                        }*/
                         is BaseResultUseCase.NullOrEmptyData -> {
-                            _errorMsg.value = resourceProvider
-                                .getStringResource(R.string.error_generic)
+                            _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
                             _enableButton.value = true
                         }
                     }
@@ -148,7 +147,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private fun onSignUpWithFirebase() {
+     fun onSignUpWithFirebase() {
         try {
             if (noErrorExists()) {
                 viewModelScope.launch {
