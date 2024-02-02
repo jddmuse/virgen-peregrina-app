@@ -179,6 +179,14 @@
                     android:text="@string/label_pilgrimages"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
+                <TextView
+                    android:id="@+id/info_pilgrimages"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:text="@string/label_no_pilgrimage_able"
+                    android:visibility="gone" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/pilgrimages_recycler_view"
                     android:layout_width="match_parent"

@@ -2,7 +2,7 @@
 <resources>
 
 
-    <string name="api_url">https://virgen-peregrina-app.herokuapp.com/</string>
+    <string name="api_url">https://virgenperegrina-b576d3590745.herokuapp.com</string>
     <string name="app_name">virgen-peregrina-app</string>
     <string name="login_button" translatable="true">Continue</string>
     <string name="email" translatable="true">Email</string>
@@ -18,6 +18,10 @@
     <string name="label_positive_action" translatable="true">Yes</string>
     <string name="label_negative_action" translatable="true">No</string>
     <string name="button_action_add_replica" translatable="true">Add new</string>
+    <string name="label_no_pilgrimage_able" translatable="true">No record of pilgrimages currently.</string>
+    <string name="label_replicas_empty" translatable="true">You don't have Replicas recorded.</string>
+    <string name="label_replicas_empty_var" translatable="true">There is nor recorded Replicas</string>
+    <string name="label_ur_replicas" translatable="true">Yours</string>
 
     <string name="label_who_receive" translatable="true">Who receive data</string>
     <string name="label_attendant_pilgrim" translatable="true">Who attendant the Pilgrimage</string>

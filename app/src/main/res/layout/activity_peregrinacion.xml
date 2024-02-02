@@ -11,9 +11,18 @@
         android:id="@+id/your_replicas_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tus Replicas"
+        android:text="@string/label_ur_replicas"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/your_replicas_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/label_replicas_empty"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/your_replicas_text_view" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/your_replicas_recycler_view"
@@ -31,6 +40,15 @@
         android:text="Todas"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
         app:layout_constraintTop_toBottomOf="@id/your_replicas_recycler_view" />
+
+    <TextView
+        android:id="@+id/all_replicas_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="No hay Replicas registradas."
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/all_replicas_text_view" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/replicas_recycler_view"

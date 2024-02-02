@@ -2,7 +2,7 @@
 <resources>
 
 
-    <string name="api_url">https://virgen-peregrina-app.herokuapp.com/</string>
+    <string name="api_url">https://virgenperegrina-b576d3590745.herokuapp.com</string>
     <string name="app_name">virgen-peregrina-app</string>
     <string name="login_button" translatable="true">Continuar</string>
     <string name="email" translatable="true">Email</string>
@@ -17,7 +17,11 @@
     <string name="label_have_replica" translatable="true">¿Eres custodio de Replica?</string>
     <string name="label_positive_action" translatable="true">Si</string>
     <string name="label_negative_action" translatable="true">No</string>
+    <string name="label_no_pilgrimage_able" translatable="true">No hay registro de peregrinaciones en el momento.</string>
     <string name="button_action_add_replica" translatable="true">Agregar Nueva</string>
+    <string name="label_ur_replicas" translatable="true">Tus Replicas</string>
+    <string name="label_replicas_empty" translatable="true">No tiene Replicas registradas.</string>
+    <string name="label_replicas_empty_var" translatable="true">No hay Replicas registradas.</string>
 
 
     <string name="label_who_receive" translatable="true">Datos de quien recibe</string>

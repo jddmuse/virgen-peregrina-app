@@ -3,6 +3,7 @@ package com.virgen.peregrina
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -66,7 +67,14 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
             }
             viewModel.pilgrimages.observe(this) { data ->
                 Log.i(TAG, "viewModel.pilgrimages.observe = $data")
-                pilgrimagesAdapter.updateData(data)
+                if(data.isNotEmpty()) {
+                    binding.infoPilgrimages.visibility = View.GONE
+                    binding.pilgrimagesRecyclerView.visibility = View.VISIBLE
+                    pilgrimagesAdapter.updateData(data)
+                } else {
+                    binding.infoPilgrimages.visibility = View.VISIBLE
+                    binding.pilgrimagesRecyclerView.visibility = View.GONE
+                }
             }
             viewModel.userData.observe(this) { data: LoginResponse? ->
                 Log.i(TAG, "Change observed = $data")
