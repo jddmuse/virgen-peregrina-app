@@ -22,6 +22,20 @@
     <string name="label_ur_replicas" translatable="true">Tus Replicas</string>
     <string name="label_replicas_empty" translatable="true">No tiene Replicas registradas.</string>
     <string name="label_replicas_empty_var" translatable="true">No hay Replicas registradas.</string>
+    <string name="label_code_replica_details" translatable="true">Codigo</string>
+    <string name="label_date_replica_details" translatable="true">Codigo</string>
+    <string name="button_pilgrimage_replica_details" translatable="true">Peregrinar</string>
+    <string name="label_about_replica_details" translatable="true">Acerca del propietario</string>
+    <string name="label_testimonials_replica_details" translatable="true">Testimonios</string>
+    <string name="switch_remember_loging" translatable="true">Recordar mis datos  </string>}
+    <string name="label_sing_up_login" translatable="true">¿No está registrado? Registrate aqui</string>}
+
+
+
+
+
+
+
 
 
     <string name="label_who_receive" translatable="true">Datos de quien recibe</string>

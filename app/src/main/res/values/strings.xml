@@ -19,6 +19,20 @@
     <string name="label_replicas_empty" translatable="true">You don\'t have Replicas recorded.</string>
     <string name="label_replicas_empty_var" translatable="true">There is nor recorded Replicas</string>
     <string name="button_action_add_replica" translatable="true">Add new</string>
+    <string name="label_code_replica_details" translatable="true">Codigo</string>
+    <string name="label_date_replica_details" translatable="true">Fecha</string>
+    <string name="button_pilgrimage_replica_details" translatable="true">Peregrinar</string>
+    <string name="label_about_replica_details" translatable="true">Acerca del propietario</string>
+    <string name="label_testimonials_replica_details" translatable="true">Testimonios</string>}
+    <string name="switch_remember_loging" translatable="true">Recordar mis datos  </string>}
+    <string name="label_sing_up_login" translatable="true">¿No está registrado? Registrate aqui</string>}
+
+
+
+
+
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

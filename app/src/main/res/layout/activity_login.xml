@@ -54,9 +54,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
-            android:text="Remember me"
+            android:text="@string/switch_remember_loging"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/password_input_layout" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+
 
         <Button
             android:id="@+id/login_button"
@@ -74,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="¿No está registrado? Registrate aqui"
+            android:text="@string/label_sing_up_login"
             app:layout_constraintTop_toBottomOf="@id/login_button" />
 
         <ProgressBar
