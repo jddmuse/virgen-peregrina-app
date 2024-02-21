@@ -86,6 +86,7 @@ dependencies {
 
     //circular image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.7.10"
 
 }
 

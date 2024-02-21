@@ -12,7 +12,9 @@ import com.example.virgen_peregrina_app.databinding.ActivityPeregrinacionBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.ReplicaModel
+import com.virgen.peregrina.data.response.LoginResponse
 import com.virgen.peregrina.ui.replica_details.ReplicaDetailsActivity
+import com.virgen.peregrina.ui.replica_list.create.CreateReplicaActivity
 import com.virgen.peregrina.util.METHOD_CALLED
 import com.virgen.peregrina.util.OnItemActionListener
 import com.virgen.peregrina.util.UIBehavior
@@ -89,8 +91,8 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
                         msg.toString(), Snackbar.LENGTH_SHORT
                     ).show()
                 }
-                userData.observe(this@ReplicasListActivity) { data ->
-                    if (data.replicas.isNotEmpty()) {
+                userData.observe(this@ReplicasListActivity) { data: LoginResponse ->
+                    if (data != null &&  data.replicas.isNotEmpty()) {
                         binding.yourReplicasRecyclerView.visibility = View.VISIBLE
                         yourReplicaItemAdapter.updateData(data.replicas)
                         binding.yourReplicasInfo.visibility = View.GONE
@@ -141,11 +143,8 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
                 startActivity(
                     Intent(
                         this@ReplicasListActivity,
-                        ::class.java
-                    ).apply {
-                        putExtra("replica", Gson().toJson(item))
-                        putExtra("pilgrimage_enabled", false)
-                    }
+                        CreateReplicaActivity::class.java
+                    )
                 )
             }
         } catch (ex: Exception) {

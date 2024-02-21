@@ -29,6 +29,8 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
+        initListeners()
+        initObservers()
     }
 
     override fun initUI() {
@@ -39,8 +41,6 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
                     passwordEditText.setText(password)
                 }
             }
-            initListeners()
-            initObservers()
         } catch (ex: Exception) {
             Log.e(TAG, "initUI(): Exception -> $ex")
         }
@@ -55,7 +55,6 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
                     requestFocus()
                 }
             }
-
             viewModel.passwordErrorMsg.observe(this) { msg ->
                 Log.i(TAG, "CHANGED OBSERVED: passwordErrorMsg = $msg")
                 with(binding.passwordEditText) {
@@ -63,24 +62,15 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
                     requestFocus()
                 }
             }
-
             viewModel.errorMsg.observe(this) { msg: String? ->
                 Log.i(TAG, "CHANGED OBSERVED: errorMsg = $msg")
                 Snackbar.make(binding.loginButton, msg!!, Snackbar.LENGTH_SHORT).show()
             }
-
-            viewModel.startMainActivity.observe(this) {
-                startActivity(
-                    Intent(this, MainActivity::class.java)
-                )
-            }
-
             viewModel.startRegisterActivity.observe(this) {
                 startActivity(
                     Intent(this, RegisterActivity::class.java)
                 )
             }
-
             viewModel.enableButton.observe(this) { response ->
                 Log.i(TAG, "CHANGED OBSERVED: enableButton = $response")
                 with(binding) {
@@ -88,9 +78,18 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
                     progressBar.visibility = if (response) View.GONE else View.VISIBLE
                 }
             }
-
-            viewModel.userData.observe(this) { response ->
-                viewModel.onSaveUserData(response)
+            viewModel.loginWithFirebase.observe(this) { value ->
+                if (value) viewModel.loginWithVirgenPeregrina()
+            }
+            viewModel.loginWithVirgenPeregrina.observe(this) { value ->
+                if (value) {
+                    startActivity(Intent(this, MainActivity::class.java))
+                } else {
+                    with(binding) {
+                        loginButton.isEnabled = true
+                        progressBar.visibility = View.GONE
+                    }
+                }
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")

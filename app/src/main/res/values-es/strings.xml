@@ -27,16 +27,14 @@
     <string name="button_pilgrimage_replica_details" translatable="true">Peregrinar</string>
     <string name="label_about_replica_details" translatable="true">Acerca del propietario</string>
     <string name="label_testimonials_replica_details" translatable="true">Testimonios</string>
-    <string name="switch_remember_loging" translatable="true">Recordar mis datos  </string>}
-    <string name="label_sing_up_login" translatable="true">¿No está registrado? Registrate aqui</string>}
-
-
-
-
-
-
-
-
+    <string name="switch_remember_loging" translatable="true">Recordar mis datos  </string>
+    <string name="label_sing_up_login" translatable="true">¿No está registrado? Hazlo aquí</string>
+    <string name="label_name_register_user_form" translatable="true">Nombres</string>
+    <string name="label_last_name_register_user_form" translatable="true">Apellidos</string>
+    <string name="label_phone_register_user_form" translatable="true">Celular</string>
+    <string name="label_country_register_user_form" translatable="true">País</string>
+    <string name="label_city_register_user_form" translatable="true">Ciudad</string>
+    <string name="label_address_register_user_form" translatable="true">Dirección</string>
 
     <string name="label_who_receive" translatable="true">Datos de quien recibe</string>
     <string name="label_attendant_pilgrim" translatable="true">Miembro que acompaña</string>

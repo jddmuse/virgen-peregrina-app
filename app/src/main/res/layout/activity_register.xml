@@ -32,7 +32,7 @@
             android:id="@+id/name_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name"
+            android:hint="@string/label_name_register_user_form"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -47,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
-            android:hint="Last name"
+            android:hint="@string/label_last_name_register_user_form"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -79,7 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:hint="Cellphone"
+                android:hint="@string/label_phone_register_user_form"
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -112,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
-            android:hint="City"
+            android:hint="@string/label_city_register_user_form"
             app:endIconMode="clear_text">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -127,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
-            android:hint="Address"
+            android:hint="@string/label_address_register_user_form"
             app:endIconMode="clear_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -177,6 +177,16 @@
         android:layout_marginTop="@dimen/dp_32"
         android:text="@string/button_action_continue"
         app:layout_constraintTop_toBottomOf="@id/form_linear_layout" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/action_button"
+        app:layout_constraintEnd_toEndOf="@id/action_button"
+        app:layout_constraintStart_toStartOf="@id/action_button"
+        app:layout_constraintTop_toTopOf="@id/action_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -88,10 +88,7 @@ class RegisterViewModel @Inject constructor(
 
     fun onValueChanged(value: Any?, inputType: RegisterInputType) {
         try {
-            Log.i(
-                TAG, "METHOD CALLED: onValueChanged() " +
-                        "PARAMS: $value, $inputType"
-            )
+            Log.i(TAG, "METHOD CALLED: onValueChanged() " + "PARAMS: $value, $inputType")
             val valueAux = value?.toString() ?: EMPTY_STRING
             when (inputType) {
                 RegisterInputType.NAME -> setName = valueAux
@@ -169,6 +166,7 @@ class RegisterViewModel @Inject constructor(
     fun onActionButton() {
         try {
             Log.i(TAG, "$METHOD_CALLED onActionButton()")
+            _enableButton.value = false
             if (noErrorExists()) {
                 val signUpRequest = SignUpRequest(
                     uuid = setUUID,
@@ -191,7 +189,7 @@ class RegisterViewModel @Inject constructor(
                         is BaseResultUseCase.NullOrEmptyData -> {}
                     }
                 }
-            }
+            } else _enableButton.value = true
         } catch (ex: Exception) {
             Log.e(TAG, "onValueChanged(): Exception -> $ex")
         }

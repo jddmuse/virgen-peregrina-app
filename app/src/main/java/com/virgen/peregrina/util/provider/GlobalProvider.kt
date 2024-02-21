@@ -7,5 +7,5 @@ import javax.inject.Singleton
 @Singleton
 class GlobalProvider @Inject constructor() {
 
-    var userData: LoginResponse? = null
+
 }

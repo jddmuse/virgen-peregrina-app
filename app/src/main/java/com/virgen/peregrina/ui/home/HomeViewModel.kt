@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
 import com.google.gson.Gson
+import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.model.TestimonyModel
 import com.virgen.peregrina.data.response.LoginResponse
 import com.virgen.peregrina.domain.pilgrimage.GetAllPilgrimagesUseCase
 import com.virgen.peregrina.domain.pilgrimage.SendTestimonyUseCase
+import com.virgen.peregrina.ui.home.dialogs.SendTestimonyDialog
 import com.virgen.peregrina.util.base.BaseResultUseCase
 import com.virgen.peregrina.util.getCurrentDate
 import com.virgen.peregrina.util.getExceptionLog
@@ -34,9 +36,6 @@ class HomeViewModel @Inject constructor(
         private const val TAG = "HomeViewModel"
     }
 
-    private val _userData = MutableLiveData<LoginResponse?>()
-    val userData: LiveData<LoginResponse?> get() = _userData
-
     private val _pilgrimages = MutableLiveData<List<PilgrimageModel>>()
     val pilgrimages: LiveData<List<PilgrimageModel>> get() = _pilgrimages
 
@@ -46,15 +45,18 @@ class HomeViewModel @Inject constructor(
     private val _infoMsg = MutableLiveData<String?>()
     val infoMsg: LiveData<String?> get() = _infoMsg
 
+    private val _askForReturningReplicaAndTestimonyEvent = MutableLiveData<PilgrimageModel>()
+    val askForReturningReplicaAndTestimonyEvent: LiveData<PilgrimageModel> get() = _askForReturningReplicaAndTestimonyEvent
+
+    private val _userNameTitle = MutableLiveData<String>()
+    val userNameTitle: LiveData<String> get() = _userNameTitle
+
     fun onCreate() {
         try {
-            _userData.value = globalProvider.userData
             viewModelScope.launch {
                 when (val result = getAllPilgrimagesUseCase()) {
                     is BaseResultUseCase.Error -> {
-                        _errorMsg.value =
-                            resourceProvider
-                                .getStringResource(R.string.error_generic)
+                        _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
                     }
                     is BaseResultUseCase.Success -> {
                         _pilgrimages.value = result.data ?: listOf()
@@ -62,6 +64,7 @@ class HomeViewModel @Inject constructor(
                     is BaseResultUseCase.NullOrEmptyData -> {}
                 }
             }
+            preferencesManager.userSessionData?.name?.let { _userNameTitle.value = it }
         } catch (ex: Exception) {
             getExceptionLog(TAG, "onCreate", ex)
         }
@@ -101,4 +104,13 @@ class HomeViewModel @Inject constructor(
             getExceptionLog(TAG, "onSendTestimonyUseCase", ex)
         }
     }
+
+    fun askForTestimony() {
+        preferencesManager.userSessionData?.replicas?.forEach { replica ->
+            replica.pilgrimages.forEach { pilgrimage ->
+                _askForReturningReplicaAndTestimonyEvent.value = pilgrimage
+            }
+        }
+    }
+
 }

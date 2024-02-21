@@ -10,6 +10,7 @@ import com.example.virgen_peregrina_app.R
 import com.google.gson.Gson
 import com.virgen.peregrina.data.request.LoginRequest
 import com.virgen.peregrina.data.response.LoginResponse
+import com.virgen.peregrina.data.response.toSessionData
 import com.virgen.peregrina.util.base.BaseResultUseCase
 import com.virgen.peregrina.domain.login.LoginWithFirebaseUseCase
 import com.virgen.peregrina.domain.login.LoginWithVirgenPeregrinaUseCase
@@ -43,12 +44,6 @@ class LoginViewModel @Inject constructor(
     private var setUUID: String = EMPTY_STRING
     private var setRememberData: Boolean = false
 
-    private val _userData = MutableLiveData<LoginResponse>()
-    val userData: LiveData<LoginResponse> get() = _userData
-
-    private val _startMainActivity = MutableLiveData<Boolean>()
-    val startMainActivity: LiveData<Boolean> get() = _startMainActivity
-
     private val _startRegisterActivity = MutableLiveData<Boolean>()
     val startRegisterActivity: LiveData<Boolean> get() = _startRegisterActivity
 
@@ -64,6 +59,12 @@ class LoginViewModel @Inject constructor(
     private val _errorMsg = MutableLiveData<String?>()
     val errorMsg: LiveData<String?> get() = _errorMsg
 
+    private val _loginWithFirebase = MutableLiveData<Boolean>()
+    val loginWithFirebase: LiveData<Boolean> get() = _loginWithFirebase
+
+    private val _loginWithVirgenPeregrina = MutableLiveData<Boolean>()
+    val loginWithVirgenPeregrina: LiveData<Boolean> get() = _loginWithVirgenPeregrina
+
 
     fun onCreate(callback: (String, String) -> Unit) {
         with(preferencesManager) {
@@ -76,10 +77,8 @@ class LoginViewModel @Inject constructor(
     //
     fun onValueChanged(value: Editable?, inputType: LoginInputType) {
         try {
-            Log.i(TAG, "METHOD CALLED: onValueChanged()")
-            Log.i(TAG, "PARAMS: $value, $inputType")
+            Log.i(TAG, "METHOD CALLED: onValueChanged() PARAMS: $value, $inputType")
             val valueAux = value?.toString() ?: EMPTY_STRING
-
             when (inputType) {
                 LoginInputType.PASSWORD -> {
                     setPassword = valueAux
@@ -110,13 +109,9 @@ class LoginViewModel @Inject constructor(
         try {
             Log.i(TAG, "$METHOD_CALLED onLoginWithFirebase()")
             if (noErrorExists()) {
-                // disable button
                 _enableButton.value = false
-                // save data
                 savePreferencesData()
-                // launch coroutine
                 viewModelScope.launch {
-
                     when (val result = loginWithFirebaseUseCase(setEmail, setPassword)) {
                         is BaseResultUseCase.Success -> {
                             result.data?.uid?.let { uid ->
@@ -124,19 +119,9 @@ class LoginViewModel @Inject constructor(
                                 loginWithVirgenPeregrina()
                             }
                         }
-                        /*is BaseResultUseCase.Error -> {
-                            result.exception.message?.let { msg ->
-                                if (msg.contains(resourceProvider.getStringResource(R.string.error_invalid_user))) {
-                                    onSignUpWithFirebase()
-                                } else {
-                                    _errorMsg.value = resourceProvider
-                                        .getStringResource(R.string.error_login)
-                                    _enableButton.value = true
-                                }
-                            }
-                        }*/
                         is BaseResultUseCase.NullOrEmptyData -> {
-                            _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
+                            _errorMsg.value =
+                                resourceProvider.getStringResource(R.string.error_generic)
                             _enableButton.value = true
                         }
                     }
@@ -147,7 +132,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-     fun onSignUpWithFirebase() {
+    fun onSignUpWithFirebase() {
         try {
             if (noErrorExists()) {
                 viewModelScope.launch {
@@ -193,7 +178,7 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private fun loginWithVirgenPeregrina() {
+    fun loginWithVirgenPeregrina() {
         try {
             _enableButton.value = false
             viewModelScope.launch {
@@ -202,9 +187,12 @@ class LoginViewModel @Inject constructor(
                 )
                 when (result) {
                     is BaseResultUseCase.Success -> {
-                        if (result.data != null)
-                            _userData.value = result.data!!
-                        _startMainActivity.value = !(_startMainActivity.value ?: false)
+                        if (result.data != null) {
+                            preferencesManager.userSessionData = result.data.toSessionData()
+                            _loginWithVirgenPeregrina.value = true
+                        } else {
+                            _loginWithVirgenPeregrina.value = false
+                        }
                     }
                     is BaseResultUseCase.NullOrEmptyData -> {
                         _errorMsg.value = resourceProvider
@@ -222,15 +210,4 @@ class LoginViewModel @Inject constructor(
             Log.e(TAG, "loginWithVirgenPeregrina() -> Exception: $ex")
         }
     }
-
-    fun onSaveUserData(response: LoginResponse) {
-        try {
-//            preferencesManager.userData = Gson().toJson(response)
-            Log.i(TAG, "$METHOD_CALLED onSaveUserData() PARAMS: $response")
-            globalProvider.userData = response
-        } catch (ex: Exception) {
-            Log.e(TAG, "saveUserData() -> Exception: $ex")
-        }
-    }
-
 }

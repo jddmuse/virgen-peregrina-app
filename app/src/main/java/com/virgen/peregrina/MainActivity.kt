@@ -37,6 +37,9 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
+        initListeners()
+        initObservers()
+        viewModel.onCreate()
     }
 
     override fun initUI() {
@@ -51,10 +54,6 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
                 }
             }
             initRecyclerView()
-            initListeners()
-            initObservers()
-            viewModel.onCreate()
-            askForNotifications()
         } catch (ex: Exception) {
             Log.e(TAG, "initUI(): Exception -> $ex")
         }
@@ -76,10 +75,20 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
                     binding.pilgrimagesRecyclerView.visibility = View.GONE
                 }
             }
-            viewModel.userData.observe(this) { data: LoginResponse? ->
-                Log.i(TAG, "Change observed = $data")
-                binding.welcomeTextView.text =
-                    "${data?.name ?: EMPTY_STRING} ${data?.lastName ?: EMPTY_STRING}"
+            viewModel.userNameTitle.observe(this) { value ->
+                binding.welcomeTextView.text = value
+            }
+            viewModel.askForReturningReplicaAndTestimonyEvent.observe(this) { pilgrimage ->
+                if (!pilgrimage.have_testimony && pilgrimage.isFinished) {
+                    SendTestimonyDialog(this) { testimony ->
+                        viewModel.onSendTestimony(
+                            testimonyMsg = testimony,
+                            replica_id = pilgrimage.replica_id,
+                            user_id = pilgrimage.user_id,
+                            pilgrimage_id = pilgrimage.id!!
+                        )
+                    }.show()
+                }
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")
@@ -115,24 +124,6 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initRecyclerView(): Exception -> $ex")
-        }
-    }
-
-    private fun askForNotifications() {
-        try {
-            Log.i(TAG, "$METHOD_CALLED askForNotifications()")
-            viewModel.userData.value?.let { user ->
-//                user.pilgrimages.forEach { pilgrimage ->
-//                    askForReturningReplicaAndTestimony(pilgrimage, Pilgrimage.ATTENDANT)
-//                }
-                user.replicas.forEach { replica ->
-                    replica.pilgrimages.forEach { pilgrimage ->
-                        askForReturningReplicaAndTestimony(pilgrimage)
-                    }
-                }
-            }
-        } catch (ex: Exception) {
-            getExceptionLog(TAG, "askForNotifications", ex)
         }
     }
 

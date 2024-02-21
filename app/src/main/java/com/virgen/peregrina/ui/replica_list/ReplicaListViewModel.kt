@@ -44,7 +44,6 @@ class ReplicaListViewModel @Inject constructor(
     fun onCreate() {
         Log.i(TAG, "$METHOD_CALLED onCreate()")
         try {
-            _userData.value = globalProvider.userData
             viewModelScope.launch {
                 when (val result = getAvailableReplicasUseCase()) {
                     is BaseResultUseCase.Success -> {

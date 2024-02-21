@@ -23,16 +23,15 @@
     <string name="label_date_replica_details" translatable="true">Fecha</string>
     <string name="button_pilgrimage_replica_details" translatable="true">Peregrinar</string>
     <string name="label_about_replica_details" translatable="true">Acerca del propietario</string>
-    <string name="label_testimonials_replica_details" translatable="true">Testimonios</string>}
-    <string name="switch_remember_loging" translatable="true">Recordar mis datos  </string>}
-    <string name="label_sing_up_login" translatable="true">¿No está registrado? Registrate aqui</string>}
-
-
-
-
-
-
-
+    <string name="label_testimonials_replica_details" translatable="true">Testimonios</string>
+    <string name="switch_remember_loging" translatable="true">Recordar mis datos  </string>
+    <string name="label_sing_up_login" translatable="true">¿No está registrado? Registrate aqui</string>
+    <string name="label_name_register_user_form" translatable="true">Name</string>
+    <string name="label_last_name_register_user_form" translatable="true">Last Name</string>
+    <string name="label_phone_register_user_form" translatable="true">Cellphone</string>
+    <string name="label_country_register_user_form" translatable="true">Country</string>
+    <string name="label_city_register_user_form" translatable="true">City</string>
+    <string name="label_address_register_user_form" translatable="true">Address</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
