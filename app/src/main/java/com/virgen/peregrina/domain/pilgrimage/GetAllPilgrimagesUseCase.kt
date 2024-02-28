@@ -25,6 +25,9 @@ class GetAllPilgrimagesUseCase @Inject constructor(
                 Log.i(TAG, "result=${result.data}")
                 BaseResultUseCase.Success(result.data)
             }
+            is BaseResultRepository.ApiError -> {
+                BaseResultUseCase.APIError(null, result.message)
+            }
         }
     } catch (ex: Exception) {
         getExceptionLog(TAG, "invoke", ex)

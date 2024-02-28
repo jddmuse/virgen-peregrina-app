@@ -28,6 +28,9 @@ class CreatePilgrimageUseCase @Inject constructor(
             is BaseResultRepository.Error -> {
                 BaseResultUseCase.Error(result.exception)
             }
+            is BaseResultRepository.ApiError -> {
+                BaseResultUseCase.APIError(null, result.message)
+            }
         }
     } catch (ex: Exception) {
         Log.e(TAG, "invoke(): Exception -> $ex")

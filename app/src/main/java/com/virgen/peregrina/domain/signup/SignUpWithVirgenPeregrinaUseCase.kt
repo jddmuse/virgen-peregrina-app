@@ -26,6 +26,7 @@ class SignUpWithVirgenPeregrinaUseCase @Inject constructor(
             when (val result = userRepository.signUp(signUpRequest)) {
                 is BaseResultRepository.Success -> BaseResultUseCase.Success(result.data)
                 is BaseResultRepository.Error -> BaseResultUseCase.NullOrEmptyData()
+                is BaseResultRepository.ApiError -> BaseResultUseCase.APIError(null, result.message)
             }
         } catch (ex: Exception) {
             Log.e(TAG, "invoke() -> Exception: $ex")

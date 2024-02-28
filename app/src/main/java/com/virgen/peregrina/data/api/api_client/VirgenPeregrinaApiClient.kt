@@ -4,6 +4,7 @@ import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.data.model.TestimonyModel
 import com.virgen.peregrina.data.model.UserModel
+import com.virgen.peregrina.data.request.CreateReplicaRequest
 import com.virgen.peregrina.data.request.LoginRequest
 import com.virgen.peregrina.data.request.SignUpRequest
 import com.virgen.peregrina.data.response.LoginResponse
@@ -30,6 +31,11 @@ interface VirgenPeregrinaApiClient {
     suspend fun getAllReplicas(
 
     ): BaseResponseApi<List<ReplicaModel>>
+
+    @GET("replica/create")
+    suspend fun createReplica(
+        request: CreateReplicaRequest
+    ): BaseResponseApi<ReplicaModel>
 
     @GET("testimony/get-all/{replica_id}")
     suspend fun getTestimoniesByReplica(

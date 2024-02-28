@@ -16,13 +16,16 @@ class GetAvailableReplicasUseCase @Inject constructor(
     }
 
     suspend operator fun invoke(): BaseResultUseCase<List<ReplicaModel>> = try {
-        when (val result = replicaRepository.getAllReplicas()) {
+        when (val result = replicaRepository.getAll()) {
             is BaseResultRepository.Success -> {
                 Log.i(TAG, "result.data=${result.data}")
                 BaseResultUseCase.Success(result.data)
             }
             is BaseResultRepository.Error -> {
                 BaseResultUseCase.NullOrEmptyData()
+            }
+            is BaseResultRepository.ApiError -> {
+                BaseResultUseCase.APIError(null, result.message)
             }
         }
     } catch (ex: Exception) {

@@ -26,6 +26,9 @@ class SendTestimonyUseCase @Inject constructor(
                 is BaseResultRepository.Error -> {
                     BaseResultUseCase.Error(result.exception)
                 }
+                is BaseResultRepository.ApiError -> {
+                    BaseResultUseCase.APIError(null, result.message)
+                }
             }
         } else {
             BaseResultUseCase.NoInternetConnection()

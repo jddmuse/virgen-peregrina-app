@@ -104,22 +104,22 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    fun onValueChanged(value: Any?, inputType: ReplicaDialogInputType) {
+    fun onValueChanged(value: Any?, inputType: EnumReplicaDialogInputType) {
         try {
             Log.i(
                 TAG, "METHOD CALLED: onValueChanged() " +
                         "PARAMS: $value, $inputType"
             )
             when (inputType) {
-                ReplicaDialogInputType.CODE -> {
+                EnumReplicaDialogInputType.CODE -> {
                     val valueAux = value?.toString() ?: EMPTY_STRING
                     setCodeReplica = valueAux
                 }
-                ReplicaDialogInputType.DATE -> {
+                EnumReplicaDialogInputType.DATE -> {
                     val valueAux = value?.toString() ?: EMPTY_STRING
                     setReceivedDateReplica = valueAux
                 }
-                ReplicaDialogInputType.REPAIR_REQUIRED -> {
+                EnumReplicaDialogInputType.REPAIR_REQUIRED -> {
                     val valueAux = value as Boolean? ?: false
                     setRepairRequired = valueAux
                 }

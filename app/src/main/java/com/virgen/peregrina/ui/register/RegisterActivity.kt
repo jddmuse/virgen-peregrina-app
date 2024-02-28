@@ -33,17 +33,13 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
+        initListeners()
+        initObservers()
+        viewModel.onCreate()
     }
 
     override fun initUI() {
-        try {
-            dialog = ReplicaDialog(this)
-            initListeners()
-            initObservers()
-            viewModel.onCreate()
-        } catch (ex: Exception) {
-            Log.e(TAG, "initUI(): Exception -> $ex")
-        }
+        dialog = ReplicaDialog(this)
     }
 
     override fun initObservers() {
@@ -155,10 +151,10 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
         try {
             dialog.binding.also {
                 it.codeEditText.addTextChangedListener { text ->
-                    viewModel.onValueChanged(text, ReplicaDialogInputType.CODE)
+                    viewModel.onValueChanged(text, EnumReplicaDialogInputType.CODE)
                 }
                 it.dateEditText.addTextChangedListener { text ->
-                    viewModel.onValueChanged(text, ReplicaDialogInputType.DATE)
+                    viewModel.onValueChanged(text, EnumReplicaDialogInputType.DATE)
                 }
                 it.dateEditText.setOnClickListener { view ->
                     val picker = DatePickerFragment { year, month, day ->
@@ -166,20 +162,19 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
                     }
                     picker.show(supportFragmentManager, TAG)
                 }
-                it.positiveRadioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
-                    if (isChecked)
-                        viewModel.onValueChanged(true, ReplicaDialogInputType.REPAIR_REQUIRED)
+                it.positiveFixRequiredRadioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
+                    if (isChecked) {
+                        viewModel.onValueChanged(true, EnumReplicaDialogInputType.REPAIR_REQUIRED)
+                        it.fixingGeneralLabelTextView.visibility = View.VISIBLE
+                    } else {
+                        it.fixingGeneralLabelTextView.visibility = View.GONE
+                    }
+                }
+                it.positiveContainerRadioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
+                    it.containerLabelTextView.visibility = if (isChecked) View.VISIBLE else View.GONE
                 }
                 it.actionButton.setOnClickListener {
                     viewModel.onReplicaSaved()
-                }
-                it.positiveRadioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
-                    it.fixingGeneralLabelTextView.visibility =
-                        if (isChecked) View.VISIBLE else View.GONE
-                }
-                it.positiveContainerRadioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
-                    it.containerLabelTextView.visibility =
-                        if (isChecked) View.VISIBLE else View.GONE
                 }
             }
         } catch (ex: Exception) {
