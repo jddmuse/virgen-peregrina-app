@@ -36,6 +36,9 @@
     <string name="label_city_register_user_form" translatable="true">Ciudad</string>
     <string name="label_address_register_user_form" translatable="true">Dirección</string>
     <string name="label_replica_created_successfull" translatable="true">¡Replica creada con éxito!</string>
+    <string name="label_replica_status_avaibale" translatable="true">Disponible</string>
+    <string name="label_replica_status_busy" translatable="true">Ocupado</string>
+    <string name="label_no_testomonies" translatable="true">No hay testimonios</string>
 
     <string name="label_who_receive" translatable="true">Datos de quien recibe</string>
     <string name="label_attendant_pilgrim" translatable="true">Miembro que acompaña</string>

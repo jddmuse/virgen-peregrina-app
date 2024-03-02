@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
                 }
             }
             viewModel.userNameTitle.observe(this) { value ->
-                binding.welcomeTextView.text = value
+                binding.appBarLayout.textView.text = value
             }
             viewModel.askForReturningReplicaAndTestimonyEvent.observe(this) { pilgrimage ->
                 if (!pilgrimage.have_testimony && pilgrimage.isFinished) {

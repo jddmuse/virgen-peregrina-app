@@ -12,6 +12,7 @@ import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityReplicaDetailsBinding
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.ReplicaModel
+import com.virgen.peregrina.data.model.TestimonyModel
 import com.virgen.peregrina.ui.pilgrimage.PilgrimageActivity
 import com.virgen.peregrina.ui.replica_details.testimony.TestimonyItemAdapter
 import com.virgen.peregrina.util.EMPTY_STRING
@@ -86,8 +87,12 @@ class ReplicaDetailsActivity : AppCompatActivity(), UIBehavior {
 
     override fun initObservers() {
         try {
-            viewModel.testimonies.observe(this) { data ->
-                testimonyItemAdapter.updateData(data)
+            viewModel.testimonies.observe(this) { data: List<TestimonyModel> ->
+                if(data.isNotEmpty()) {
+                    testimonyItemAdapter.updateData(data)
+                } else {
+                    binding.infoTestimoniesTextView.visibility = View.VISIBLE
+                }
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")

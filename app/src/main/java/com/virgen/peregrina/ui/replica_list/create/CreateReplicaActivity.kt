@@ -10,7 +10,9 @@ import com.virgen.peregrina.ui.loading_dialog.LoadingDialogView
 import com.virgen.peregrina.ui.register.EnumReplicaDialogInputType
 import com.virgen.peregrina.util.UIBehavior
 import com.virgen.peregrina.util.enum.EnumReplicaState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CreateReplicaActivity : AppCompatActivity(), UIBehavior {
 
     companion object {

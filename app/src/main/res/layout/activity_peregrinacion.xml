@@ -4,68 +4,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/dp_16"
     tools:context="com.virgen.peregrina.ui.replica_list.ReplicasListActivity">
 
-    <TextView
-        android:id="@+id/your_replicas_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_ur_replicas"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/app_bar_layout"
+        layout="@layout/app_bar_layout" />
 
-    <Button
-        android:id="@+id/add_replica_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_32"
-        android:text="Agregar Replica"
-        app:layout_constraintStart_toEndOf="@id/your_replicas_text_view"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/your_replicas_info"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_16"
-        android:text="@string/label_replicas_empty"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/your_replicas_text_view" />
+        android:layout_height="0dp"
+        android:padding="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_16"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/your_replicas_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_8"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/your_replicas_text_view" />
+        <LinearLayout
+            android:id="@+id/your_replicas_linear_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/all_replicas_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_44"
-        android:text="Todas"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        app:layout_constraintTop_toBottomOf="@id/your_replicas_recycler_view" />
+            <TextView
+                android:id="@+id/your_replicas_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="@string/label_ur_replicas"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/all_replicas_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_16"
-        android:text="No hay Replicas registradas."
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/all_replicas_text_view" />
+            <ImageButton
+                android:id="@+id/add_replica_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:src="@drawable/ic_add"
+                android:text="Agregar Replica"
+                app:layout_constraintStart_toEndOf="@id/your_replicas_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/replicas_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_8"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/all_replicas_text_view" />
+        <TextView
+            android:id="@+id/your_replicas_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/label_replicas_empty"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/your_replicas_linear_layout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/your_replicas_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/your_replicas_linear_layout" />
+
+        <TextView
+            android:id="@+id/all_replicas_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_44"
+            android:text="Todas"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintTop_toBottomOf="@id/your_replicas_recycler_view" />
+
+        <TextView
+            android:id="@+id/all_replicas_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="No hay Replicas registradas."
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/all_replicas_text_view" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/replicas_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_8"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/all_replicas_text_view" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

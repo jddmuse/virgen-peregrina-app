@@ -11,7 +11,6 @@ import com.virgen.peregrina.domain.replica.CreateReplicaUseCase
 import com.virgen.peregrina.ui.register.EnumReplicaDialogInputType
 import com.virgen.peregrina.util.EMPTY_STRING
 import com.virgen.peregrina.util.base.BaseResultUseCase
-import com.virgen.peregrina.util.base.BaseViewModel
 import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,7 +22,7 @@ class CreateReplicaViewModel @Inject constructor(
     private val resourceProvider: ResourceProvider,
     private val createReplicaUseCase: CreateReplicaUseCase,
     private val preferencesManager: PreferencesManager
-) : BaseViewModel() {
+) : ViewModel() {
 
     private var setCode: String = EMPTY_STRING
     private var setYear: String = EMPTY_STRING
@@ -33,6 +32,15 @@ class CreateReplicaViewModel @Inject constructor(
 
     private val _dispatchSuccessful = MutableLiveData<Pair<Boolean, String>>()
     val dispatchSuccessful: LiveData<Pair<Boolean, String>> get() = _dispatchSuccessful
+
+    private val _loading = MutableLiveData<Pair<Boolean, String>>()
+    val loading: LiveData<Pair<Boolean, String>> get() = _loading
+
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> get() = _errorMessage
+
+    private val _infoMessage = MutableLiveData<String>()
+    val infoMessage: LiveData<String> get() = _infoMessage
 
     companion object {
         private const val TAG = "CreateReplicaViewModel"

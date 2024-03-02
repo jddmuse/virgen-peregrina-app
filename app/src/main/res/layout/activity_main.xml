@@ -4,29 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="com.virgen.peregrina.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/dp_16">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/welcome_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hola"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            app:layout_constraintTop_toTopOf="parent" />
+        <include
+            android:id="@+id/app_bar_layout"
+            layout="@layout/app_bar_layout" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/month_message_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
             app:cardCornerRadius="@dimen/dp_16"
-            app:layout_constraintTop_toBottomOf="@id/welcome_text_view">
+            app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
 
             <TextView
                 android:id="@+id/month_message_text_view"
@@ -44,6 +39,7 @@
             android:id="@+id/peregrinacion_card_view"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_184"
+            android:layout_marginStart="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
             android:layout_marginEnd="@dimen/dp_8"
             android:clickable="true"
@@ -82,6 +78,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:layout_marginEnd="@dimen/dp_16"
             android:id="@+id/guidelines_card_view"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp_184"
@@ -120,46 +117,8 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <!--        <com.google.android.material.card.MaterialCardView-->
-        <!--            android:id="@+id/ajustes_card_view"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="@dimen/dp_184"-->
-        <!--            android:layout_marginStart="@dimen/dp_8"-->
-        <!--            android:layout_marginTop="@dimen/dp_16"-->
-        <!--            app:cardCornerRadius="@dimen/dp_16"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toEndOf="@id/peregrinacion_card_view"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/month_message_card_view">-->
-
-        <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:orientation="vertical">-->
-
-        <!--                <TextView-->
-        <!--                    style="@style/TextAppearance.AppCompat.Body2"-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_marginTop="@dimen/dp_8"-->
-        <!--                    android:gravity="center"-->
-        <!--                    android:text="@string/label_profile"-->
-        <!--                    app:layout_constraintTop_toTopOf="@id/profile_image_view" />-->
-
-        <!--                <ImageView-->
-        <!--                    android:id="@+id/profile_image_view"-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="match_parent"-->
-        <!--                    android:layout_marginHorizontal="@dimen/dp_16"-->
-        <!--                    android:paddingTop="@dimen/dp_32"-->
-        <!--                    android:paddingBottom="@dimen/dp_16"-->
-        <!--                    android:scaleType="fitXY"-->
-        <!--                    android:src="@drawable/pastor" />-->
-
-        <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-        <!--        </com.google.android.material.card.MaterialCardView>-->
-
         <com.google.android.material.card.MaterialCardView
+            android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"

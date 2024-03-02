@@ -8,6 +8,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityPeregrinacionBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -46,7 +47,7 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
         try {
             yourReplicaItemAdapter = ReplicaItemAdapter()
             allReplicaItemAdapter = ReplicaItemAdapter()
-
+            binding.appBarLayout.textView.text = getString(R.string.label_replicas)
             binding.replicasRecyclerView.let {
                 it.layoutManager = LinearLayoutManager(
                     this@ReplicasListActivity,
@@ -92,13 +93,13 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
                     ).show()
                 }
                 userData.observe(this@ReplicasListActivity) { data: LoginResponse? ->
-                    if (data != null &&  !data.replicas.isNullOrEmpty()) {
+                    if (data != null && !data.replicas.isNullOrEmpty()) {
                         binding.yourReplicasRecyclerView.visibility = View.VISIBLE
                         yourReplicaItemAdapter.updateData(data.replicas)
                         binding.yourReplicasInfo.visibility = View.GONE
                     } else {
                         binding.yourReplicasInfo.visibility = View.VISIBLE
-                        binding.yourReplicasRecyclerView.visibility = View.GONE
+                        binding.yourReplicasRecyclerView.visibility = View.INVISIBLE
                     }
                 }
             }
@@ -147,6 +148,7 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
                     )
                 )
             }
+
         } catch (ex: Exception) {
             Log.e(TAG, "initListeners(): Exception -> $ex")
         }

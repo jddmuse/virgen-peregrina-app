@@ -124,6 +124,10 @@ class LoginViewModel @Inject constructor(
                                 resourceProvider.getStringResource(R.string.error_generic)
                             _enableButton.value = true
                         }
+                        is BaseResultUseCase.Error -> {
+                            _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
+                            _enableButton.value = true
+                        }
                     }
                 }
             }
