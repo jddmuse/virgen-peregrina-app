@@ -27,37 +27,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_text_view">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/code_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Code"
-            app:endIconMode="clear_text">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/code_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/date_input_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
-            android:hint="Date you received it"
-            app:endIconMode="clear_text">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/date_edit_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="false"
-                android:focusable="false"
-                android:inputType="textEmailAddress" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,27 +44,68 @@
                     style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_need_fix" />
+                    android:text="@string/label_year_you_received" />
 
-                <RadioGroup
-                    android:id="@+id/fix_required_radio_group"
+                <com.google.android.material.card.MaterialCardView
+                    app:cardElevation="@dimen/dp_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dp_56">
+
+                        <NumberPicker
+                            android:id="@+id/year_picker"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:text="@string/label_code_replica_details" />
 
-                    <RadioButton
-                        android:id="@+id/positive_fix_required_radio_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/label_positive_action" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/code_text_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Code"
+                    app:endIconMode="none">
 
-                    <RadioButton
-                        android:id="@+id/negative_fix_required_radio_button"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/code_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:text="@string/label_need_fix" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/fix_required_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/label_hint_select"
+                    app:endIconMode="dropdown_menu">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/fix_required_edit_text"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_8"
-                        android:text="@string/label_negative_action" />
-                </RadioGroup>
+                        android:clickable="false"
+                        android:focusable="false" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
                 <TextView
@@ -115,33 +125,21 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/label_replica_state" />
 
-                <RadioGroup
-                    android:id="@+id/state_radio_group"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/status_text_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:hint="@string/label_select_status_replica"
+                    app:endIconMode="dropdown_menu">
 
-                    <RadioButton
-                        android:id="@+id/state_good_radio_button"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/status_edit_text"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/label_good" />
-
-                    <RadioButton
-                        android:id="@+id/state_regular_radio_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_8"
-                        android:text="@string/label_regular" />
-
-                    <RadioButton
-                        android:id="@+id/state_bad_radio_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_8"
-                        android:text="@string/label_bad" />
-                </RadioGroup>
-
+                        android:clickable="false"
+                        android:focusable="false" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
@@ -150,25 +148,21 @@
                     android:layout_marginTop="@dimen/dp_8"
                     android:text="@string/label_has_container" />
 
-                <RadioGroup
-                    android:id="@+id/container_radio_group"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/container_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:hint="@string/label_hint_select"
+                    app:endIconMode="dropdown_menu">
 
-                    <RadioButton
-                        android:id="@+id/positive_container_radio_button"
-                        android:layout_width="wrap_content"
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/container_edit_text"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/label_positive_action" />
-
-                    <RadioButton
-                        android:id="@+id/negative_container_radio_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_8"
-                        android:text="@string/label_negative_action" />
-                </RadioGroup>
+                        android:clickable="false"
+                        android:focusable="false" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/container_label_text_view"

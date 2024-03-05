@@ -39,6 +39,10 @@
     <string name="label_replica_status_avaibale" translatable="true">Disponible</string>
     <string name="label_replica_status_busy" translatable="true">Ocupado</string>
     <string name="label_no_testomonies" translatable="true">No hay testimonios</string>
+    <string name="label_select_status_replica" translatable="true">Seleccione un estado</string>
+    <string name="label_hint_select" translatable="true">Seleccione</string>
+    <string name="label_year_you_received" translatable="true">Año en que recibiste la replica</string>
+    <string name="label_year_select" translatable="true">Seleccione el año</string>
 
     <string name="label_who_receive" translatable="true">Datos de quien recibe</string>
     <string name="label_attendant_pilgrim" translatable="true">Miembro que acompaña</string>

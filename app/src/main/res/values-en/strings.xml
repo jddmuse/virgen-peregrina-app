@@ -39,6 +39,10 @@
     <string name="label_replica_status_avaibale" translatable="true">Available</string>
     <string name="label_replica_status_busy" translatable="true">Busy</string>
     <string name="label_no_testomonies" translatable="true">No testimonies</string>
+    <string name="label_select_status_replica" translatable="true">Select a status</string>
+    <string name="label_hint_select" translatable="true">Select</string>
+    <string name="label_year_you_received" translatable="true">Year you received Replica</string>
+    <string name="label_year_select" translatable="true">Select year</string>
 
     <string name="label_who_receive" translatable="true">Who receive data</string>
     <string name="label_attendant_pilgrim" translatable="true">Who attendant the Pilgrimage</string>
