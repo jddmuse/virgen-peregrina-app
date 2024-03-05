@@ -41,10 +41,19 @@
     <string name="label_year_you_received" translatable="true">Year you received Replica</string>
     <string name="label_year_select" translatable="true">Select year</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_names_required_field" translatable="true">Names *</string>
+    <string name="label_last_name_required_field" translatable="true">Last Name *</string>
+    <string name="label_email_required_field" translatable="true">Email *</string>
+    <string name="label_cellphone_required_field" translatable="true">Cellphone *</string>
+    <string name="label_country_required_field" translatable="true">Country *</string>
+    <string name="label_city_required_field" translatable="true">City *</string>
+    <string name="label_address_required_field" translatable="true">Address *</string>
+    <string name="label_pilgrim_attends_required_field" translatable="true">Pilgrim *</string>
+    <string name="label_start_date_required_field" translatable="true">Start date *</string>
+    <string name="label_end_date_required_field" translatable="true">End date *</string>
+    <string name="label_intention_required_field" translatable="true">Intention *</string>
 
-
+    <string name="label_start_pilgrimage" translatable="true">Start Pilgrimage</string>
     <string name="label_who_receive" translatable="true">Who receive data</string>
     <string name="label_attendant_pilgrim" translatable="true">Who attendant the Pilgrimage</string>
     <string name="label_intention" translatable="true">Intention</string>

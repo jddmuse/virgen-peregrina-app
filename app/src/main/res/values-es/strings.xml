@@ -43,10 +43,23 @@
     <string name="label_hint_select" translatable="true">Seleccione</string>
     <string name="label_year_you_received" translatable="true">Año en que recibiste la replica</string>
     <string name="label_year_select" translatable="true">Seleccione el año</string>
-
+    <string name="label_start_pilgrimage" translatable="true">Iniciar Peregrinación</string>
     <string name="label_who_receive" translatable="true">Datos de quien recibe</string>
     <string name="label_attendant_pilgrim" translatable="true">Miembro que acompaña</string>
     <string name="label_intention" translatable="true">Intención</string>
+
+    <string name="label_names_required_field" translatable="true">Nombres *</string>
+    <string name="label_last_name_required_field" translatable="true">Apellidos *</string>
+    <string name="label_email_required_field" translatable="true">Email *</string>
+    <string name="label_cellphone_required_field" translatable="true">Celular *</string>
+    <string name="label_country_required_field" translatable="true">País *</string>
+    <string name="label_city_required_field" translatable="true">Ciudad *</string>
+    <string name="label_address_required_field" translatable="true">Dirección *</string>
+    <string name="label_pilgrim_attends_required_field" translatable="true">Peregrino *</string>
+    <string name="label_start_date_required_field" translatable="true">Fecha de Inicio *</string>
+    <string name="label_end_date_required_field" translatable="true">Fecha Final *</string>
+    <string name="label_intention_required_field" translatable="true">Intención *</string>
+
     <string name="label_pilgrimage_success" translatable="true">Peregrinación registrada exitosamente</string>
     <string name="action_button_yes" translatable="true">Yes</string>
     <string name="label_pilgrimage_finished" translatable="true">La peregrinación que acompañas ha finalizado exitosamente, por favor escribe un testimonio</string>
