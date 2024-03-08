@@ -93,6 +93,9 @@ class PilgrimageViewModel @Inject constructor(
     private val _onFinishActivity = MutableLiveData<Boolean>()
     val onFinishActivity: LiveData<Boolean> get() = _onFinishActivity
 
+    private val _loading = MutableLiveData<Pair<Boolean, String>>()
+    val loading: LiveData<Pair<Boolean, String>> get() = _loading
+
     companion object {
         private const val TAG = "PilgrimageViewModel"
     }
@@ -107,9 +110,7 @@ class PilgrimageViewModel @Inject constructor(
                         _pilgrims.value = list
                     }
                     is BaseResultUseCase.Error -> {
-                        _error.value =
-                            resourceProvider
-                                .getStringResource(R.string.error_generic)
+                        _error.value = resourceProvider.getStringResource(R.string.error_generic)
                     }
                 }
             }
@@ -130,6 +131,7 @@ class PilgrimageViewModel @Inject constructor(
 
     private fun saveReceiverUser() {
         try {
+            _loading.value = Pair(true, resourceProvider.getStringResource(R.string.label_sending_request))
             val newUser = SignUpRequest(
                 uuid = null,
                 name = setName,
@@ -145,14 +147,17 @@ class PilgrimageViewModel @Inject constructor(
             viewModelScope.launch {
                 when (val result = signUpWithVirgenPeregrinaUseCase(newUser)) {
                     is BaseResultUseCase.Success -> {
+                        _loading.value = Pair(false, "")
                         savePilgrimage(result.data!!.id)
                     }
                     is BaseResultUseCase.Error -> {
-                        _error.value =
-                            resourceProvider
-                                .getStringResource(R.string.error_generic)
+                        _loading.value = Pair(false, "")
+                        _error.value = resourceProvider.getStringResource(R.string.error_generic)
                     }
-                    is BaseResultUseCase.NullOrEmptyData -> {}
+                    is BaseResultUseCase.NullOrEmptyData -> {
+                        _loading.value = Pair(false, "")
+                        _error.value = resourceProvider.getStringResource(R.string.error_generic)
+                    }
                 }
             }
         } catch (ex: Exception) {

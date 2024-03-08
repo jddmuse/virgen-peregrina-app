@@ -10,6 +10,7 @@ import com.example.virgen_peregrina_app.databinding.ActivityPilgrimageBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hbb20.CountryCodePicker
 import com.virgen.peregrina.ui.date_picker_dialog.DatePickerFragment
+import com.virgen.peregrina.ui.loading_dialog.LoadingDialogView
 import com.virgen.peregrina.ui.register.RegisterInputType
 import com.virgen.peregrina.util.UIBehavior
 import com.virgen.peregrina.util.formatDate
@@ -24,6 +25,7 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
     }
 
     private lateinit var binding: ActivityPilgrimageBinding
+    private lateinit var loadingDialog: LoadingDialogView
     private val viewModel: PilgrimageViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +37,7 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
 
     override fun initUI() {
         try {
+            loadingDialog = LoadingDialogView(this)
             val replicaId = intent.getLongExtra("replica_id", -1)
             initListeners()
             initObservers()
@@ -67,13 +70,9 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
                     }
                 }
             }
-
-            //
             viewModel.error.observe(this) {
 
             }
-
-            // receiver data
             viewModel.nameErrorMsg.observe(this) { msg ->
                 with(binding.nameEditText) {
                     error = msg
@@ -116,8 +115,6 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
                     requestFocus()
                 }
             }
-
-            // pilgrimage data
             viewModel.setUserIdErrorMsg.observe(this) { msg ->
                 with(binding.attendantPilgrimEditText) {
                     error = msg
@@ -148,7 +145,12 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
                     .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
                     .show()
             }
-
+            viewModel.loading.observe(this) { value ->
+                if(value.first)
+                    loadingDialog.setMessage(value.second).show()
+                else
+                    loadingDialog.dismiss()
+            }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")
         }

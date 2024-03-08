@@ -59,6 +59,7 @@
     <string name="label_start_date_required_field" translatable="true">Fecha de Inicio *</string>
     <string name="label_end_date_required_field" translatable="true">Fecha Final *</string>
     <string name="label_intention_required_field" translatable="true">Intención *</string>
+    <string name="label_sending_request" translatable="true">Enviando solicitud…</string>
 
     <string name="label_pilgrimage_success" translatable="true">Peregrinación registrada exitosamente</string>
     <string name="action_button_yes" translatable="true">Yes</string>

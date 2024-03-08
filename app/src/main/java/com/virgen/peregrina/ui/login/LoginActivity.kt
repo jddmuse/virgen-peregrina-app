@@ -10,6 +10,7 @@ import androidx.core.widget.addTextChangedListener
 import com.example.virgen_peregrina_app.databinding.ActivityLoginBinding
 import com.google.android.material.snackbar.Snackbar
 import com.virgen.peregrina.MainActivity
+import com.virgen.peregrina.ui.loading_dialog.LoadingDialogView
 import com.virgen.peregrina.ui.register.RegisterActivity
 import com.virgen.peregrina.util.UIBehavior
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +23,7 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
     }
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var loadingDialog: LoadingDialogView
     private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {

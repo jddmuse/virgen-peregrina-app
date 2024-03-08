@@ -65,6 +65,8 @@ class LoginViewModel @Inject constructor(
     private val _loginWithVirgenPeregrina = MutableLiveData<Boolean>()
     val loginWithVirgenPeregrina: LiveData<Boolean> get() = _loginWithVirgenPeregrina
 
+    private val _loading = MutableLiveData<Pair<Boolean, String>>()
+    val loading: LiveData<Pair<Boolean, String>> get() = _loading
 
     fun onCreate(callback: (String, String) -> Unit) {
         with(preferencesManager) {
@@ -109,22 +111,25 @@ class LoginViewModel @Inject constructor(
         try {
             Log.i(TAG, "$METHOD_CALLED onLoginWithFirebase()")
             if (noErrorExists()) {
+                _loading.value = Pair(true, resourceProvider.getStringResource(R.string.label_sending_request))
                 _enableButton.value = false
                 savePreferencesData()
                 viewModelScope.launch {
                     when (val result = loginWithFirebaseUseCase(setEmail, setPassword)) {
                         is BaseResultUseCase.Success -> {
+                            _loading.value = Pair(false, "")
                             result.data?.uid?.let { uid ->
                                 setUUID = uid
                                 loginWithVirgenPeregrina()
                             }
                         }
                         is BaseResultUseCase.NullOrEmptyData -> {
-                            _errorMsg.value =
-                                resourceProvider.getStringResource(R.string.error_generic)
+                            _loading.value = Pair(false, "")
+                            _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
                             _enableButton.value = true
                         }
                         is BaseResultUseCase.Error -> {
+                            _loading.value = Pair(false, "")
                             _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
                             _enableButton.value = true
                         }

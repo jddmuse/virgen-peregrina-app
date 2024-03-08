@@ -97,7 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
-                    app:endIconMode="clear_text">
+                    app:endIconMode="clear_text">+
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/email_edit_text"
@@ -135,6 +135,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:hint="Cellphone"
+                        app:endIconMode="none"
                         app:layout_constraintEnd_toEndOf="parent">
 
                         <com.google.android.material.textfield.MaterialAutoCompleteTextView

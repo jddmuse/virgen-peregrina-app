@@ -55,6 +55,7 @@
     <string name="label_start_date_required_field" translatable="true">Start date *</string>
     <string name="label_end_date_required_field" translatable="true">End date *</string>
     <string name="label_intention_required_field" translatable="true">Intention *</string>
+    <string name="label_sending_request" translatable="true">Sending request…</string>
 
     <string name="label_start_pilgrimage" translatable="true">Start Pilgrimage</string>
     <string name="label_who_receive" translatable="true">Who receive data</string>
