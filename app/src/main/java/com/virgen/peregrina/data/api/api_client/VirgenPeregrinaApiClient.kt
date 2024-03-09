@@ -32,9 +32,9 @@ interface VirgenPeregrinaApiClient {
 
     ): BaseResponseApi<List<ReplicaModel>>
 
-    @GET("replica/create")
+    @POST("replica/create")
     suspend fun createReplica(
-        request: CreateReplicaRequest
+        @Body request: CreateReplicaRequest
     ): BaseResponseApi<ReplicaModel>
 
     @GET("testimony/get-all/{replica_id}")

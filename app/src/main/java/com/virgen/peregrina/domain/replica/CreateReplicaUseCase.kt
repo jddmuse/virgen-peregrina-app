@@ -1,6 +1,7 @@
 package com.virgen.peregrina.domain.replica
 
 import android.util.Log
+import com.google.gson.Gson
 import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.data.repository.ReplicaRepository
 import com.virgen.peregrina.data.request.CreateReplicaRequest
@@ -21,7 +22,7 @@ class CreateReplicaUseCase @Inject constructor(
 
     suspend operator fun invoke(data: CreateReplicaRequest): BaseResultUseCase<ReplicaModel> {
         return try {
-            Log.i(TAG, "$METHOD_CALLED invoke() PARAMS: $data")
+            Log.i(TAG, "$METHOD_CALLED invoke() PARAMS: ${Gson().toJson(data)}")
             when(val result = replicaRepository.create(data)) {
                 is BaseResultRepository.Success -> { BaseResultUseCase.Success(result.data) }
                 is BaseResultRepository.Error -> { BaseResultUseCase.Error(result.exception) }

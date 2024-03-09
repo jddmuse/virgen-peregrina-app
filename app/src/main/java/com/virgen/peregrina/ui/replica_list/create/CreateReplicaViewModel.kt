@@ -14,6 +14,7 @@ import com.virgen.peregrina.util.base.BaseResultUseCase
 import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -83,11 +84,12 @@ class CreateReplicaViewModel @Inject constructor(
             code = setCode,
             year = setYear,
             requireRepair = setRepairRequired,
-            ownerId = userId,
-            container = setContainer
+            ownerId = userId.toString(),
+            container = setContainer,
+            status = setState
         )
         viewModelScope.launch {
-            when(val result = createReplicaUseCase.invoke(request)) {
+            when(val result = createReplicaUseCase(request)) {
                 is BaseResultUseCase.Success -> {
                     _loading.value = Pair(false, EMPTY_STRING)
                     _dispatchSuccessful.value = Pair(true, resourceProvider.getStringResource(R.string.label_replica_created_successfull))

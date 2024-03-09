@@ -2,9 +2,12 @@ package com.virgen.peregrina.data.repository
 
 import android.util.Log
 import com.example.virgen_peregrina_app.R
+import com.google.gson.Gson
 import com.virgen.peregrina.data.api.api_client.VirgenPeregrinaApiClient
 import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.data.request.CreateReplicaRequest
+import com.virgen.peregrina.domain.replica.CreateReplicaUseCase
+import com.virgen.peregrina.util.METHOD_CALLED
 import com.virgen.peregrina.util.base.BaseResponseApi
 import com.virgen.peregrina.util.base.BaseResultRepository
 import com.virgen.peregrina.util.getExceptionLog
@@ -35,7 +38,8 @@ class ReplicaRepository @Inject constructor(
 
     suspend fun create(data: CreateReplicaRequest): BaseResultRepository<ReplicaModel> {
         return try {
-            val result: BaseResponseApi<ReplicaModel> = virgenPeregrinaApiClient.createReplica(data)
+            Log.i(TAG, "$METHOD_CALLED invoke() PARAMS: ${Gson().toJson(data)}")
+            val result = virgenPeregrinaApiClient.createReplica(data)
             if(result.data != null)
                 BaseResultRepository.Success(result.data)
             else
