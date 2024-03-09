@@ -93,6 +93,11 @@ class CreateReplicaActivity : AppCompatActivity(), UIBehavior {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+    }
+
     override fun initListeners() {
         with(binding) {
             codeEditText.addTextChangedListener { text ->

@@ -153,4 +153,10 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
             Log.e(TAG, "initListeners(): Exception -> $ex")
         }
     }
+
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.onCreate()
+    }
 }

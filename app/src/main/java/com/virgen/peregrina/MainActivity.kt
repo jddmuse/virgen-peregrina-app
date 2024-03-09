@@ -157,5 +157,9 @@ class MainActivity : AppCompatActivity(), UIBehavior, OnItemActionListener<Pilgr
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.onCreate()
+    }
 
 }
