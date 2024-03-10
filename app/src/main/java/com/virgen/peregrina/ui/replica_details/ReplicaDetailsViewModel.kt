@@ -31,7 +31,7 @@ class ReplicaDetailsViewModel @Inject constructor(
     fun onCreate(replica_id: Long?) {
         viewModelScope.launch {
             try {
-                if (replica_id != null)
+                if (replica_id != null) {
                     getReplicaId = replica_id
                     when (val result = getTestimoniesByReplicaUseCase(getReplicaId)) {
                         is BaseResultUseCase.Success -> {
@@ -40,6 +40,7 @@ class ReplicaDetailsViewModel @Inject constructor(
                         is BaseResultUseCase.Error -> {}
                         is BaseResultUseCase.NullOrEmptyData -> {}
                     }
+                }
             } catch (ex: Exception) {
                 Log.e(TAG, "onCreate(): Exception -> $ex")
             }
