@@ -61,6 +61,18 @@
     <string name="label_intention_required_field" translatable="true">Intención *</string>
     <string name="label_sending_request" translatable="true">Enviando solicitud…</string>
 
+    <string name="label_type_name_hint_field" translatable="true">Escribe el nombre…</string>
+    <string name="label_type_last_name_hint_field" translatable="true">Escribe el apellido…</string>
+    <string name="label_type_email_hint_field" translatable="true">Escribe el correo…</string>
+    <string name="label_type_cellphone_hint_field" translatable="true">Escribe el numero de celular…</string>
+    <string name="label_type_country_hint_field" translatable="true">Escribe el país…</string>
+    <string name="label_type_city_hint_field" translatable="true">Escribe la ciudad…</string>
+    <string name="label_type_address_hint_field" translatable="true">Escribe la dirección…</string>
+    <string name="label_type_pilgrim_hint_field" translatable="true">Selecciona el peregrino…</string>
+    <string name="label_type_start_date_hint_field" translatable="true">Escribe la fecha de inicio…</string>
+    <string name="label_type_end_date_hint_field" translatable="true">Escribe la fecha de finalizacion…</string>
+    <string name="label_type_intention_hint_field" translatable="true">Escribe intención…</string>
+
     <string name="label_pilgrimage_success" translatable="true">Peregrinación registrada exitosamente</string>
     <string name="action_button_yes" translatable="true">Yes</string>
     <string name="label_pilgrimage_finished" translatable="true">La peregrinación que acompañas ha finalizado exitosamente, por favor escribe un testimonio</string>
