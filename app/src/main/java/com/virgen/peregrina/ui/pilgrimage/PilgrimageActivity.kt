@@ -206,10 +206,10 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
                     }
                     picker.show(supportFragmentManager, TAG)
                 }
-
                 actionButton.setOnClickListener {
                     viewModel.onStartPilgrimage()
                 }
+                appBarLayout.toolbar.setNavigationOnClickListener { finish() }
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initListeners(): Exception -> $ex")

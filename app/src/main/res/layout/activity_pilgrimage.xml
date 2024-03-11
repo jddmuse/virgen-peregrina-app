@@ -8,22 +8,27 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingHorizontal="@dimen/dp_16">
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/app_bar_layout"
+            layout="@layout/app_bar_layout" />
 
         <TextView
             android:id="@+id/start_pilgrimage_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
             android:text="@string/label_start_pilgrimage"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/who_receive_form_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginVertical="@dimen/dp_16"
             app:cardCornerRadius="@dimen/dp_16"
             app:layout_constraintTop_toBottomOf="@id/start_pilgrimage_label">
@@ -334,8 +339,9 @@
             android:id="@+id/action_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginVertical="@dimen/dp_16"
-            android:text="Start Pilgrimage"
+            android:text="@string/label_start_pilgrimage"
             app:layout_constraintTop_toBottomOf="@id/pilgrimage_card_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
