@@ -3,6 +3,7 @@ package com.virgen.peregrina.data.repository
 import android.util.Log
 import com.virgen.peregrina.data.api.api_client.VirgenPeregrinaApiClient
 import com.virgen.peregrina.data.model.PilgrimageModel
+import com.virgen.peregrina.data.request.CreatePilgrimageRequest
 import com.virgen.peregrina.util.base.BaseResultRepository
 import com.virgen.peregrina.util.getExceptionLog
 import kotlinx.coroutines.Dispatchers
@@ -17,10 +18,10 @@ class PilgrimageRepository @Inject constructor(
         private const val TAG = "PilgrimageRepository"
     }
 
-    suspend fun create(pilgrimageModel: PilgrimageModel): BaseResultRepository<PilgrimageModel> =
+    suspend fun create(data: CreatePilgrimageRequest): BaseResultRepository<PilgrimageModel> =
         withContext(Dispatchers.IO) {
             try {
-                val result = virgenPeregrinaApiClient.createPilgrimage(pilgrimageModel)
+                val result = virgenPeregrinaApiClient.createPilgrimage(data)
                 BaseResultRepository.Success(result.data)
             } catch (ex: Exception) {
                 Log.e(TAG, "create(): Exception -> $ex")

@@ -149,6 +149,8 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
                 )
             }
 
+            binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
+
         } catch (ex: Exception) {
             Log.e(TAG, "initListeners(): Exception -> $ex")
         }

@@ -1,6 +1,7 @@
 package com.virgen.peregrina.ui.login
 
 import android.content.Intent
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -43,6 +44,7 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
                     passwordEditText.setText(password)
                 }
             }
+            binding.signupTextView.paintFlags = Paint.UNDERLINE_TEXT_FLAG;
         } catch (ex: Exception) {
             Log.e(TAG, "initUI(): Exception -> $ex")
         }

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.model.UserModel
+import com.virgen.peregrina.data.request.CreatePilgrimageRequest
 import com.virgen.peregrina.data.request.SignUpRequest
 import com.virgen.peregrina.domain.pilgrimage.CreatePilgrimageUseCase
 import com.virgen.peregrina.domain.pilgrimage.GetAllPilgrimsUseCase
@@ -167,13 +168,15 @@ class PilgrimageViewModel @Inject constructor(
 
     private fun savePilgrimage(receiverUserId: Long) {
         try {
-            val newPilgrimage = PilgrimageModel(
-                date_start = setStartDate,
-                date_end = setEndDate,
+            val newPilgrimage = CreatePilgrimageRequest(
+                startDate = setStartDate,
+                endDate = setEndDate,
                 intention = setIntention,
-                user_id = setUserId!!,
-                replica_id = setReplicaId!!,
-                receiver_user_id = receiverUserId
+                userId = setUserId!!,
+                replicaId = setReplicaId!!,
+                receiverId = receiverUserId,
+                city = setCity,
+                country = setCountry
             )
             viewModelScope.launch {
                 when (val result = createPilgrimageUseCase(newPilgrimage)) {

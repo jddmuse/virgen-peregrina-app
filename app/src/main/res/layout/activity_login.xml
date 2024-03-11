@@ -70,6 +70,7 @@
             app:layout_constraintTop_toBottomOf="@id/remember_data_switch" />
 
         <TextView
+            android:textColor="@color/purple_700"
             android:id="@+id/signup_text_view"
             android:textStyle="bold"
             android:layout_marginTop="@dimen/dp_16"

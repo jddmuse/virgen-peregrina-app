@@ -4,6 +4,7 @@ import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.data.model.TestimonyModel
 import com.virgen.peregrina.data.model.UserModel
+import com.virgen.peregrina.data.request.CreatePilgrimageRequest
 import com.virgen.peregrina.data.request.CreateReplicaRequest
 import com.virgen.peregrina.data.request.LoginRequest
 import com.virgen.peregrina.data.request.SignUpRequest
@@ -52,7 +53,7 @@ interface VirgenPeregrinaApiClient {
 
     @POST("pilgrimage/create")
     suspend fun createPilgrimage(
-        @Body pilgrimageModel: PilgrimageModel
+        @Body data: CreatePilgrimageRequest
     ): BaseResponseApi<PilgrimageModel>
 
     @GET("pilgrimage/get-all")
