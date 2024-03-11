@@ -53,12 +53,11 @@
             android:id="@+id/remember_data_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_32"
             android:text="@string/switch_remember_loging"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/password_input_layout" />
 
         <Button
             android:id="@+id/login_button"
@@ -70,14 +69,14 @@
             app:layout_constraintTop_toBottomOf="@id/remember_data_switch" />
 
         <TextView
-            android:textColor="@color/purple_700"
             android:id="@+id/signup_text_view"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/dp_16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
             android:gravity="center"
             android:text="@string/label_sing_up_login"
+            android:textColor="@color/purple_700"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/login_button" />
 
         <ProgressBar
@@ -96,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_64"
             android:gravity="center"
-            android:text="Beta version 0.8\nNov 2022"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/login_button" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -34,6 +34,8 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
         initUI()
         initListeners()
         initObservers()
+
+        binding.rememberDataSwitch.isChecked = true
     }
 
     override fun initUI() {
