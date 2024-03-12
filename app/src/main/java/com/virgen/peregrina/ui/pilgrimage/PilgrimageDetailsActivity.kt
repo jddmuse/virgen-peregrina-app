@@ -24,6 +24,11 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
         binding = ActivityPilgrimageDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
+        initListeners()
+    }
+
+    private fun initListeners() {
+        binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
     }
 
     private fun initUI() {
@@ -45,6 +50,8 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
                 replicaOwnerUserNameTextView.text = pilgrimageModel.replica_owner_name_id
                 replicaOwnerUserEmailTextView.text = pilgrimageModel.replica_owner_user_email
                 replicaOwnerUserTelephoneTextView.text = pilgrimageModel.replica_owner_user_telephone
+
+                replicaCodeTextView.text = getString(R.string.label_replica_code_value, pilgrimageModel.replica_code)
             }
         } catch (ex: Exception) {
             getExceptionLog(TAG, "initUI", ex)

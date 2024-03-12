@@ -90,6 +90,8 @@
     <string name="label_replica_data">Replica Data</string>
     <string name="label_sending_request" translatable="true">Sending request…</string>
 
+    <string name="label_replica_code_value" translatable="true">Code: %1$s</string>
+
     <string name="label_replica_returned_same_state" translatable="true">Is the replica in the same condition it was borrowed?</string>
     <string name="label_pilgrimage_finished_2" translatable="true">The accompanying pilgrimage has ended, please describe the experience</string>
     <string name="label_guidelines" translatable="true">Guidelines</string>
