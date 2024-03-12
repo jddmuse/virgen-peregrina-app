@@ -21,4 +21,8 @@
     <color name="secondaryDarkColor">#572217</color>
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#ffffff</color>
+
+    <color name="pilgrimage_status_pending">#FFF38B</color>
+    <color name="pilgrimage_status_finished">#73AF75</color>
+    <color name="pilgrimage_status_in_progress">#687FFF</color>
 </resources>

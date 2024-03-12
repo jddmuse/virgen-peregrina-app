@@ -40,6 +40,10 @@
     <string name="label_hint_select" translatable="true">Select</string>
     <string name="label_year_you_received" translatable="true">Year you received Replica</string>
     <string name="label_year_select" translatable="true">Select year</string>
+    
+    <string name="pilgrimage_status_pending" translatable="true">Pending</string>
+    <string name="pilgrimage_status_finished" translatable="true">Finished</string>
+    <string name="pilgrimage_status_in_progress" translatable="true">In Progress</string>
 
     <string name="label_names_required_field" translatable="true">Names *</string>
     <string name="label_last_name_required_field" translatable="true">Last Name *</string>

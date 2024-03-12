@@ -69,6 +69,10 @@
     <string name="label_type_end_date_hint_field" translatable="true">Type end date…</string>
     <string name="label_type_intention_hint_field" translatable="true">Type intention…</string>
 
+    <string name="pilgrimage_status_pending" translatable="true">Pending</string>
+    <string name="pilgrimage_status_finished" translatable="true">Finished</string>
+    <string name="pilgrimage_status_in_progress" translatable="true">In Progress</string>
+
     <string name="label_start_pilgrimage" translatable="true">Start Pilgrimage</string>
     <string name="label_who_receive" translatable="true">Who receive data</string>
     <string name="label_attendant_pilgrim" translatable="true">Who attendant the Pilgrimage</string>
