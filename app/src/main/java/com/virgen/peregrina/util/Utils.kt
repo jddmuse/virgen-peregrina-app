@@ -19,26 +19,31 @@ fun formatDateForView(
     context: Context,
     date: String
 ): String {
-    val list = date.split("/")
-    val day = list[0]
-    val month = list[1]
-    val year = list[2]
-    val monthAux = when (month) {
-        "01" -> context.getString(R.string.month_january)
-        "02" -> context.getString(R.string.month_february)
-        "03" -> context.getString(R.string.month_march)
-        "04" -> context.getString(R.string.month_april)
-        "05" -> context.getString(R.string.month_may)
-        "06" -> context.getString(R.string.month_june)
-        "07" -> context.getString(R.string.month_july)
-        "08" -> context.getString(R.string.month_august)
-        "09" -> context.getString(R.string.month_september)
-        "10" -> context.getString(R.string.month_october)
-        "11" -> context.getString(R.string.month_november)
-        "12" -> context.getString(R.string.month_december)
-        else -> ""
+    try {
+        val list = date.split("/")
+        val day = list[0]
+        val month = list[1]
+        val year = list[2]
+        val monthAux = when (month) {
+            "01" -> context.getString(R.string.month_january)
+            "02" -> context.getString(R.string.month_february)
+            "03" -> context.getString(R.string.month_march)
+            "04" -> context.getString(R.string.month_april)
+            "05" -> context.getString(R.string.month_may)
+            "06" -> context.getString(R.string.month_june)
+            "07" -> context.getString(R.string.month_july)
+            "08" -> context.getString(R.string.month_august)
+            "09" -> context.getString(R.string.month_september)
+            "10" -> context.getString(R.string.month_october)
+            "11" -> context.getString(R.string.month_november)
+            "12" -> context.getString(R.string.month_december)
+            else -> ""
+        }
+        return "$day $monthAux"
+    } catch (ex:Exception) {
+        getExceptionLog("Utils", "formatDateForView", ex)
     }
-    return "$day $monthAux"
+    return "No se pudo obtener"
 }
 
 fun getExceptionLog(tag: String, method: String, exception: Exception) =

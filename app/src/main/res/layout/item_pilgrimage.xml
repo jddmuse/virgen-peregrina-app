@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_2"
             android:maxLines="3"
-            android:text="Por la familia pepito perez..."
+            android:text="@string/error_generic"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <TextView
@@ -62,7 +62,6 @@
             android:background="@drawable/shape_state_pilgrimage"
             android:gravity="center_vertical"
             android:paddingHorizontal="@dimen/dp_8"
-            android:text="en curso"
             android:textColor="@color/secondaryTextColor" />
 
     </LinearLayout>

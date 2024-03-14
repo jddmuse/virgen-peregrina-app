@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
-    <string name="api_url">https://virgenperegrina-b576d3590745.herokuapp.com</string>
     <string name="app_name">virgen-peregrina-app</string>
     <string name="login_button" translatable="true">Continue</string>
     <string name="email" translatable="true">Email</string>

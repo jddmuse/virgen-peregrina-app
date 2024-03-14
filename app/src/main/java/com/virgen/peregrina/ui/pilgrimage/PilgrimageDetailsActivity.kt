@@ -38,7 +38,7 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
             with(binding) {
                 intentionTextView.text = pilgrimageModel.intention
                 dateTextView.text = getDatesRank(
-                    pilgrimageModel.date_start, pilgrimageModel.date_end
+                    pilgrimageModel.date_start ?: "", pilgrimageModel.date_end ?: ""
                 )
                 cityTextView.text = formatLocation(
                     pilgrimageModel.city, pilgrimageModel.country
@@ -59,7 +59,12 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
     }
 
     private fun getDatesRank(start: String, end: String): String {
-        return "From ${formatDateForView(this, start)} to ${formatDateForView(this, end)}"
+        try {
+            return "From ${formatDateForView(this, start)} to ${formatDateForView(this, end)}"
+        } catch (ex:Exception) {
+            getExceptionLog(TAG, "getDatesRank", ex)
+        }
+        return getString(R.string.error_generic)
     }
 
 }
