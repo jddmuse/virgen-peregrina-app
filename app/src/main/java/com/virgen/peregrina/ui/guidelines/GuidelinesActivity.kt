@@ -19,11 +19,16 @@ class GuidelinesActivity : AppCompatActivity() {
         binding = ActivityGuidelinesBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initUI()
+        initListeners()
+    }
+
+    private fun initListeners() {
+        binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
     }
 
     private fun initUI() {
         try {
-
+            binding.appBarLayout.textView.text = getString(R.string.label_pilgrimage_guidelines)
         } catch (ex:Exception) {
             getExceptionLog(TAG, "", ex)
         }
