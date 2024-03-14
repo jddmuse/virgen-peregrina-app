@@ -92,10 +92,10 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
                         msg.toString(), Snackbar.LENGTH_SHORT
                     ).show()
                 }
-                userData.observe(this@ReplicasListActivity) { data: LoginResponse? ->
-                    if (data != null && !data.replicas.isNullOrEmpty()) {
+                yourReplicas.observe(this@ReplicasListActivity) { data ->
+                    if (data != null && data.isNotEmpty()) {
                         binding.yourReplicasRecyclerView.visibility = View.VISIBLE
-                        yourReplicaItemAdapter.updateData(data.replicas)
+                        yourReplicaItemAdapter.updateData(data)
                         binding.yourReplicasInfo.visibility = View.GONE
                     } else {
                         binding.yourReplicasInfo.visibility = View.VISIBLE

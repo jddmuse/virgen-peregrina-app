@@ -32,11 +32,11 @@ class ReplicaListViewModel @Inject constructor(
         private const val TAG = "PeregrinacionViewModel"
     }
 
-    private val _userData = MutableLiveData<LoginResponse>()
-    val userData: LiveData<LoginResponse> get() = _userData
-
     private val _replicas = MutableLiveData<List<ReplicaModel>>()
     val replicas: LiveData<List<ReplicaModel>> get() = _replicas
+
+    private val _yourReplicas = MutableLiveData<List<ReplicaModel>>()
+    val yourReplicas: LiveData<List<ReplicaModel>> get() = _yourReplicas
 
     private val _errorMsg = MutableLiveData<String?>()
     val errorMsg: LiveData<String?> get() = _errorMsg
@@ -59,8 +59,21 @@ class ReplicaListViewModel @Inject constructor(
                     }
                 }
             }
+            getOwnReplicas()
         } catch (ex: Exception) {
             getExceptionLog(TAG, "onCreate", ex)
+        }
+    }
+
+    private fun getOwnReplicas() {
+        try {
+            preferencesManager.userSessionData?.let { sessionData ->
+                if(!sessionData.replicas.isNullOrEmpty()) {
+                    _yourReplicas.value = sessionData.replicas!!
+                }
+            }
+        } catch (ex:Exception) {
+            getExceptionLog(TAG, "getOwnReplicas", ex)
         }
     }
 
