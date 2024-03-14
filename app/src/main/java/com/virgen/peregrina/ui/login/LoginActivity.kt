@@ -97,6 +97,12 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
                     }
                 }
             }
+            viewModel.loading.observe(this) { value ->
+                if(value.first)
+                    loadingDialog.setMessage(value.second).show()
+                else
+                    loadingDialog.dismiss()
+            }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")
         }

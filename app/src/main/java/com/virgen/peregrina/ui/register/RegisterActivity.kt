@@ -7,10 +7,13 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityRegisterBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hbb20.CountryCodePicker
 import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.ui.date_picker_dialog.DatePickerFragment
+import com.virgen.peregrina.ui.loading_dialog.LoadingDialogView
 import com.virgen.peregrina.util.UIBehavior
 import com.virgen.peregrina.util.getExceptionLog
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +28,7 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
 
     private lateinit var binding: ActivityRegisterBinding
     private val viewModel: RegisterViewModel by viewModels()
+    private lateinit var loadingDialog: LoadingDialogView
 
     private lateinit var dialog: ReplicaDialog
 
@@ -40,6 +44,7 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
 
     override fun initUI() {
         dialog = ReplicaDialog(this)
+        loadingDialog = LoadingDialogView(this)
     }
 
     override fun initObservers() {
@@ -104,7 +109,18 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
                     requestFocus()
                 }
             }
-
+            viewModel.loading.observe(this) { value ->
+                if(value.first)
+                    loadingDialog.setMessage(value.second).show()
+                else
+                    loadingDialog.dismiss()
+            }
+            viewModel.error.observe(this) {
+                MaterialAlertDialogBuilder(this)
+                    .setMessage(it.ifEmpty { getString(R.string.error_generic) })
+                    .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
+                    .show()
+            }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")
         }

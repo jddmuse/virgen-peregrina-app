@@ -78,6 +78,12 @@ class RegisterViewModel @Inject constructor(
     private val _onCloseDatePickerDialog = MutableLiveData<Boolean>()
     val onCloseDatePickerDialog: LiveData<Boolean> get() = _onCloseDatePickerDialog
 
+    private val _loading = MutableLiveData<Pair<Boolean, String>>()
+    val loading: LiveData<Pair<Boolean, String>> get() = _loading
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> get() = _error
+
 
     fun onCreate() {
         with(preferencesManager) {
@@ -168,6 +174,7 @@ class RegisterViewModel @Inject constructor(
             Log.i(TAG, "$METHOD_CALLED onActionButton()")
             _enableButton.value = false
             if (noErrorExists()) {
+                _loading.value = Pair(true, resourceProvider.getStringResource(R.string.label_sending_request))
                 val signUpRequest = SignUpRequest(
                     uuid = setUUID,
                     name = setName,
@@ -183,10 +190,17 @@ class RegisterViewModel @Inject constructor(
                 viewModelScope.launch {
                     when (val result = signUpWithVirgenPeregrinaUseCase(signUpRequest)) {
                         is BaseResultUseCase.Success -> {
+                            _loading.value = Pair(false, "")
                             _startMainActivity.value = !(_startMainActivity.value ?: false)
                         }
-                        is BaseResultUseCase.Error -> {}
-                        is BaseResultUseCase.NullOrEmptyData -> {}
+                        is BaseResultUseCase.Error -> {
+                            _loading.value = Pair(false, "")
+                            _error.value = resourceProvider.getStringResource(R.string.error_generic)
+                        }
+                        is BaseResultUseCase.NullOrEmptyData -> {
+                            _loading.value = Pair(false, "")
+                            _error.value = resourceProvider.getStringResource(R.string.error_generic)
+                        }
                     }
                 }
             } else _enableButton.value = true

@@ -71,7 +71,10 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
                 }
             }
             viewModel.error.observe(this) {
-
+                MaterialAlertDialogBuilder(this)
+                    .setMessage(it.ifEmpty { getString(R.string.error_generic) })
+                    .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
+                    .show()
             }
             viewModel.nameErrorMsg.observe(this) { msg ->
                 with(binding.nameEditText) {
