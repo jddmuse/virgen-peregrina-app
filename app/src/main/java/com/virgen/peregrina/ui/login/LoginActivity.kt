@@ -40,6 +40,7 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
 
     override fun initUI() {
         try {
+            loadingDialog = LoadingDialogView(this)
             viewModel.onCreate { email, password ->
                 with(binding) {
                     emailEditText.setText(email)
