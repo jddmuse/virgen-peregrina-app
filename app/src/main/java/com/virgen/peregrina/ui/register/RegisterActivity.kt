@@ -16,6 +16,7 @@ import com.virgen.peregrina.ui.date_picker_dialog.DatePickerFragment
 import com.virgen.peregrina.ui.loading_dialog.LoadingDialogView
 import com.virgen.peregrina.util.UIBehavior
 import com.virgen.peregrina.util.getExceptionLog
+import com.virgen.peregrina.util.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -147,7 +148,7 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
                 cellphoneEditText.addTextChangedListener {
                     viewModel.onValueChanged(it, RegisterInputType.CELLPHONE)
                 }
-                actionButton.setOnClickListener {
+                actionButton.setSafeOnClickListener {
                     viewModel.onActionButton()
                 }
                 addReplicaButton.setOnClickListener {

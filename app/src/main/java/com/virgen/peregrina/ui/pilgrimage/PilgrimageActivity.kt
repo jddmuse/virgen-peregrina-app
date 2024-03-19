@@ -14,6 +14,7 @@ import com.virgen.peregrina.ui.loading_dialog.LoadingDialogView
 import com.virgen.peregrina.ui.register.RegisterInputType
 import com.virgen.peregrina.util.UIBehavior
 import com.virgen.peregrina.util.formatDate
+import com.virgen.peregrina.util.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -209,7 +210,7 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
                     }
                     picker.show(supportFragmentManager, TAG)
                 }
-                actionButton.setOnClickListener {
+                actionButton.setSafeOnClickListener {
                     viewModel.onStartPilgrimage()
                 }
                 appBarLayout.toolbar.setNavigationOnClickListener { finish() }

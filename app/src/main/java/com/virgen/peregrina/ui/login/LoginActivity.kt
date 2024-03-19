@@ -14,6 +14,7 @@ import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.ui.loading_dialog.LoadingDialogView
 import com.virgen.peregrina.ui.register.RegisterActivity
 import com.virgen.peregrina.util.UIBehavior
+import com.virgen.peregrina.util.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -118,7 +119,7 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
                 passwordEditText.addTextChangedListener {
                     viewModel.onValueChanged(it, LoginInputType.PASSWORD)
                 }
-                loginButton.setOnClickListener {
+                loginButton.setSafeOnClickListener {
                     viewModel.onLoginWithFirebase()
                 }
                 rememberDataSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
