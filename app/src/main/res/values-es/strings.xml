@@ -49,7 +49,8 @@
     <string name="pilgrimage_status_finished" translatable="true">Finalizado</string>
     <string name="pilgrimage_status_in_progress" translatable="true">En curso</string>
 
-    <string name="label_replica_code_value" translatable="true">Codigo: %1$s</string>
+    <string name="label_replica_code_value" translatable="true">Codigo de Replica: %1$s</string>
+    <string name="label_date_rank" translatable="true">de %1$s a %2$s</string>
 
     <string name="label_names_required_field" translatable="true">Nombres *</string>
     <string name="label_last_name_required_field" translatable="true">Apellidos *</string>

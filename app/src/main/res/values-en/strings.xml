@@ -70,7 +70,8 @@
     <string name="pilgrimage_status_finished" translatable="true">Finished</string>
     <string name="pilgrimage_status_in_progress" translatable="true">In Progress</string>
 
-    <string name="label_replica_code_value" translatable="true">Code: %1$s</string>
+    <string name="label_replica_code_value" translatable="true">Replica Code: %1$s</string>
+    <string name="label_date_rank" translatable="true">from %1$s to %2$s</string>
 
     <string name="label_start_pilgrimage" translatable="true">Start Pilgrimage</string>
     <string name="label_who_receive" translatable="true">Who receive data</string>
@@ -135,7 +136,7 @@ Invite them to connect to the Monday rosaries, the dawn rosary of the first Satu
     <string name="label_container_want">* If youu want to get a container send email to quinteromau@gmail.com</string>
     <string name="label_send_email_generic">Send email to qinteromau@gmail.com</string>
     <string name="label_receiver_user_data">Receiver User</string>
-    <string name="label_replica_owner_user_data">Owner</string>
+    <string name="label_replica_owner_user_data">Replica Owner</string>
     <string name="label_month_message">Mis corazones: Yo os bendigo a vosotros en nombre de Dios el Padre, el Hijo y el Espíritu Santo…
 
 Mi corazón se regocija por vuestra presencia… Habéis rezado el rosario con devoción… Mi hijo Jesús os bendice, impone su mano sobre vuestra cabeza, pasa sanando vuestras pequeñas almas de vuestros dolores…

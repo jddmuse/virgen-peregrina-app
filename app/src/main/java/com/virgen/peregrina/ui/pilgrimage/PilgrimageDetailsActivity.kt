@@ -3,7 +3,6 @@ package com.virgen.peregrina.ui.pilgrimage
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.virgen_peregrina_app.R
-import com.example.virgen_peregrina_app.databinding.ActivityMainBinding
 import com.example.virgen_peregrina_app.databinding.ActivityPilgrimageDetailsBinding
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.PilgrimageModel
@@ -33,6 +32,9 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
 
     private fun initUI() {
         try {
+            binding.appBarLayout.textView.text = getString(R.string.label_pilgrimage_details)
+
+
             val jsonObject = intent.getStringExtra("pilgrimage")
             val pilgrimageModel = Gson().fromJson(jsonObject, PilgrimageModel::class.java)
             with(binding) {
@@ -52,6 +54,10 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
                 replicaOwnerUserTelephoneTextView.text = pilgrimageModel.replica_owner_user_telephone
 
                 replicaCodeTextView.text = getString(R.string.label_replica_code_value, pilgrimageModel.replica_code)
+
+                attendantNameTextView.text = pilgrimageModel.attendantName
+                attendantEmailTextView.text = pilgrimageModel.attendantEmail
+                attendantTelephoneTextView.text = pilgrimageModel.attendantPhone
             }
         } catch (ex: Exception) {
             getExceptionLog(TAG, "initUI", ex)
@@ -60,8 +66,12 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
 
     private fun getDatesRank(start: String, end: String): String {
         try {
-            return "From ${formatDateForView(this, start)} to ${formatDateForView(this, end)}"
-        } catch (ex:Exception) {
+            return getString(
+                R.string.label_date_rank,
+                formatDateForView(this, start),
+                formatDateForView(this, end)
+            )
+        } catch (ex: Exception) {
             getExceptionLog(TAG, "getDatesRank", ex)
         }
         return getString(R.string.error_generic)
