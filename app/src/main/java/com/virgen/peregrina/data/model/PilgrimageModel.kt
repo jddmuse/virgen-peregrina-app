@@ -23,7 +23,10 @@ data class PilgrimageModel(
     val replica_owner_user_id: Long? = null,
     val replica_owner_name_id: String = "",
     val replica_owner_user_email: String = "",
-    val replica_owner_user_telephone: String = ""
+    val replica_owner_user_telephone: String = "",
+    val attendantName: String = "",
+    val attendantEmail: String = "",
+    val attendantPhone: String = "",
 )
 
 fun GetPilgrimagesResponse.toModel(): PilgrimageModel {
@@ -48,6 +51,9 @@ fun GetPilgrimagesResponse.toModel(): PilgrimageModel {
         replica_owner_user_id = replicaOwnerId,
         replica_owner_name_id = replicaOwnerName,
         replica_owner_user_email = replicaOwnerEmail,
-        replica_owner_user_telephone = replicaOwnerTelephone
+        replica_owner_user_telephone = replicaOwnerTelephone,
+        attendantName = attendantName,
+        attendantEmail = attendantEmail,
+        attendantPhone = attendantPhone
     )
 }

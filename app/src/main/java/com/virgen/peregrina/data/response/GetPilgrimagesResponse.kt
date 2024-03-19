@@ -65,4 +65,13 @@ data class GetPilgrimagesResponse(
 
     @SerializedName("replica_code")
     val replicaCode: String = "",
+
+    @SerializedName("companion_user_name")
+    val attendantName: String = "",
+
+    @SerializedName("companion_user_email")
+    val attendantEmail: String = "",
+
+    @SerializedName("companion_user_telefone")
+    val attendantPhone: String = "",
 )

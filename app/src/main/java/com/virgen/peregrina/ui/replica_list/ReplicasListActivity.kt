@@ -139,7 +139,6 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
                     )
                 }
             })
-
             binding.addReplicaButton.setOnClickListener {
                 startActivity(
                     Intent(
@@ -148,9 +147,11 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
                     )
                 )
             }
-
             binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
 
+            binding.refreshButton.setOnClickListener {
+                viewModel.getMyReplicasFromApi()
+            }
         } catch (ex: Exception) {
             Log.e(TAG, "initListeners(): Exception -> $ex")
         }
@@ -160,5 +161,6 @@ class ReplicasListActivity : AppCompatActivity(), UIBehavior {
     override fun onResume() {
         super.onResume()
         viewModel.onCreate()
+        binding.refreshButton.visibility = View.VISIBLE
     }
 }

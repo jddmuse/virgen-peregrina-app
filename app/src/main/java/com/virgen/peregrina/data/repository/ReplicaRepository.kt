@@ -49,4 +49,19 @@ class ReplicaRepository @Inject constructor(
             BaseResultRepository.Error(ex)
         }
     }
+
+    suspend fun getReplicasByUserFromApi(id: Long): BaseResultRepository<List<ReplicaModel>> {
+        return try {
+            Log.i(TAG, "getReplicasByUserFromApi() PARAMS: $id")
+            val result = virgenPeregrinaApiClient.getAllReplicasByUser(id)
+            if(result.data != null)
+                BaseResultRepository.Success(result.data)
+            else
+                BaseResultRepository.ApiError(result.message ?: resourceProvider.getStringResource(R.string.error_generic))
+        } catch (ex:Exception) {
+            getExceptionLog(TAG, "getReplicasByUserFromApi", ex)
+            BaseResultRepository.Error(ex)
+        }
+    }
+
 }

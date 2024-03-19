@@ -59,13 +59,13 @@ class ReplicaListViewModel @Inject constructor(
                     }
                 }
             }
-            getOwnReplicas()
+            getMyReplicas()
         } catch (ex: Exception) {
             getExceptionLog(TAG, "onCreate", ex)
         }
     }
 
-    private fun getOwnReplicas() {
+    private fun getMyReplicas() {
         try {
             preferencesManager.userSessionData?.let { sessionData ->
                 if(!sessionData.replicas.isNullOrEmpty()) {
@@ -74,6 +74,35 @@ class ReplicaListViewModel @Inject constructor(
             }
         } catch (ex:Exception) {
             getExceptionLog(TAG, "getOwnReplicas", ex)
+        }
+    }
+
+    fun getMyReplicasFromApi() {
+        try {
+            val userId = preferencesManager.userSessionData?.let { it.id }
+            if(userId != null) {
+                viewModelScope.launch {
+                    when (val result = getAvailableReplicasUseCase.getReplicasByUserFromApi(userId)) {
+                        is BaseResultUseCase.Success -> {
+                            _yourReplicas.value = result.data ?: emptyList()
+                        }
+                        is BaseResultUseCase.NullOrEmptyData -> {
+                            _errorMsg.value = resourceProvider
+                                .getStringResource(R.string.error_generic)
+                        }
+                        is BaseResultUseCase.Error -> {
+                            _errorMsg.value = resourceProvider
+                                .getStringResource(R.string.error_generic)
+                        }
+                        is BaseResultUseCase.APIError -> {
+                            _errorMsg.value = result.message ?: resourceProvider
+                                .getStringResource(R.string.error_generic)
+                        }
+                    }
+                }
+            }
+        } catch (ex:Exception) {
+            getExceptionLog(TAG, "getMyReplicasFromApi", ex)
         }
     }
 
