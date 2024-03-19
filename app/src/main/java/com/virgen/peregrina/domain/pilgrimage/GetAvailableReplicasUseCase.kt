@@ -49,8 +49,8 @@ class GetAvailableReplicasUseCase @Inject constructor(
                     is BaseResultRepository.ApiError -> {
                         BaseResultUseCase.APIError(null, result.message)
                     }
+                    else -> BaseResultUseCase.NullOrEmptyData()
                 }
-                BaseResultUseCase.NullOrEmptyData()
             } catch (ex: Exception) {
                 Log.e(TAG, "getReplicasByUserFromApi(): Exception -> $ex")
                 BaseResultUseCase.Error(ex)

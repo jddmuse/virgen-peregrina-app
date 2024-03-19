@@ -34,7 +34,7 @@ interface VirgenPeregrinaApiClient {
 
     ): BaseResponseApi<List<ReplicaModel>>
 
-    @GET("replica/get-replicas/{userId}")
+    @GET("user/get-replicas/{userId}")
     suspend fun getAllReplicasByUser(
         @Path("userId") userId: Long
     ): BaseResponseApi<List<ReplicaModel>>
