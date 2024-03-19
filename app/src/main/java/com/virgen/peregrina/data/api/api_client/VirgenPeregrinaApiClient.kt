@@ -8,6 +8,7 @@ import com.virgen.peregrina.data.request.CreatePilgrimageRequest
 import com.virgen.peregrina.data.request.CreateReplicaRequest
 import com.virgen.peregrina.data.request.LoginRequest
 import com.virgen.peregrina.data.request.SignUpRequest
+import com.virgen.peregrina.data.response.GetPilgrimagesResponse
 import com.virgen.peregrina.data.response.LoginResponse
 import com.virgen.peregrina.data.response.SignUpResponse
 import com.virgen.peregrina.util.base.BaseResponseApi
@@ -57,6 +58,6 @@ interface VirgenPeregrinaApiClient {
     ): BaseResponseApi<PilgrimageModel>
 
     @GET("pilgrimage/get-all")
-    suspend fun getAllPilgrimages(): BaseResponseApi<List<PilgrimageModel>>
+    suspend fun getAllPilgrimages(): BaseResponseApi<List<GetPilgrimagesResponse>>
 
 }

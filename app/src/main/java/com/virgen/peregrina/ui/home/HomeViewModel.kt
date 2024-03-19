@@ -9,6 +9,7 @@ import com.google.gson.Gson
 import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.model.TestimonyModel
+import com.virgen.peregrina.data.model.toModel
 import com.virgen.peregrina.data.response.LoginResponse
 import com.virgen.peregrina.domain.pilgrimage.GetAllPilgrimagesUseCase
 import com.virgen.peregrina.domain.pilgrimage.SendTestimonyUseCase
@@ -59,7 +60,7 @@ class HomeViewModel @Inject constructor(
                         _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
                     }
                     is BaseResultUseCase.Success -> {
-                        _pilgrimages.value = result.data ?: listOf()
+                        _pilgrimages.value = result.data?.map { it.toModel() } ?: listOf()
                     }
                     is BaseResultUseCase.NullOrEmptyData -> {}
                 }

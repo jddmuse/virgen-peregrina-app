@@ -4,6 +4,7 @@ import android.util.Log
 import com.virgen.peregrina.data.api.api_client.VirgenPeregrinaApiClient
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.request.CreatePilgrimageRequest
+import com.virgen.peregrina.data.response.GetPilgrimagesResponse
 import com.virgen.peregrina.util.base.BaseResultRepository
 import com.virgen.peregrina.util.getExceptionLog
 import kotlinx.coroutines.Dispatchers
@@ -29,7 +30,7 @@ class PilgrimageRepository @Inject constructor(
             }
         }
 
-    suspend fun getAll(): BaseResultRepository<List<PilgrimageModel>> =
+    suspend fun getAll(): BaseResultRepository<List<GetPilgrimagesResponse>> =
         withContext(Dispatchers.IO) {
             try {
                 val result = virgenPeregrinaApiClient.getAllPilgrimages()

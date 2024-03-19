@@ -1,5 +1,7 @@
 package com.virgen.peregrina.data.model
 
+import com.virgen.peregrina.data.response.GetPilgrimagesResponse
+
 data class PilgrimageModel(
     val id: Long? = null,
     val date_start: String? = "",
@@ -23,3 +25,29 @@ data class PilgrimageModel(
     val replica_owner_user_email: String = "",
     val replica_owner_user_telephone: String = ""
 )
+
+fun GetPilgrimagesResponse.toModel(): PilgrimageModel {
+    return PilgrimageModel(
+        id = id,
+        date_start = startDate,
+        date_end = endDate,
+        intention = intention,
+        user_id = userId,
+        replica_id = replicaId,
+        replica_code = replicaCode,
+        isFinished = isFinished,
+        city = city,
+        country = country,
+        state = status,
+        replica_is_returned = replicaIsReturned,
+        have_testimony = haveTestimony,
+        receiver_user_id = receiverId,
+        receiver_user_name = receiverName,
+        receiver_user_telephone = receiverTelephone,
+        receiver_user_email = receiverEmail,
+        replica_owner_user_id = replicaOwnerId,
+        replica_owner_name_id = replicaOwnerName,
+        replica_owner_user_email = replicaOwnerEmail,
+        replica_owner_user_telephone = replicaOwnerTelephone
+    )
+}
