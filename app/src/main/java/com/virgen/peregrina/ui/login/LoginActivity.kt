@@ -126,7 +126,7 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
                     viewModel.onValueChanged(null, LoginInputType.REMEMBER)
                 }
                 signupTextView.setOnClickListener {
-                    viewModel.onSignUpWithFirebase()
+                    startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
                 }
             }
         } catch (ex: Exception) {

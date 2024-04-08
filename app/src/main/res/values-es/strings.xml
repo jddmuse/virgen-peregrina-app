@@ -4,6 +4,7 @@
     <string name="login_button" translatable="true">Continuar</string>
     <string name="email" translatable="true">Email</string>
     <string name="password" translatable="true">Contraseña</string>
+    <string name="password_required" translatable="true">Contraseña *</string>
     <string name="button_action_continue" translatable="true">Continuar</string>
     <string name="error_generic" translatable="true">Algo salió mal, por favor intente de nuevo.</string>
     <string name="error_login" translatable="true">Email o contraseña incorrecta, por favor verifique</string>

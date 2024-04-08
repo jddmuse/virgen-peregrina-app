@@ -7,17 +7,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
-import com.google.gson.Gson
 import com.virgen.peregrina.data.request.LoginRequest
-import com.virgen.peregrina.data.response.LoginResponse
 import com.virgen.peregrina.data.response.toSessionData
-import com.virgen.peregrina.util.base.BaseResultUseCase
 import com.virgen.peregrina.domain.login.LoginWithFirebaseUseCase
 import com.virgen.peregrina.domain.login.LoginWithVirgenPeregrinaUseCase
 import com.virgen.peregrina.domain.signup.SignUpWithFirebaseUseCase
-import com.virgen.peregrina.domain.signup.SignUpWithVirgenPeregrinaUseCase
 import com.virgen.peregrina.util.EMPTY_STRING
 import com.virgen.peregrina.util.METHOD_CALLED
+import com.virgen.peregrina.util.base.BaseResultUseCase
 import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.provider.GlobalProvider
 import com.virgen.peregrina.util.provider.ResourceProvider
@@ -28,11 +25,9 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginWithFirebaseUseCase: LoginWithFirebaseUseCase,
-    private val signUpWithFirebaseUseCase: SignUpWithFirebaseUseCase,
     private val loginWithVirgenPeregrinaUseCase: LoginWithVirgenPeregrinaUseCase,
     private val resourceProvider: ResourceProvider,
-    private val preferencesManager: PreferencesManager,
-    private val globalProvider: GlobalProvider
+    private val preferencesManager: PreferencesManager
 ) : ViewModel() {
 
     companion object {
@@ -141,35 +136,6 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    fun onSignUpWithFirebase() {
-        try {
-            if (noErrorExists()) {
-                viewModelScope.launch {
-                    when (val result = signUpWithFirebaseUseCase(setEmail, setPassword)) {
-                        is BaseResultUseCase.Success -> {
-                            result.data?.uid?.let { uuid ->
-                                preferencesManager.email = setEmail
-                                preferencesManager.uuid = uuid
-                                _startRegisterActivity.value =
-                                    !(_startRegisterActivity.value ?: false)
-                            }
-                        }
-                        is BaseResultUseCase.Error -> {
-                            _errorMsg.value = resourceProvider
-                                .getStringResource(R.string.error_login)
-                        }
-                        is BaseResultUseCase.NullOrEmptyData -> {
-                            _errorMsg.value = resourceProvider
-                                .getStringResource(R.string.error_generic)
-                        }
-                    }
-                }
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "onSignUpWithFirebase() -> Exception: $ex")
-        }
-    }
-
     private fun noErrorExists(): Boolean {
         return _emailErrorMsg.value == null && _passwordErrorMsg.value == null
     }
@@ -191,10 +157,7 @@ class LoginViewModel @Inject constructor(
         try {
             _enableButton.value = false
             viewModelScope.launch {
-                val result = loginWithVirgenPeregrinaUseCase(
-                    LoginRequest(setUUID, setEmail)
-                )
-                when (result) {
+                when (val result = loginWithVirgenPeregrinaUseCase(LoginRequest(setUUID, setEmail))) {
                     is BaseResultUseCase.Success -> {
                         if (result.data != null) {
                             preferencesManager.userSessionData = result.data.toSessionData()
@@ -204,13 +167,11 @@ class LoginViewModel @Inject constructor(
                         }
                     }
                     is BaseResultUseCase.NullOrEmptyData -> {
-                        _errorMsg.value = resourceProvider
-                            .getStringResource(R.string.error_generic)
+                        _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
                         _enableButton.value = true
                     }
                     is BaseResultUseCase.Error -> {
-                        _errorMsg.value = resourceProvider
-                            .getStringResource(R.string.error_generic)
+                        _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
                         _enableButton.value = true
                     }
                 }

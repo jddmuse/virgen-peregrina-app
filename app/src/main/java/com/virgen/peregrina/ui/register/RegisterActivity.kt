@@ -10,10 +10,12 @@ import androidx.core.widget.addTextChangedListener
 import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityRegisterBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 import com.hbb20.CountryCodePicker
 import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.ui.date_picker_dialog.DatePickerFragment
 import com.virgen.peregrina.ui.loading_dialog.LoadingDialogView
+import com.virgen.peregrina.ui.login.LoginActivity
 import com.virgen.peregrina.util.UIBehavior
 import com.virgen.peregrina.util.getExceptionLog
 import com.virgen.peregrina.util.setSafeOnClickListener
@@ -87,9 +89,7 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
                 }
             }
             viewModel.startMainActivity.observe(this) {
-                startActivity(
-                    Intent(this, MainActivity::class.java)
-                )
+                startActivity(Intent(this, MainActivity::class.java))
             }
             viewModel.onCloseDatePickerDialog.observe(this) {
                 dialog.binding.also {
@@ -122,6 +122,10 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
                     .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
                     .show()
             }
+            viewModel.errorMsg.observe(this) { msg: String? ->
+                Log.i(TAG, "CHANGED OBSERVED: errorMsg = $msg")
+                Snackbar.make(binding.actionButton, msg!!, Snackbar.LENGTH_SHORT).show()
+            }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")
         }
@@ -130,6 +134,12 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
     override fun initListeners() {
         try {
             with(binding) {
+                emailEditText.addTextChangedListener {
+                    viewModel.onValueChanged(it, RegisterInputType.EMAIL)
+                }
+                passwordEditText.addTextChangedListener {
+                    viewModel.onValueChanged(it, RegisterInputType.PASSWORD)
+                }
                 nameEditText.addTextChangedListener {
                     viewModel.onValueChanged(it, RegisterInputType.NAME)
                 }
