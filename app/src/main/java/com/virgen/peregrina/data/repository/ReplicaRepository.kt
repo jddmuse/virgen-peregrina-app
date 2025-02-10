@@ -3,13 +3,11 @@ package com.virgen.peregrina.data.repository
 import android.util.Log
 import com.example.virgen_peregrina_app.R
 import com.google.gson.Gson
-import com.virgen.peregrina.data.api.api_client.VirgenPeregrinaApiClient
+import com.virgen.peregrina.data.api.service.VirgenPeregrinaApiClient
 import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.data.request.CreateReplicaRequest
-import com.virgen.peregrina.domain.replica.CreateReplicaUseCase
 import com.virgen.peregrina.util.METHOD_CALLED
-import com.virgen.peregrina.util.base.BaseResponseApi
-import com.virgen.peregrina.util.base.BaseResultRepository
+import com.virgen.peregrina.util.base.BaseResponseRepository
 import com.virgen.peregrina.util.getExceptionLog
 import com.virgen.peregrina.util.provider.ResourceProvider
 import kotlinx.coroutines.Dispatchers
@@ -25,42 +23,42 @@ class ReplicaRepository @Inject constructor(
         private const val TAG = "ReplicaRepository"
     }
 
-    suspend fun getAll(): BaseResultRepository<List<ReplicaModel>> =
+    suspend fun getAll(): BaseResponseRepository<List<ReplicaModel>> =
         withContext(Dispatchers.IO) {
             try {
                 val result = virgenPeregrinaApiClient.getAllReplicas()
-                BaseResultRepository.Success(result.data)
+                BaseResponseRepository.Success(result.data)
             } catch (ex: Exception) {
                 Log.e(TAG, "getAllReplicas(): Exception -> $ex")
-                BaseResultRepository.Error(ex)
+                BaseResponseRepository.Error(ex)
             }
         }
 
-    suspend fun create(data: CreateReplicaRequest): BaseResultRepository<ReplicaModel> {
+    suspend fun create(data: CreateReplicaRequest): BaseResponseRepository<ReplicaModel> {
         return try {
             Log.i(TAG, "$METHOD_CALLED invoke() PARAMS: ${Gson().toJson(data)}")
             val result = virgenPeregrinaApiClient.createReplica(data)
             if(result.data != null)
-                BaseResultRepository.Success(result.data)
+                BaseResponseRepository.Success(result.data)
             else
-                BaseResultRepository.ApiError(result.message ?: resourceProvider.getStringResource(R.string.error_generic))
+                BaseResponseRepository.ApiError(result.message ?: resourceProvider.getStringResource(R.string.error_generic))
         } catch (ex:Exception) {
             getExceptionLog(TAG, "create", ex)
-            BaseResultRepository.Error(ex)
+            BaseResponseRepository.Error(ex)
         }
     }
 
-    suspend fun getReplicasByUserFromApi(id: Long): BaseResultRepository<List<ReplicaModel>> {
+    suspend fun getReplicasByUserFromApi(id: Long): BaseResponseRepository<List<ReplicaModel>> {
         return try {
             Log.i(TAG, "getReplicasByUserFromApi() PARAMS: $id")
             val result = virgenPeregrinaApiClient.getAllReplicasByUser(id)
             if(result.data != null)
-                BaseResultRepository.Success(result.data)
+                BaseResponseRepository.Success(result.data)
             else
-                BaseResultRepository.ApiError(result.message ?: resourceProvider.getStringResource(R.string.error_generic))
+                BaseResponseRepository.ApiError(result.message ?: resourceProvider.getStringResource(R.string.error_generic))
         } catch (ex:Exception) {
             getExceptionLog(TAG, "getReplicasByUserFromApi", ex)
-            BaseResultRepository.Error(ex)
+            BaseResponseRepository.Error(ex)
         }
     }
 

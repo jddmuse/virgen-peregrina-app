@@ -3,26 +3,22 @@ package com.virgen.peregrina.ui.register
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityRegisterBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
 import com.hbb20.CountryCodePicker
 import com.virgen.peregrina.MainActivity
-import com.virgen.peregrina.ui.date_picker_dialog.DatePickerFragment
-import com.virgen.peregrina.ui.loading_dialog.LoadingDialogView
-import com.virgen.peregrina.ui.login.LoginActivity
-import com.virgen.peregrina.util.UIBehavior
-import com.virgen.peregrina.util.getExceptionLog
-import com.virgen.peregrina.util.setSafeOnClickListener
+import com.virgen.peregrina.ui.dialog.LoadingDialogView
+import com.virgen.peregrina.ui.register.enumerator.EnumRegisterInputType
+import com.virgen.peregrina.util.view.IView
+import com.virgen.peregrina.util.view.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterActivity : AppCompatActivity(), UIBehavior,
+class RegisterActivity : AppCompatActivity(), IView,
     CountryCodePicker.OnCountryChangeListener {
 
     companion object {
@@ -33,82 +29,41 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
     private val viewModel: RegisterViewModel by viewModels()
     private lateinit var loadingDialog: LoadingDialogView
 
-    private lateinit var dialog: ReplicaDialog
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initUI()
+        initView()
         initListeners()
         initObservers()
-        viewModel.onCreate()
     }
 
-    override fun initUI() {
-        dialog = ReplicaDialog(this)
+    override fun initView() {
         loadingDialog = LoadingDialogView(this)
     }
 
     override fun initObservers() {
         try {
-            viewModel.nameErrorMsg.observe(this) { msg ->
-                with(binding.nameEditText) {
-                    error = msg
-                    requestFocus()
+            viewModel.errorEditText.observe(this) { pair ->
+                when(pair.first) {
+                    EnumRegisterInputType.NAME -> binding.nameEditText.error = pair.second
+                    EnumRegisterInputType.LAST_NAME -> binding.lastNameEditText.error = pair.second
+                    EnumRegisterInputType.ADDRESS -> binding.addressEditText.error = pair.second
+                    EnumRegisterInputType.COUNTRY -> binding.countryEditText.error = pair.second
+                    EnumRegisterInputType.CITY -> binding.cityEditText.error = pair.second
+//                    EnumRegisterInputType.COUNTRY_CODE -> binding.countryCodePicker.error = pair.second
+                    EnumRegisterInputType.CELLPHONE -> binding.cellphoneEditText.error = pair.second
+                    EnumRegisterInputType.EMAIL -> binding.emailEditText.error = pair.second
+                    EnumRegisterInputType.PASSWORD -> binding.passwordEditText.error = pair.second
                 }
             }
-            viewModel.lastNameErrorMsg.observe(this) { msg ->
-                with(binding.lastNameEditText) {
-                    error = msg
-                    requestFocus()
+            viewModel.formValidatedEvent.observe(this) { value ->
+                if(value) {
+                    viewModel.register()
                 }
             }
-            viewModel.addressErrorMsg.observe(this) { msg ->
-                with(binding.addressEditText) {
-                    error = msg
-                    requestFocus()
-                }
-            }
-            viewModel.countryErrorMsg.observe(this) { msg ->
-                with(binding.countryEditText) {
-                    error = msg
-                    requestFocus()
-                }
-            }
-            viewModel.cityErrorMsg.observe(this) { msg ->
-                with(binding.cityEditText) {
-                    error = msg
-                    requestFocus()
-                }
-            }
-            viewModel.cellphoneErrorMsg.observe(this) { msg ->
-                with(binding.cellphoneEditText) {
-                    error = msg
-                    requestFocus()
-                }
-            }
-            viewModel.startMainActivity.observe(this) {
+            viewModel.registerFinishedEvent.observe(this) {
                 startActivity(Intent(this, MainActivity::class.java))
-            }
-            viewModel.onCloseDatePickerDialog.observe(this) {
-                dialog.binding.also {
-                    it.codeEditText.text?.clear()
-                    it.dateEditText.text?.clear()
-                }
-                dialog.dismiss()
-            }
-            viewModel.codeReplicaErrorMsg.observe(this) { msg ->
-                with(dialog.binding.codeEditText) {
-                    error = msg
-                    requestFocus()
-                }
-            }
-            viewModel.receivedDateErrorMsg.observe(this) { msg ->
-                with(dialog.binding.dateEditText) {
-                    error = msg
-                    requestFocus()
-                }
             }
             viewModel.loading.observe(this) { value ->
                 if(value.first)
@@ -116,15 +71,11 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
                 else
                     loadingDialog.dismiss()
             }
-            viewModel.error.observe(this) {
+            viewModel.error.observe(this) { value: String ->
                 MaterialAlertDialogBuilder(this)
-                    .setMessage(it.ifEmpty { getString(R.string.error_generic) })
-                    .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
+                    .setMessage(value.ifEmpty { getString(R.string.error_generic) })
+                    .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which ->  }
                     .show()
-            }
-            viewModel.errorMsg.observe(this) { msg: String? ->
-                Log.i(TAG, "CHANGED OBSERVED: errorMsg = $msg")
-                Snackbar.make(binding.actionButton, msg!!, Snackbar.LENGTH_SHORT).show()
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")
@@ -135,36 +86,42 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
         try {
             with(binding) {
                 emailEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.EMAIL)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.EMAIL)
                 }
                 passwordEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.PASSWORD)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.PASSWORD)
                 }
                 nameEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.NAME)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.NAME)
                 }
                 lastNameEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.LAST_NAME)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.LAST_NAME)
                 }
                 addressEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.ADDRESS)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.ADDRESS)
                 }
                 countryEditText.setOnClickListener {
-                    onCountrySelected()
+                    with(binding) {
+                        countryEditText.setText(countryCodePicker.selectedCountryName)
+                        viewModel.onValueChanged(
+                            countryCodePicker.selectedCountryName,
+                            EnumRegisterInputType.COUNTRY
+                        )
+                        viewModel.onValueChanged(
+                            countryCodePicker.selectedCountryCode,
+                            EnumRegisterInputType.COUNTRY_CODE
+                        )
+                    }
                 }
                 cityEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.CITY)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.CITY)
                 }
                 cellphoneEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.CELLPHONE)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.CELLPHONE)
                 }
                 actionButton.setSafeOnClickListener {
-                    viewModel.onActionButton()
+                    viewModel.validateForm()
                 }
-                addReplicaButton.setOnClickListener {
-                    dialog.show()
-                }
-                initDialogListeners()
                 countryCodePicker.setOnCountryChangeListener(this@RegisterActivity)
 
             }
@@ -173,55 +130,7 @@ class RegisterActivity : AppCompatActivity(), UIBehavior,
         }
     }
 
-
-    private fun initDialogListeners() {
-        try {
-            dialog.binding.also {
-                it.codeEditText.addTextChangedListener { text ->
-                    viewModel.onValueChanged(text, EnumReplicaDialogInputType.CODE)
-                }
-                it.dateEditText.addTextChangedListener { text ->
-                    viewModel.onValueChanged(text, EnumReplicaDialogInputType.DATE)
-                }
-                it.dateEditText.setOnClickListener { view ->
-                    val picker = DatePickerFragment { year, month, day ->
-                        it.dateEditText.setText("$day/${month + 1}/$year")
-                    }
-                    picker.show(supportFragmentManager, TAG)
-                }
-                it.positiveFixRequiredRadioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
-                    if (isChecked) {
-                        viewModel.onValueChanged(true, EnumReplicaDialogInputType.REPAIR_REQUIRED)
-                        it.fixingGeneralLabelTextView.visibility = View.VISIBLE
-                    } else {
-                        it.fixingGeneralLabelTextView.visibility = View.GONE
-                    }
-                }
-                it.positiveContainerRadioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
-                    it.containerLabelTextView.visibility = if (isChecked) View.VISIBLE else View.GONE
-                }
-                it.actionButton.setOnClickListener {
-                    viewModel.onReplicaSaved()
-                }
-            }
-        } catch (ex: Exception) {
-            getExceptionLog(TAG, "initDialogListeners", ex)
-        }
-    }
-
     override fun onCountrySelected() {
-        with(binding) {
-            countryEditText.setText(countryCodePicker.selectedCountryName)
-            viewModel.onValueChanged(
-                countryCodePicker.selectedCountryName,
-                RegisterInputType.COUNTRY
-            )
-            viewModel.onValueChanged(
-                countryCodePicker.selectedCountryCode,
-                RegisterInputType.COUNTRY_CODE
-            )
-        }
+        //
     }
-
-
 }

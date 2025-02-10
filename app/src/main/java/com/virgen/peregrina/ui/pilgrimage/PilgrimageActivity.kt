@@ -9,16 +9,16 @@ import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityPilgrimageBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.hbb20.CountryCodePicker
-import com.virgen.peregrina.ui.date_picker_dialog.DatePickerFragment
-import com.virgen.peregrina.ui.loading_dialog.LoadingDialogView
-import com.virgen.peregrina.ui.register.RegisterInputType
-import com.virgen.peregrina.util.UIBehavior
+import com.virgen.peregrina.ui.dialog.DatePickerFragment
+import com.virgen.peregrina.ui.dialog.LoadingDialogView
+import com.virgen.peregrina.ui.register.enumerator.EnumRegisterInputType
+import com.virgen.peregrina.util.view.IView
 import com.virgen.peregrina.util.formatDate
-import com.virgen.peregrina.util.setSafeOnClickListener
+import com.virgen.peregrina.util.view.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PilgrimageActivity : AppCompatActivity(), UIBehavior,
+class PilgrimageActivity : AppCompatActivity(), IView,
     CountryCodePicker.OnCountryChangeListener {
 
     companion object {
@@ -33,10 +33,10 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
         super.onCreate(savedInstanceState)
         binding = ActivityPilgrimageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initUI()
+        initView()
     }
 
-    override fun initUI() {
+    override fun initView() {
         try {
             loadingDialog = LoadingDialogView(this)
             val replicaId = intent.getLongExtra("replica_id", -1)
@@ -164,22 +164,22 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
         try {
             with(binding) {
                 nameEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.NAME)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.NAME)
                 }
                 lastNameEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.LAST_NAME)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.LAST_NAME)
                 }
                 addressEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.ADDRESS)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.ADDRESS)
                 }
                 countryEditText.setOnClickListener {
                     onCountrySelected()
                 }
                 cityEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.CITY)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.CITY)
                 }
                 cellphoneEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.CELLPHONE)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.CELLPHONE)
                 }
                 startDateEditText.addTextChangedListener {
                     viewModel.onValueChanged(it, PilgrimageInputType.START_DATE)
@@ -188,7 +188,7 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
                     viewModel.onValueChanged(it, PilgrimageInputType.END_DATE)
                 }
                 emailEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, RegisterInputType.EMAIL)
+                    viewModel.onValueChanged(it, EnumRegisterInputType.EMAIL)
                 }
                 intentionEditText.addTextChangedListener {
                     viewModel.onValueChanged(it, PilgrimageInputType.INTENTION)
@@ -225,11 +225,11 @@ class PilgrimageActivity : AppCompatActivity(), UIBehavior,
             countryEditText.setText(countryCodePicker.selectedCountryName)
             viewModel.onValueChanged(
                 countryCodePicker.selectedCountryName,
-                RegisterInputType.COUNTRY
+                EnumRegisterInputType.COUNTRY
             )
             viewModel.onValueChanged(
                 countryCodePicker.selectedCountryCode,
-                RegisterInputType.COUNTRY_CODE
+                EnumRegisterInputType.COUNTRY_CODE
             )
         }
     }

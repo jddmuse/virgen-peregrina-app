@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Virgenperegrinaapp">
         <activity
-            android:name="com.virgen.peregrina.ui.replica_list.create.CreateReplicaActivity"
+            android:name="com.virgen.peregrina.ui.replica.create.CreateReplicaActivity"
             android:exported="false" />
         <activity
             android:name="com.virgen.peregrina.ui.guidelines.GuidelinesActivity"
@@ -34,14 +34,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name="com.virgen.peregrina.ui.replica_details.ReplicaDetailsActivity"
+            android:name="com.virgen.peregrina.ui.replica.info.ReplicaDetailsActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name="com.virgen.peregrina.ui.replica_list.ReplicasListActivity"
+            android:name="com.virgen.peregrina.ui.replica.list.ReplicasListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

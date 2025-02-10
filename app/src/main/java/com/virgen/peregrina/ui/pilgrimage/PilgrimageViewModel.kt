@@ -6,18 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
-import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.model.UserModel
 import com.virgen.peregrina.data.request.CreatePilgrimageRequest
 import com.virgen.peregrina.data.request.SignUpRequest
 import com.virgen.peregrina.domain.pilgrimage.CreatePilgrimageUseCase
 import com.virgen.peregrina.domain.pilgrimage.GetAllPilgrimsUseCase
-import com.virgen.peregrina.domain.signup.SignUpWithVirgenPeregrinaUseCase
-import com.virgen.peregrina.ui.register.RegisterInputType
+import com.virgen.peregrina.ui.register.enumerator.EnumRegisterInputType
 import com.virgen.peregrina.util.EMPTY_STRING
 import com.virgen.peregrina.util.METHOD_CALLED
-import com.virgen.peregrina.util.base.BaseResultRepository
-import com.virgen.peregrina.util.base.BaseResultUseCase
+import com.virgen.peregrina.util.base.BaseResponseRunner
 import com.virgen.peregrina.util.getCellphone
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -106,11 +103,11 @@ class PilgrimageViewModel @Inject constructor(
             setReplicaId = replica_id
             viewModelScope.launch {
                 when (val result = getAllPilgrimsUseCase()) {
-                    is BaseResultUseCase.Success -> {
+                    is BaseResponseRunner.Success -> {
                         val list = result.data ?: emptyList()
                         _pilgrims.value = list
                     }
-                    is BaseResultUseCase.Error -> {
+                    is BaseResponseRunner.Error -> {
                         _error.value = resourceProvider.getStringResource(R.string.error_generic)
                     }
                 }
@@ -147,15 +144,15 @@ class PilgrimageViewModel @Inject constructor(
             )
             viewModelScope.launch {
                 when (val result = signUpWithVirgenPeregrinaUseCase(newUser)) {
-                    is BaseResultUseCase.Success -> {
+                    is BaseResponseRunner.Success -> {
                         _loading.value = Pair(false, "")
                         savePilgrimage(result.data!!.id)
                     }
-                    is BaseResultUseCase.Error -> {
+                    is BaseResponseRunner.Error -> {
                         _loading.value = Pair(false, "")
                         _error.value = resourceProvider.getStringResource(R.string.error_generic)
                     }
-                    is BaseResultUseCase.NullOrEmptyData -> {
+                    is BaseResponseRunner.NullOrEmptyData -> {
                         _loading.value = Pair(false, "")
                         _error.value = resourceProvider.getStringResource(R.string.error_generic)
                     }
@@ -180,14 +177,14 @@ class PilgrimageViewModel @Inject constructor(
             )
             viewModelScope.launch {
                 when (val result = createPilgrimageUseCase(newPilgrimage)) {
-                    is BaseResultUseCase.Success -> {
+                    is BaseResponseRunner.Success -> {
                         Log.i(TAG, "pilgrimage creada exitosa mente. ${result.data}")
                         _onFinishActivity.value = !(_onFinishActivity.value ?: false)
                     }
-                    is BaseResultUseCase.Error -> {
+                    is BaseResponseRunner.Error -> {
 //                        _error.value = result.
                     }
-                    is BaseResultUseCase.NullOrEmptyData -> {}
+                    is BaseResponseRunner.NullOrEmptyData -> {}
                 }
             }
         } catch (ex: Exception) {
@@ -195,7 +192,7 @@ class PilgrimageViewModel @Inject constructor(
         }
     }
 
-    fun onValueChanged(value: Any?, inputType: RegisterInputType) {
+    fun onValueChanged(value: Any?, inputType: EnumRegisterInputType) {
         try {
             Log.i(
                 TAG, "METHOD CALLED: onValueChanged() " +
@@ -203,14 +200,14 @@ class PilgrimageViewModel @Inject constructor(
             )
             val valueAux = value?.toString() ?: EMPTY_STRING
             when (inputType) {
-                RegisterInputType.EMAIL -> setEmail = valueAux
-                RegisterInputType.NAME -> setName = valueAux
-                RegisterInputType.LAST_NAME -> setLastName = valueAux
-                RegisterInputType.ADDRESS -> setAddress = valueAux
-                RegisterInputType.COUNTRY -> setCountry = valueAux
-                RegisterInputType.CITY -> setCity = valueAux
-                RegisterInputType.COUNTRY_CODE -> setCountryCode = valueAux
-                RegisterInputType.CELLPHONE -> setCellphone = valueAux
+                EnumRegisterInputType.EMAIL -> setEmail = valueAux
+                EnumRegisterInputType.NAME -> setName = valueAux
+                EnumRegisterInputType.LAST_NAME -> setLastName = valueAux
+                EnumRegisterInputType.ADDRESS -> setAddress = valueAux
+                EnumRegisterInputType.COUNTRY -> setCountry = valueAux
+                EnumRegisterInputType.CITY -> setCity = valueAux
+                EnumRegisterInputType.COUNTRY_CODE -> setCountryCode = valueAux
+                EnumRegisterInputType.CELLPHONE -> setCellphone = valueAux
             }
         } catch (ex: Exception) {
             Log.e(TAG, "onValueChanged() -> $ex")

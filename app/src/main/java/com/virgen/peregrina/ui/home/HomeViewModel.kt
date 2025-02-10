@@ -5,20 +5,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
-import com.google.gson.Gson
-import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.model.TestimonyModel
 import com.virgen.peregrina.data.model.toModel
-import com.virgen.peregrina.data.response.LoginResponse
 import com.virgen.peregrina.domain.pilgrimage.GetAllPilgrimagesUseCase
-import com.virgen.peregrina.domain.pilgrimage.SendTestimonyUseCase
-import com.virgen.peregrina.ui.home.dialogs.SendTestimonyDialog
-import com.virgen.peregrina.util.base.BaseResultUseCase
+import com.virgen.peregrina.domain.SendTestimonyUseCase
+import com.virgen.peregrina.util.base.BaseResponseRunner
 import com.virgen.peregrina.util.getCurrentDate
 import com.virgen.peregrina.util.getExceptionLog
 import com.virgen.peregrina.util.manager.PreferencesManager
-import com.virgen.peregrina.util.provider.GlobalProvider
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -56,13 +51,13 @@ class HomeViewModel @Inject constructor(
         try {
             viewModelScope.launch {
                 when (val result = getAllPilgrimagesUseCase()) {
-                    is BaseResultUseCase.Error -> {
+                    is BaseResponseRunner.Error -> {
                         _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
                     }
-                    is BaseResultUseCase.Success -> {
+                    is BaseResponseRunner.Success -> {
                         _pilgrimages.value = result.data?.map { it.toModel() } ?: listOf()
                     }
-                    is BaseResultUseCase.NullOrEmptyData -> {}
+                    is BaseResponseRunner.NullOrEmptyData -> {}
                 }
             }
             preferencesManager.userSessionData?.name?.let { _userNameTitle.value = it }
@@ -87,18 +82,18 @@ class HomeViewModel @Inject constructor(
                     pilgrimage_id =pilgrimage_id
                 )
                 when (val result = sendTestimonyUseCase(data)) {
-                    is BaseResultUseCase.Success -> {
+                    is BaseResponseRunner.Success -> {
                         _infoMsg.value =
                             resourceProvider
                                 .getStringResource(R.string.info_testimony_send_successfully)
                     }
-                    is BaseResultUseCase.Error -> {}
-                    is BaseResultUseCase.NoInternetConnection -> {
+                    is BaseResponseRunner.Error -> {}
+                    is BaseResponseRunner.NoInternetConnection -> {
                         _errorMsg.value =
                             resourceProvider
                                 .getStringResource(R.string.error_no_internet_connection)
                     }
-                    is BaseResultUseCase.NullOrEmptyData -> {}
+                    is BaseResponseRunner.NullOrEmptyData -> {}
                 }
             }
         } catch (ex: Exception) {

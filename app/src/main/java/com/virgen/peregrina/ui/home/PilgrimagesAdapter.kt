@@ -1,8 +1,6 @@
 package com.virgen.peregrina.ui.home
 
 import android.annotation.SuppressLint
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +10,13 @@ import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ItemPilgrimageBinding
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.util.METHOD_CALLED
-import com.virgen.peregrina.util.OnItemActionListener
-import com.virgen.peregrina.util.enum.EnumPilgrimageStatus
+import com.virgen.peregrina.util.view.IActionListener
+import com.virgen.peregrina.util.enumerator.EnumPilgrimageStatus
 import com.virgen.peregrina.util.formatDateForView
 import com.virgen.peregrina.util.getExceptionLog
 
 class PilgrimagesAdapter(
-    private val onItemActionListener: OnItemActionListener<PilgrimageModel>,
+    private val iActionListener: IActionListener<PilgrimageModel>,
     private var list: List<PilgrimageModel> = emptyList()
 ) : RecyclerView.Adapter<PilgrimagesAdapter.ViewHolder>() {
 
@@ -38,7 +36,7 @@ class PilgrimagesAdapter(
         val item = list[position]
         holder.bind(item)
         holder.itemView.setOnClickListener {
-            onItemActionListener.onClick(item)
+            iActionListener.onClick(item)
         }
     }
 

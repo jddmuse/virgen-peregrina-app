@@ -1,11 +1,11 @@
 package com.virgen.peregrina.data.repository
 
 import android.util.Log
-import com.virgen.peregrina.data.api.api_client.VirgenPeregrinaApiClient
+import com.virgen.peregrina.data.api.service.VirgenPeregrinaApiClient
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.request.CreatePilgrimageRequest
 import com.virgen.peregrina.data.response.GetPilgrimagesResponse
-import com.virgen.peregrina.util.base.BaseResultRepository
+import com.virgen.peregrina.util.base.BaseResponseRepository
 import com.virgen.peregrina.util.getExceptionLog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -19,25 +19,25 @@ class PilgrimageRepository @Inject constructor(
         private const val TAG = "PilgrimageRepository"
     }
 
-    suspend fun create(data: CreatePilgrimageRequest): BaseResultRepository<PilgrimageModel> =
+    suspend fun create(data: CreatePilgrimageRequest): BaseResponseRepository<PilgrimageModel> =
         withContext(Dispatchers.IO) {
             try {
                 val result = virgenPeregrinaApiClient.createPilgrimage(data)
-                BaseResultRepository.Success(result.data)
+                BaseResponseRepository.Success(result.data)
             } catch (ex: Exception) {
                 Log.e(TAG, "create(): Exception -> $ex")
-                BaseResultRepository.Error(ex)
+                BaseResponseRepository.Error(ex)
             }
         }
 
-    suspend fun getAll(): BaseResultRepository<List<GetPilgrimagesResponse>> =
+    suspend fun getAll(): BaseResponseRepository<List<GetPilgrimagesResponse>> =
         withContext(Dispatchers.IO) {
             try {
                 val result = virgenPeregrinaApiClient.getAllPilgrimages()
-                BaseResultRepository.Success(result.data)
+                BaseResponseRepository.Success(result.data)
             } catch (ex: Exception) {
                 getExceptionLog(TAG, "getAll", ex)
-                BaseResultRepository.Error(ex)
+                BaseResponseRepository.Error(ex)
             }
         }
 

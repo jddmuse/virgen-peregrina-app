@@ -8,17 +8,19 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
+import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityLoginBinding
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.virgen.peregrina.MainActivity
-import com.virgen.peregrina.ui.loading_dialog.LoadingDialogView
+import com.virgen.peregrina.ui.dialog.LoadingDialogView
+import com.virgen.peregrina.ui.login.enumerator.EnumLoginInputType
 import com.virgen.peregrina.ui.register.RegisterActivity
-import com.virgen.peregrina.util.UIBehavior
-import com.virgen.peregrina.util.setSafeOnClickListener
+import com.virgen.peregrina.util.view.IView
+import com.virgen.peregrina.util.view.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginActivity : AppCompatActivity(), UIBehavior {
+class LoginActivity : AppCompatActivity(), IView {
 
     companion object {
         private const val TAG = "LoginActivity"
@@ -32,22 +34,22 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initUI()
+        initView()
         initListeners()
         initObservers()
 
         binding.rememberDataSwitch.isChecked = true
+        viewModel.onCreate { email, password ->
+            with(binding) {
+                emailEditText.setText(email)
+                passwordEditText.setText(password)
+            }
+        }
     }
 
-    override fun initUI() {
+    override fun initView() {
         try {
             loadingDialog = LoadingDialogView(this)
-            viewModel.onCreate { email, password ->
-                with(binding) {
-                    emailEditText.setText(email)
-                    passwordEditText.setText(password)
-                }
-            }
             binding.signupTextView.paintFlags = Paint.UNDERLINE_TEXT_FLAG;
         } catch (ex: Exception) {
             Log.e(TAG, "initUI(): Exception -> $ex")
@@ -55,82 +57,49 @@ class LoginActivity : AppCompatActivity(), UIBehavior {
     }
 
     override fun initObservers() {
-        try {
-            viewModel.emailErrorMsg.observe(this) { msg ->
-                Log.i(TAG, "CHANGED OBSERVED: emailErrorMsg = $msg")
-                with(binding.emailEditText) {
-                    error = msg
-                    requestFocus()
-                }
+        viewModel.loginSuccessEvent.observe(this) {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+        viewModel.errorEditText.observe(this) { pair ->
+            when (pair.first) {
+                EnumLoginInputType.EMAIL -> binding.emailEditText.error = pair.second
+                EnumLoginInputType.PASSWORD -> binding.passwordEditText.error = pair.second
             }
-            viewModel.passwordErrorMsg.observe(this) { msg ->
-                Log.i(TAG, "CHANGED OBSERVED: passwordErrorMsg = $msg")
-                with(binding.passwordEditText) {
-                    error = msg
-                    requestFocus()
-                }
-            }
-            viewModel.errorMsg.observe(this) { msg: String? ->
-                Log.i(TAG, "CHANGED OBSERVED: errorMsg = $msg")
-                Snackbar.make(binding.loginButton, msg!!, Snackbar.LENGTH_SHORT).show()
-            }
-            viewModel.startRegisterActivity.observe(this) {
-                startActivity(
-                    Intent(this, RegisterActivity::class.java)
-                )
-            }
-            viewModel.enableButton.observe(this) { response ->
-                Log.i(TAG, "CHANGED OBSERVED: enableButton = $response")
-                with(binding) {
-                    loginButton.isEnabled = response
-                    progressBar.visibility = if (response) View.GONE else View.VISIBLE
-                }
-            }
-            viewModel.loginWithFirebase.observe(this) { value ->
-                if (value) viewModel.loginWithVirgenPeregrina()
-            }
-            viewModel.loginWithVirgenPeregrina.observe(this) { value ->
-                if (value) {
-                    startActivity(Intent(this, MainActivity::class.java))
-                } else {
-                    with(binding) {
-                        loginButton.isEnabled = true
-                        progressBar.visibility = View.GONE
-                    }
-                }
-            }
-            viewModel.loading.observe(this) { value ->
-                if(value.first)
-                    loadingDialog.setMessage(value.second).show()
-                else
-                    loadingDialog.dismiss()
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "initObservers(): Exception -> $ex")
+        }
+        viewModel.formValidatedEvent.observe(this) {
+            viewModel.login()
+        }
+        viewModel.error.observe(this) { value: String ->
+            MaterialAlertDialogBuilder(this)
+                .setMessage(value.ifEmpty { getString(R.string.error_generic) })
+                .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which ->  }
+                .show()
+        }
+        viewModel.loading.observe(this) { value ->
+            if (value.first)
+                loadingDialog.setMessage(value.second).show()
+            else
+                loadingDialog.dismiss()
         }
     }
 
     override fun initListeners() {
-        try {
-            with(binding) {
-                emailEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, LoginInputType.EMAIL)
-                }
-                passwordEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, LoginInputType.PASSWORD)
-                }
-                loginButton.setSafeOnClickListener {
-                    viewModel.onLoginWithFirebase()
-                }
-                rememberDataSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
-                    viewModel.onValueChanged(null, LoginInputType.REMEMBER)
-                }
-                signupTextView.setOnClickListener {
-                    startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
-                }
+        with(binding) {
+            emailEditText.addTextChangedListener {
+                viewModel.onValueChanged(it, EnumLoginInputType.EMAIL)
             }
-        } catch (ex: Exception) {
-            Log.e(TAG, "initListeners(): Exception -> $ex")
+            passwordEditText.addTextChangedListener {
+                viewModel.onValueChanged(it, EnumLoginInputType.PASSWORD)
+            }
+            loginButton.setSafeOnClickListener {
+                viewModel.validateForm()
+            }
+            rememberDataSwitch.setOnCheckedChangeListener { buttonView, isChecked ->
+                viewModel.onValueChanged(null, EnumLoginInputType.REMEMBER)
+            }
+            signupTextView.setOnClickListener {
+                startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+            }
         }
     }
 

@@ -2,13 +2,11 @@ package com.virgen.peregrina.util.manager
 
 import android.content.Context
 import com.google.gson.Gson
-import com.virgen.peregrina.data.response.LoginResponse
 import com.virgen.peregrina.data.response.UserSessionData
 import com.virgen.peregrina.util.convertJsonString2DataClass
 import com.virgen.peregrina.util.getExceptionLog
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 class PreferencesManager @Inject constructor(
     @ApplicationContext private val context: Context

@@ -1,16 +1,11 @@
 package com.virgen.peregrina.data.model
 
+import java.util.Date
+
 data class ReplicaModel(
-    val id: Long? = null,
+    val id: Long,
+    val photoUrl: String?,
     val code: String,
-    val received_date: String,
-    val repair_required: Boolean,
-    val user_id: Int? = null,
-    val user_name: String? = null,
-    var user_cellphone: String? = null,
-    var user_country: String? = null,
-    var user_city: String? = null,
-    var user_email: String? = null,
-    var isAvailable: Boolean = true,
-    val pilgrimages: List<PilgrimageModel> = emptyList()
-) : java.io.Serializable
+    val birthdate: Date,
+    val user: UserModel
+)
