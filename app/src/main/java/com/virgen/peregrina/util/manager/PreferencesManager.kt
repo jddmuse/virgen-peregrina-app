@@ -2,7 +2,6 @@ package com.virgen.peregrina.util.manager
 
 import android.content.Context
 import com.google.gson.Gson
-import com.virgen.peregrina.data.response.UserSessionData
 import com.virgen.peregrina.util.convertJsonString2DataClass
 import com.virgen.peregrina.util.getExceptionLog
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -79,12 +78,12 @@ class PreferencesManager @Inject constructor(
         get() = sharedPreferences.getString(KEY_UUID, "") ?: ""
         set(value) = putString(KEY_UUID, value ?: "")
 
-    var userSessionData: UserSessionData?
-        get() =  convertJsonString2DataClass(
-            json = sharedPreferences.getString(KEY_USER_DATA, "") ?: "",
-            type = UserSessionData::class.java
-        )
-        set(value) = putDataClass(KEY_USER_DATA, value)
+//    var userSessionData: UserSessionData?
+//        get() =  convertJsonString2DataClass(
+//            json = sharedPreferences.getString(KEY_USER_DATA, "") ?: "",
+//            type = UserSessionData::class.java
+//        )
+//        set(value) = putDataClass(KEY_USER_DATA, value)
 
 
 }

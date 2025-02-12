@@ -64,6 +64,7 @@ class LoginActivity : AppCompatActivity(), IView {
             when (pair.first) {
                 EnumLoginInputType.EMAIL -> binding.emailEditText.error = pair.second
                 EnumLoginInputType.PASSWORD -> binding.passwordEditText.error = pair.second
+                EnumLoginInputType.REMEMBER -> {}
             }
         }
         viewModel.formValidatedEvent.observe(this) {

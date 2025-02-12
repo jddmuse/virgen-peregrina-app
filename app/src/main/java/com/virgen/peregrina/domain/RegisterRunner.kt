@@ -5,8 +5,9 @@ import com.virgen.peregrina.data.request.CreateUserRequest
 import com.virgen.peregrina.util.base.BaseResponseRunner
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class RegisterRunner {
+class RegisterRunner @Inject constructor() {
 
     suspend fun invoke(data: CreateUserRequest): BaseResponseRunner<UserModel> {
         return withContext(Dispatchers.IO) {

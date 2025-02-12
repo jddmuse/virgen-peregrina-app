@@ -114,8 +114,7 @@ class LoginViewModel @Inject constructor(
             pass = setPassword
         )
         viewModelScope.launch {
-            val response = loginRunner.invoke(data)
-            when(response) {
+            when(val response = loginRunner.invoke(data)) {
                 is BaseResponseRunner.Success -> {
                     _loading.value = Pair(false, "")
                     _loginSuccessEvent.value = true

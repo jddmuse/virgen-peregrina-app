@@ -55,34 +55,34 @@ class PilgrimagesAdapter(
         @SuppressLint("UseCompatLoadingForDrawables")
         fun bind(item: PilgrimageModel) {
             try {
-                with(binding) {
-                    startDateTextView.text = formatDateForView(itemView.context, item.date_start ?: "")
-                    intentionTextView.text = item.intention
-                    cityTextView.text = "${item.city}, ${item.country}"
-
-                    var colorBackground: Int = -1
-                    var textStatus = ""
-                    when (item.state) {
-                        EnumPilgrimageStatus.PENDING.value -> {
-                            colorBackground = itemView.context.getColor(R.color.pilgrimage_status_pending)
-                            textStatus = itemView.context.getString(R.string.pilgrimage_status_pending)
-                        }
-                        EnumPilgrimageStatus.FINISHED.value -> {
-                            colorBackground = itemView.context.getColor(R.color.pilgrimage_status_finished)
-                            textStatus =itemView.context.getString(R.string.pilgrimage_status_finished)
-                        }
-                        EnumPilgrimageStatus.IN_PROGRESS.value -> {
-                            colorBackground = itemView.context.getColor(R.color.pilgrimage_status_in_progress)
-                            textStatus = itemView.context.getString(R.string.pilgrimage_status_in_progress)
-                        }
-                    }
-                    stateTextView.apply {
-                        text = textStatus
+//                with(binding) {
+//                    startDateTextView.text = formatDateForView(itemView.context, item.date_start ?: "")
+//                    intentionTextView.text = item.intention
+//                    cityTextView.text = "${item.city}, ${item.country}"
+//
+//                    var colorBackground: Int = -1
+//                    var textStatus = ""
+//                    when (item.state) {
+//                        EnumPilgrimageStatus.PENDING.value -> {
+//                            colorBackground = itemView.context.getColor(R.color.pilgrimage_status_pending)
+//                            textStatus = itemView.context.getString(R.string.pilgrimage_status_pending)
+//                        }
+//                        EnumPilgrimageStatus.FINISHED.value -> {
+//                            colorBackground = itemView.context.getColor(R.color.pilgrimage_status_finished)
+//                            textStatus =itemView.context.getString(R.string.pilgrimage_status_finished)
+//                        }
+//                        EnumPilgrimageStatus.IN_PROGRESS.value -> {
+//                            colorBackground = itemView.context.getColor(R.color.pilgrimage_status_in_progress)
+//                            textStatus = itemView.context.getString(R.string.pilgrimage_status_in_progress)
+//                        }
+//                    }
+//                    stateTextView.apply {
+//                        text = textStatus
 //                    background = itemView.context.getDrawable(R.drawable.shape_state_pilgrimage)?.apply {
 //                        colorFilter = PorterDuffColorFilter(colorBackground, PorterDuff.Mode.SRC_IN)
 //                    }
-                    }
-                }
+//                    }
+//                }
             } catch (ex:Exception) {
                 getExceptionLog(TAG, "bind", ex)
             }

@@ -42,9 +42,9 @@ class PilgrimageActivity : AppCompatActivity(), IView,
             val replicaId = intent.getLongExtra("replica_id", -1)
             initListeners()
             initObservers()
-            viewModel.onCreate(
-                replicaId
-            )
+//            viewModel.onCreate(
+//                replicaId
+//            )
         } catch (ex: Exception) {
             Log.e(TAG, "initUI(): Exception -> $ex")
         }
@@ -211,7 +211,7 @@ class PilgrimageActivity : AppCompatActivity(), IView,
                     picker.show(supportFragmentManager, TAG)
                 }
                 actionButton.setSafeOnClickListener {
-                    viewModel.onStartPilgrimage()
+//                    viewModel.onStartPilgrimage()
                 }
                 appBarLayout.toolbar.setNavigationOnClickListener { finish() }
             }

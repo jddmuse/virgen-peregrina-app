@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), IView, IActionListener<PilgrimageModel
         initView()
         initListeners()
         initObservers()
-        viewModel.onCreate()
+//        viewModel.onCreate()
     }
 
     override fun initView() {
@@ -79,18 +79,18 @@ class MainActivity : AppCompatActivity(), IView, IActionListener<PilgrimageModel
             viewModel.userNameTitle.observe(this) { value ->
                 binding.appBarLayout.textView.text = value
             }
-            viewModel.askForReturningReplicaAndTestimonyEvent.observe(this) { pilgrimage ->
-                if (!pilgrimage.have_testimony && pilgrimage.isFinished) {
-                    SendTestimonyDialog(this) { testimony ->
-                        viewModel.onSendTestimony(
-                            testimonyMsg = testimony,
-                            replica_id = pilgrimage.replica_id,
-                            user_id = pilgrimage.user_id,
-                            pilgrimage_id = pilgrimage.id!!
-                        )
-                    }.show()
-                }
-            }
+//            viewModel.askForReturningReplicaAndTestimonyEvent.observe(this) { pilgrimage ->
+//                if (!pilgrimage.have_testimony && pilgrimage.isFinished) {
+//                    SendTestimonyDialog(this) { testimony ->
+//                        viewModel.onSendTestimony(
+//                            testimonyMsg = testimony,
+//                            replica_id = pilgrimage.replica_id,
+//                            user_id = pilgrimage.user_id,
+//                            pilgrimage_id = pilgrimage.id!!
+//                        )
+//                    }.show()
+//                }
+//            }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")
         }
@@ -128,22 +128,22 @@ class MainActivity : AppCompatActivity(), IView, IActionListener<PilgrimageModel
         }
     }
 
-    private fun askForReturningReplicaAndTestimony(pilgrimage: PilgrimageModel) {
-        try {
-            if (!pilgrimage.have_testimony && pilgrimage.isFinished) {
-                SendTestimonyDialog(this) { testimony ->
-                    viewModel.onSendTestimony(
-                        testimonyMsg = testimony,
-                        replica_id = pilgrimage.replica_id,
-                        user_id = pilgrimage.user_id,
-                        pilgrimage_id = pilgrimage.id!!
-                    )
-                }.show()
-            }
-        } catch (ex: Exception) {
-            getExceptionLog(TAG, "askForReturningReplica", ex)
-        }
-    }
+//    private fun askForReturningReplicaAndTestimony(pilgrimage: PilgrimageModel) {
+//        try {
+//            if (!pilgrimage.have_testimony && pilgrimage.isFinished) {
+//                SendTestimonyDialog(this) { testimony ->
+//                    viewModel.onSendTestimony(
+//                        testimonyMsg = testimony,
+//                        replica_id = pilgrimage.replica_id,
+//                        user_id = pilgrimage.user_id,
+//                        pilgrimage_id = pilgrimage.id!!
+//                    )
+//                }.show()
+//            }
+//        } catch (ex: Exception) {
+//            getExceptionLog(TAG, "askForReturningReplica", ex)
+//        }
+//    }
 
     override fun onClick(item: PilgrimageModel) {
         try {
@@ -160,7 +160,7 @@ class MainActivity : AppCompatActivity(), IView, IActionListener<PilgrimageModel
 
     override fun onResume() {
         super.onResume()
-        viewModel.onCreate()
+//        viewModel.onCreate()
     }
 
 }

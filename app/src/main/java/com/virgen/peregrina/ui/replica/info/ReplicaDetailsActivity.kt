@@ -46,25 +46,25 @@ class ReplicaDetailsActivity : AppCompatActivity(), IView {
             val pilgrimageEnabled = intent.getBooleanExtra("pilgrimage_enabled", false)
 
             val data = Gson().fromJson(jsonObject, ReplicaModel::class.java)
-            with(binding) {
-                codeTextView.text = data.code
-                oldTextView.text = data.received_date
-                ownerNameTextView.text = data.user_name
-                ownerPhoneTextView.text = data.user_cellphone
-                ownerEmailTextView.text = data.user_email
-                ownerCityTextView.text = formatLocation(
-                    city = data.user_city ?: EMPTY_STRING,
-                    country = data.user_country ?: EMPTY_STRING
-                )
-                pilgrimageButton.visibility = if (data.isAvailable) View.VISIBLE else View.GONE
-                if (!data.isAvailable) {
-                    pilgrimageButton.text = getString(R.string.label_pilgrimage_in_progress)
-                    pilgrimageButton.isEnabled = false
-                }
-            }
-            viewModel.onCreate(
-                replica_id = data.id
-            )
+//            with(binding) {
+//                codeTextView.text = data.code
+//                oldTextView.text = data.received_date
+//                ownerNameTextView.text = data.user_name
+//                ownerPhoneTextView.text = data.user_cellphone
+//                ownerEmailTextView.text = data.user_email
+//                ownerCityTextView.text = formatLocation(
+//                    city = data.user_city ?: EMPTY_STRING,
+//                    country = data.user_country ?: EMPTY_STRING
+//                )
+//                pilgrimageButton.visibility = if (data.isAvailable) View.VISIBLE else View.GONE
+//                if (!data.isAvailable) {
+//                    pilgrimageButton.text = getString(R.string.label_pilgrimage_in_progress)
+//                    pilgrimageButton.isEnabled = false
+//                }
+//            }
+//            viewModel.onCreate(
+//                replica_id = data.id
+//            )
         } catch (ex: Exception) {
             Log.e(TAG, "initUI(): Exception -> $ex")
         }

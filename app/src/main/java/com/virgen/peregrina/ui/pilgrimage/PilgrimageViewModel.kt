@@ -4,28 +4,17 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
 import com.virgen.peregrina.data.model.UserModel
-import com.virgen.peregrina.data.request.CreatePilgrimageRequest
-import com.virgen.peregrina.data.request.SignUpRequest
-import com.virgen.peregrina.domain.pilgrimage.CreatePilgrimageUseCase
-import com.virgen.peregrina.domain.pilgrimage.GetAllPilgrimsUseCase
 import com.virgen.peregrina.ui.register.enumerator.EnumRegisterInputType
 import com.virgen.peregrina.util.EMPTY_STRING
 import com.virgen.peregrina.util.METHOD_CALLED
-import com.virgen.peregrina.util.base.BaseResponseRunner
-import com.virgen.peregrina.util.getCellphone
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PilgrimageViewModel @Inject constructor(
-    private val getAllPilgrimsUseCase: GetAllPilgrimsUseCase,
-    private val signUpWithVirgenPeregrinaUseCase: SignUpWithVirgenPeregrinaUseCase,
-    private val createPilgrimageUseCase: CreatePilgrimageUseCase,
     private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
@@ -98,120 +87,120 @@ class PilgrimageViewModel @Inject constructor(
         private const val TAG = "PilgrimageViewModel"
     }
 
-    fun onCreate(replica_id: Long) {
-        try {
-            setReplicaId = replica_id
-            viewModelScope.launch {
-                when (val result = getAllPilgrimsUseCase()) {
-                    is BaseResponseRunner.Success -> {
-                        val list = result.data ?: emptyList()
-                        _pilgrims.value = list
-                    }
-                    is BaseResponseRunner.Error -> {
-                        _error.value = resourceProvider.getStringResource(R.string.error_generic)
-                    }
-                }
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "onCreate(): Exception -> $ex")
-        }
-    }
+//    fun onCreate(replica_id: Long) {
+//        try {
+//            setReplicaId = replica_id
+//            viewModelScope.launch {
+//                when (val result = getAllPilgrimsUseCase()) {
+//                    is BaseResponseRunner.Success -> {
+//                        val list = result.data ?: emptyList()
+//                        _pilgrims.value = list
+//                    }
+//                    is BaseResponseRunner.Error -> {
+//                        _error.value = resourceProvider.getStringResource(R.string.error_generic)
+//                    }
+//                }
+//            }
+//        } catch (ex: Exception) {
+//            Log.e(TAG, "onCreate(): Exception -> $ex")
+//        }
+//    }
 
-    fun onStartPilgrimage() {
-        try {
-            if (isAllFormFilled()) {
-                saveReceiverUser()
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "onStartPilgrimage(): Exception -> $ex")
-        }
-    }
+//    fun onStartPilgrimage() {
+//        try {
+//            if (isAllFormFilled()) {
+//                saveReceiverUser()
+//            }
+//        } catch (ex: Exception) {
+//            Log.e(TAG, "onStartPilgrimage(): Exception -> $ex")
+//        }
+//    }
 
-    private fun saveReceiverUser() {
-        try {
-            _loading.value = Pair(true, resourceProvider.getStringResource(R.string.label_sending_request))
-            val newUser = SignUpRequest(
-                uuid = null,
-                name = setName,
-                last_name = setLastName,
-                email = setEmail,
-                city = setCity,
-                country = setCountry,
-                cellphone = getCellphone(setCountryCode, setCellphone),
-                address = setAddress,
-                replicas = null,
-                isPilgrim = false
-            )
-            viewModelScope.launch {
-                when (val result = signUpWithVirgenPeregrinaUseCase(newUser)) {
-                    is BaseResponseRunner.Success -> {
-                        _loading.value = Pair(false, "")
-                        savePilgrimage(result.data!!.id)
-                    }
-                    is BaseResponseRunner.Error -> {
-                        _loading.value = Pair(false, "")
-                        _error.value = resourceProvider.getStringResource(R.string.error_generic)
-                    }
-                    is BaseResponseRunner.NullOrEmptyData -> {
-                        _loading.value = Pair(false, "")
-                        _error.value = resourceProvider.getStringResource(R.string.error_generic)
-                    }
-                }
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "saveReceiverUser(): Exception -> $ex")
-        }
-    }
+//    private fun saveReceiverUser() {
+//        try {
+//            _loading.value = Pair(true, resourceProvider.getStringResource(R.string.label_sending_request))
+//            val newUser = SignUpRequest(
+//                uuid = null,
+//                name = setName,
+//                last_name = setLastName,
+//                email = setEmail,
+//                city = setCity,
+//                country = setCountry,
+//                cellphone = getCellphone(setCountryCode, setCellphone),
+//                address = setAddress,
+//                replicas = null,
+//                isPilgrim = false
+//            )
+//            viewModelScope.launch {
+//                when (val result = signUpWithVirgenPeregrinaUseCase(newUser)) {
+//                    is BaseResponseRunner.Success -> {
+//                        _loading.value = Pair(false, "")
+//                        savePilgrimage(result.data!!.id)
+//                    }
+//                    is BaseResponseRunner.Error -> {
+//                        _loading.value = Pair(false, "")
+//                        _error.value = resourceProvider.getStringResource(R.string.error_generic)
+//                    }
+//                    is BaseResponseRunner.NullOrEmptyData -> {
+//                        _loading.value = Pair(false, "")
+//                        _error.value = resourceProvider.getStringResource(R.string.error_generic)
+//                    }
+//                }
+//            }
+//        } catch (ex: Exception) {
+//            Log.e(TAG, "saveReceiverUser(): Exception -> $ex")
+//        }
+//    }
 
-    private fun savePilgrimage(receiverUserId: Long) {
-        try {
-            val newPilgrimage = CreatePilgrimageRequest(
-                startDate = setStartDate,
-                endDate = setEndDate,
-                intention = setIntention,
-                userId = setUserId!!,
-                replicaId = setReplicaId!!,
-                receiverId = receiverUserId,
-                city = setCity,
-                country = setCountry
-            )
-            viewModelScope.launch {
-                when (val result = createPilgrimageUseCase(newPilgrimage)) {
-                    is BaseResponseRunner.Success -> {
-                        Log.i(TAG, "pilgrimage creada exitosa mente. ${result.data}")
-                        _onFinishActivity.value = !(_onFinishActivity.value ?: false)
-                    }
-                    is BaseResponseRunner.Error -> {
-//                        _error.value = result.
-                    }
-                    is BaseResponseRunner.NullOrEmptyData -> {}
-                }
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "savePilgrimage(): Exception -> $ex")
-        }
-    }
+//    private fun savePilgrimage(receiverUserId: Long) {
+//        try {
+//            val newPilgrimage = CreatePilgrimageRequest(
+//                startDate = setStartDate,
+//                endDate = setEndDate,
+//                intention = setIntention,
+//                userId = setUserId!!,
+//                replicaId = setReplicaId!!,
+//                receiverId = receiverUserId,
+//                city = setCity,
+//                country = setCountry
+//            )
+//            viewModelScope.launch {
+//                when (val result = createPilgrimageUseCase(newPilgrimage)) {
+//                    is BaseResponseRunner.Success -> {
+//                        Log.i(TAG, "pilgrimage creada exitosa mente. ${result.data}")
+//                        _onFinishActivity.value = !(_onFinishActivity.value ?: false)
+//                    }
+//                    is BaseResponseRunner.Error -> {
+////                        _error.value = result.
+//                    }
+//                    is BaseResponseRunner.NullOrEmptyData -> {}
+//                }
+//            }
+//        } catch (ex: Exception) {
+//            Log.e(TAG, "savePilgrimage(): Exception -> $ex")
+//        }
+//    }
 
     fun onValueChanged(value: Any?, inputType: EnumRegisterInputType) {
-        try {
-            Log.i(
-                TAG, "METHOD CALLED: onValueChanged() " +
-                        "PARAMS: $value, $inputType"
-            )
-            val valueAux = value?.toString() ?: EMPTY_STRING
-            when (inputType) {
-                EnumRegisterInputType.EMAIL -> setEmail = valueAux
-                EnumRegisterInputType.NAME -> setName = valueAux
-                EnumRegisterInputType.LAST_NAME -> setLastName = valueAux
-                EnumRegisterInputType.ADDRESS -> setAddress = valueAux
-                EnumRegisterInputType.COUNTRY -> setCountry = valueAux
-                EnumRegisterInputType.CITY -> setCity = valueAux
-                EnumRegisterInputType.COUNTRY_CODE -> setCountryCode = valueAux
-                EnumRegisterInputType.CELLPHONE -> setCellphone = valueAux
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "onValueChanged() -> $ex")
-        }
+//        try {
+//            Log.i(
+//                TAG, "METHOD CALLED: onValueChanged() " +
+//                        "PARAMS: $value, $inputType"
+//            )
+//            val valueAux = value?.toString() ?: EMPTY_STRING
+//            when (inputType) {
+//                EnumRegisterInputType.EMAIL -> setEmail = valueAux
+//                EnumRegisterInputType.NAME -> setName = valueAux
+//                EnumRegisterInputType.LAST_NAME -> setLastName = valueAux
+//                EnumRegisterInputType.ADDRESS -> setAddress = valueAux
+//                EnumRegisterInputType.COUNTRY -> setCountry = valueAux
+//                EnumRegisterInputType.CITY -> setCity = valueAux
+//                EnumRegisterInputType.COUNTRY_CODE -> setCountryCode = valueAux
+//                EnumRegisterInputType.CELLPHONE -> setCellphone = valueAux
+//            }
+//        } catch (ex: Exception) {
+//            Log.e(TAG, "onValueChanged() -> $ex")
+//        }
     }
 
     fun onValueChanged(value: Any?, inputType: PilgrimageInputType) {

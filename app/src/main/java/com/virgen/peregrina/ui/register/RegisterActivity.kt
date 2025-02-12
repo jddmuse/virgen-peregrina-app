@@ -51,10 +51,10 @@ class RegisterActivity : AppCompatActivity(), IView,
                     EnumRegisterInputType.ADDRESS -> binding.addressEditText.error = pair.second
                     EnumRegisterInputType.COUNTRY -> binding.countryEditText.error = pair.second
                     EnumRegisterInputType.CITY -> binding.cityEditText.error = pair.second
-//                    EnumRegisterInputType.COUNTRY_CODE -> binding.countryCodePicker.error = pair.second
                     EnumRegisterInputType.CELLPHONE -> binding.cellphoneEditText.error = pair.second
                     EnumRegisterInputType.EMAIL -> binding.emailEditText.error = pair.second
                     EnumRegisterInputType.PASSWORD -> binding.passwordEditText.error = pair.second
+                    EnumRegisterInputType.COUNTRY_CODE -> {}
                 }
             }
             viewModel.formValidatedEvent.observe(this) { value ->

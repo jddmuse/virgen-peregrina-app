@@ -4,23 +4,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.virgen_peregrina_app.R
-import com.virgen.peregrina.data.request.CreateReplicaRequest
-import com.virgen.peregrina.domain.replica.CreateReplicaUseCase
 import com.virgen.peregrina.ui.register.enumerator.EnumReplicaDialogInputType
 import com.virgen.peregrina.util.EMPTY_STRING
-import com.virgen.peregrina.util.base.BaseResponseRunner
 import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class CreateReplicaViewModel @Inject constructor(
     private val resourceProvider: ResourceProvider,
-    private val createReplicaUseCase: CreateReplicaUseCase,
     private val preferencesManager: PreferencesManager
 ) : ViewModel() {
 
@@ -77,33 +70,33 @@ class CreateReplicaViewModel @Inject constructor(
     }
 
     fun dispatch() {
-        _loading.value = Pair(true, EMPTY_STRING)
-        val userId = preferencesManager.userSessionData?.id ?: return
-        val request = CreateReplicaRequest(
-            code = setCode,
-            year = setYear,
-            requireRepair = setRepairRequired,
-            ownerId = userId.toString(),
-            container = setContainer,
-            status = setState
-        )
-        viewModelScope.launch {
-            when(val result = createReplicaUseCase(request)) {
-                is BaseResponseRunner.Success -> {
-                    _loading.value = Pair(false, EMPTY_STRING)
-                    _dispatchSuccessful.value = Pair(true, resourceProvider.getStringResource(R.string.label_replica_created_successfull))
-                }
-                is BaseResponseRunner.Error -> {
-                    _loading.value = Pair(false, EMPTY_STRING)
-                    _dispatchSuccessful.value = Pair(false, resourceProvider.getStringResource(R.string.error_generic))
-                }
-                is BaseResponseRunner.APIError -> {
-                    _loading.value = Pair(false, EMPTY_STRING)
-                    val message = result.message ?: resourceProvider.getStringResource(R.string.error_generic)
-                    _dispatchSuccessful.value = Pair(false, message)
-                }
-            }
-        }
+//        _loading.value = Pair(true, EMPTY_STRING)
+//        val userId = preferencesManager.userSessionData?.id ?: return
+//        val request = CreateReplicaRequest(
+//            code = setCode,
+//            year = setYear,
+//            requireRepair = setRepairRequired,
+//            ownerId = userId.toString(),
+//            container = setContainer,
+//            status = setState
+//        )
+//        viewModelScope.launch {
+//            when(val result = createReplicaUseCase(request)) {
+//                is BaseResponseRunner.Success -> {
+//                    _loading.value = Pair(false, EMPTY_STRING)
+//                    _dispatchSuccessful.value = Pair(true, resourceProvider.getStringResource(R.string.label_replica_created_successfull))
+//                }
+//                is BaseResponseRunner.Error -> {
+//                    _loading.value = Pair(false, EMPTY_STRING)
+//                    _dispatchSuccessful.value = Pair(false, resourceProvider.getStringResource(R.string.error_generic))
+//                }
+//                is BaseResponseRunner.APIError -> {
+//                    _loading.value = Pair(false, EMPTY_STRING)
+//                    val message = result.message ?: resourceProvider.getStringResource(R.string.error_generic)
+//                    _dispatchSuccessful.value = Pair(false, message)
+//                }
+//            }
+//        }
     }
 
 }

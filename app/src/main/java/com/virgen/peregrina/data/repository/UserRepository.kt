@@ -37,6 +37,7 @@ class UserRepository @Inject constructor(
                 BaseResponseRepository.Error(ex)
             }
         }
+        return BaseResponseRepository.Error(Exception())
     }
 
     suspend fun create(data: CreateUserRequest): BaseResponseRepository<UserModel> {
@@ -58,6 +59,7 @@ class UserRepository @Inject constructor(
                 BaseResponseRepository.Error(ex)
             }
         }
+        return BaseResponseRepository.Error(Exception())
     }
 
 //    suspend fun login(loginRequest: LoginRequest): BaseResponseRepository<LoginResponse> =

@@ -41,11 +41,11 @@ class TestimonyItemAdapter(
         private val binding = ItemTestimonyBinding.bind(view)
 
         fun bind(item: TestimonyModel) {
-            with(binding) {
-                nameTextView.text = item.user_name
-                testimonyTextView.text = item.value
-                dateTextView.text = formatDateForView(itemView.context, item.date ?: EMPTY_STRING)
-            }
+//            with(binding) {
+//                nameTextView.text = item.user_name
+//                testimonyTextView.text = item.value
+//                dateTextView.text = formatDateForView(itemView.context, item.date ?: EMPTY_STRING)
+//            }
         }
 
     }
