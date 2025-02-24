@@ -6,7 +6,7 @@ import com.virgen.peregrina.data.api.service.VirgenPeregrinaApiClient
 import com.virgen.peregrina.data.model.UserModel
 import com.virgen.peregrina.data.request.CreateUserRequest
 import com.virgen.peregrina.data.request.LoginRequest
-import com.virgen.peregrina.util.base.BaseResponseRepository
+import com.virgen.peregrina.util.response.ResponseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -19,7 +19,7 @@ class UserRepository @Inject constructor(
         private const val TAG = "UserRepository -> "
     }
 
-    suspend fun login(data: LoginRequest): BaseResponseRepository<UserModel> {
+    suspend fun login(data: LoginRequest): ResponseRepository<UserModel> {
         withContext(Dispatchers.IO) {
             try {
                 Log.i(TAG, "login() PARAMS: ${Gson().toJson(data)}")
@@ -34,13 +34,13 @@ class UserRepository @Inject constructor(
                 }
             } catch (ex:Exception) {
                 Log.e(TAG, "login(): Exception -> $ex")
-                BaseResponseRepository.Error(ex)
+                ResponseRepository.Error(ex)
             }
         }
-        return BaseResponseRepository.Error(Exception())
+        return ResponseRepository.Error(Exception())
     }
 
-    suspend fun create(data: CreateUserRequest): BaseResponseRepository<UserModel> {
+    suspend fun create(data: CreateUserRequest): ResponseRepository<UserModel> {
         withContext(Dispatchers.IO) {
             try {
                 Log.i(TAG, "create() PARAMS: ${Gson().toJson(data)}")
@@ -56,10 +56,10 @@ class UserRepository @Inject constructor(
                 }
             } catch (ex: Exception) {
                 Log.e(TAG, "create(): Exception -> $ex")
-                BaseResponseRepository.Error(ex)
+                ResponseRepository.Error(ex)
             }
         }
-        return BaseResponseRepository.Error(Exception())
+        return ResponseRepository.Error(Exception())
     }
 
 //    suspend fun login(loginRequest: LoginRequest): BaseResponseRepository<LoginResponse> =

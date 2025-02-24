@@ -10,7 +10,7 @@ import com.virgen.peregrina.data.request.CreateUserRequest
 import com.virgen.peregrina.domain.RegisterRunner
 import com.virgen.peregrina.ui.register.enumerator.EnumRegisterInputType
 import com.virgen.peregrina.util.EMPTY_STRING
-import com.virgen.peregrina.util.base.BaseResponseRunner
+import com.virgen.peregrina.util.response.ResponseRunner
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -186,26 +186,26 @@ class RegisterViewModel @Inject constructor(
         )
         viewModelScope.launch {
             when(val baseResponse = registerRunner.invoke(data)) {
-                is BaseResponseRunner.Success -> {
+                is ResponseRunner.Success -> {
                     _loading.value = Pair(false, "")
                     _registerFinishedEvent.value = true
                 }
-                is BaseResponseRunner.APIError -> {
+                is ResponseRunner.APIError -> {
                     _loading.value = Pair(false, "")
                     _error.value = StringBuilder()
                         .append(baseResponse.message ?: "")
                         .append("\n${baseResponse.error}")
                         .toString()
                 }
-                is BaseResponseRunner.Error -> {
+                is ResponseRunner.Error -> {
                     _loading.value = Pair(false, "")
                     _error.value = resourceProvider.getStringResource(R.string.error_generic)
                 }
-                is BaseResponseRunner.NoInternetConnection -> {
+                is ResponseRunner.NoInternetConnection -> {
                     _loading.value = Pair(false, "")
                     _error.value = resourceProvider.getStringResource(R.string.error_no_internet_connection)
                 }
-                is BaseResponseRunner.NullOrEmptyData -> {
+                is ResponseRunner.NullOrEmptyData -> {
                     _loading.value = Pair(false, "")
                     _error.value = resourceProvider.getStringResource(R.string.error_generic)
                 }

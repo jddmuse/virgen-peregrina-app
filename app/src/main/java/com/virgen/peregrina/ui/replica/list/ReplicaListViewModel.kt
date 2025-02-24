@@ -1,19 +1,12 @@
 package com.virgen.peregrina.ui.replica.list
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.virgen_peregrina_app.R
 import com.virgen.peregrina.data.model.ReplicaModel
-import com.virgen.peregrina.util.METHOD_CALLED
-import com.virgen.peregrina.util.base.BaseResponseRunner
-import com.virgen.peregrina.util.getExceptionLog
 import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel

@@ -1,27 +1,27 @@
-package com.virgen.peregrina.util.base
+package com.virgen.peregrina.util.response
 
-sealed class BaseResponseRunner<out T : Any> {
+sealed class ResponseRunner<out T : Any> {
 
     class Success<out T : Any>(
         val data: T?
-    ) : BaseResponseRunner<T>()
+    ) : ResponseRunner<T>()
 
     class NullOrEmptyData(
         val message: String? = null
-    ) : BaseResponseRunner<Nothing>()
+    ) : ResponseRunner<Nothing>()
 
     class NoInternetConnection(
         val message: String? = null
-    ): BaseResponseRunner<Nothing>()
+    ): ResponseRunner<Nothing>()
 
     class Error(
         val exception: Throwable
-    ) : BaseResponseRunner<Nothing>()
+    ) : ResponseRunner<Nothing>()
 
     class APIError<out T : Any>(
         val data: T?,
         val error: String?,
         val message: String?
-    ) : BaseResponseRunner<T>()
+    ) : ResponseRunner<T>()
 
 }

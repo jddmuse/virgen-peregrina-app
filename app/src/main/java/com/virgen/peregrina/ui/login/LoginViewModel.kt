@@ -11,7 +11,7 @@ import com.virgen.peregrina.data.request.LoginRequest
 import com.virgen.peregrina.domain.LoginRunner
 import com.virgen.peregrina.ui.login.enumerator.EnumLoginInputType
 import com.virgen.peregrina.util.EMPTY_STRING
-import com.virgen.peregrina.util.base.BaseResponseRunner
+import com.virgen.peregrina.util.response.ResponseRunner
 import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -115,23 +115,23 @@ class LoginViewModel @Inject constructor(
         )
         viewModelScope.launch {
             when(val response = loginRunner.invoke(data)) {
-                is BaseResponseRunner.Success -> {
+                is ResponseRunner.Success -> {
                     _loading.value = Pair(false, "")
                     _loginSuccessEvent.value = true
                 }
-                is BaseResponseRunner.APIError -> {
+                is ResponseRunner.APIError -> {
                     _loading.value = Pair(false, "")
                     _error.value = StringBuilder().append(response.message ?: "").append("\n${response.error}").toString()
                 }
-                is BaseResponseRunner.Error -> {
+                is ResponseRunner.Error -> {
                     _loading.value = Pair(false, "")
                     _error.value = resourceProvider.getStringResource(R.string.error_generic)
                 }
-                is BaseResponseRunner.NoInternetConnection -> {
+                is ResponseRunner.NoInternetConnection -> {
                     _loading.value = Pair(false, "")
                     _error.value = resourceProvider.getStringResource(R.string.error_no_internet_connection)
                 }
-                is BaseResponseRunner.NullOrEmptyData -> {
+                is ResponseRunner.NullOrEmptyData -> {
                     _loading.value = Pair(false, "")
                     _error.value = resourceProvider.getStringResource(R.string.error_generic)
 

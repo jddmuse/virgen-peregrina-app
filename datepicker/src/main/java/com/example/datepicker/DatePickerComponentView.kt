@@ -116,6 +116,7 @@ class DatePickerComponentView @JvmOverloads constructor(
                             val indexOf = helper.localDateSelected.dayOfMonth - 1
                             val textView = binding.calendarGridLayout.getChildAt(indexOf) as TextView
                             textView.setBackgroundColor(Color.TRANSPARENT)
+                            // falta excluir seleccion de un mes diferente al actual
                         } catch (ex:Exception) {
                             Log.e(TAG, "onDateSelected -> $ex")
                         }

@@ -1,6 +1,6 @@
-package com.virgen.peregrina.util.base
+package com.virgen.peregrina.util.response
 
-class BaseResponseService<T>(
+class ResponseService<T>(
     val data: T? = null,
     val message: String? = null,
     val error: String? = null
