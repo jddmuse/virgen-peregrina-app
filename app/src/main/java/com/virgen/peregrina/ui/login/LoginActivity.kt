@@ -35,8 +35,8 @@ class LoginActivity : AppCompatActivity(), IView {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView()
-        initListeners()
         initObservers()
+        initListeners()
 
         binding.rememberDataSwitch.isChecked = true
         viewModel.onCreate { email, password ->
@@ -58,7 +58,8 @@ class LoginActivity : AppCompatActivity(), IView {
 
     override fun initObservers() {
         viewModel.loginSuccessEvent.observe(this) {
-            startActivity(Intent(this, MainActivity::class.java))
+            Log.i(TAG, "LOGIN SUCCESSFULLY!!!")
+            //startActivity(Intent(this, MainActivity::class.java))
         }
         viewModel.errorEditText.observe(this) { pair ->
             when (pair.first) {

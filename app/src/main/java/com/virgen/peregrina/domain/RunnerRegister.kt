@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class RegisterRunner @Inject constructor() {
+class RunnerRegister @Inject constructor() {
 
     suspend fun invoke(data: CreateUserRequest): ResponseRunner<UserModel> {
         return withContext(Dispatchers.IO) {

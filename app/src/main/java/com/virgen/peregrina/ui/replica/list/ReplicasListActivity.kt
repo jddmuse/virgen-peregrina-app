@@ -28,8 +28,6 @@ class ReplicasListActivity : AppCompatActivity(), IView {
     }
 
     private lateinit var binding: ActivityPeregrinacionBinding
-    private lateinit var allReplicaItemAdapter: ReplicaItemAdapter
-    private lateinit var yourReplicaItemAdapter: ReplicaItemAdapter
 
     private val viewModel: ReplicaListViewModel by viewModels()
 
@@ -37,129 +35,45 @@ class ReplicasListActivity : AppCompatActivity(), IView {
         super.onCreate(savedInstanceState)
         binding = ActivityPeregrinacionBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initView()
         initObservers()
         initListeners()
     }
 
     override fun initView() {
-        try {
-            yourReplicaItemAdapter = ReplicaItemAdapter()
-            allReplicaItemAdapter = ReplicaItemAdapter()
-            binding.appBarLayout.textView.text = getString(R.string.label_replicas)
-            binding.replicasRecyclerView.let {
-                it.layoutManager = LinearLayoutManager(
+        binding.appBarLayout.textView.text = getString(R.string.label_replicas)
+    }
+
+    override fun initObservers() {
+        viewModel.replicas.observe(this@ReplicasListActivity) { list ->
+            binding.replicasRecyclerView.apply {
+                layoutManager = LinearLayoutManager(
                     this@ReplicasListActivity,
                     RecyclerView.VERTICAL,
                     false
                 )
-                it.adapter = allReplicaItemAdapter
+                adapter = ReplicaItemAdapter(listOf(), {})
             }
-            binding.yourReplicasRecyclerView.let {
-                it.layoutManager = LinearLayoutManager(
-                    this, RecyclerView.VERTICAL, false
-                )
-                it.adapter = yourReplicaItemAdapter
-            }
-            viewModel.onCreate()
-        } catch (ex: Exception) {
-            Log.e(TAG, "initUI(): Exception -> $ex")
         }
-    }
-
-    override fun initObservers() {
-        try {
-            with(viewModel) {
-                replicas.observe(this@ReplicasListActivity) { list ->
-                    Log.i(TAG, "replicas Change Observed: $list")
-                    if (list.isNotEmpty()) {
-                        with(binding) {
-                            allReplicasInfo.visibility = View.GONE
-                            replicasRecyclerView.visibility = View.VISIBLE
-                        }
-                        allReplicaItemAdapter.updateData(list)
-                    } else {
-                        with(binding) {
-                            allReplicasInfo.visibility = View.VISIBLE
-                            replicasRecyclerView.visibility = View.GONE
-                        }
-                    }
-                }
-                errorMsg.observe(this@ReplicasListActivity) { msg ->
-                    Snackbar.make(
-                        binding.replicasRecyclerView,
-                        msg.toString(), Snackbar.LENGTH_SHORT
-                    ).show()
-                }
-                yourReplicas.observe(this@ReplicasListActivity) { data ->
-                    if (data != null && data.isNotEmpty()) {
-                        binding.yourReplicasRecyclerView.visibility = View.VISIBLE
-                        yourReplicaItemAdapter.updateData(data)
-                        binding.yourReplicasInfo.visibility = View.GONE
-                    } else {
-                        binding.yourReplicasInfo.visibility = View.VISIBLE
-                        binding.yourReplicasRecyclerView.visibility = View.INVISIBLE
-                    }
-                }
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "initObservers(): Exceptipn -> $ex")
+        viewModel.errorMsg.observe(this@ReplicasListActivity) { msg ->
+            Snackbar.make(
+                binding.replicasRecyclerView,
+                msg.toString(), Snackbar.LENGTH_SHORT
+            ).show()
         }
     }
 
     override fun initListeners() {
-        try {
-            yourReplicaItemAdapter.addObserver(object : IActionListener<ReplicaModel> {
-                override fun onClick(item: ReplicaModel) {
-                    Log.i(TAG, "$METHOD_CALLED onClick() PARAMS: $item")
-                    startActivity(
-                        Intent(
-                            this@ReplicasListActivity,
-                            ReplicaDetailsActivity::class.java
-                        ).apply {
-                            putExtra("replica", Gson().toJson(item))
-                            putExtra("pilgrimage_enabled", true)
-                        }
-                    )
-                }
-            })
-
-            allReplicaItemAdapter.addObserver(object : IActionListener<ReplicaModel> {
-                override fun onClick(item: ReplicaModel) {
-                    Log.i(TAG, "$METHOD_CALLED onClick() PARAMS: $item")
-                    startActivity(
-                        Intent(
-                            this@ReplicasListActivity,
-                            ReplicaDetailsActivity::class.java
-                        ).apply {
-                            putExtra("replica", Gson().toJson(item))
-                            putExtra("pilgrimage_enabled", false)
-                        }
-                    )
-                }
-            })
-            binding.addReplicaButton.setOnClickListener {
-                startActivity(
-                    Intent(
-                        this@ReplicasListActivity,
-                        CreateReplicaActivity::class.java
-                    )
+        binding.newButton.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@ReplicasListActivity,
+                    CreateReplicaActivity::class.java
                 )
-            }
-            binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
-
-            binding.refreshButton.setOnClickListener {
-                viewModel.getMyReplicasFromApi()
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "initListeners(): Exception -> $ex")
+            )
         }
+        binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
     }
 
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.onCreate()
-        binding.refreshButton.visibility = View.VISIBLE
-    }
 }

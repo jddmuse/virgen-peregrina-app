@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
 import com.virgen.peregrina.data.request.LoginRequest
-import com.virgen.peregrina.domain.LoginRunner
+import com.virgen.peregrina.domain.RunnerLogin
 import com.virgen.peregrina.ui.login.enumerator.EnumLoginInputType
 import com.virgen.peregrina.util.EMPTY_STRING
 import com.virgen.peregrina.util.response.ResponseRunner
@@ -22,7 +22,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val resourceProvider: ResourceProvider,
     private val preferencesManager: PreferencesManager,
-    private val loginRunner: LoginRunner
+    private val runnerLogin: RunnerLogin
 ) : ViewModel() {
 
     companion object {
@@ -114,14 +114,14 @@ class LoginViewModel @Inject constructor(
             pass = setPassword
         )
         viewModelScope.launch {
-            when(val response = loginRunner.invoke(data)) {
+            when(val response = runnerLogin.invoke(data)) {
                 is ResponseRunner.Success -> {
                     _loading.value = Pair(false, "")
                     _loginSuccessEvent.value = true
                 }
-                is ResponseRunner.APIError -> {
+                is ResponseRunner.ApiError -> {
                     _loading.value = Pair(false, "")
-                    _error.value = StringBuilder().append(response.message ?: "").append("\n${response.error}").toString()
+                    _error.value = StringBuilder().append(response.message ?: "").toString()  // .append("\n${response.error}").toString()
                 }
                 is ResponseRunner.Error -> {
                     _loading.value = Pair(false, "")

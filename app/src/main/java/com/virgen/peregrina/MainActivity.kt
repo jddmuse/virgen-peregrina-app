@@ -23,7 +23,7 @@ import com.virgen.peregrina.util.view.IActionListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity(), IView, IActionListener<PilgrimageModel> {
+class MainActivity : AppCompatActivity(), IView {
 
     companion object {
         private const val TAG = "MainActivity"
@@ -37,10 +37,10 @@ class MainActivity : AppCompatActivity(), IView, IActionListener<PilgrimageModel
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initView()
-        initListeners()
         initObservers()
-//        viewModel.onCreate()
+        initListeners()
     }
 
     override fun initView() {
@@ -54,7 +54,17 @@ class MainActivity : AppCompatActivity(), IView, IActionListener<PilgrimageModel
                     }
                 }
             }
-            initRecyclerView()
+            pilgrimagesAdapter = PilgrimagesAdapter(object: IActionListener<PilgrimageModel> {
+                override fun onClick(item: PilgrimageModel) {
+                    val jsonObject = Gson().toJson(item)
+                    val intent = Intent(this@MainActivity, PilgrimageDetailsActivity::class.java).apply { putExtra("pilgrimage", jsonObject) }
+                    startActivity(intent)
+                }
+            })
+            binding.pilgrimagesRecyclerView.apply {
+                layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+                adapter = pilgrimagesAdapter
+            }
         } catch (ex: Exception) {
             Log.e(TAG, "initUI(): Exception -> $ex")
         }
@@ -79,18 +89,6 @@ class MainActivity : AppCompatActivity(), IView, IActionListener<PilgrimageModel
             viewModel.userNameTitle.observe(this) { value ->
                 binding.appBarLayout.textView.text = value
             }
-//            viewModel.askForReturningReplicaAndTestimonyEvent.observe(this) { pilgrimage ->
-//                if (!pilgrimage.have_testimony && pilgrimage.isFinished) {
-//                    SendTestimonyDialog(this) { testimony ->
-//                        viewModel.onSendTestimony(
-//                            testimonyMsg = testimony,
-//                            replica_id = pilgrimage.replica_id,
-//                            user_id = pilgrimage.user_id,
-//                            pilgrimage_id = pilgrimage.id!!
-//                        )
-//                    }.show()
-//                }
-//            }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")
         }
@@ -99,7 +97,6 @@ class MainActivity : AppCompatActivity(), IView, IActionListener<PilgrimageModel
     override fun initListeners() {
         try {
             binding.peregrinacionCardView.setOnClickListener {
-                Log.i(TAG, "peregrinacionCardView.onClick()")
                 startActivity(
                     Intent(this, ReplicasListActivity::class.java)
                 )
@@ -112,55 +109,6 @@ class MainActivity : AppCompatActivity(), IView, IActionListener<PilgrimageModel
         } catch (ex: Exception) {
             Log.e(TAG, "initListeners(): Exception -> $ex")
         }
-    }
-
-    private fun initRecyclerView() {
-        try {
-            pilgrimagesAdapter = PilgrimagesAdapter(this)
-            binding.pilgrimagesRecyclerView.let {
-                it.layoutManager = LinearLayoutManager(
-                    this, RecyclerView.VERTICAL, false
-                )
-                it.adapter = pilgrimagesAdapter
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "initRecyclerView(): Exception -> $ex")
-        }
-    }
-
-//    private fun askForReturningReplicaAndTestimony(pilgrimage: PilgrimageModel) {
-//        try {
-//            if (!pilgrimage.have_testimony && pilgrimage.isFinished) {
-//                SendTestimonyDialog(this) { testimony ->
-//                    viewModel.onSendTestimony(
-//                        testimonyMsg = testimony,
-//                        replica_id = pilgrimage.replica_id,
-//                        user_id = pilgrimage.user_id,
-//                        pilgrimage_id = pilgrimage.id!!
-//                    )
-//                }.show()
-//            }
-//        } catch (ex: Exception) {
-//            getExceptionLog(TAG, "askForReturningReplica", ex)
-//        }
-//    }
-
-    override fun onClick(item: PilgrimageModel) {
-        try {
-            val jsonObject = Gson().toJson(item)
-            startActivity(
-                Intent(this, PilgrimageDetailsActivity::class.java).apply {
-                    putExtra("pilgrimage", jsonObject)
-                }
-            )
-        } catch (ex: Exception) {
-            getExceptionLog(TAG, "onClick", ex)
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-//        viewModel.onCreate()
     }
 
 }

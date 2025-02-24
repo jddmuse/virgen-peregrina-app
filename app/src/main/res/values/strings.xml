@@ -1,5 +1,5 @@
 <resources>
-    <string name="api_url" translatable="false">https://virgenperegrinapp-bc84c2186f5f.herokuapp.com/</string>
+    <string name="api_url" translatable="false">https://jeison-damian-bb0428f481f9.herokuapp.com/</string>
     <string name="app_name">virgen-peregrina-app</string>
     <string name="login_button" translatable="true">Continue</string>
     <string name="email" translatable="true">Email</string>

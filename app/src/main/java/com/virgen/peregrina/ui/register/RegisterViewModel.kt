@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
 import com.virgen.peregrina.data.request.CreateUserRequest
-import com.virgen.peregrina.domain.RegisterRunner
+import com.virgen.peregrina.domain.RunnerRegister
 import com.virgen.peregrina.ui.register.enumerator.EnumRegisterInputType
 import com.virgen.peregrina.util.EMPTY_STRING
 import com.virgen.peregrina.util.response.ResponseRunner
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val resourceProvider: ResourceProvider,
-    private val registerRunner: RegisterRunner
+    private val runnerRegister: RunnerRegister
 ) : ViewModel() {
 
     companion object {
@@ -185,12 +185,12 @@ class RegisterViewModel @Inject constructor(
             telephone = ""
         )
         viewModelScope.launch {
-            when(val baseResponse = registerRunner.invoke(data)) {
+            when(val baseResponse = runnerRegister.invoke(data)) {
                 is ResponseRunner.Success -> {
                     _loading.value = Pair(false, "")
                     _registerFinishedEvent.value = true
                 }
-                is ResponseRunner.APIError -> {
+                is ResponseRunner.ApiError -> {
                     _loading.value = Pair(false, "")
                     _error.value = StringBuilder()
                         .append(baseResponse.message ?: "")
