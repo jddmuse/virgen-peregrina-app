@@ -1,8 +1,8 @@
 package com.virgen.peregrina.util.response
 
-sealed class ResponseRunner<out T : Any> {
+sealed class ResponseRunner<out T> {
 
-    class Success<out T : Any>(
+    class Success<out T>(
         val data: T?
     ) : ResponseRunner<T>()
 

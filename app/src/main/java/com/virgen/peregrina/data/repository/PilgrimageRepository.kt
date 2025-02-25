@@ -1,37 +1,27 @@
 package com.virgen.peregrina.data.repository
 
 import com.virgen.peregrina.data.api.service.VirgenPeregrinaApiClient
+import com.virgen.peregrina.data.model.PilgrimageModel
+import com.virgen.peregrina.data.repository.helper.RepositoryHelper
+import com.virgen.peregrina.util.response.ResponseRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class PilgrimageRepository @Inject constructor(
-    private val virgenPeregrinaApiClient: VirgenPeregrinaApiClient
+    private val apiService: VirgenPeregrinaApiClient,
+    private val repositoryHelper: RepositoryHelper
 ) {
 
     companion object {
         private const val TAG = "PilgrimageRepository"
     }
 
-//    suspend fun create(data: CreatePilgrimageRequest): BaseResponseRepository<PilgrimageModel> =
-//        withContext(Dispatchers.IO) {
-//            try {
-//                val result = virgenPeregrinaApiClient.createPilgrimage(data)
-//                BaseResponseRepository.Success(result.data)
-//            } catch (ex: Exception) {
-//                Log.e(TAG, "create(): Exception -> $ex")
-//                BaseResponseRepository.Error(ex)
-//            }
-//        }
-//
-//    suspend fun getAll(): BaseResponseRepository<List<GetPilgrimagesResponse>> =
-//        withContext(Dispatchers.IO) {
-//            try {
-//                val result = virgenPeregrinaApiClient.getAllPilgrimages()
-//                BaseResponseRepository.Success(result.data)
-//            } catch (ex: Exception) {
-//                getExceptionLog(TAG, "getAll", ex)
-//                BaseResponseRepository.Error(ex)
-//            }
-//        }
-
+    suspend fun list(page: Int, size: Int, sort: String): ResponseRepository<List<PilgrimageModel>> {
+        return withContext(Dispatchers.IO) {
+            val response = apiService.listPilgrimages(page, size, sort)
+            return@withContext repositoryHelper.response(response)
+        }
+    }
 
 }

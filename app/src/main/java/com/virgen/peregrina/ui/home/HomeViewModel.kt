@@ -28,72 +28,11 @@ class HomeViewModel @Inject constructor(
     private val _infoMsg = MutableLiveData<String?>()
     val infoMsg: LiveData<String?> get() = _infoMsg
 
-    private val _askForReturningReplicaAndTestimonyEvent = MutableLiveData<PilgrimageModel>()
-    val askForReturningReplicaAndTestimonyEvent: LiveData<PilgrimageModel> get() = _askForReturningReplicaAndTestimonyEvent
-
     private val _userNameTitle = MutableLiveData<String>()
     val userNameTitle: LiveData<String> get() = _userNameTitle
 
-//    fun onCreate() {
-//        try {
-//            viewModelScope.launch {
-//                when (val result = getAllPilgrimagesUseCase()) {
-//                    is BaseResponseRunner.Error -> {
-//                        _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
-//                    }
-//                    is BaseResponseRunner.Success -> {
-//                        _pilgrimages.value = result.data?.map { it.toModel() } ?: listOf()
-//                    }
-//                    is BaseResponseRunner.NullOrEmptyData -> {}
-//                }
-//            }
-//            preferencesManager.userSessionData?.name?.let { _userNameTitle.value = it }
-//        } catch (ex: Exception) {
-//            getExceptionLog(TAG, "onCreate", ex)
-//        }
-//    }
 
-//    fun onSendTestimony(
-//        testimonyMsg: String,
-//        replica_id: Long,
-//        user_id: Long,
-//        pilgrimage_id: Long
-//    ) {
-//        try {
-//            viewModelScope.launch {
-//                val data = TestimonyModel(
-//                    date = getCurrentDate(),
-//                    user_id = user_id,
-//                    replica_id = replica_id,
-//                    value = testimonyMsg,
-//                    pilgrimage_id =pilgrimage_id
-//                )
-//                when (val result = sendTestimonyUseCase(data)) {
-//                    is BaseResponseRunner.Success -> {
-//                        _infoMsg.value =
-//                            resourceProvider
-//                                .getStringResource(R.string.info_testimony_send_successfully)
-//                    }
-//                    is BaseResponseRunner.Error -> {}
-//                    is BaseResponseRunner.NoInternetConnection -> {
-//                        _errorMsg.value =
-//                            resourceProvider
-//                                .getStringResource(R.string.error_no_internet_connection)
-//                    }
-//                    is BaseResponseRunner.NullOrEmptyData -> {}
-//                }
-//            }
-//        } catch (ex: Exception) {
-//            getExceptionLog(TAG, "onSendTestimonyUseCase", ex)
-//        }
-//    }
+    fun pilgrimages() {
 
-//    fun askForTestimony() {
-//        preferencesManager.userSessionData?.replicas?.forEach { replica ->
-//            replica.pilgrimages.forEach { pilgrimage ->
-//                _askForReturningReplicaAndTestimonyEvent.value = pilgrimage
-//            }
-//        }
-//    }
-
+    }
 }
