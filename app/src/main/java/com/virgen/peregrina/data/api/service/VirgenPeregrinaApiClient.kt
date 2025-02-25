@@ -43,7 +43,7 @@ interface VirgenPeregrinaApiClient {
         @Query("page") page: Int,
         @Query("size") size: Int,
         @Query("sort") sort: String //= "nombre,asc"
-    ): Response<ResponseService<List<ReplicaModel>>>
+    ): Response<ResponseService<ResponsePage<ReplicaModel>>>
 
     /** Pilgrimage ******************************************/
     /********************************************************/

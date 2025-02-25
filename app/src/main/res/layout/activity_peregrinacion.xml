@@ -39,14 +39,16 @@
     <!--        app:layout_constraintTop_toBottomOf="@id/add_new_button" />-->
 
     <TextView
-        android:id="@+id/all_replicas_info"
+        android:id="@+id/info_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"
         android:layout_marginVertical="@dimen/dp_16"
         android:text="No hay Replicas registradas."
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/all_replicas_text_view" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/new_button"
+        app:layout_constraintVertical_bias="0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/replicas_recycler_view"

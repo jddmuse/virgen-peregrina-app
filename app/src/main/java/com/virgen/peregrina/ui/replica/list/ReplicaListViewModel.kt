@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.virgen_peregrina_app.R
 import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.domain.RunnerReplicas
 import com.virgen.peregrina.ui.replica.EnumReplicaInputType
 import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.provider.ResourceProvider
+import com.virgen.peregrina.util.response.ResponseRunner
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,9 +33,26 @@ class ReplicaListViewModel @Inject constructor(
     val errorMsg: LiveData<String?> get() = _errorMsg
 
     fun replicas(origin: EnumReplicaInputType = EnumReplicaInputType.API) {
-//        viewModelScope.launch {
-//            val response = runnerReplicas.invoke()
-//        }
+        viewModelScope.launch {
+            when (val response = runnerReplicas.invoke()) {
+                is ResponseRunner.Success -> {
+                    val data = response.data?.content ?: listOf()
+                    _replicas.value = data
+                }
+                is ResponseRunner.ApiError -> {
+                    _errorMsg.value = response.message
+                }
+                is ResponseRunner.Error -> {
+                    _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
+                }
+                is ResponseRunner.NoInternetConnection -> {
+                    _errorMsg.value = resourceProvider.getStringResource(R.string.error_no_internet_connection)
+                }
+                is ResponseRunner.NullOrEmptyData -> {
+                    _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
+                }
+            }
+        }
     }
 
 }

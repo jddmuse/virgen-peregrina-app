@@ -39,6 +39,12 @@ class ReplicasListActivity : AppCompatActivity(), IView {
         initView()
         initObservers()
         initListeners()
+
+        defaultSettings()
+    }
+
+    private fun defaultSettings() {
+        viewModel.replicas()
     }
 
     override fun initView() {
@@ -47,13 +53,20 @@ class ReplicasListActivity : AppCompatActivity(), IView {
 
     override fun initObservers() {
         viewModel.replicas.observe(this@ReplicasListActivity) { list ->
-            binding.replicasRecyclerView.apply {
-                layoutManager = LinearLayoutManager(
-                    this@ReplicasListActivity,
-                    RecyclerView.VERTICAL,
-                    false
-                )
-                adapter = ReplicaItemAdapter(listOf(), {})
+            if (list.isNotEmpty()) {
+                binding.replicasRecyclerView.apply {
+                    layoutManager = LinearLayoutManager(
+                        this@ReplicasListActivity,
+                        RecyclerView.VERTICAL,
+                        false
+                    )
+                    adapter = ReplicaItemAdapter(list, {
+                        // COMPLETE
+                    })
+                }
+            } else {
+                binding.replicasRecyclerView.visibility = View.GONE
+                binding.infoTextView.visibility = View.VISIBLE
             }
         }
         viewModel.errorMsg.observe(this@ReplicasListActivity) { msg ->

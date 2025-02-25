@@ -45,10 +45,15 @@ class HomeViewModel @Inject constructor(
                     val data = response.data?.content ?: listOf()
                     _pilgrimages.value = data
                 }
-                is ResponseRunner.ApiError -> _errorMsg.value = response.message
-                is ResponseRunner.Error -> _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
-                is ResponseRunner.NoInternetConnection -> _errorMsg.value = resourceProvider.getStringResource(R.string.error_no_internet_connection)
-                is ResponseRunner.NullOrEmptyData -> _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
+                is ResponseRunner.ApiError -> {
+                    _errorMsg.value = response.message
+                }
+                is ResponseRunner.NoInternetConnection -> {
+                    _errorMsg.value = resourceProvider.getStringResource(R.string.error_no_internet_connection)
+                }
+                else -> {
+                    _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
+                }
             }
         }
     }
