@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.virgen_peregrina_app.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.PilgrimageModel
+import com.virgen.peregrina.data.model.parcelable
 import com.virgen.peregrina.ui.guidelines.GuidelinesActivity
 import com.virgen.peregrina.ui.home.HomeViewModel
 import com.virgen.peregrina.ui.home.PilgrimagesAdapter
@@ -78,8 +79,8 @@ class MainActivity : AppCompatActivity(), IView {
                         visibility = View.VISIBLE
                         adapter = PilgrimagesAdapter(
                             list = data,
-                            listener = { item ->
-                                val jsonObject = Gson().toJson(item)
+                            listener = { item: PilgrimageModel ->
+                                val jsonObject = Gson().toJson(item.parcelable())
                                 val intent = Intent(this@MainActivity, PilgrimageDetailsActivity::class.java)
                                 startActivity(intent.apply { putExtra("pilgrimage", jsonObject) })
                             }

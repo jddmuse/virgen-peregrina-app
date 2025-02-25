@@ -1,5 +1,6 @@
 package com.virgen.peregrina.data.model
 
+import com.virgen.peregrina.ui.pilgrimage.util.PilgrimageParcelableModel
 import java.time.LocalDate
 
 data class PilgrimageModel(
@@ -9,3 +10,7 @@ data class PilgrimageModel(
     val endDate: LocalDate,
     val intention: String
 )
+
+fun PilgrimageModel.parcelable(): PilgrimageParcelableModel {
+    return PilgrimageParcelableModel(replicaId, userId, startDate.toString(), endDate.toString(), intention)
+}

@@ -52,101 +52,27 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/title_intention_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
+                        android:layout_marginTop="@dimen/dp_24"
+                        android:layout_marginBottom="@dimen/dp_8"
                         android:text="@string/label_intention"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/intention_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/title_intention_text_view" />
-
-                    <TextView
-                        android:id="@+id/receiver_user_data_label_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:text="@string/label_receiver_user_data"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        app:layout_constraintTop_toBottomOf="@id/city_text_view" />
-
-                    <TextView
-                        android:id="@+id/receiver_user_name_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/receiver_user_data_label_text_view" />
-
-                    <TextView
-                        android:id="@+id/receiver_user_telephone_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/receiver_user_name_text_view" />
-
-                    <TextView
-                        android:id="@+id/receiver_user_email_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/receiver_user_telephone_text_view" />
-
-                    <TextView
-                        android:id="@+id/attendant_label_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:text="Acompañamiento por"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        app:layout_constraintTop_toBottomOf="@id/receiver_user_email_text_view" />
-
-                    <TextView
-                        android:id="@+id/attendant_name_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/attendant_telephone_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/attendant_email_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/replica_owner_user_label_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:text="@string/label_replica_owner_user_data"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-                    <TextView
-                        android:id="@+id/replica_owner_user_name_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/replica_owner_user_label_text_view" />
-
-                    <TextView
-                        android:id="@+id/replica_owner_user_telephone_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/replica_owner_user_name_text_view" />
-
-                    <TextView
-                        android:id="@+id/replica_owner_user_email_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintTop_toBottomOf="@id/replica_owner_user_telephone_text_view" />
+                        android:layout_marginTop="@dimen/dp_8" />
 
                     <TextView
                         android:id="@+id/replica_code_text_view"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dp_8" />
 
                 </LinearLayout>
 

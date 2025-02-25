@@ -8,6 +8,7 @@ import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ItemPilgrimageBinding
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.util.DateUtils
+import com.virgen.peregrina.util.camelCase
 import com.virgen.peregrina.util.enumerator.EnumDateFormat
 
 class PilgrimagesAdapter(
@@ -43,8 +44,8 @@ class PilgrimagesAdapter(
         fun bind(item: PilgrimageModel) {
             // COMPLETE
 //            binding.cityTextView.text = item.city
-            binding.startDateTextView.text = DateUtils.format(item.startDate, EnumDateFormat.WEEKDAY_DD_MMM)
-            binding.intentionTextView.text = item.intention
+            binding.startDateTextView.text = DateUtils.format(item.startDate, EnumDateFormat.WEEKDAY_DD_MMM).camelCase()
+            binding.intentionTextView.text = item.intention.camelCase()
 //            binding.statusTextView.text = item.status
 
         }

@@ -6,7 +6,12 @@ import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityPilgrimageDetailsBinding
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.PilgrimageModel
+import com.virgen.peregrina.ui.pilgrimage.util.PilgrimageParcelableModel
+import com.virgen.peregrina.util.DateUtils
+import com.virgen.peregrina.util.camelCase
+import com.virgen.peregrina.util.enumerator.EnumDateFormat
 import com.virgen.peregrina.util.getExceptionLog
+import java.time.LocalDate
 
 class PilgrimageDetailsActivity : AppCompatActivity() {
 
@@ -20,7 +25,8 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPilgrimageDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        initUI()
+
+        initView()
         initListeners()
     }
 
@@ -28,13 +34,18 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
         binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
     }
 
-    private fun initUI() {
+    private fun initView() {
         try {
             binding.appBarLayout.textView.text = getString(R.string.label_pilgrimage_details)
             val jsonObject = intent.getStringExtra("pilgrimage")
-            val pilgrimageModel = Gson().fromJson(jsonObject, PilgrimageModel::class.java)
+            val pilgrimage = Gson().fromJson(jsonObject, PilgrimageParcelableModel::class.java)
+
+            binding.cityTextView.text = "CUCUTA".camelCase() //pilgrimage.city
+            binding.intentionTextView.text = pilgrimage.intention?.camelCase()
+            binding.replicaCodeTextView.text = "Código de réplica: ${pilgrimage.replicaId}"
+            pilgrimage.startDate?.let { binding.dateTextView.text = DateUtils.format(it, EnumDateFormat.WEEKDAY_DD_MMM).camelCase() }
         } catch (ex: Exception) {
-            getExceptionLog(TAG, "initUI", ex)
+            getExceptionLog(TAG, "initView", ex)
         }
     }
 
