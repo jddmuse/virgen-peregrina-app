@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity(), IView {
     }
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var pilgrimagesAdapter: PilgrimagesAdapter
     private val viewModel: HomeViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,6 +40,12 @@ class MainActivity : AppCompatActivity(), IView {
         initView()
         initObservers()
         initListeners()
+
+        defaultSettings()
+    }
+
+    private fun defaultSettings() {
+        viewModel.pilgrimages()
     }
 
     override fun initView() {
@@ -54,17 +59,6 @@ class MainActivity : AppCompatActivity(), IView {
                     }
                 }
             }
-            pilgrimagesAdapter = PilgrimagesAdapter(object: IActionListener<PilgrimageModel> {
-                override fun onClick(item: PilgrimageModel) {
-                    val jsonObject = Gson().toJson(item)
-                    val intent = Intent(this@MainActivity, PilgrimageDetailsActivity::class.java).apply { putExtra("pilgrimage", jsonObject) }
-                    startActivity(intent)
-                }
-            })
-            binding.pilgrimagesRecyclerView.apply {
-                layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
-                adapter = pilgrimagesAdapter
-            }
         } catch (ex: Exception) {
             Log.e(TAG, "initUI(): Exception -> $ex")
         }
@@ -73,14 +67,24 @@ class MainActivity : AppCompatActivity(), IView {
     override fun initObservers() {
         try {
             viewModel.errorMsg.observe(this) { msg ->
-                getToast(this, msg ?: EMPTY_STRING)
+                // COMPLETE
             }
             viewModel.pilgrimages.observe(this) { data ->
                 Log.i(TAG, "viewModel.pilgrimages.observe = $data")
                 if(data.isNotEmpty()) {
                     binding.infoPilgrimages.visibility = View.GONE
-                    binding.pilgrimagesRecyclerView.visibility = View.VISIBLE
-                    pilgrimagesAdapter.updateData(data)
+                    binding.pilgrimagesRecyclerView.apply {
+                        layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+                        visibility = View.VISIBLE
+                        adapter = PilgrimagesAdapter(
+                            list = data,
+                            listener = { item ->
+                                val jsonObject = Gson().toJson(item)
+                                val intent = Intent(this@MainActivity, PilgrimageDetailsActivity::class.java)
+                                startActivity(intent.apply { putExtra("pilgrimage", jsonObject) })
+                            }
+                        )
+                    }
                 } else {
                     binding.infoPilgrimages.visibility = View.VISIBLE
                     binding.pilgrimagesRecyclerView.visibility = View.GONE

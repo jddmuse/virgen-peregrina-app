@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity(), IView {
     override fun initObservers() {
         viewModel.loginSuccessEvent.observe(this) {
             Log.i(TAG, "LOGIN SUCCESSFULLY!!!")
-            //startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
         }
         viewModel.errorEditText.observe(this) { pair ->
             when (pair.first) {

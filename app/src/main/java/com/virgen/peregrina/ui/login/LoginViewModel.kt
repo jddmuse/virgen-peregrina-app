@@ -52,11 +52,12 @@ class LoginViewModel @Inject constructor(
 
 
     fun onCreate(callback: (String, String) -> Unit) {
-        with(preferencesManager) {
-            setEmail = email ?: EMPTY_STRING
-            setPassword = password ?: EMPTY_STRING
-        }
-        callback(setEmail, setPassword)
+//        with(preferencesManager) {
+//            setEmail = email ?: EMPTY_STRING
+//            setPassword = password ?: EMPTY_STRING
+//        }
+//        callback(setEmail, setPassword)
+        callback("juliana@gmail.com", "123")
     }
 
     fun onValueChanged(value: Editable?, inputType: EnumLoginInputType) {

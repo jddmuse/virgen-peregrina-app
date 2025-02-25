@@ -1,22 +1,19 @@
 package com.virgen.peregrina.ui.replica.info
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityReplicaDetailsBinding
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.data.model.TestimonyModel
 import com.virgen.peregrina.ui.pilgrimage.PilgrimageActivity
-import com.virgen.peregrina.util.EMPTY_STRING
 import com.virgen.peregrina.util.view.IView
-import com.virgen.peregrina.util.formatLocation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

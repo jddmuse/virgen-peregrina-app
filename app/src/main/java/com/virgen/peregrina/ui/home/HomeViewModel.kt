@@ -3,16 +3,22 @@ package com.virgen.peregrina.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.virgen_peregrina_app.R
 import com.virgen.peregrina.data.model.PilgrimageModel
+import com.virgen.peregrina.domain.RunnerPilgrimages
 import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.provider.ResourceProvider
+import com.virgen.peregrina.util.response.ResponseRunner
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val resourceProvider: ResourceProvider,
-    private val preferencesManager: PreferencesManager
+    private val preferencesManager: PreferencesManager,
+    private val runnerPilgrimages: RunnerPilgrimages
 ) : ViewModel() {
 
     companion object {
@@ -33,6 +39,17 @@ class HomeViewModel @Inject constructor(
 
 
     fun pilgrimages() {
-
+        viewModelScope.launch {
+            when (val response = runnerPilgrimages.invoke()) {
+                is ResponseRunner.Success -> {
+                    val data = response.data?.content ?: listOf()
+                    _pilgrimages.value = data
+                }
+                is ResponseRunner.ApiError -> _errorMsg.value = response.message
+                is ResponseRunner.Error -> _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
+                is ResponseRunner.NoInternetConnection -> _errorMsg.value = resourceProvider.getStringResource(R.string.error_no_internet_connection)
+                is ResponseRunner.NullOrEmptyData -> _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
+            }
+        }
     }
 }

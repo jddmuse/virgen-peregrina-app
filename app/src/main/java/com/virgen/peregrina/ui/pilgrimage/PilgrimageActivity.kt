@@ -1,9 +1,9 @@
 package com.virgen.peregrina.ui.pilgrimage
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityPilgrimageBinding
@@ -13,7 +13,6 @@ import com.virgen.peregrina.ui.dialog.DatePickerFragment
 import com.virgen.peregrina.ui.dialog.LoadingDialogView
 import com.virgen.peregrina.ui.register.enumerator.EnumRegisterInputType
 import com.virgen.peregrina.util.view.IView
-import com.virgen.peregrina.util.formatDate
 import com.virgen.peregrina.util.view.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -196,17 +195,19 @@ class PilgrimageActivity : AppCompatActivity(), IView,
 
                 startDateEditText.setOnClickListener {
                     val picker = DatePickerFragment { year, month, day ->
-                        startDateEditText.setText(
-                            formatDate(day, month, year)
-                        )
+                        // COMPLETE
+//                        startDateEditText.setText(
+//                            formatDate(day, month, year)
+//                        )
                     }
                     picker.show(supportFragmentManager, TAG)
                 }
                 endDateEditText.setOnClickListener {
                     val picker = DatePickerFragment { year, month, day ->
-                        endDateEditText.setText(
-                            formatDate(day, month, year)
-                        )
+                        // COMPLETE
+//                        endDateEditText.setText(
+//                            formatDate(day, month, year)
+//                        )
                     }
                     picker.show(supportFragmentManager, TAG)
                 }

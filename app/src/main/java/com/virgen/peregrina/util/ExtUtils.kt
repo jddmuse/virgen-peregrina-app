@@ -1,5 +1,6 @@
 package com.virgen.peregrina.util
 
+import android.util.Log
 import com.google.gson.Gson
 
 fun <T> convertJsonString2DataClass(json: String?, type: Class<T>): T? {
@@ -13,3 +14,6 @@ fun <T> convertJsonString2DataClass(json: String?, type: Class<T>): T? {
         null
     }
 }
+
+fun getExceptionLog(tag: String, method: String, exception: Exception) =
+    Log.e(tag, "$method() -> Exception=$exception")

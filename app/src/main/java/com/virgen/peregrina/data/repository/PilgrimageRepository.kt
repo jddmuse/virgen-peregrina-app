@@ -5,6 +5,7 @@ import com.virgen.peregrina.data.api.service.VirgenPeregrinaApiClient
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.repository.helper.RepositoryHelper
 import com.virgen.peregrina.data.request.CreatePilgrimageRequest
+import com.virgen.peregrina.util.response.ResponsePage
 import com.virgen.peregrina.util.response.ResponseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -19,7 +20,7 @@ class PilgrimageRepository @Inject constructor(
         private const val TAG = "PilgrimageRepository"
     }
 
-    suspend fun list(page: Int, size: Int, sort: String): ResponseRepository<List<PilgrimageModel>> {
+    suspend fun list(page: Int, size: Int, sort: String): ResponseRepository<ResponsePage<PilgrimageModel>> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.listPilgrimages(page, size, sort)
