@@ -14,221 +14,14 @@
             android:id="@+id/app_bar_layout"
             layout="@layout/app_bar_layout" />
 
-        <TextView
-            android:id="@+id/start_pilgrimage_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_16"
-            android:text="@string/label_start_pilgrimage"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            app:layout_constraintTop_toBottomOf="@id/app_bar_layout" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/who_receive_form_card_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:layout_marginVertical="@dimen/dp_16"
-            app:cardCornerRadius="@dimen/dp_16"
-            app:layout_constraintTop_toBottomOf="@id/start_pilgrimage_label">
-
-            <LinearLayout
-                android:id="@+id/form_linear_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/dp_16"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/dp_16"
-                    android:text="@string/label_who_receive"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/label_names_required_field" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/name_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_type_name_hint_field"
-                    app:endIconMode="clear_text">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/name_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_last_name_required_field" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/last_name_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_type_last_name_hint_field"
-                    app:endIconMode="clear_text">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/last_name_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_email_required_field" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/email_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_type_email_hint_field"
-                    app:endIconMode="clear_text">+
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/email_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_country_required_field" />
-
-                <LinearLayout
-                    android:id="@+id/ly_cellphone_zone"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.hbb20.CountryCodePicker
-                        android:id="@+id/country_code_picker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        app:ccp_defaultNameCode="CO"
-                        app:ccp_showArrow="false"
-                        app:ccp_showNameCode="false"
-                        app:ccp_textGravity="LEFT" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/cellphone_input_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:hint="@string/label_type_cellphone_hint_field"
-                        app:endIconMode="none"
-                        app:layout_constraintEnd_toEndOf="parent">
-
-                        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                            android:id="@+id/cellphone_edit_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:inputType="number" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_country_required_field" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/country_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_type_country_hint_field"
-                    app:endIconMode="clear_text">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/country_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:inputType="textEmailAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_city_required_field" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/city_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_type_city_hint_field"
-                    app:endIconMode="clear_text">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/city_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_address_required_field" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/address_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_type_address_hint_field"
-                    app:endIconMode="clear_text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/address_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/pilgrimage_card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginTop="@dimen/dp_16"
             app:cardCornerRadius="@dimen/dp_16"
-            app:layout_constraintTop_toBottomOf="@id/who_receive_form_card_view">
+            app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -243,28 +36,28 @@
                     android:text="Pilgrimage"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_pilgrim_attends_required_field" />
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/dp_16"-->
+                <!--                    android:text="@string/label_pilgrim_attends_required_field" />-->
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/attendant_pilgrim_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_type_pilgrim_hint_field"
-                    app:endIconMode="dropdown_menu">
+                <!--                <com.google.android.material.textfield.TextInputLayout-->
+                <!--                    android:id="@+id/attendant_pilgrim_input_layout"-->
+                <!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:hint="@string/label_type_pilgrim_hint_field"-->
+                <!--                    app:endIconMode="dropdown_menu">-->
 
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/attendant_pilgrim_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:paddingHorizontal="@dimen/dp_16" />
+                <!--                    <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
+                <!--                        android:id="@+id/attendant_pilgrim_edit_text"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:maxLines="1"-->
+                <!--                        android:paddingHorizontal="@dimen/dp_16" />-->
 
-                </com.google.android.material.textfield.TextInputLayout>
+                <!--                </com.google.android.material.textfield.TextInputLayout>-->
 
                 <TextView
                     android:layout_width="match_parent"
@@ -272,22 +65,11 @@
                     android:layout_marginTop="@dimen/dp_16"
                     android:text="@string/label_start_date_required_field" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/start_date_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                <com.example.datepicker.DatePickerComponentView
+                    android:id="@+id/start_date_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/label_type_start_date_hint_field"
-                    app:endIconMode="clear_text">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/start_date_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:inputType="textEmailAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:minHeight="48dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -295,22 +77,11 @@
                     android:layout_marginTop="@dimen/dp_16"
                     android:text="@string/label_end_date_required_field" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/end_date_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                <com.example.datepicker.DatePickerComponentView
+                    android:id="@+id/end_date_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/label_type_end_date_hint_field"
-                    app:endIconMode="clear_text">
-
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/end_date_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:focusable="false"
-                        android:inputType="textEmailAddress" />
-                </com.google.android.material.textfield.TextInputLayout>
+                    android:minHeight="48dp" />
 
                 <TextView
                     android:layout_width="match_parent"

@@ -62,6 +62,10 @@ class ReplicasListActivity : AppCompatActivity(), IView {
                     )
                     adapter = ReplicaItemAdapter(list, {
                         // COMPLETE
+                        val intent = Intent(this@ReplicasListActivity, ReplicaDetailsActivity::class.java).apply {
+                            putExtra("replica", Gson().toJson(it))
+                        }
+                        startActivity(intent)
                     })
                 }
             } else {

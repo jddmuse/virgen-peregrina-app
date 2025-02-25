@@ -1,16 +1,25 @@
 package com.example.datepicker
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.LifecycleOwner
+import com.example.datepicker.util.DateFormat
+import com.example.datepicker.util.DateUtils
 import com.example.datepickercomponentview.databinding.DatePickerComponentViewBinding
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -20,13 +29,7 @@ class DatePickerComponentView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0,
-    defStyleRes: Int = 0,
-    private val daysOff: List<DatePickerDaysOffRange> = listOf(
-        DatePickerDaysOffRange(LocalDate.now(), LocalDate.now().with(ChronoField.DAY_OF_MONTH, 16)),
-        DatePickerDaysOffRange(LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 4), LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 8)),
-        DatePickerDaysOffRange(LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 26), LocalDate.now().plusMonths(2).with(ChronoField.DAY_OF_MONTH, 4)),
-    ),
-    private val onDateSelectedListener: ((LocalDate) -> Unit)? = null
+    defStyleRes: Int = 0
 ) : LinearLayout(context, attrs, defStyle, defStyleRes) {
 
     companion object {
@@ -38,8 +41,17 @@ class DatePickerComponentView @JvmOverloads constructor(
     private var binding: DatePickerComponentViewBinding =
         DatePickerComponentViewBinding.inflate(LayoutInflater.from(context), this, true)
 
+    /** Variables */
+    private val daysOff: List<DatePickerDaysOffRange> = listOf(
+        DatePickerDaysOffRange(LocalDate.now(), LocalDate.now().with(ChronoField.DAY_OF_MONTH, 16)),
+        DatePickerDaysOffRange(LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 4), LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 8)),
+        DatePickerDaysOffRange(LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 26), LocalDate.now().plusMonths(2).with(ChronoField.DAY_OF_MONTH, 4)),
+    )
+    private var onDateSelectedListener: ((LocalDate) -> Unit)? = null
+
     init {
         initDefaultSettings()
+
         initView()
         initObservers()
         initListeners()
@@ -133,10 +145,12 @@ class DatePickerComponentView @JvmOverloads constructor(
 
     private fun initObservers() {
         helper.onDateSelected.observe(context as LifecycleOwner) { date: LocalDate ->
+            binding.editText.setText(DateUtils.format(date, DateFormat.WEEKDAY_DD_MMM_YYYY))
             onDateSelectedListener?.invoke(date)
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun initListeners() {
         binding.arrowBackImageButton.setOnClickListener {
             helper.valueChanged(1, DatePickerTypeValueEnum.BACK_MONTH)
@@ -146,5 +160,27 @@ class DatePickerComponentView @JvmOverloads constructor(
             helper.valueChanged(1, DatePickerTypeValueEnum.NEXT_MONTH)
             initView()
         }
+        binding.editText.setOnTouchListener { v, event ->
+            if(event.action == MotionEvent.ACTION_UP) {
+                v.requestFocus()
+                return@setOnTouchListener true
+            }
+            false
+        }
+        binding.editText.setOnFocusChangeListener { v, hasFocus ->
+            if(hasFocus) {
+                val imm = getSystemService(context, InputMethodManager::class.java)
+                imm?.hideSoftInputFromWindow(v.windowToken, 0)
+                binding.calendarLayout.visibility = View.VISIBLE
+            } else {
+                binding.calendarLayout.visibility = View.GONE
+            }
+        }
     }
+
+    /** Public functions */
+    fun setOnDateSelectedListener(listener: (LocalDate) -> Unit) {
+        onDateSelectedListener = listener
+    }
+
 }

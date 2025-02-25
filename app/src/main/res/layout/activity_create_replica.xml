@@ -46,20 +46,20 @@
                     android:layout_height="wrap_content"
                     android:text="@string/label_year_you_received" />
 
-                <com.google.android.material.card.MaterialCardView
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/year_text_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp_56">
+                    android:layout_height="wrap_content"
+                    android:hint="Year"
+                    app:endIconMode="none">
 
-                        <NumberPicker
-                            android:id="@+id/year_picker"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/year_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number" />
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
@@ -82,28 +82,28 @@
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_need_fix" />
+                <!--                <TextView-->
+                <!--                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/dp_16"-->
+                <!--                    android:text="@string/label_need_fix" />-->
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/fix_required_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_hint_select"
-                    app:endIconMode="dropdown_menu">
+                <!--                <com.google.android.material.textfield.TextInputLayout-->
+                <!--                    android:id="@+id/fix_required_input_layout"-->
+                <!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:hint="@string/label_hint_select"-->
+                <!--                    app:endIconMode="dropdown_menu">-->
 
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/fix_required_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:focusable="false" />
-                </com.google.android.material.textfield.TextInputLayout>
+                <!--                    <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
+                <!--                        android:id="@+id/fix_required_edit_text"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:clickable="false"-->
+                <!--                        android:focusable="false" />-->
+                <!--                </com.google.android.material.textfield.TextInputLayout>-->
 
 
                 <TextView
@@ -116,51 +116,51 @@
                     android:visibility="gone" />
 
 
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/label_replica_state" />
+                <!--                <TextView-->
+                <!--                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/dp_8"-->
+                <!--                    android:text="@string/label_replica_state" />-->
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/status_text_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_select_status_replica"
-                    app:endIconMode="dropdown_menu">
+                <!--                <com.google.android.material.textfield.TextInputLayout-->
+                <!--                    android:id="@+id/status_text_input_layout"-->
+                <!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:hint="@string/label_select_status_replica"-->
+                <!--                    app:endIconMode="dropdown_menu">-->
 
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/status_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:focusable="false" />
-                </com.google.android.material.textfield.TextInputLayout>
+                <!--                    <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
+                <!--                        android:id="@+id/status_edit_text"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:clickable="false"-->
+                <!--                        android:focusable="false" />-->
+                <!--                </com.google.android.material.textfield.TextInputLayout>-->
 
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/label_has_container" />
+                <!--                <TextView-->
+                <!--                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginTop="@dimen/dp_8"-->
+                <!--                    android:text="@string/label_has_container" />-->
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/container_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/label_hint_select"
-                    app:endIconMode="dropdown_menu">
+                <!--                <com.google.android.material.textfield.TextInputLayout-->
+                <!--                    android:id="@+id/container_input_layout"-->
+                <!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:hint="@string/label_hint_select"-->
+                <!--                    app:endIconMode="dropdown_menu">-->
 
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/container_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:focusable="false" />
-                </com.google.android.material.textfield.TextInputLayout>
+                <!--                    <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
+                <!--                        android:id="@+id/container_edit_text"-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:clickable="false"-->
+                <!--                        android:focusable="false" />-->
+                <!--                </com.google.android.material.textfield.TextInputLayout>-->
 
                 <TextView
                     android:id="@+id/container_label_text_view"

@@ -2,7 +2,6 @@ package com.virgen.peregrina.util
 
 import com.virgen.peregrina.util.enumerator.EnumDateFormat
 import java.time.LocalDate
-import javax.inject.Inject
 
 object DateUtils {
 

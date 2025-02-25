@@ -122,51 +122,6 @@
                         android:layout_height="wrap_content" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/testimonies_card_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_16"
-                app:cardCornerRadius="@dimen/dp_16"
-                app:layout_constraintTop_toBottomOf="@id/owner_card_view">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:padding="@dimen/dp_16">
-
-                    <TextView
-                        android:id="@+id/testimony_label_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/label_testimonials_replica_details"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        app:layout_constraintTop_toBottomOf="@id/replica_card_view" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/testimonies_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_16"
-                        app:layout_constraintTop_toBottomOf="@id/testimony_label_text_view" />
-
-                    <TextView
-                        android:id="@+id/info_testimonies_text_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_16"
-                        android:layout_marginTop="@dimen/dp_16"
-                        android:layout_marginEnd="@dimen/dp_16"
-                        android:text="@string/label_no_testomonies"
-                        android:visibility="gone" />
-                </LinearLayout>
-
-
-            </com.google.android.material.card.MaterialCardView>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
 </LinearLayout>

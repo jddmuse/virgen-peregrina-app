@@ -5,6 +5,6 @@ import java.time.LocalDate
 
 class CreateReplicaRequest(
     @SerializedName("code") val code: String,
-    @SerializedName("birthdate") val birthdate: LocalDate,
+    @SerializedName("birthdate") val birthdate: String,
     @SerializedName("ownerId") val ownerId: Long
 )

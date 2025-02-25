@@ -13,13 +13,11 @@ class PreferencesManager @Inject constructor(
 
     companion object {
         private const val TAG = "PreferencesManager"
-        private const val PREFERENCES_NAME_PROD = "serviforms_preferences"
-        private const val PREFERENCES_NAME_DEV = "datarutas_preferences_debug"
-        private const val KEY_AUTH_TOKEN = "auth_token"
-        private const val KEY_UUID = "uuid"
+        private const val PREFERENCES_NAME_PROD = "virgenperegrina_preferences"
+        private const val PREFERENCES_NAME_DEV = "virgenperegrina_preferences_dev"
+        private const val KEY_USER_ID = "userId"
         private const val KEY_EMAIL = "email"
         private const val KEY_PASSWORD = "password"
-        private const val KEY_USER_DATA = "user_data"
     }
 
     private val sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME_PROD, 0)
@@ -62,10 +60,6 @@ class PreferencesManager @Inject constructor(
         }
     }
 
-    var authToken: String
-        get() = sharedPreferences.getString(KEY_AUTH_TOKEN, "") ?: ""
-        set(value) = putString(KEY_AUTH_TOKEN, value ?: "")
-
     var email: String?
         get() = sharedPreferences.getString(KEY_EMAIL, "") ?: ""
         set(value) = putString(KEY_EMAIL, value ?: "")
@@ -74,9 +68,9 @@ class PreferencesManager @Inject constructor(
         get() = sharedPreferences.getString(KEY_PASSWORD, "") ?: ""
         set(value) = putString(KEY_PASSWORD, value ?: "")
 
-    var uuid: String?
-        get() = sharedPreferences.getString(KEY_UUID, "") ?: ""
-        set(value) = putString(KEY_UUID, value ?: "")
+    var userId: Long
+        get() = sharedPreferences.getLong(KEY_USER_ID, -1)
+        set(value) = putLong(KEY_USER_ID, value)
 
 //    var userSessionData: UserSessionData?
 //        get() =  convertJsonString2DataClass(

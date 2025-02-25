@@ -38,7 +38,6 @@ class ReplicaDetailsActivity : AppCompatActivity(), IView {
 
     override fun initView() {
         try {
-            initRecyclerView()
             val jsonObject = intent.getStringExtra("replica")
             val pilgrimageEnabled = intent.getBooleanExtra("pilgrimage_enabled", false)
 
@@ -67,46 +66,18 @@ class ReplicaDetailsActivity : AppCompatActivity(), IView {
         }
     }
 
-    private fun initRecyclerView() {
-        try {
-            testimonyItemAdapter = TestimonyItemAdapter()
-            binding.testimoniesRecyclerView.let {
-                it.layoutManager = LinearLayoutManager(
-                    this, RecyclerView.VERTICAL, false
-                )
-                it.adapter = testimonyItemAdapter
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "initRecyclerView(): Exception -> $ex")
-        }
-    }
-
     override fun initObservers() {
-        try {
-            viewModel.testimonies.observe(this) { data: List<TestimonyModel> ->
-                if(data.isNotEmpty()) {
-                    testimonyItemAdapter.updateData(data)
-                } else {
-                    binding.infoTestimoniesTextView.visibility = View.VISIBLE
-                }
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "initObservers(): Exception -> $ex")
-        }
+
     }
 
     override fun initListeners() {
-        try {
-            binding.pilgrimageButton.setOnClickListener {
-                startActivity(
-                    Intent(this, PilgrimageActivity::class.java).apply {
-                        putExtra("replica_id", viewModel.getReplicaId)
-                    }
-                )
-            }
-            binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
-        } catch (ex: Exception) {
-            Log.e(TAG, "initListeners(): Exception -> $ex")
+        binding.pilgrimageButton.setOnClickListener {
+            startActivity(
+                Intent(this, PilgrimageActivity::class.java).apply {
+                    putExtra("replica_id", viewModel.getReplicaId)
+                }
+            )
         }
+        binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
     }
 }

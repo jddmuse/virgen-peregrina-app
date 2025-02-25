@@ -27,14 +27,12 @@ class CreateReplicaActivity : AppCompatActivity(), IView {
     private lateinit var binding: ActivityCreateReplicaBinding
     private val viewModel: CreateReplicaViewModel by viewModels()
     private lateinit var loadingDialog: LoadingDialogView
-    private lateinit var replicaStatusAdapter: ArrayAdapter<String>
-    private lateinit var fixRequiredAdapter: ArrayAdapter<String>
-    private lateinit var containerAdapter: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateReplicaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initView()
         initObservers()
         initListeners()
@@ -43,45 +41,14 @@ class CreateReplicaActivity : AppCompatActivity(), IView {
     override fun initView() {
         loadingDialog = LoadingDialogView(this)
 
-        // Inicializa desplegable de estado de Replica
-        replicaStatusAdapter = ArrayAdapter(
-            this,
-            androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
-            EnumReplicaStatus.values().map { it.name }
-        )
-        replicaStatusAdapter.notifyDataSetChanged()
-        with(binding.statusEditText) {
-            setAdapter(replicaStatusAdapter)
-            threshold = 1
-        }
-        // Inicializa desplegable de Reparacion requerida
-        fixRequiredAdapter = ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listOf("SI", "NO"))
-        fixRequiredAdapter.notifyDataSetChanged()
-        with(binding.fixRequiredEditText) {
-            setAdapter(fixRequiredAdapter)
-            threshold = 1
-        }
-        // Inicializa desplegable de Estuche
-        containerAdapter = ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, listOf("SI", "NO"))
-        containerAdapter.notifyDataSetChanged()
-        with(binding.containerEditText) {
-            setAdapter(containerAdapter)
-            threshold = 1
-        }
-        // year picker
-        binding.yearPicker.apply {
-            val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-            minValue = 1960
-            maxValue = currentYear
-        }
     }
 
     override fun initObservers() {
         viewModel.loading.observe(this) {
-            if(it.first) loadingDialog.show()
+            if (it.first) loadingDialog.show()
             else loadingDialog.dismiss()
         }
-        viewModel.dispatchSuccessful.observe(this) {
+        viewModel.createReplicaSuccess.observe(this) {
             loadingDialog.dismiss()
             MaterialAlertDialogBuilder(this)
                 .setMessage(getString(R.string.label_replica_created_successfull))
@@ -91,39 +58,12 @@ class CreateReplicaActivity : AppCompatActivity(), IView {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-
-    }
-
     override fun initListeners() {
-        with(binding) {
-            codeEditText.addTextChangedListener { text ->
-                viewModel.onValueChanged(text, EnumReplicaDialogInputType.CODE)
-            }
-            yearPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-                viewModel.onValueChanged(newVal.toString(), EnumReplicaDialogInputType.DATE)
-            }
-            fixRequiredEditText.setOnItemClickListener { parent, view, position, id ->
-                fixRequiredAdapter.getItem(position)?.let { item ->
-                    val value = item == "SI"
-                    viewModel.onValueChanged(value, EnumReplicaDialogInputType.REPAIR_REQUIRED)
-                }
-            }
-            containerEditText.setOnItemClickListener { parent, view, position, id ->
-                containerAdapter.getItem(position)?.let { item ->
-                    val value = item == "SI"
-                    viewModel.onValueChanged(value, EnumReplicaDialogInputType.CONTAINER)
-                }
-            }
-            statusEditText.setOnItemClickListener { adapterView: AdapterView<*>, view, i, l ->
-                replicaStatusAdapter.getItem(i)?.let { item ->
-                    viewModel.onValueChanged(item, EnumReplicaDialogInputType.STATE)
-                }
-            }
-            dispatchButton.setSafeOnClickListener {
-                viewModel.dispatch()
-            }
+        binding.yearEditText.addTextChangedListener {
+            viewModel.valueChanged(it.toString(), EnumReplicaDialogInputType.DATE)
+        }
+        binding.codeEditText.addTextChangedListener {
+            viewModel.valueChanged(it.toString(), EnumReplicaDialogInputType.CODE)
         }
     }
 }
