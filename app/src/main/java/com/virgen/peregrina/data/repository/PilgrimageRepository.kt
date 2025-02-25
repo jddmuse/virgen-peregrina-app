@@ -1,8 +1,10 @@
 package com.virgen.peregrina.data.repository
 
+import android.util.Log
 import com.virgen.peregrina.data.api.service.VirgenPeregrinaApiClient
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.repository.helper.RepositoryHelper
+import com.virgen.peregrina.data.request.CreatePilgrimageRequest
 import com.virgen.peregrina.util.response.ResponseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -19,8 +21,25 @@ class PilgrimageRepository @Inject constructor(
 
     suspend fun list(page: Int, size: Int, sort: String): ResponseRepository<List<PilgrimageModel>> {
         return withContext(Dispatchers.IO) {
-            val response = apiService.listPilgrimages(page, size, sort)
-            return@withContext repositoryHelper.response(response)
+            try {
+                val response = apiService.listPilgrimages(page, size, sort)
+                repositoryHelper.response(response)
+            } catch (ex: Exception) {
+                Log.e(TAG, "list(): Exception -> $ex")
+                ResponseRepository.Error(ex)
+            }
+        }
+    }
+
+    suspend fun create(data: CreatePilgrimageRequest): ResponseRepository<PilgrimageModel> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.createPilgrimage(data)
+                repositoryHelper.response(response)
+            } catch (ex: Exception) {
+                Log.e(TAG, "create(): Exception -> $ex")
+                ResponseRepository.Error(ex)
+            }
         }
     }
 

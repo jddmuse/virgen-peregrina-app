@@ -35,25 +35,16 @@ class UserRepository @Inject constructor(
     }
 
     suspend fun create(data: CreateUserRequest): ResponseRepository<UserModel> {
-        withContext(Dispatchers.IO) {
+        return withContext(Dispatchers.IO) {
             try {
                 Log.i(TAG, "create() PARAMS: ${Gson().toJson(data)}")
                 val responseApi = apiService.createUser(data)
-                when(responseApi.code()) {
-                    200 -> {
-                        val body = responseApi.body()
-
-                    }
-                    400 -> {}
-                    404 -> {}
-                    else -> {}
-                }
-            } catch (ex: Exception) {
+                return@withContext repositoryHelper.response(responseApi)
+            } catch (ex:Exception) {
                 Log.e(TAG, "create(): Exception -> $ex")
                 ResponseRepository.Error(ex)
             }
         }
-        return ResponseRepository.Error(Exception())
     }
 
 }

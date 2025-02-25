@@ -3,6 +3,7 @@ package com.virgen.peregrina.data.api.service
 import com.virgen.peregrina.data.model.PilgrimageModel
 import com.virgen.peregrina.data.model.ReplicaModel
 import com.virgen.peregrina.data.model.UserModel
+import com.virgen.peregrina.data.request.CreatePilgrimageRequest
 import com.virgen.peregrina.data.request.CreateReplicaRequest
 import com.virgen.peregrina.data.request.CreateUserRequest
 import com.virgen.peregrina.data.request.LoginRequest
@@ -27,7 +28,7 @@ interface VirgenPeregrinaApiClient {
     @POST("user/create")
     suspend fun createUser(
         @Body data: CreateUserRequest
-    ): Response<ResponseService<ResponsePage<UserModel>>>
+    ): Response<ResponseService<UserModel>>
 
     /** Replica *********************************************/
     /********************************************************/
@@ -49,8 +50,8 @@ interface VirgenPeregrinaApiClient {
 
     @POST("pilgrimage/create")
     suspend fun createPilgrimage(
-        @Body data: CreateReplicaRequest
-    ): Response<ResponseService<ReplicaModel>>
+        @Body data: CreatePilgrimageRequest
+    ): Response<ResponseService<PilgrimageModel>>
 
     @GET("pilgrimage/list")
     suspend fun listPilgrimages(
