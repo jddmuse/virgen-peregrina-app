@@ -3,19 +3,23 @@ package com.example.datepicker
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import java.time.LocalDate
+import java.time.temporal.ChronoField
 
 class DatePickerComponentHelper(
     private val daysOff: List<DatePickerDaysOffRange>
 ) {
 
     /** Eventos */
-    private val _onDateSelected = MutableLiveData<LocalDate>()
-    val onDateSelected: LiveData<LocalDate> get() = _onDateSelected
+    private val _onDateSelectedEvent = MutableLiveData<LocalDate>()
+    val onDateSelectedEvent: LiveData<LocalDate> get() = _onDateSelectedEvent
+
+    private val _onClearBeforeSelection = MutableLiveData<Int>()
+    val onClearBeforeSelection: LiveData<Int> get() = _onClearBeforeSelection
 
     /** Variables ****************************/
-    val localDateNow = LocalDate.now()
+//    val localDateNow = LocalDate.now()
 
-    private var _localDateSelected: LocalDate = localDateNow
+    private var _localDateSelected: LocalDate = LocalDate.now()
     val localDateSelected: LocalDate get() = _localDateSelected
 
     val monthSelected: Int get() = localDateSelected.monthValue
@@ -39,8 +43,14 @@ class DatePickerComponentHelper(
     fun valueChanged(value: Any, type: DatePickerTypeValueEnum) {
         when(type) {
             DatePickerTypeValueEnum.SELECTION -> {
-                _localDateSelected = value as LocalDate
-                _onDateSelected.value = localDateSelected
+                val daySelected = value as Int
+                val dateSelected = localDateSelected.with(ChronoField.DAY_OF_MONTH, daySelected.toLong())
+                /** Limpia la seleccion solo si la nueva seleccion es del mismo mes */
+                if(dateSelected.month == onDateSelectedEvent.value?.month) {
+                    _onClearBeforeSelection.value = localDateSelected.dayOfMonth
+                }
+                _localDateSelected = dateSelected
+                _onDateSelectedEvent.value = localDateSelected
             }
             DatePickerTypeValueEnum.NEXT_MONTH -> {
                 _localDateSelected = localDateSelected.plusMonths(1)

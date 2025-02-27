@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
-import android.os.Build
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
@@ -15,7 +14,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.LifecycleOwner
 import com.example.datepicker.util.DateFormat
@@ -124,19 +122,8 @@ class DatePickerComponentView @JvmOverloads constructor(
                     setBackgroundColor(Color.GRAY)
                 } else {
                     setOnClickListener {
-                        /** Limpie seleccion anterior */
-                        try {
-                            val indexOf = helper.localDateSelected.dayOfMonth - 1
-                            val textView = binding.calendarGridLayout.getChildAt(indexOf) as TextView
-                            textView.setBackgroundColor(Color.TRANSPARENT)
-                            // falta excluir seleccion de un mes diferente al actual
-                        } catch (ex:Exception) {
-                            Log.e(TAG, "onDateSelected -> $ex")
-                        }
-                        /** Setea nueva seleccion */
-                        val date = helper.localDateSelected.with(ChronoField.DAY_OF_MONTH, i.toLong())
-                        helper.valueChanged(date, DatePickerTypeValueEnum.SELECTION)
                         setBackgroundColor(Color.BLUE)
+                        helper.valueChanged(i, DatePickerTypeValueEnum.SELECTION)
                     }
                 }
             }
@@ -145,9 +132,18 @@ class DatePickerComponentView @JvmOverloads constructor(
     }
 
     private fun initObservers() {
-        helper.onDateSelected.observe(context as LifecycleOwner) { date: LocalDate ->
+        helper.onDateSelectedEvent.observe(context as LifecycleOwner) { date: LocalDate ->
             binding.editText.setText(DateUtils.format(date, DateFormat.WEEKDAY_DD_MMM_YYYY))
             onDateSelectedListener?.invoke(date)
+        }
+        helper.onClearBeforeSelection.observe(context as LifecycleOwner) { dayOfMonth ->
+            try {
+                val indexOf = dayOfMonth - 1
+                val textView = binding.calendarGridLayout.getChildAt(indexOf) as TextView
+                textView.setBackgroundColor(Color.TRANSPARENT)
+            } catch (ex:Exception) {
+                Log.e(TAG, "onClearBeforeSelection -> $ex")
+            }
         }
     }
 
