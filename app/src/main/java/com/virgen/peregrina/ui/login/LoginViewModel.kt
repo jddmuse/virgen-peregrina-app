@@ -119,9 +119,9 @@ class LoginViewModel @Inject constructor(
                 is ResponseRunner.Success -> {
                     _loading.value = Pair(false, "")
                     with(preferencesManager) {
-                        userId = response.data?.id ?: -1
-                        email = response.data?.email ?: EMPTY_STRING
-                        password = response.data?.pass ?: EMPTY_STRING
+                        userId = response.data?.userId ?: -1
+                        email = response.data?.userEmail ?: ""
+                        password = response.data?.userEmail ?: ""
                     }
                     _loginSuccessEvent.value = true
                 }

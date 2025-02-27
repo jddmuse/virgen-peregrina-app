@@ -1,6 +1,6 @@
 package com.virgen.peregrina.domain
 
-import com.virgen.peregrina.data.model.pilgrimage.PilgrimageModel
+import com.virgen.peregrina.data.model.pilgrimage.PilgrimageLiteModel
 import com.virgen.peregrina.data.repository.PilgrimageRepository
 import com.virgen.peregrina.data.request.CreatePilgrimageRequest
 import com.virgen.peregrina.domain.helper.RunnerHelper
@@ -13,7 +13,7 @@ class RunnerCreatePilgrimage @Inject constructor(
 ) {
 
 
-    suspend fun invoke(data: CreatePilgrimageRequest): ResponseRunner<PilgrimageModel> {
+    suspend fun invoke(data: CreatePilgrimageRequest): ResponseRunner<PilgrimageLiteModel> {
         val response = repository.create(data)
         return runnerHelper.response(response)
     }

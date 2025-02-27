@@ -1,5 +1,6 @@
 package com.virgen.peregrina.data.api.service
 
+import com.virgen.peregrina.data.model.pilgrimage.PilgrimageLiteModel
 import com.virgen.peregrina.data.model.pilgrimage.PilgrimageModel
 import com.virgen.peregrina.data.model.replica.ReplicaModel
 import com.virgen.peregrina.data.model.user.UserModel
@@ -7,6 +8,7 @@ import com.virgen.peregrina.data.request.CreatePilgrimageRequest
 import com.virgen.peregrina.data.request.CreateReplicaRequest
 import com.virgen.peregrina.data.request.CreateUserRequest
 import com.virgen.peregrina.data.request.LoginRequest
+import com.virgen.peregrina.data.response.LoginResponse
 import com.virgen.peregrina.util.response.ResponsePage
 import com.virgen.peregrina.util.response.ResponseService
 import retrofit2.Response
@@ -23,7 +25,7 @@ interface VirgenPeregrinaApiClient {
     @POST("auth/login")
     suspend fun login(
         @Body data: LoginRequest
-    ): Response<ResponseService<UserModel>>
+    ): Response<ResponseService<LoginResponse>>
 
     @POST("user/create")
     suspend fun createUser(
@@ -51,7 +53,7 @@ interface VirgenPeregrinaApiClient {
     @POST("pilgrimage/create")
     suspend fun createPilgrimage(
         @Body data: CreatePilgrimageRequest
-    ): Response<ResponseService<PilgrimageModel>>
+    ): Response<ResponseService<PilgrimageLiteModel>>
 
     @GET("pilgrimage/list")
     suspend fun listPilgrimages(

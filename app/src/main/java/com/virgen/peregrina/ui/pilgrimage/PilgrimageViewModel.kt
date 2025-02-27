@@ -158,35 +158,35 @@ class PilgrimageViewModel @Inject constructor(
     }
 
     fun create() {
-        if(valid()) {
-            val request = CreatePilgrimageRequest(
-                replicaId = setReplicaId,
-                userId = setUserId,
-                startDate = setStartDate!!,
-                endDate = setEndDate!!,
-                intention = setIntention
-            )
-            _loading.value = Pair(true, "")
-            viewModelScope.launch {
-                when(val response = runnerCreatePilgrimage.invoke(request)) {
-                    is ResponseRunner.Success -> {
-                        _loading.value = Pair(false, "")
-                        _createPilgrimageSuccess.value = Pair(true, "")
-                    }
-                    is ResponseRunner.ApiError -> {
-                        _loading.value = Pair(false, "")
-                        _error.value = StringBuilder()
-                            .append(response.message ?: "")
-                            .append("\n${response.error}").toString()
-                    }
-                    is ResponseRunner.NoInternetConnection -> {
-                        _loading.value = Pair(false, "")
-                        _error.value = resourceProvider.getStringResource(R.string.error_no_internet_connection)
-                    }
-                    else -> {
-                        _loading.value = Pair(false, "")
-                        _error.value = resourceProvider.getStringResource(R.string.error_generic)
-                    }
+        if(!valid()) return
+        val request = CreatePilgrimageRequest(
+            replicaId = setReplicaId,
+            userId = setUserId,
+            startDate = setStartDate!!,
+            endDate = setEndDate!!,
+            intention = setIntention
+        )
+        _loading.value = Pair(true, "")
+        viewModelScope.launch {
+            val response = runnerCreatePilgrimage.invoke(request)
+            when(response) {
+                is ResponseRunner.Success -> {
+                    _loading.value = Pair(false, "")
+                    _createPilgrimageSuccess.value = Pair(true, "")
+                }
+                is ResponseRunner.ApiError -> {
+                    _loading.value = Pair(false, "")
+                    _error.value = StringBuilder()
+                        .append(response.message ?: "")
+                        .append("\n${response.error}").toString()
+                }
+                is ResponseRunner.NoInternetConnection -> {
+                    _loading.value = Pair(false, "")
+                    _error.value = resourceProvider.getStringResource(R.string.error_no_internet_connection)
+                }
+                else -> {
+                    _loading.value = Pair(false, "")
+                    _error.value = resourceProvider.getStringResource(R.string.error_generic)
                 }
             }
         }

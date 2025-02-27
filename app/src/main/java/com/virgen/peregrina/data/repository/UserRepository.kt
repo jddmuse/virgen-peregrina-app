@@ -7,6 +7,7 @@ import com.virgen.peregrina.data.model.user.UserModel
 import com.virgen.peregrina.data.repository.helper.RepositoryHelper
 import com.virgen.peregrina.data.request.CreateUserRequest
 import com.virgen.peregrina.data.request.LoginRequest
+import com.virgen.peregrina.data.response.LoginResponse
 import com.virgen.peregrina.util.response.ResponseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,7 +22,7 @@ class UserRepository @Inject constructor(
         private const val TAG = "UserRepository"
     }
 
-    suspend fun login(data: LoginRequest): ResponseRepository<UserModel> {
+    suspend fun login(data: LoginRequest): ResponseRepository<LoginResponse> {
         return withContext(Dispatchers.IO) {
             try {
                 Log.i(TAG, "login() PARAMS: ${Gson().toJson(data)}")

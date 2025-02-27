@@ -86,11 +86,13 @@ class PilgrimageActivity : AppCompatActivity(), IView {
                         binding.intentionEditText.error = pair.second
                     }
                     EnumPilgrimageInputType.USER -> {
-                        MaterialAlertDialogBuilder(this)
-                            .setMessage(getString(R.string.pilgrimage_label_success))
-                            .setCancelable(false)
-                            .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
-                            .show()
+                        if(pair.second != null) {
+                            MaterialAlertDialogBuilder(this)
+                                .setMessage(getString(R.string.pilgrimage_error_user_authentication))
+                                .setCancelable(false)
+                                .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
+                                .show()
+                        }
                     }
                     else -> {}
                 }

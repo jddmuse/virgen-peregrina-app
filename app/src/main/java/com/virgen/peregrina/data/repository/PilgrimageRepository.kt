@@ -2,6 +2,7 @@ package com.virgen.peregrina.data.repository
 
 import android.util.Log
 import com.virgen.peregrina.data.api.service.VirgenPeregrinaApiClient
+import com.virgen.peregrina.data.model.pilgrimage.PilgrimageLiteModel
 import com.virgen.peregrina.data.model.pilgrimage.PilgrimageModel
 import com.virgen.peregrina.data.repository.helper.RepositoryHelper
 import com.virgen.peregrina.data.request.CreatePilgrimageRequest
@@ -32,7 +33,7 @@ class PilgrimageRepository @Inject constructor(
         }
     }
 
-    suspend fun create(data: CreatePilgrimageRequest): ResponseRepository<PilgrimageModel> {
+    suspend fun create(data: CreatePilgrimageRequest): ResponseRepository<PilgrimageLiteModel> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.createPilgrimage(data)
