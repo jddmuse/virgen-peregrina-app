@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
-import com.virgen.peregrina.data.model.PilgrimageModel
+import com.virgen.peregrina.data.model.pilgrimage.PilgrimageModel
 import com.virgen.peregrina.domain.RunnerPilgrimages
 import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.provider.ResourceProvider

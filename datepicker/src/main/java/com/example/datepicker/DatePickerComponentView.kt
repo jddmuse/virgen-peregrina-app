@@ -42,19 +42,20 @@ class DatePickerComponentView @JvmOverloads constructor(
         DatePickerComponentViewBinding.inflate(LayoutInflater.from(context), this, true)
 
     /** Variables */
-    private val daysOff: List<DatePickerDaysOffRange> = listOf(
-        DatePickerDaysOffRange(LocalDate.now(), LocalDate.now().with(ChronoField.DAY_OF_MONTH, 16)),
-        DatePickerDaysOffRange(LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 4), LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 8)),
-        DatePickerDaysOffRange(LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 26), LocalDate.now().plusMonths(2).with(ChronoField.DAY_OF_MONTH, 4)),
-    )
+//    private val daysOff: List<DatePickerDaysOffRange> = listOf(
+//        DatePickerDaysOffRange(LocalDate.now(), LocalDate.now().with(ChronoField.DAY_OF_MONTH, 16)),
+//        DatePickerDaysOffRange(LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 4), LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 8)),
+//        DatePickerDaysOffRange(LocalDate.now().plusMonths(1).with(ChronoField.DAY_OF_MONTH, 26), LocalDate.now().plusMonths(2).with(ChronoField.DAY_OF_MONTH, 4)),
+//    )
+    private val daysOff: MutableList<DatePickerDaysOffRange> = mutableListOf()
     private var onDateSelectedListener: ((LocalDate) -> Unit)? = null
 
     init {
-        initDefaultSettings()
-
-        initView()
-        initObservers()
-        initListeners()
+//        initDefaultSettings()
+//
+//        initView()
+//        initObservers()
+//        initListeners()
     }
 
     private fun initDefaultSettings() {
@@ -178,9 +179,32 @@ class DatePickerComponentView @JvmOverloads constructor(
         }
     }
 
-    /** Public functions */
-    fun setOnDateSelectedListener(listener: (LocalDate) -> Unit) {
-        onDateSelectedListener = listener
+
+
+    /**** Public functions ***********************************/
+    /*********************************************************/
+
+    fun setDaysOff(list: List<DatePickerDaysOffRange>): DatePickerComponentView {
+        return run {
+            daysOff.clear()
+            daysOff.addAll(list)
+            this@DatePickerComponentView
+        }
+    }
+
+    fun setOnDateSelectedListener(listener: (LocalDate) -> Unit): DatePickerComponentView {
+        return run {
+            onDateSelectedListener = listener
+            this@DatePickerComponentView
+        }
+    }
+
+    fun build() {
+        initDefaultSettings()
+
+        initView()
+        initObservers()
+        initListeners()
     }
 
 }

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ItemPilgrimageBinding
-import com.virgen.peregrina.data.model.PilgrimageModel
+import com.virgen.peregrina.data.model.pilgrimage.PilgrimageModel
 import com.virgen.peregrina.util.DateUtils
 import com.virgen.peregrina.util.camelCase
 import com.virgen.peregrina.util.enumerator.EnumDateFormat

@@ -2,7 +2,7 @@ package com.virgen.peregrina.data.repository
 
 import android.util.Log
 import com.virgen.peregrina.data.api.service.VirgenPeregrinaApiClient
-import com.virgen.peregrina.data.model.PilgrimageModel
+import com.virgen.peregrina.data.model.pilgrimage.PilgrimageModel
 import com.virgen.peregrina.data.repository.helper.RepositoryHelper
 import com.virgen.peregrina.data.request.CreatePilgrimageRequest
 import com.virgen.peregrina.util.response.ResponsePage

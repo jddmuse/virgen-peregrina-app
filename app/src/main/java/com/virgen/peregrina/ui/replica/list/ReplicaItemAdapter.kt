@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ItemAvailableReplicaBinding
-import com.virgen.peregrina.data.model.ReplicaModel
+import com.virgen.peregrina.data.model.replica.ReplicaModel
 
 class ReplicaItemAdapter(
     val list: List<ReplicaModel>,

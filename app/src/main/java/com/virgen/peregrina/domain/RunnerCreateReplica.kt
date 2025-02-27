@@ -1,6 +1,6 @@
 package com.virgen.peregrina.domain
 
-import com.virgen.peregrina.data.model.ReplicaModel
+import com.virgen.peregrina.data.model.replica.ReplicaModel
 import com.virgen.peregrina.data.repository.ReplicaRepository
 import com.virgen.peregrina.data.request.CreateReplicaRequest
 import com.virgen.peregrina.domain.helper.RunnerHelper

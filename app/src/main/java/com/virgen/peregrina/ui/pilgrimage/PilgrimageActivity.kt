@@ -5,10 +5,13 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import com.example.datepicker.DatePickerDaysOffRange
 import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityPilgrimageBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.gson.Gson
 import com.hbb20.CountryCodePicker
+import com.virgen.peregrina.data.model.replica.ReplicaParcelableModel
 import com.virgen.peregrina.ui.dialog.DatePickerFragment
 import com.virgen.peregrina.ui.dialog.LoadingDialogView
 import com.virgen.peregrina.ui.pilgrimage.util.EnumPilgrimageInputType
@@ -28,6 +31,11 @@ class PilgrimageActivity : AppCompatActivity(), IView {
     private lateinit var loadingDialog: LoadingDialogView
     private val viewModel: PilgrimageViewModel by viewModels()
 
+    private val replica: ReplicaParcelableModel by lazy {
+        val jsonObject = intent.getStringExtra("replica")
+        Gson().fromJson(jsonObject, ReplicaParcelableModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPilgrimageBinding.inflate(layoutInflater)
@@ -40,7 +48,15 @@ class PilgrimageActivity : AppCompatActivity(), IView {
 
     override fun initView() {
         loadingDialog = LoadingDialogView(this)
-        val replicaId = intent.getLongExtra("replica_id", -1)
+        val daysOff = replica.pilgrimages?.filter { it.startDate != null && it.endDate != null }?.map { DatePickerDaysOffRange(it.startDate!!, it.endDate!!) } ?: emptyList()
+        binding.startDatePicker
+            .setOnDateSelectedListener {  }
+            .setDaysOff(daysOff)
+            .build()
+        binding.endDatePicker
+            .setOnDateSelectedListener {  }
+            .setDaysOff(daysOff)
+            .build()
     }
 
     override fun initObservers() {

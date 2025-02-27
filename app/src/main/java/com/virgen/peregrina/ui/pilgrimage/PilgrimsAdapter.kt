@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
-import com.virgen.peregrina.data.model.UserModel
 import com.virgen.peregrina.util.EMPTY_STRING
 
 class PilgrimsAdapter(

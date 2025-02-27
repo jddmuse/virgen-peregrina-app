@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
-import com.virgen.peregrina.data.model.ReplicaModel
+import com.virgen.peregrina.data.model.replica.ReplicaModel
 import com.virgen.peregrina.domain.RunnerReplicas
 import com.virgen.peregrina.ui.replica.EnumReplicaInputType
 import com.virgen.peregrina.util.manager.PreferencesManager

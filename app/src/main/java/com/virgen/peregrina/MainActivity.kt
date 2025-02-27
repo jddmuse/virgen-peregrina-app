@@ -10,17 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virgen_peregrina_app.databinding.ActivityMainBinding
 import com.google.gson.Gson
-import com.virgen.peregrina.data.model.PilgrimageModel
-import com.virgen.peregrina.data.model.parcelable
+import com.virgen.peregrina.data.model.pilgrimage.PilgrimageModel
+import com.virgen.peregrina.data.model.pilgrimage.parcelable
 import com.virgen.peregrina.ui.guidelines.GuidelinesActivity
 import com.virgen.peregrina.ui.home.HomeViewModel
 import com.virgen.peregrina.ui.home.PilgrimagesAdapter
-import com.virgen.peregrina.ui.home.dialogs.SendTestimonyDialog
 import com.virgen.peregrina.ui.pilgrimage.PilgrimageDetailsActivity
 import com.virgen.peregrina.ui.replica.list.ReplicasListActivity
-import com.virgen.peregrina.util.*
 import com.virgen.peregrina.util.view.IView
-import com.virgen.peregrina.util.view.IActionListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

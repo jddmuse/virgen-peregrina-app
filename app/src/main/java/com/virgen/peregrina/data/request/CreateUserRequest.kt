@@ -1,6 +1,6 @@
 package com.virgen.peregrina.data.request
 
-import com.virgen.peregrina.data.model.UserModel
+import com.virgen.peregrina.data.model.user.UserModel
 
 data class CreateUserRequest(
     val name: String,

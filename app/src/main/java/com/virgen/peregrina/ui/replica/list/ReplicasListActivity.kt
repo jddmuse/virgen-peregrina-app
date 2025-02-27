@@ -3,7 +3,6 @@ package com.virgen.peregrina.ui.replica.list
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,11 +11,9 @@ import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityPeregrinacionBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
-import com.virgen.peregrina.data.model.ReplicaModel
+import com.virgen.peregrina.data.model.replica.parcelable
 import com.virgen.peregrina.ui.replica.create.CreateReplicaActivity
 import com.virgen.peregrina.ui.replica.info.ReplicaDetailsActivity
-import com.virgen.peregrina.util.METHOD_CALLED
-import com.virgen.peregrina.util.view.IActionListener
 import com.virgen.peregrina.util.view.IView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -63,7 +60,7 @@ class ReplicasListActivity : AppCompatActivity(), IView {
                     adapter = ReplicaItemAdapter(list, {
                         // COMPLETE
                         val intent = Intent(this@ReplicasListActivity, ReplicaDetailsActivity::class.java).apply {
-                            putExtra("replica", Gson().toJson(it))
+                            putExtra("replica", Gson().toJson(it.parcelable()))
                         }
                         startActivity(intent)
                     })

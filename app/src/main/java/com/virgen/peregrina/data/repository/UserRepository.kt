@@ -3,7 +3,7 @@ package com.virgen.peregrina.data.repository
 import android.util.Log
 import com.google.gson.Gson
 import com.virgen.peregrina.data.api.service.VirgenPeregrinaApiClient
-import com.virgen.peregrina.data.model.UserModel
+import com.virgen.peregrina.data.model.user.UserModel
 import com.virgen.peregrina.data.repository.helper.RepositoryHelper
 import com.virgen.peregrina.data.request.CreateUserRequest
 import com.virgen.peregrina.data.request.LoginRequest

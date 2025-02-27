@@ -1,6 +1,6 @@
 package com.virgen.peregrina.domain
 
-import com.virgen.peregrina.data.model.PilgrimageModel
+import com.virgen.peregrina.data.model.pilgrimage.PilgrimageModel
 import com.virgen.peregrina.data.repository.PilgrimageRepository
 import com.virgen.peregrina.domain.helper.RunnerHelper
 import com.virgen.peregrina.util.provider.NetworkProvider
