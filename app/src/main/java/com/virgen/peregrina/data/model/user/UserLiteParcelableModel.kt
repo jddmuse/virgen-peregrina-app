@@ -23,6 +23,8 @@ class UserLiteParcelableModel(
     val country: String? get() = _country
     val cellphone: String? get() = _cellphone
 
+    val nameAndLastName: String get() = "$_name $_lastName"
+
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readString(),

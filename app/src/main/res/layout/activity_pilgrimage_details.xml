@@ -15,69 +15,140 @@
             android:id="@+id/app_bar_layout"
             layout="@layout/app_bar_layout" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="@dimen/dp_16">
 
-            <com.google.android.material.card.MaterialCardView
+            <TextView
+                android:id="@+id/pilgrimage_status_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:background="@drawable/selector_pilgrimage_status"
+                android:paddingHorizontal="@dimen/dp_16"
+                android:paddingVertical="@dimen/dp_8"
+                android:text="Iniciada"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/pilgrimage_intention_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/dp_16"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_marginTop="@dimen/dp_24"
+                android:lineSpacingMultiplier="1.3"
+                android:text="Peregrinacion Espiritual"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_24"
+                android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/dp_16"
-                    android:paddingVertical="@dimen/dp_16">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_24"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/city_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                        <TextView
-                            android:id="@+id/date_text_view"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_24"
-                        android:layout_marginBottom="@dimen/dp_8"
-                        android:text="@string/pilgrimage_label_intention"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_18"
-                        android:textStyle="bold"
+                    <ImageView
+                        android:id="@+id/date_icon_image_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/zero"
+                        android:paddingHorizontal="@dimen/dp_16"
+                        android:src="@drawable/ic_calendar"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/intention_text_view"
-                        android:layout_width="match_parent"
+                        android:id="@+id/label_date_text_view"
+                        android:layout_width="@dimen/zero"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8" />
+                        android:maxLines="1"
+                        android:text="Fecha inicio"
+                        android:textSize="@dimen/sp_16"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/date_icon_image_view"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/replica_code_text_view"
-                        android:layout_width="match_parent"
+                        android:id="@+id/value_date_text_view"
+                        android:layout_width="@dimen/zero"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8" />
+                        android:maxLines="1"
+                        android:text="16 OCT 2025"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/date_icon_image_view"
+                        app:layout_constraintTop_toBottomOf="@id/label_date_text_view" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            </com.google.android.material.card.MaterialCardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/user_icon_image_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/zero"
+                        android:paddingHorizontal="@dimen/dp_12"
+                        android:src="@drawable/ic_user"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/label_user_text_view"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Peregrino"
+                        android:textSize="@dimen/sp_16"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/user_icon_image_view"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/value_user_text_view"
+                        android:layout_width="@dimen/zero"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Juan Pepito"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_16"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/user_icon_image_view"
+                        app:layout_constraintTop_toBottomOf="@id/label_user_text_view" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_32"
+                android:text="Informacion"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/information_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_16"
+                android:lineSpacingMultiplier="1.5" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

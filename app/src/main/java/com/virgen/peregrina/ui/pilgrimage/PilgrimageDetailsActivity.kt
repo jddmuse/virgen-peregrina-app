@@ -1,5 +1,6 @@
 package com.virgen.peregrina.ui.pilgrimage
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.virgen_peregrina_app.R
@@ -32,16 +33,26 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
         binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
     }
 
+    @SuppressLint("StringFormatMatches")
     private fun initView() {
         try {
             binding.appBarLayout.textView.text = getString(R.string.pilgrimage_label__details)
             val jsonObject = intent.getStringExtra("pilgrimage")
             val pilgrimage = Gson().fromJson(jsonObject, PilgrimageParcelableModel::class.java)
 
-            binding.cityTextView.text = "CUCUTA".camelCase() //pilgrimage.city
-            binding.intentionTextView.text = pilgrimage.intention?.camelCase()
-            binding.replicaCodeTextView.text = "Código de réplica: ${pilgrimage?.replica?.code}"
-            pilgrimage.startDate?.let { binding.dateTextView.text = DateUtils.format(it, EnumDateFormat.WEEKDAY_DD_MMM).camelCase() }
+//            binding.cityTextView.text = "CUCUTA".camelCase() //pilgrimage.city
+            binding.pilgrimageIntentionTextView.text = pilgrimage.intention?.camelCase()
+//            binding.replicaCodeTextView.text = "Código de réplica: ${pilgrimage?.replica?.code}"
+            pilgrimage.startDate?.let { binding.valueDateTextView.text = DateUtils.format(it, EnumDateFormat.DD_MMM_YYYY).camelCase() }
+            binding.valueUserTextView.text = pilgrimage.user?.nameAndLastName?.camelCase()
+            binding.informationTextView.text = getString(
+                R.string.pilgrimage_label_information,
+                pilgrimage.user?.city?.camelCase(),
+                DateUtils.format(pilgrimage.startDate!!, EnumDateFormat.WEEKDAY_DD_MMM_YYYY).camelCase(),
+                DateUtils.format(pilgrimage.endDate!!, EnumDateFormat.WEEKDAY_DD_MMM_YYYY).camelCase(),
+                pilgrimage.user?.nameAndLastName?.camelCase(),
+                pilgrimage.replica?.code
+            )
         } catch (ex: Exception) {
             getExceptionLog(TAG, "initView", ex)
         }

@@ -1,5 +1,6 @@
 package com.virgen.peregrina.util
 
+import com.example.datepicker.util.DateFormat
 import com.virgen.peregrina.util.enumerator.EnumDateFormat
 import java.time.LocalDate
 
@@ -26,6 +27,12 @@ object DateUtils {
                 str.append(localDate.dayOfWeek).append(" ")
                     .append(localDate.dayOfMonth).append(" ")
                     .append(localDate.month.name.subSequence(0, 3))
+            }
+            EnumDateFormat.WEEKDAY_DD_MMM_YYYY -> {
+                str.append(localDate.dayOfWeek).append(" ")
+                    .append(localDate.dayOfMonth).append(" ")
+                    .append(localDate.month.name.subSequence(0, 3)).append(" ")
+                    .append(localDate.year)
             }
         }
         return str.toString()
