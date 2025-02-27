@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity(), IView {
             viewModel.errorMsg.observe(this) { msg ->
                 // COMPLETE
             }
-            viewModel.pilgrimages.observe(this) { data ->
+            viewModel.pilgrimages.observe(this) { data: List<PilgrimageModel> ->
                 Log.i(TAG, "viewModel.pilgrimages.observe = $data")
                 if(data.isNotEmpty()) {
                     binding.infoPilgrimages.visibility = View.GONE

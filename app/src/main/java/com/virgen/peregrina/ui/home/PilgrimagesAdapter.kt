@@ -43,7 +43,7 @@ class PilgrimagesAdapter(
 
         fun bind(item: PilgrimageModel) {
             // COMPLETE
-//            binding.cityTextView.text = item.city
+            binding.cityTextView.text = item.user.city.camelCase()
             binding.startDateTextView.text = DateUtils.format(item.startDate, EnumDateFormat.WEEKDAY_DD_MMM).camelCase()
             binding.intentionTextView.text = item.intention.camelCase()
 //            binding.statusTextView.text = item.status

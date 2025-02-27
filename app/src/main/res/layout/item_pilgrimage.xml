@@ -18,7 +18,17 @@
             android:layout_height="@dimen/dp_1"
             android:background="@color/secondaryColor" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <TextView
+            android:id="@+id/intention_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_16"
+            android:maxLines="3"
+            android:text="@string/error_generic"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:visibility="visible" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_8"
@@ -27,42 +37,38 @@
             <TextView
                 android:id="@+id/city_text_view"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:maxLines="1"
-                android:textSize="@dimen/sp_12"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="@dimen/sp_12" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="@dimen/dp_4"
+                android:text="@string/label_separator_middle_point" />
 
             <TextView
                 android:id="@+id/start_date_text_view"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_16"
-                android:textSize="@dimen/sp_12"
-                app:layout_constraintStart_toEndOf="@id/city_text_view"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/sp_12" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/intention_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_2"
-            android:maxLines="3"
-            android:text="@string/error_generic"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-        <TextView
-            android:id="@+id/state_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginTop="@dimen/dp_4"
-            android:background="@drawable/shape_state_pilgrimage"
-            android:gravity="center_vertical"
-            android:paddingHorizontal="@dimen/dp_8"
-            android:textColor="@color/secondaryTextColor" />
+        <!--        <TextView-->
+        <!--            android:id="@+id/state_text_view"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="end"-->
+        <!--            android:layout_marginTop="@dimen/dp_4"-->
+        <!--            android:background="@drawable/shape_state_pilgrimage"-->
+        <!--            android:gravity="center_vertical"-->
+        <!--            android:paddingHorizontal="@dimen/dp_8"-->
+        <!--            android:textColor="@color/secondaryTextColor"-->
+        <!--            android:visibility="gone" />-->
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

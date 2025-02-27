@@ -34,7 +34,7 @@ fun String.camelCase(delimiter: String = " "): String {
         }
         str.append(delimiter)
     }
-    return str.toString()
+    return str.toString().trim()
 }
 
 fun AppCompatActivity.navigateToMainActivity() {

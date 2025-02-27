@@ -124,6 +124,7 @@ Id en paz hijitos y llevad la paz a todos mis hijos confundidos y perdidos… En
     <string name="action_button_yes" translatable="false">Yes</string>
     <string name="error_generic" translatable="false">Something was wrong, please, try again</string>
     <string name="error_field_required" translatable="false">This field is required</string>
+    <string name="label_separator_middle_point">&#8226;</string>
 
     <!-- Pilgrimage -->
     <string name="pilgrimage_error_start_date" translatable="false">La fecha de inicio debe ser menor a la fecha de finalización</string>
