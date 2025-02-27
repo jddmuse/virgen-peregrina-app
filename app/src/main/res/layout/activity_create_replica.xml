@@ -46,20 +46,18 @@
                     android:layout_height="wrap_content"
                     android:text="@string/replica_label_year_you_received" />
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/year_text_input_layout"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                <com.example.datepicker.DatePickerComponentView
+                    android:id="@+id/birthdate_picker"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Year"
-                    app:endIconMode="none">
+                    android:layout_height="wrap_content" />
 
-                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                        android:id="@+id/year_edit_text"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number" />
-                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/date_error_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:textColor="@color/errorColor"
+                    android:visibility="gone" />
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
@@ -82,29 +80,13 @@
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!--                <TextView-->
-                <!--                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="@dimen/dp_16"-->
-                <!--                    android:text="@string/label_need_fix" />-->
-
-                <!--                <com.google.android.material.textfield.TextInputLayout-->
-                <!--                    android:id="@+id/fix_required_input_layout"-->
-                <!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:hint="@string/label_hint_select"-->
-                <!--                    app:endIconMode="dropdown_menu">-->
-
-                <!--                    <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
-                <!--                        android:id="@+id/fix_required_edit_text"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:clickable="false"-->
-                <!--                        android:focusable="false" />-->
-                <!--                </com.google.android.material.textfield.TextInputLayout>-->
-
+                <TextView
+                    android:id="@+id/code_error_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:textColor="@color/errorColor"
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/fixing_general_label_text_view"
@@ -114,53 +96,6 @@
                     android:text="@string/label_send_email_generic"
                     android:textColor="@color/secondaryColor"
                     android:visibility="gone" />
-
-
-                <!--                <TextView-->
-                <!--                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="@dimen/dp_8"-->
-                <!--                    android:text="@string/label_replica_state" />-->
-
-                <!--                <com.google.android.material.textfield.TextInputLayout-->
-                <!--                    android:id="@+id/status_text_input_layout"-->
-                <!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:hint="@string/label_select_status_replica"-->
-                <!--                    app:endIconMode="dropdown_menu">-->
-
-                <!--                    <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
-                <!--                        android:id="@+id/status_edit_text"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:clickable="false"-->
-                <!--                        android:focusable="false" />-->
-                <!--                </com.google.android.material.textfield.TextInputLayout>-->
-
-                <!--                <TextView-->
-                <!--                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginTop="@dimen/dp_8"-->
-                <!--                    android:text="@string/label_has_container" />-->
-
-                <!--                <com.google.android.material.textfield.TextInputLayout-->
-                <!--                    android:id="@+id/container_input_layout"-->
-                <!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:hint="@string/label_hint_select"-->
-                <!--                    app:endIconMode="dropdown_menu">-->
-
-                <!--                    <com.google.android.material.textfield.MaterialAutoCompleteTextView-->
-                <!--                        android:id="@+id/container_edit_text"-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:clickable="false"-->
-                <!--                        android:focusable="false" />-->
-                <!--                </com.google.android.material.textfield.TextInputLayout>-->
 
                 <TextView
                     android:id="@+id/container_label_text_view"
@@ -175,7 +110,7 @@
     </LinearLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/dispatch_button"
+        android:id="@+id/action_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_16"

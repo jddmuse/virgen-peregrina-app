@@ -1,6 +1,7 @@
 package com.virgen.peregrina.ui.replica.create
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -8,8 +9,9 @@ import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityCreateReplicaBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.virgen.peregrina.ui.dialog.LoadingDialogView
-import com.virgen.peregrina.ui.register.enumerator.EnumReplicaDialogInputType
+import com.virgen.peregrina.ui.replica.EnumReplicaInputType
 import com.virgen.peregrina.util.view.IView
+import com.virgen.peregrina.util.view.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -36,7 +38,7 @@ class CreateReplicaActivity : AppCompatActivity(), IView {
 
     override fun initView() {
         loadingDialog = LoadingDialogView(this)
-
+        binding.birthdatePicker.build()
     }
 
     override fun initObservers() {
@@ -52,14 +54,41 @@ class CreateReplicaActivity : AppCompatActivity(), IView {
                 .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
                 .show()
         }
+        viewModel.errorMessage.observe(this) { message ->
+            MaterialAlertDialogBuilder(this)
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
+                .show()
+        }
+        viewModel.errorEditText.observe(this) { pair ->
+            when (pair.first) {
+                EnumReplicaInputType.CODE -> {
+                    binding.codeErrorTextView.apply {
+                        visibility = if(pair.second != null) View.VISIBLE else View.GONE
+                        text = pair.second
+                    }
+                }
+                EnumReplicaInputType.BIRTHDATE -> {
+                    binding.dateErrorTextView.apply {
+                        visibility = if(pair.second != null) View.VISIBLE else View.GONE
+                        text = pair.second
+                    }
+                }
+                else -> {}
+            }
+        }
     }
 
     override fun initListeners() {
-        binding.yearEditText.addTextChangedListener {
-            viewModel.valueChanged(it.toString(), EnumReplicaDialogInputType.DATE)
+        binding.birthdatePicker.setOnDateSelectedListener {
+            viewModel.valueChanged(it, EnumReplicaInputType.BIRTHDATE)
         }
         binding.codeEditText.addTextChangedListener {
-            viewModel.valueChanged(it.toString(), EnumReplicaDialogInputType.CODE)
+            viewModel.valueChanged(it.toString(), EnumReplicaInputType.CODE)
+        }
+        binding.actionButton.setSafeOnClickListener {
+            viewModel.create()
         }
     }
 }
