@@ -2,6 +2,7 @@ package com.virgen.peregrina.ui.pilgrimage
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -10,12 +11,9 @@ import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityPilgrimageBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
-import com.hbb20.CountryCodePicker
 import com.virgen.peregrina.data.model.replica.ReplicaParcelableModel
-import com.virgen.peregrina.ui.dialog.DatePickerFragment
 import com.virgen.peregrina.ui.dialog.LoadingDialogView
 import com.virgen.peregrina.ui.pilgrimage.util.EnumPilgrimageInputType
-import com.virgen.peregrina.ui.register.enumerator.EnumRegisterInputType
 import com.virgen.peregrina.util.view.IView
 import com.virgen.peregrina.util.view.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,17 +42,20 @@ class PilgrimageActivity : AppCompatActivity(), IView {
         initView()
         initObservers()
         initListeners()
+        defaultSettings()
+    }
+
+    private fun defaultSettings() {
+        viewModel.valueChanged(replica.id, EnumPilgrimageInputType.REPLICA)
     }
 
     override fun initView() {
         loadingDialog = LoadingDialogView(this)
         val daysOff = replica.pilgrimages?.filter { it.startDate != null && it.endDate != null }?.map { DatePickerDaysOffRange(it.startDate!!, it.endDate!!) } ?: emptyList()
         binding.startDatePicker
-            .setOnDateSelectedListener {  }
             .setDaysOff(daysOff)
             .build()
         binding.endDatePicker
-            .setOnDateSelectedListener {  }
             .setDaysOff(daysOff)
             .build()
     }
@@ -69,21 +70,41 @@ class PilgrimageActivity : AppCompatActivity(), IView {
             }
             viewModel.errorEditText.observe(this) { pair ->
                 when (pair.first) {
-//                    EnumPilgrimageInputType.START_DATE -> binding.startDateEditText.error = pair.second
-//                    EnumPilgrimageInputType.END_DATE -> binding.endDateEditText.error = pair.second
-                    EnumPilgrimageInputType.USER_ID -> binding.intentionEditText.error = pair.second
+                    EnumPilgrimageInputType.START_DATE -> {
+                        binding.startDateErrorTextView.apply {
+                            visibility = if(pair.second != null) View.VISIBLE else View.GONE
+                            text = pair.second
+                        }
+                    }
+                    EnumPilgrimageInputType.END_DATE -> {
+                        binding.endDateErrorTextView.apply {
+                            visibility = if(pair.second != null) View.VISIBLE else View.GONE
+                            text = pair.second
+                        }
+                    }
+                    EnumPilgrimageInputType.INTENTION -> {
+                        binding.intentionEditText.error = pair.second
+                    }
+                    EnumPilgrimageInputType.USER -> {
+                        MaterialAlertDialogBuilder(this)
+                            .setMessage(getString(R.string.pilgrimage_label_success))
+                            .setCancelable(false)
+                            .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
+                            .show()
+                    }
                     else -> {}
                 }
             }
-//            viewModel.onFinishActivity.observe(this) {
-//                MaterialAlertDialogBuilder(this)
-//                    .setMessage(getString(R.string.label_pilgrimage_success))
-//                    .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
-//                    .show()
-//            }
             viewModel.loading.observe(this) { value ->
                 if(value.first) loadingDialog.setMessage(value.second).show()
                 else loadingDialog.dismiss()
+            }
+            viewModel.createPilgrimageSuccess.observe(this) {
+                MaterialAlertDialogBuilder(this)
+                    .setMessage(getString(R.string.pilgrimage_label_success))
+                    .setCancelable(false)
+                    .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
+                    .show()
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initObservers(): Exception -> $ex")
@@ -98,7 +119,10 @@ class PilgrimageActivity : AppCompatActivity(), IView {
             viewModel.create()
         }
         binding.startDatePicker.setOnDateSelectedListener {
-            // COMPLETE
+            viewModel.valueChanged(it, EnumPilgrimageInputType.START_DATE)
+        }
+        binding.endDatePicker.setOnDateSelectedListener {
+            viewModel.valueChanged(it, EnumPilgrimageInputType.END_DATE)
         }
         binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
     }

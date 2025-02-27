@@ -60,7 +60,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
                     android:gravity="center"
-                    android:text="@string/label_replicas"
+                    android:text="@string/replica_label_replicas"
                     app:layout_constraintTop_toTopOf="@id/virgen_image_view" />
 
                 <ImageView
@@ -135,7 +135,7 @@
                     android:id="@+id/pilgrimages_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_pilgrimages"
+                    android:text="@string/pilgrimage_label_list"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                 <TextView
@@ -143,7 +143,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_no_pilgrimage_able"
+                    android:text="@string/pilgrimage_label_able"
                     android:visibility="gone" />
 
                 <androidx.recyclerview.widget.RecyclerView

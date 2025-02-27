@@ -72,6 +72,14 @@
                     android:minHeight="48dp" />
 
                 <TextView
+                    android:id="@+id/start_date_error_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:textColor="@color/errorColor"
+                    android:visibility="gone" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_16"
@@ -82,6 +90,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="48dp" />
+
+                <TextView
+                    android:id="@+id/end_date_error_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:textColor="@color/errorColor"
+                    android:visibility="gone" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -113,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_16"
             android:layout_marginVertical="@dimen/dp_16"
-            android:text="@string/label_start_pilgrimage"
+            android:text="@string/pilgrimage_label_action_button_start"
             app:layout_constraintTop_toBottomOf="@id/pilgrimage_card_view" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

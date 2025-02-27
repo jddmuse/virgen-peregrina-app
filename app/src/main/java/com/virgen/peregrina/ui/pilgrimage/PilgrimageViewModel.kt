@@ -4,25 +4,37 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
+import com.virgen.peregrina.data.request.CreatePilgrimageRequest
+import com.virgen.peregrina.domain.RunnerCreatePilgrimage
 import com.virgen.peregrina.ui.pilgrimage.util.EnumPilgrimageInputType
 import com.virgen.peregrina.util.EMPTY_STRING
-import com.virgen.peregrina.util.METHOD_CALLED
+import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.provider.ResourceProvider
+import com.virgen.peregrina.util.response.ResponseRunner
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
+import java.time.LocalDate
 import javax.inject.Inject
 
 @HiltViewModel
 class PilgrimageViewModel @Inject constructor(
-    private val resourceProvider: ResourceProvider
+    private val resourceProvider: ResourceProvider,
+    private val preferencesManager: PreferencesManager,
+    private val runnerCreatePilgrimage: RunnerCreatePilgrimage
 ) : ViewModel() {
 
     // pilgrimage data
-    private var setUserId: Long = -1
-    private var setIntention = EMPTY_STRING
-    private var setStartDate = EMPTY_STRING
-    private var setEndDate = EMPTY_STRING
+    private var setUserId: Long = preferencesManager.userId
+    private var setIntention = ""
+    private var setStartDate: LocalDate? = null
+    private var setEndDate: LocalDate? = null
     private var setReplicaId: Long = -1
+
+    // events
+    private val _createPilgrimageSuccess = MutableLiveData<Pair<Boolean, String>>()
+    val createPilgrimageSuccess: LiveData<Pair<Boolean, String>> get() = _createPilgrimageSuccess
 
     // error live data
     private val _errorEditText = MutableLiveData<Pair<EnumPilgrimageInputType, String?>>()
@@ -44,18 +56,64 @@ class PilgrimageViewModel @Inject constructor(
             when (inputType) {
                 EnumPilgrimageInputType.INTENTION -> {
                     value as String
+                    if(value.isEmpty()) {
+                        _errorEditText.value = Pair(
+                            EnumPilgrimageInputType.INTENTION,
+                            resourceProvider.getStringResource(R.string.error_field_required)
+                        )
+                        setIntention = ""
+                        return
+                    }
                     setIntention = value
                 }
-                EnumPilgrimageInputType.USER_ID -> {
+                EnumPilgrimageInputType.USER -> {
                     value as Long
                     setUserId = value
                 }
+                EnumPilgrimageInputType.REPLICA -> {
+                    value as Long
+                    setReplicaId = value
+                }
                 EnumPilgrimageInputType.START_DATE -> {
-                    value as String
+                    value as LocalDate
+                    if(value.isEqual(LocalDate.now()) || value.isBefore(LocalDate.now())) {
+                        _errorEditText.value = Pair(
+                            EnumPilgrimageInputType.START_DATE,
+                            resourceProvider.getStringResource(R.string.pilgrimage_error_date_current)
+                        )
+                        setStartDate = null
+                        return
+                    }
+                    if(setEndDate != null && (value.isEqual(setEndDate) || value.isAfter(setEndDate))) {
+                        _errorEditText.value = Pair(
+                            EnumPilgrimageInputType.START_DATE,
+                            resourceProvider.getStringResource(R.string.pilgrimage_error_start_date)
+                        )
+                        setStartDate = null
+                        return
+                    }
+                    _errorEditText.value = Pair(EnumPilgrimageInputType.START_DATE, null)
                     setStartDate = value
                 }
                 EnumPilgrimageInputType.END_DATE -> {
-                    value as String
+                    value as LocalDate
+                    if(value.isEqual(LocalDate.now()) || value.isBefore(LocalDate.now())) {
+                        _errorEditText.value = Pair(
+                            EnumPilgrimageInputType.END_DATE,
+                            resourceProvider.getStringResource(R.string.pilgrimage_error_date_current)
+                        )
+                        setEndDate = null
+                        return
+                    }
+                    if(setStartDate != null && (value.isEqual(setStartDate) || value.isBefore(setStartDate))) {
+                        _errorEditText.value = Pair(
+                            EnumPilgrimageInputType.END_DATE,
+                            resourceProvider.getStringResource(R.string.pilgrimage_error_end_date)
+                        )
+                        setEndDate = null
+                        return
+                    }
+                    _errorEditText.value = Pair(EnumPilgrimageInputType.END_DATE, null)
                     setEndDate = value
                 }
             }
@@ -66,10 +124,7 @@ class PilgrimageViewModel @Inject constructor(
 
     private fun valid(): Boolean = when {
         setUserId == -1L -> {
-            _errorEditText.value = Pair(
-                EnumPilgrimageInputType.USER_ID,
-                resourceProvider.getStringResource(R.string.error_field_required)
-            )
+            _error.value = resourceProvider.getStringResource(R.string.pilgrimage_error_user_authentication)
             false
         }
         setIntention.isEmpty() -> {
@@ -79,14 +134,14 @@ class PilgrimageViewModel @Inject constructor(
             )
             false
         }
-        setStartDate.isEmpty() -> {
+        setStartDate == null -> {
             _errorEditText.value = Pair(
                 EnumPilgrimageInputType.START_DATE,
                 resourceProvider.getStringResource(R.string.error_field_required)
             )
             false
         }
-        setEndDate.isEmpty() -> {
+        setEndDate == null -> {
             _errorEditText.value = Pair(
                 EnumPilgrimageInputType.END_DATE,
                 resourceProvider.getStringResource(R.string.error_field_required)
@@ -94,7 +149,7 @@ class PilgrimageViewModel @Inject constructor(
             false
         }
         else -> {
-            _errorEditText.value = Pair(EnumPilgrimageInputType.USER_ID, null)
+            _errorEditText.value = Pair(EnumPilgrimageInputType.USER, null)
             _errorEditText.value = Pair(EnumPilgrimageInputType.INTENTION, null)
             _errorEditText.value = Pair(EnumPilgrimageInputType.START_DATE, null)
             _errorEditText.value = Pair(EnumPilgrimageInputType.END_DATE, null)
@@ -103,7 +158,38 @@ class PilgrimageViewModel @Inject constructor(
     }
 
     fun create() {
-
+        if(valid()) {
+            val request = CreatePilgrimageRequest(
+                replicaId = setReplicaId,
+                userId = setUserId,
+                startDate = setStartDate!!,
+                endDate = setEndDate!!,
+                intention = setIntention
+            )
+            _loading.value = Pair(true, "")
+            viewModelScope.launch {
+                when(val response = runnerCreatePilgrimage.invoke(request)) {
+                    is ResponseRunner.Success -> {
+                        _loading.value = Pair(false, "")
+                        _createPilgrimageSuccess.value = Pair(true, "")
+                    }
+                    is ResponseRunner.ApiError -> {
+                        _loading.value = Pair(false, "")
+                        _error.value = StringBuilder()
+                            .append(response.message ?: "")
+                            .append("\n${response.error}").toString()
+                    }
+                    is ResponseRunner.NoInternetConnection -> {
+                        _loading.value = Pair(false, "")
+                        _error.value = resourceProvider.getStringResource(R.string.error_no_internet_connection)
+                    }
+                    else -> {
+                        _loading.value = Pair(false, "")
+                        _error.value = resourceProvider.getStringResource(R.string.error_generic)
+                    }
+                }
+            }
+        }
     }
 
 }

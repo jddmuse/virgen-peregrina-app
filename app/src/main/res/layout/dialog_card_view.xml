@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
         android:gravity="center"
-        android:text="@string/label_replica_data"
+        android:text="@string/replica_label_replica_data"
         app:layout_constraintTop_toBottomOf="@id/action_button" />
 
     <Button
@@ -84,7 +84,7 @@
                     style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_need_fix" />
+                    android:text="" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/label_replica_state" />
+                    android:text="@string/replica_label_replica_state" />
 
                 <RadioGroup
                     android:layout_width="match_parent"
@@ -155,7 +155,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:text="@string/label_has_container" />
+                    android:text="@string/replica_label_has_container" />
 
                 <RadioGroup
                     android:layout_width="match_parent"

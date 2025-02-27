@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_16"
         android:gravity="center"
-        android:text="@string/label_replica_data"
+        android:text="@string/replica_label_replica_data"
         android:textSize="@dimen/sp_16"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +44,7 @@
                     style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/label_year_you_received" />
+                    android:text="@string/replica_label_year_you_received" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/year_text_input_layout"
@@ -66,7 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_code_replica_details" />
+                    android:text="@string/replica_label_code_replica_details" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/code_text_input_layout"

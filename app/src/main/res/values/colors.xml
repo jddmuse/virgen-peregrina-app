@@ -25,4 +25,6 @@
     <color name="pilgrimage_status_pending">#FFF38B</color>
     <color name="pilgrimage_status_finished">#73AF75</color>
     <color name="pilgrimage_status_in_progress">#687FFF</color>
+
+    <color name="errorColor">#FF0000</color>
 </resources>

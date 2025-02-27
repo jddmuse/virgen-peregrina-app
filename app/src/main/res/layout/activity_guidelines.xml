@@ -146,7 +146,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_how_to_care_replica" />
+                    android:text="@string/replica_label_how_to_care_replica" />
 
                 <TextView
                     android:layout_width="match_parent"

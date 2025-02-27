@@ -192,11 +192,8 @@ class DatePickerComponentView @JvmOverloads constructor(
         }
     }
 
-    fun setOnDateSelectedListener(listener: (LocalDate) -> Unit): DatePickerComponentView {
-        return run {
-            onDateSelectedListener = listener
-            this@DatePickerComponentView
-        }
+    fun setOnDateSelectedListener(listener: (LocalDate) -> Unit) {
+        onDateSelectedListener = listener
     }
 
     fun build() {

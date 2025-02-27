@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"
-            android:text="@string/label_replica_returned_same_state" />
+            android:text="@string/replica_label_replica_returned_same_state" />
 
         <RadioGroup
             android:layout_width="match_parent"

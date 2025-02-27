@@ -118,6 +118,11 @@ class LoginViewModel @Inject constructor(
             when(val response = runnerLogin.invoke(data)) {
                 is ResponseRunner.Success -> {
                     _loading.value = Pair(false, "")
+                    with(preferencesManager) {
+                        userId = response.data?.id ?: -1
+                        email = response.data?.email ?: EMPTY_STRING
+                        password = response.data?.pass ?: EMPTY_STRING
+                    }
                     _loginSuccessEvent.value = true
                 }
                 is ResponseRunner.ApiError -> {

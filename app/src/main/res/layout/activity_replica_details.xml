@@ -47,7 +47,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_16"
-                        android:text="@string/label_code_replica_details"
+                        android:text="@string/replica_label_code_replica_details"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/icon_image_view"
@@ -59,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/dp_16"
                         android:layout_marginTop="@dimen/dp_4"
-                        android:text="@string/label_date_replica_details"
+                        android:text="@string/replica_label_date_replica_details"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/icon_image_view"
@@ -71,7 +71,7 @@
                         android:layout_height="@dimen/dp_44"
                         android:layout_marginStart="@dimen/dp_16"
                         android:layout_marginTop="@dimen/dp_4"
-                        android:text="@string/button_pilgrimage_replica_details"
+                        android:text="@string/pilgrimage_label_action_button"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/icon_image_view"
                         app:layout_constraintTop_toBottomOf="@id/old_text_view" />
@@ -97,7 +97,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/label_about_replica_details"
+                        android:text="@string/replica_label_about_replica_details"
                         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
                     <TextView

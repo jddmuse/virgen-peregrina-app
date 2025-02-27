@@ -34,7 +34,7 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
 
     private fun initView() {
         try {
-            binding.appBarLayout.textView.text = getString(R.string.label_pilgrimage_details)
+            binding.appBarLayout.textView.text = getString(R.string.pilgrimage_label__details)
             val jsonObject = intent.getStringExtra("pilgrimage")
             val pilgrimage = Gson().fromJson(jsonObject, PilgrimageParcelableModel::class.java)
 

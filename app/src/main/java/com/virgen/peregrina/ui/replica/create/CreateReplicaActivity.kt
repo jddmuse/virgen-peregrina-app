@@ -1,8 +1,6 @@
 package com.virgen.peregrina.ui.replica.create
 
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -12,8 +10,6 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.virgen.peregrina.ui.dialog.LoadingDialogView
 import com.virgen.peregrina.ui.register.enumerator.EnumReplicaDialogInputType
 import com.virgen.peregrina.util.view.IView
-import com.virgen.peregrina.util.enumerator.EnumReplicaStatus
-import com.virgen.peregrina.util.view.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
@@ -51,7 +47,7 @@ class CreateReplicaActivity : AppCompatActivity(), IView {
         viewModel.createReplicaSuccess.observe(this) {
             loadingDialog.dismiss()
             MaterialAlertDialogBuilder(this)
-                .setMessage(getString(R.string.label_replica_created_successfull))
+                .setMessage(getString(R.string.replica_label_replica_created_successfull))
                 .setCancelable(false)
                 .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
                 .show()

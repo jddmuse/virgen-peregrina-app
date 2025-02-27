@@ -45,7 +45,7 @@ class ReplicasListActivity : AppCompatActivity(), IView {
     }
 
     override fun initView() {
-        binding.appBarLayout.textView.text = getString(R.string.label_replicas)
+        binding.appBarLayout.textView.text = getString(R.string.replica_label_replicas)
     }
 
     override fun initObservers() {
