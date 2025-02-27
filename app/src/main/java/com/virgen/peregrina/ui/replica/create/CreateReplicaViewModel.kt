@@ -112,12 +112,16 @@ class CreateReplicaViewModel @Inject constructor(
                 false
             }
             preferencesManager.userId == -1L -> {
-                _errorMessage.value = resourceProvider.getStringResource(R.string.pilgrimage_error_user_authentication)
+                _errorEditText.value = Pair(
+                    EnumReplicaInputType.AUTH,
+                    resourceProvider.getStringResource(R.string.pilgrimage_error_user_authentication)
+                )
                 false
             }
             else -> {
                 _errorEditText.value = Pair(EnumReplicaInputType.BIRTHDATE, null)
                 _errorEditText.value = Pair(EnumReplicaInputType.CODE, null)
+                _errorEditText.value = Pair(EnumReplicaInputType.AUTH, null)
                 true
             }
         }

@@ -1,5 +1,6 @@
 package com.virgen.peregrina.ui.pilgrimage
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,9 +12,12 @@ import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityPilgrimageBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.gson.Gson
+import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.data.model.replica.ReplicaParcelableModel
 import com.virgen.peregrina.ui.dialog.LoadingDialogView
 import com.virgen.peregrina.ui.pilgrimage.util.EnumPilgrimageInputType
+import com.virgen.peregrina.util.navigateToLoginActivity
+import com.virgen.peregrina.util.navigateToMainActivity
 import com.virgen.peregrina.util.view.IView
 import com.virgen.peregrina.util.view.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -90,7 +94,9 @@ class PilgrimageActivity : AppCompatActivity(), IView {
                             MaterialAlertDialogBuilder(this)
                                 .setMessage(getString(R.string.pilgrimage_error_user_authentication))
                                 .setCancelable(false)
-                                .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
+                                .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which ->
+                                    navigateToLoginActivity()
+                                }
                                 .show()
                         }
                     }
@@ -105,7 +111,9 @@ class PilgrimageActivity : AppCompatActivity(), IView {
                 MaterialAlertDialogBuilder(this)
                     .setMessage(getString(R.string.pilgrimage_label_success))
                     .setCancelable(false)
-                    .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
+                    .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which ->
+                        navigateToMainActivity()
+                    }
                     .show()
             }
         } catch (ex: Exception) {

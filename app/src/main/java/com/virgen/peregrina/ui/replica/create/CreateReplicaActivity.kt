@@ -1,5 +1,6 @@
 package com.virgen.peregrina.ui.replica.create
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
@@ -8,8 +9,11 @@ import androidx.core.widget.addTextChangedListener
 import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityCreateReplicaBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.ui.dialog.LoadingDialogView
 import com.virgen.peregrina.ui.replica.EnumReplicaInputType
+import com.virgen.peregrina.util.navigateToLoginActivity
+import com.virgen.peregrina.util.navigateToMainActivity
 import com.virgen.peregrina.util.view.IView
 import com.virgen.peregrina.util.view.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,14 +55,18 @@ class CreateReplicaActivity : AppCompatActivity(), IView {
             MaterialAlertDialogBuilder(this)
                 .setMessage(getString(R.string.replica_label_replica_created_successfull))
                 .setCancelable(false)
-                .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
+                .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which ->
+                    navigateToMainActivity()
+                }
                 .show()
         }
         viewModel.errorMessage.observe(this) { message ->
             MaterialAlertDialogBuilder(this)
                 .setMessage(message)
                 .setCancelable(false)
-                .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> finish() }
+                .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which ->
+                    navigateToMainActivity()
+                }
                 .show()
         }
         viewModel.errorEditText.observe(this) { pair ->
@@ -73,6 +81,17 @@ class CreateReplicaActivity : AppCompatActivity(), IView {
                     binding.dateErrorTextView.apply {
                         visibility = if(pair.second != null) View.VISIBLE else View.GONE
                         text = pair.second
+                    }
+                }
+                EnumReplicaInputType.AUTH -> {
+                    if(pair.second != null) {
+                        MaterialAlertDialogBuilder(this)
+                            .setMessage(getString(R.string.pilgrimage_error_user_authentication))
+                            .setCancelable(false)
+                            .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which ->
+                                navigateToLoginActivity()
+                            }
+                            .show()
                     }
                 }
                 else -> {}
