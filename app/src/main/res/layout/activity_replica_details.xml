@@ -27,56 +27,63 @@
                 app:cardCornerRadius="@dimen/dp_16"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:orientation="horizontal"
                     android:paddingHorizontal="@dimen/dp_16"
-                    android:paddingVertical="@dimen/dp_8">
+                    android:paddingVertical="@dimen/dp_16"
+                    android:weightSum="3">
 
-                    <de.hdodenhof.circleimageview.CircleImageView
+                    <ImageView
                         android:id="@+id/icon_image_view"
-                        android:layout_width="@dimen/dp_144"
+                        android:layout_width="0dp"
                         android:layout_height="@dimen/dp_144"
-                        android:padding="@dimen/dp_16"
-                        android:src="@drawable/virgen_icon"
+                        android:layout_weight="1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/madre_divina"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/code_text_view"
+                    <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_16"
-                        android:text="@string/replica_label_code_replica_details"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/icon_image_view"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:paddingStart="@dimen/dp_16">
 
-                    <TextView
-                        android:id="@+id/old_text_view"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/dp_16"
-                        android:layout_marginTop="@dimen/dp_4"
-                        android:text="@string/replica_label_date_replica_details"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/icon_image_view"
-                        app:layout_constraintTop_toBottomOf="@id/code_text_view" />
+                        <TextView
+                            android:id="@+id/code_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/replica_label_code_replica_details"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_18"
+                            android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/icon_image_view"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/pilgrimage_button"
-                        android:layout_width="0dp"
-                        android:layout_height="@dimen/dp_44"
-                        android:layout_marginStart="@dimen/dp_16"
-                        android:layout_marginTop="@dimen/dp_4"
-                        android:text="@string/pilgrimage_label_action_button"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/icon_image_view"
-                        app:layout_constraintTop_toBottomOf="@id/old_text_view" />
+                        <TextView
+                            android:id="@+id/birthdate_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/dp_4"
+                            android:text="@string/replica_label_date_replica_details"
+                            android:textSize="@dimen/sp_14"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/icon_image_view"
+                            app:layout_constraintTop_toBottomOf="@id/code_text_view" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/pilgrimage_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp_44"
+                            android:layout_marginTop="@dimen/dp_4"
+                            android:text="@string/pilgrimage_label_action_button" />
+                    </LinearLayout>
+                </LinearLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
@@ -98,28 +105,16 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/replica_label_about_replica_details"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_18"
+                        android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/owner_name_text_view"
+                        android:id="@+id/owner_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dp_8" />
 
-                    <TextView
-                        android:id="@+id/owner_phone_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/owner_email_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/owner_city_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,3 +48,10 @@ fun AppCompatActivity.navigateToLoginActivity() {
         .apply { flags = Intent.FLAG_ACTIVITY_CLEAR_TOP }
     startActivity(intent)
 }
+
+fun Int.lessThanTen(): String {
+    if (this < 10) {
+        return "0$this"
+    }
+    return "$this"
+}

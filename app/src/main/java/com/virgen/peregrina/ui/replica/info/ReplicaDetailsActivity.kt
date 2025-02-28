@@ -10,6 +10,8 @@ import com.google.gson.Gson
 import com.virgen.peregrina.data.model.replica.ReplicaModel
 import com.virgen.peregrina.data.model.replica.ReplicaParcelableModel
 import com.virgen.peregrina.ui.pilgrimage.PilgrimageActivity
+import com.virgen.peregrina.util.DateUtils
+import com.virgen.peregrina.util.enumerator.EnumDateFormat
 import com.virgen.peregrina.util.view.IView
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,6 +35,7 @@ class ReplicaDetailsActivity : AppCompatActivity(), IView {
         super.onCreate(savedInstanceState)
         binding = ActivityReplicaDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initView()
         initObservers()
         initListeners()
@@ -40,10 +43,12 @@ class ReplicaDetailsActivity : AppCompatActivity(), IView {
 
     override fun initView() {
         try {
-
-
+            val jsonObject = intent.getStringExtra("replica")
+            val replica = Gson().fromJson(jsonObject, ReplicaParcelableModel::class.java)
+            binding.codeTextView.text = replica.code
+            replica.birthdate?.let { binding.birthdateTextView.text = DateUtils.format(it, EnumDateFormat.DD_MMM_YYYY) }
         } catch (ex: Exception) {
-            Log.e(TAG, "initUI(): Exception -> $ex")
+            Log.e(TAG, "initView(): Exception -> $ex")
         }
     }
 

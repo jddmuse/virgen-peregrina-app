@@ -10,27 +10,27 @@ object DateUtils {
         val str = StringBuilder()
         when(format) {
             EnumDateFormat.DD_MM_YYYY -> {
-                str.append(localDate.dayOfMonth).append("/")
+                str.append(localDate.dayOfMonth.lessThanTen()).append("/")
                     .append(localDate.month.value).append("/")
                     .append(localDate.year)
             }
             EnumDateFormat.DD_MMM_YYYY -> {
-                str.append(localDate.dayOfMonth).append(" ")
+                str.append(localDate.dayOfMonth.lessThanTen()).append(" ")
                     .append(localDate.month.name).append(" ")
                     .append(localDate.year)
             }
             EnumDateFormat.DD_MMMM -> {
-                str.append(localDate.dayOfMonth).append(" ")
+                str.append(localDate.dayOfMonth.lessThanTen()).append(" ")
                     .append(localDate.month.name.subSequence(0, 3))
             }
             EnumDateFormat.WEEKDAY_DD_MMM -> {
                 str.append(localDate.dayOfWeek).append(" ")
-                    .append(localDate.dayOfMonth).append(" ")
+                    .append(localDate.dayOfMonth.lessThanTen()).append(" ")
                     .append(localDate.month.name.subSequence(0, 3))
             }
             EnumDateFormat.WEEKDAY_DD_MMM_YYYY -> {
                 str.append(localDate.dayOfWeek).append(" ")
-                    .append(localDate.dayOfMonth).append(" ")
+                    .append(localDate.dayOfMonth.lessThanTen()).append(" ")
                     .append(localDate.month.name.subSequence(0, 3)).append(" ")
                     .append(localDate.year)
             }
