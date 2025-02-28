@@ -6,6 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.ui.login.LoginActivity
+import com.virgen.peregrina.util.enumerator.EnumDaysOfWeekSpanish
+import com.virgen.peregrina.util.enumerator.EnumMonthsSpanish
+import java.time.DayOfWeek
+import java.time.Month
 
 fun <T> convertJsonString2DataClass(json: String?, type: Class<T>): T? {
     return try {
@@ -58,4 +62,33 @@ fun Int.lessThanTen(): String {
         return "0$this"
     }
     return "$this"
+}
+
+fun DayOfWeek.spanish(): String {
+    return when(this) {
+        DayOfWeek.SUNDAY -> EnumDaysOfWeekSpanish.DOMINGO.name.camelCase()
+        DayOfWeek.MONDAY -> EnumDaysOfWeekSpanish.LUNES.name.camelCase()
+        DayOfWeek.TUESDAY -> EnumDaysOfWeekSpanish.MARTES.name.camelCase()
+        DayOfWeek.WEDNESDAY -> EnumDaysOfWeekSpanish.MIERCOLES.name.camelCase()
+        DayOfWeek.THURSDAY -> EnumDaysOfWeekSpanish.JUEVES.name.camelCase()
+        DayOfWeek.FRIDAY -> EnumDaysOfWeekSpanish.VIERNES.name.camelCase()
+        DayOfWeek.SATURDAY -> EnumDaysOfWeekSpanish.SABADO.name.camelCase()
+    }
+}
+
+fun Month.spanish(): String {
+    return when(this) {
+        Month.JANUARY -> EnumMonthsSpanish.ENERO.name.camelCase()
+        Month.FEBRUARY -> EnumMonthsSpanish.FEBRERO.name.camelCase()
+        Month.MARCH -> EnumMonthsSpanish.MARZO.name.camelCase()
+        Month.APRIL -> EnumMonthsSpanish.ABRIL.name.camelCase()
+        Month.MAY -> EnumMonthsSpanish.MAYO.name.camelCase()
+        Month.JUNE -> EnumMonthsSpanish.JUNIO.name.camelCase()
+        Month.JULY -> EnumMonthsSpanish.JULIO.name.camelCase()
+        Month.AUGUST -> EnumMonthsSpanish.AGOSTO.name.camelCase()
+        Month.SEPTEMBER -> EnumMonthsSpanish.SEPTIEMBRE.name.camelCase()
+        Month.OCTOBER -> EnumMonthsSpanish.OCTUBRE.name.camelCase()
+        Month.NOVEMBER -> EnumMonthsSpanish.NOVIEMBRE.name.camelCase()
+        Month.DECEMBER -> EnumMonthsSpanish.DICIEMBRE.name.camelCase()
+    }
 }

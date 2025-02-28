@@ -16,22 +16,22 @@ object DateUtils {
             }
             EnumDateFormat.DD_MMM_YYYY -> {
                 str.append(localDate.dayOfMonth.lessThanTen()).append(" ")
-                    .append(localDate.month.name).append(" ")
+                    .append(localDate.month.spanish()).append(" ")
                     .append(localDate.year)
             }
             EnumDateFormat.DD_MMMM -> {
                 str.append(localDate.dayOfMonth.lessThanTen()).append(" ")
-                    .append(localDate.month.name.subSequence(0, 3))
+                    .append(localDate.month.spanish().subSequence(0, 3))
             }
             EnumDateFormat.WEEKDAY_DD_MMM -> {
-                str.append(localDate.dayOfWeek).append(" ")
+                str.append(localDate.dayOfWeek.spanish()).append(" ")
                     .append(localDate.dayOfMonth.lessThanTen()).append(" ")
-                    .append(localDate.month.name.subSequence(0, 3))
+                    .append(localDate.month.spanish().subSequence(0, 3))
             }
             EnumDateFormat.WEEKDAY_DD_MMM_YYYY -> {
-                str.append(localDate.dayOfWeek).append(" ")
+                str.append(localDate.dayOfWeek.spanish()).append(" ")
                     .append(localDate.dayOfMonth.lessThanTen()).append(" ")
-                    .append(localDate.month.name.subSequence(0, 3)).append(" ")
+                    .append(localDate.month.spanish().subSequence(0, 3)).append(" ")
                     .append(localDate.year)
             }
         }
