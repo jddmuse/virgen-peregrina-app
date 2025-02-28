@@ -141,7 +141,7 @@ Id en paz hijitos y llevad la paz a todos mis hijos confundidos y perdidos… En
     <string name="pilgrimage_label_intention" translatable="false">Intention</string>
     <string name="pilgrimage_label_success" translatable="false">Peregrinacion creada exitosamente</string>
     <string name="pilgrimage_label_finished" translatable="false">The pilgrimage you are accompanying has ended, please describe the experience</string>
-    <string name="pilgrimage_label_list" translatable="false">Pilgrimages</string>
+    <string name="pilgrimage_label_list" translatable="false">Peregrinaciones</string>
     <string name="pilgrimage_label__details" translatable="false">Pilgrimage Details</string>
     <string name="pilgrimage_label_in_progress">in Pilgrimage</string>
     <string name="pilgrimage_label_information">Peregrinacion en la ciudad de %1$s; inicia el %2$s y finaliza el %3$s. La peregrinacion es llevada a cabo por el peregrino %4$s y la replica en uso identificada con el codigo %5$s.</string>

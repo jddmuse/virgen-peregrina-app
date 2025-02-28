@@ -1,159 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.virgen.peregrina.MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include
+        android:id="@+id/app_bar_layout"
+        layout="@layout/app_bar_layout" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/month_message_card_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_24"
+        android:layout_marginTop="@dimen/dp_16"
+        app:cardCornerRadius="@dimen/dp_16"
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
 
-        <include
-            android:id="@+id/app_bar_layout"
-            layout="@layout/app_bar_layout" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/month_message_card_view"
+        <TextView
+            android:id="@+id/month_message_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_16"
-            app:cardCornerRadius="@dimen/dp_16"
-            app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:padding="@dimen/dp_16"
+            android:text="@string/label_month_message"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/peregrinacion_card_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_184"
+        android:layout_marginStart="@dimen/dp_24"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_8"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="@dimen/dp_16"
+        app:layout_constraintEnd_toStartOf="@id/guidelines_card_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/month_message_card_view">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/month_message_text_view"
+                style="@style/TextAppearance.AppCompat.Body2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:padding="@dimen/dp_16"
-                android:text="@string/label_month_message"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-        </com.google.android.material.card.MaterialCardView>
+                android:layout_marginTop="@dimen/dp_8"
+                android:gravity="center"
+                android:text="@string/replica_label_replicas"
+                app:layout_constraintTop_toTopOf="@id/virgen_image_view" />
 
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/peregrinacion_card_view"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_184"
-            android:layout_marginStart="@dimen/dp_16"
-            android:layout_marginTop="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_8"
-            android:clickable="true"
-            android:focusable="true"
-            app:cardCornerRadius="@dimen/dp_16"
-            app:layout_constraintEnd_toStartOf="@id/guidelines_card_view"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/month_message_card_view">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/virgen_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginHorizontal="@dimen/dp_44"
+                android:paddingTop="@dimen/dp_44"
+                android:paddingBottom="@dimen/dp_16"
+                android:scaleType="fitXY"
+                android:src="@drawable/madre_divina" />
 
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:gravity="center"
-                    android:text="@string/replica_label_replicas"
-                    app:layout_constraintTop_toTopOf="@id/virgen_image_view" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/virgen_image_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/dp_44"
-                    android:paddingTop="@dimen/dp_44"
-                    android:paddingBottom="@dimen/dp_16"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/madre_divina" />
+    </com.google.android.material.card.MaterialCardView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/guidelines_card_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_184"
+        android:layout_marginStart="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_24"
+        app:cardCornerRadius="@dimen/dp_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/peregrinacion_card_view"
+        app:layout_constraintTop_toBottomOf="@id/month_message_card_view">
 
-        </com.google.android.material.card.MaterialCardView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_marginEnd="@dimen/dp_16"
-            android:id="@+id/guidelines_card_view"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp_184"
-            android:layout_marginStart="@dimen/dp_8"
-            android:layout_marginTop="@dimen/dp_16"
-            app:cardCornerRadius="@dimen/dp_16"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/peregrinacion_card_view"
-            app:layout_constraintTop_toBottomOf="@id/month_message_card_view">
+            <TextView
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_8"
+                android:gravity="center"
+                android:text="@string/label_guidelines"
+                app:layout_constraintTop_toTopOf="@id/guidelines_image_view" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageView
+                android:id="@+id/guidelines_image_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:paddingTop="@dimen/dp_32"
+                android:paddingBottom="@dimen/dp_16"
+                android:scaleType="fitXY"
+                android:src="@drawable/corazon_flores" />
 
-                <TextView
-                    style="@style/TextAppearance.AppCompat.Body2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
-                    android:gravity="center"
-                    android:text="@string/label_guidelines"
-                    app:layout_constraintTop_toTopOf="@id/guidelines_image_view" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <ImageView
-                    android:id="@+id/guidelines_image_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginHorizontal="@dimen/dp_16"
-                    android:paddingTop="@dimen/dp_32"
-                    android:paddingBottom="@dimen/dp_16"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/corazon_flores" />
+    </com.google.android.material.card.MaterialCardView>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/dp_24"
+        android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelines_card_view">
 
-        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            android:id="@+id/pilgrimages_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pilgrimage_label_list"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_marginHorizontal="@dimen/dp_16"
+        <TextView
+            android:id="@+id/info_pilgrimages"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_16"
+            android:text="@string/pilgrimage_label_able"
+            android:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pilgrimages_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_16"
-            app:cardCornerRadius="@dimen/dp_16"
-            app:layout_constraintTop_toBottomOf="@id/guidelines_card_view">
+            tools:listitem="@layout/item_pilgrimage" />
+    </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="@dimen/dp_16">
-
-                <TextView
-                    android:id="@+id/pilgrimages_text_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/pilgrimage_label_list"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                <TextView
-                    android:id="@+id/info_pilgrimages"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/pilgrimage_label_able"
-                    android:visibility="gone" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/pilgrimages_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/sp_8"
-                    tools:listitem="@layout/item_pilgrimage" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
