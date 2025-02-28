@@ -53,35 +53,35 @@
     <string name="label_pilgrimage_finished_2" translatable="false">La peregrinación que acompañas ha finalizado, por favor, describe la experiencia</string>
     <string name="label_guidelines" translatable="false">Lineamientos</string>
     <string name="label_pilgrimage_guidelines" translatable="false">Lineamientos de Peregrinación</string>
-    <string name="label_mobility_image_conditions" translatable="false">1. Condiciones de movilidad de la Imagen:</string>
+    <string name="label_mobility_image_conditions" translatable="false">Condiciones de movilidad de la Imagen:</string>
     <string name="label_text_mobility_image_conditions" translatable="false">La imagen debe ser llevada al lugar de la visita y recuperada personalmente. En caso de no ser posible, deberán coordinar con otra persona de la misión que lo pueda realizar.</string>
-    <string name="label_visit_time" translatable="false">2. Tiempo de Visita</string>
+    <string name="label_visit_time" translatable="false">Tiempo de Visita</string>
     <string name="label_text_visit_time" translatable="false">Uno (1) a quince (15) días</string>
-    <string name="label_prayer_of_rosary" translatable="false">3. Rezo del Rosario</string>
+    <string name="label_prayer_of_rosary" translatable="false">Rezo del Rosario</string>
     <string name="label_text_prayer_of_rosary" translatable="false">Previo al inicio del Santo Rosario, encender la vela dispuesta en el hogar visitado con la llama del amor hermoso. Seguir formato oficial del Rosario de la Misión MDG.</string>
-    <string name="label_before_finishing_rosary" translatable="false">4. Antes de terminar el Rosario:</string>
+    <string name="label_before_finishing_rosary" translatable="false">Antes de terminar el Rosario:</string>
     <string name="label_text_before_finishing_rosary" translatable="false">durante el rezo del Santo Rosario, luego de la oración de Consagración a la Virgen María y antes de la bendición final, los peregrinos deberán guiar dos momentos especiales:</string>
-    <string name="label_text_before_finsihing_rosary_item_1" translatable="false">4.1 Contar la historia de la Imagen peregrina y/o leer algunos apartes de los mensajes que Nuestra Señora ha dado a Carolina Name y que están incluidos en el folleto de la misión peregrina.</string>
-    <string name="label_text_before_finsihing_rosary_item_2" translatable="false">4.2 Si es posible y dependiendo del tiempo de la visita que tengan disponible en el lugar de peregrinación, los encargados de la misión invitarán a que cada persona asistente pase al frente de la Imagen y de rodillas, pida, en el silencio de su corazón, por todas sus intenciones.</string>
-    <string name="label_final_farewell">5. Despedida Final</string>
+    <string name="label_text_before_finsihing_rosary_item_1" translatable="false">Contar la historia de la Imagen peregrina y/o leer algunos apartes de los mensajes que Nuestra Señora ha dado a Carolina Name y que están incluidos en el folleto de la misión peregrina.</string>
+    <string name="label_text_before_finsihing_rosary_item_2" translatable="false">Si es posible y dependiendo del tiempo de la visita que tengan disponible en el lugar de peregrinación, los encargados de la misión invitarán a que cada persona asistente pase al frente de la Imagen y de rodillas, pida, en el silencio de su corazón, por todas sus intenciones.</string>
+    <string name="label_final_farewell">Despedida Final</string>
     <string name="label_text_final_farewell">Oración de consagración a María. Bendición final</string>
-    <string name="label_invitation" translatable="false">6. Invitación</string>
+    <string name="label_invitation" translatable="false">Invitación</string>
     <string name="label_text_invitation" translatable="false">Informar a la familia que se visita sobre las redes sociales de la misión YouTube, Instagram, Facebook:
 @Carolina Name MDG y pagina oficial www.madredeladivinagracia.org
 Invitarlos a que se conecten a los rosarios de los lunes, rosario de aurora del primer sábado de mes y a las diferentes actividades que se programen</string>
-    <string name="label_virtual_pilgrimage">7. Peregrinación Virtual</string>
+    <string name="label_virtual_pilgrimage">Peregrinación Virtual</string>
     <string name="label_text_virtual_pilgrimage">Aplican los mismos pasos anteriores, teniendo en cuenta que la Imagen MDG y el libro de notas deben ser llevados previamente y recogidos (ambos de manera personal).</string>
-    <string name="label_text_how_to_care_replica" translatable="false">- Antes de una visita, limpiar en seco la imagen Peregrina con trapo y al transportarla ojalá utilizar un estuche oficial o uno que sea seguro para este fin.
+    <string name="label_text_how_to_care_replica" translatable="false">Antes de una visita, limpiar en seco la imagen Peregrina con trapo y al transportarla ojalá utilizar un estuche oficial o uno que sea seguro para este fin.
 
-        \n\n- Para la restauración de las imágenes por deterioro de tiempo y/o manipulación, se debe informar a la cabeza de la misión en cada ciudad, quien así mismo coordinará con el Comité de Virgen Peregrina en Colombia.
+        \n\nPara la restauración de las imágenes por deterioro de tiempo y/o manipulación, se debe informar a la cabeza de la misión en cada ciudad, quien así mismo coordinará con el Comité de Virgen Peregrina en Colombia.
 
-        \n\n- Si la virgen sufre alguna rotura o accidente informar también a la cabeza de la misión o al Comité de Virgen Peregrina. Por favor no reparar, lijar, pintar o hacerle alguna modificación a la imagen.
+        \n\nSi la virgen sufre alguna rotura o accidente informar también a la cabeza de la misión o al Comité de Virgen Peregrina. Por favor no reparar, lijar, pintar o hacerle alguna modificación a la imagen.
 
-        \n\n- Si la imagen fue extraviada, la persona que realizó la visita debe informar a la cabeza de la misión o al Comité de Virgen Peregrina.
+        \n\nSi la imagen fue extraviada, la persona que realizó la visita debe informar a la cabeza de la misión o al Comité de Virgen Peregrina.
 
-        \n\n- Es importante recordar que estas imágenes de la Madre de la Divina Gracia de la Rosa de la Paz, son solo peregrinas, es decir están de paso en los lugares y por lo tanto NO están a la venta.
+        \n\nEs importante recordar que estas imágenes de la Madre de la Divina Gracia de la Rosa de la Paz, son solo peregrinas, es decir están de paso en los lugares y por lo tanto NO están a la venta.
 
-        \n\n- En caso de que alguien este interesado en la compra de la imagen pequeña pueden invitarlo a visitar @rositadegracia ó www.rositadegracia.com</string>
+        \n\nEn caso de que alguien este interesado en la compra de la imagen pequeña pueden invitarlo a visitar @rositadegracia ó www.rositadegracia.com</string>
 
 
     <string name="label_good">Bueno</string>
@@ -166,7 +166,7 @@ Id en paz hijitos y llevad la paz a todos mis hijos confundidos y perdidos… En
     <string name="replica_label_replica_code_value" translatable="false">Code: %1$s</string>
     <string name="replica_label_replica_returned_same_state" translatable="false">Is the replica in the same condition it was borrowed?</string>
     <string name="replica_label_year_you_received" translatable="false">Year you received Replica</string>
-    <string name="replica_label_how_to_care_replica" translatable="false">8. How to take care of your Replica</string>
+    <string name="replica_label_how_to_care_replica" translatable="false">Como cuidar tu replica</string>
     <string name="replica_label_replicas" translatable="false">Replicas</string>
     <string name="replica_label_replica_owner_user_data">Owner</string>
 

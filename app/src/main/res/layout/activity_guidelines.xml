@@ -25,7 +25,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="@dimen/dp_16">
+                android:paddingHorizontal="@dimen/dp_24"
+                android:paddingBottom="@dimen/dp_24">
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Title"
@@ -36,122 +37,146 @@
                     android:visibility="gone" />
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_mobility_image_conditions" />
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:text="@string/label_mobility_image_conditions"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/label_text_mobility_image_conditions" />
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_visit_time" />
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:text="@string/label_visit_time"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/label_text_visit_time" />
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_prayer_of_rosary" />
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:text="@string/label_prayer_of_rosary"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/label_text_prayer_of_rosary" />
 
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_before_finishing_rosary" />
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:text="@string/label_before_finishing_rosary"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/label_text_before_finishing_rosary" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/label_text_before_finsihing_rosary_item_1" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_16"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/label_text_before_finsihing_rosary_item_2" />
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_final_farewell" />
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:text="@string/label_final_farewell"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/label_text_final_farewell" />
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_invitation" />
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:text="@string/label_invitation"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/label_text_invitation" />
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/label_virtual_pilgrimage" />
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:text="@string/label_virtual_pilgrimage"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/label_text_virtual_pilgrimage" />
 
                 <TextView
-                    style="@style/TextAppearance.AppCompat.Subhead"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_16"
-                    android:text="@string/replica_label_how_to_care_replica" />
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:text="@string/replica_label_how_to_care_replica"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dp_8"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="@string/label_text_how_to_care_replica" />
 
             </LinearLayout>
