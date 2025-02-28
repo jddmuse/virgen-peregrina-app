@@ -19,6 +19,10 @@ import com.virgen.peregrina.ui.pilgrimage.PilgrimageDetailsActivity
 import com.virgen.peregrina.ui.replica.list.ReplicasListActivity
 import com.virgen.peregrina.util.view.IView
 import dagger.hilt.android.AndroidEntryPoint
+import me.everything.android.ui.overscroll.IOverScrollDecor
+import me.everything.android.ui.overscroll.IOverScrollState
+import me.everything.android.ui.overscroll.IOverScrollUpdateListener
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), IView {
@@ -68,6 +72,13 @@ class MainActivity : AppCompatActivity(), IView {
             visibility = View.VISIBLE
             adapter = pilgrimagesAdapter
         }
+        OverScrollDecoratorHelper.setUpOverScroll(binding.pilgrimagesRecyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL).apply {
+            setOverScrollUpdateListener { decor, state, offset ->
+                if (state == IOverScrollState.STATE_BOUNCE_BACK && offset < 0) {
+                    viewModel.pilgrimages()
+                }
+            }
+        }
     }
 
     override fun initObservers() {
@@ -105,16 +116,16 @@ class MainActivity : AppCompatActivity(), IView {
                 Intent(this, GuidelinesActivity::class.java)
             )
         }
-        binding.pilgrimagesRecyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-                if (lastVisibleItem == layoutManager.itemCount - 1 && dy > 0){
-                    viewModel.pilgrimages()
-                }
-            }
-        })
+//        binding.pilgrimagesRecyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                super.onScrolled(recyclerView, dx, dy)
+//                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+//                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+//                if (lastVisibleItem == layoutManager.itemCount - 1 && dy > 0){
+//                    viewModel.pilgrimages()
+//                }
+//            }
+//        })
     }
 
 }
