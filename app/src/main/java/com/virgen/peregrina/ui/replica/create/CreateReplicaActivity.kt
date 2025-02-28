@@ -109,5 +109,6 @@ class CreateReplicaActivity : AppCompatActivity(), IView {
         binding.actionButton.setSafeOnClickListener {
             viewModel.create()
         }
+        binding.appBarLayout.toolbar.setNavigationOnClickListener { finish() }
     }
 }

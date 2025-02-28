@@ -123,7 +123,7 @@ Id en paz hijitos y llevad la paz a todos mis hijos confundidos y perdidos… En
     <string name="info_testimony_send_successfully" translatable="false">Testimony send successfully</string>
     <string name="action_button_yes" translatable="false">Yes</string>
     <string name="error_generic" translatable="false">Something was wrong, please, try again</string>
-    <string name="error_field_required" translatable="false">This field is required</string>
+    <string name="error_field_required" translatable="false">Este campo es requerido</string>
     <string name="label_separator_middle_point">&#8226;</string>
     <string name="locked_invoke_runner">LOCKED</string>
 
@@ -138,7 +138,7 @@ Id en paz hijitos y llevad la paz a todos mis hijos confundidos y perdidos… En
     <string name="pilgrimage_label_status_pending" translatable="false">Pending</string>
     <string name="pilgrimage_label_status_finished" translatable="false">Finished</string>
     <string name="pilgrimage_label_status_in_progress" translatable="false">In Progress</string>
-    <string name="pilgrimage_label_action_button_start" translatable="false">Start Pilgrimage</string>
+    <string name="pilgrimage_label_action_button_start" translatable="false">Programar</string>
     <string name="pilgrimage_label_intention" translatable="false">Intention</string>
     <string name="pilgrimage_label_success" translatable="false">Peregrinacion creada exitosamente</string>
     <string name="pilgrimage_label_finished" translatable="false">The pilgrimage you are accompanying has ended, please describe the experience</string>
@@ -165,7 +165,7 @@ Id en paz hijitos y llevad la paz a todos mis hijos confundidos y perdidos… En
     <string name="replica_label_replica_data">Replica Data</string>
     <string name="replica_label_replica_code_value" translatable="false">Code: %1$s</string>
     <string name="replica_label_replica_returned_same_state" translatable="false">Is the replica in the same condition it was borrowed?</string>
-    <string name="replica_label_year_you_received" translatable="false">Year you received Replica</string>
+    <string name="replica_label_year_you_received" translatable="false">Fecha de creación de replica</string>
     <string name="replica_label_how_to_care_replica" translatable="false">Como cuidar tu replica</string>
     <string name="replica_label_replicas" translatable="false">Replicas</string>
     <string name="replica_label_replica_owner_user_data">Owner</string>

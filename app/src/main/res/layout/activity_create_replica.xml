@@ -6,16 +6,9 @@
     android:layout_height="match_parent"
     tools:context="com.virgen.peregrina.ui.replica.create.CreateReplicaActivity">
 
-    <TextView
-        android:id="@+id/title_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_16"
-        android:gravity="center"
-        android:text="@string/replica_label_replica_data"
-        android:textSize="@dimen/sp_16"
-        android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/app_bar_layout"
+        layout="@layout/app_bar_layout" />
 
     <LinearLayout
         android:id="@+id/content_linear_layout"
@@ -25,7 +18,7 @@
         android:layout_marginTop="@dimen/dp_24"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title_text_view">
+        app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -37,8 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/dp_16"
-                android:paddingVertical="@dimen/dp_16">
+                android:paddingHorizontal="@dimen/dp_24"
+                android:paddingVertical="@dimen/dp_24">
 
                 <TextView
                     style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
@@ -71,7 +64,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Code"
+                    android:hint="Codigo identificador de Replica"
                     app:endIconMode="none">
 
                     <com.google.android.material.textfield.MaterialAutoCompleteTextView
@@ -107,15 +100,15 @@
                     android:visibility="gone" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-    </LinearLayout>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/action_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_16"
-        android:layout_marginBottom="@dimen/dp_16"
-        android:text="@string/button_action_continue"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/action_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:text="@string/button_action_continue"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
