@@ -1,6 +1,7 @@
 package com.virgen.peregrina.ui.pilgrimage
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.virgen_peregrina_app.R
@@ -11,6 +12,7 @@ import com.virgen.peregrina.util.DateUtils
 import com.virgen.peregrina.util.camelCase
 import com.virgen.peregrina.util.enumerator.EnumDateFormat
 import com.virgen.peregrina.util.getExceptionLog
+import java.time.LocalDate
 
 class PilgrimageDetailsActivity : AppCompatActivity() {
 
@@ -53,6 +55,23 @@ class PilgrimageDetailsActivity : AppCompatActivity() {
                 pilgrimage.user?.nameAndLastName?.camelCase(),
                 pilgrimage.replica?.code
             )
+            // binding.pilgrimageStatusTextView.isActivated =
+
+            if(LocalDate.now().isAfter(pilgrimage.endDate)) {
+                binding.pilgrimageStatusTextView.setTextColor(Color.WHITE)
+                binding.pilgrimageStatusTextView.text = "Finalizada"
+                binding.pilgrimageStatusTextView.isEnabled = false
+            }
+            if(LocalDate.now().isAfter(pilgrimage.startDate) && LocalDate.now().isBefore(pilgrimage.endDate)) {
+                binding.pilgrimageStatusTextView.setTextColor(getColor(R.color.textOnStarted))
+                binding.pilgrimageStatusTextView.text = "Iniciada"
+                binding.pilgrimageStatusTextView.isEnabled = true
+            }
+            if(LocalDate.now().isBefore(pilgrimage.startDate)) {
+                binding.pilgrimageStatusTextView.setTextColor(getColor(R.color.textOnStarted))
+                binding.pilgrimageStatusTextView.text = "Programada"
+                binding.pilgrimageStatusTextView.isEnabled = true
+            }
         } catch (ex: Exception) {
             getExceptionLog(TAG, "initView", ex)
         }

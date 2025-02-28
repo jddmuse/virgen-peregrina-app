@@ -25,5 +25,7 @@
     <color name="errorColor">#FF0000</color>
 
     <color name="startedColor">#66CA62</color>
+    <color name="textOnStarted">#072F00</color>
     <color name="finishedColor">#0077FF</color>
+    <color name="textOnFinished">#FFFFFF</color>
 </resources>
