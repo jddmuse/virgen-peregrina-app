@@ -116,16 +116,6 @@ class MainActivity : AppCompatActivity(), IView {
                 Intent(this, GuidelinesActivity::class.java)
             )
         }
-//        binding.pilgrimagesRecyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-//                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-//                if (lastVisibleItem == layoutManager.itemCount - 1 && dy > 0){
-//                    viewModel.pilgrimages()
-//                }
-//            }
-//        })
     }
 
 }

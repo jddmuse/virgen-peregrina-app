@@ -16,6 +16,8 @@ import com.virgen.peregrina.ui.replica.create.CreateReplicaActivity
 import com.virgen.peregrina.ui.replica.info.ReplicaDetailsActivity
 import com.virgen.peregrina.util.view.IView
 import dagger.hilt.android.AndroidEntryPoint
+import me.everything.android.ui.overscroll.IOverScrollState
+import me.everything.android.ui.overscroll.OverScrollDecoratorHelper
 
 @AndroidEntryPoint
 class ReplicasListActivity : AppCompatActivity(), IView {
@@ -25,8 +27,10 @@ class ReplicasListActivity : AppCompatActivity(), IView {
     }
 
     private lateinit var binding: ActivityPeregrinacionBinding
-
     private val viewModel: ReplicaListViewModel by viewModels()
+
+    /** Adapters */
+    private lateinit var replicaAdapter: ReplicaItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,32 +50,36 @@ class ReplicasListActivity : AppCompatActivity(), IView {
 
     override fun initView() {
         binding.appBarLayout.textView.text = getString(R.string.replica_label_replicas)
+        binding.infoTextView.visibility = View.GONE
+        replicaAdapter = ReplicaItemAdapter {
+            val intent = Intent(this@ReplicasListActivity, ReplicaDetailsActivity::class.java).apply {
+                putExtra("replica", Gson().toJson(it.parcelable()))
+            }
+            startActivity(intent)
+        }
+        binding.replicasRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@ReplicasListActivity, RecyclerView.VERTICAL, false)
+            adapter = replicaAdapter
+            visibility = View.VISIBLE
+        }
+        OverScrollDecoratorHelper.setUpOverScroll(binding.replicasRecyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL).apply {
+            setOverScrollUpdateListener { decor, state, offset ->
+                if (state == IOverScrollState.STATE_BOUNCE_BACK && offset < 0) {
+                    viewModel.replicas()
+                }
+            }
+        }
     }
 
     override fun initObservers() {
         viewModel.replicas.observe(this@ReplicasListActivity) { list ->
             if (list.isNotEmpty()) {
-                binding.replicasRecyclerView.apply {
-                    layoutManager = LinearLayoutManager(
-                        this@ReplicasListActivity,
-                        RecyclerView.VERTICAL,
-                        false
-                    )
-                    adapter = ReplicaItemAdapter(list, {
-                        // COMPLETE
-                        val intent = Intent(
-                            this@ReplicasListActivity,
-                            ReplicaDetailsActivity::class.java
-                        ).apply {
-                            putExtra("replica", Gson().toJson(it.parcelable()))
-                        }
-                        startActivity(intent)
-                    })
-                }
-            } else {
-                binding.replicasRecyclerView.visibility = View.GONE
-                binding.infoTextView.visibility = View.VISIBLE
+                replicaAdapter.addAll(list)
             }
+//            else {
+//                binding.replicasRecyclerView.visibility = View.GONE
+//                binding.infoTextView.visibility = View.VISIBLE
+//            }
         }
         viewModel.errorMsg.observe(this@ReplicasListActivity) { msg ->
             Snackbar.make(

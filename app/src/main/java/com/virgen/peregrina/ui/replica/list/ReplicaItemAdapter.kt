@@ -1,33 +1,29 @@
 package com.virgen.peregrina.ui.replica.list
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.virgen_peregrina_app.R
-import com.example.virgen_peregrina_app.databinding.ItemAvailableReplicaBinding
 import com.virgen.peregrina.data.model.replica.ReplicaModel
-import com.virgen.peregrina.util.camelCase
 
 class ReplicaItemAdapter(
-    val list: List<ReplicaModel>,
+    val list: MutableList<ReplicaModel> = mutableListOf(),
     val listener: (ReplicaModel) -> Unit
-) : RecyclerView.Adapter<ReplicaItemAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<ReplicaViewHolder>() {
 
     companion object {
         private const val TAG = "ReplicaItemAdapter"
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReplicaViewHolder {
+        return ReplicaViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_available_replica, parent, false
             )
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ReplicaViewHolder, position: Int) {
         val item = list[position]
         holder.bind(item)
         holder.itemView.setOnClickListener {
@@ -39,16 +35,13 @@ class ReplicaItemAdapter(
         return list.size
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    /** Public functions ********************/
+    /****************************************/
 
-        private val binding = ItemAvailableReplicaBinding.bind(view)
-
-        @SuppressLint("SetTextI18n")
-        fun bind(item: ReplicaModel) {
-            binding.codeTextView.text = item.code
-            binding.cityTextView.text = item.user.city.camelCase()
-            binding.ownerTextView.text = "${item.user.name.camelCase()} ${item.user.lastName.camelCase()}"
-        }
+    fun addAll(items: List<ReplicaModel>) {
+        val previousSize = list.size
+        list.addAll(items)
+        notifyItemRangeInserted(previousSize, items.size)
     }
 
 

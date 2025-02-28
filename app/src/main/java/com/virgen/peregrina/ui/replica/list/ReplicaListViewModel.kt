@@ -32,12 +32,16 @@ class ReplicaListViewModel @Inject constructor(
     private val _errorMsg = MutableLiveData<String?>()
     val errorMsg: LiveData<String?> get() = _errorMsg
 
+    /** Variables **/
+    private var page = 0
+
     fun replicas(origin: EnumReplicaInputType = EnumReplicaInputType.API) {
         viewModelScope.launch {
-            when (val response = runnerReplicas.invoke()) {
+            when (val response = runnerReplicas.invoke(page)) {
                 is ResponseRunner.Success -> {
-                    val data = response.data?.content ?: listOf()
-                    _replicas.value = data
+                    page++
+                    val newData = response.data?.content ?: listOf()
+                    _replicas.value = newData
                 }
                 is ResponseRunner.ApiError -> {
                     _errorMsg.value = response.message
