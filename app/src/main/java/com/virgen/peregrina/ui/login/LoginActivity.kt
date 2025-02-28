@@ -39,6 +39,10 @@ class LoginActivity : AppCompatActivity(), IView {
         initObservers()
         initListeners()
 
+        defaultSettings()
+    }
+
+    private fun defaultSettings() {
         binding.rememberDataSwitch.isChecked = true
         viewModel.onCreate { email, password ->
             with(binding) {

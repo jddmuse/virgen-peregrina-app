@@ -10,6 +10,7 @@ import com.virgen.peregrina.data.request.CreateUserRequest
 import com.virgen.peregrina.domain.RunnerRegister
 import com.virgen.peregrina.ui.register.enumerator.EnumRegisterInputType
 import com.virgen.peregrina.util.EMPTY_STRING
+import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.response.ResponseRunner
 import com.virgen.peregrina.util.provider.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(
     private val resourceProvider: ResourceProvider,
-    private val runnerRegister: RunnerRegister
+    private val runnerRegister: RunnerRegister,
+    private val preferencesManager: PreferencesManager
 ) : ViewModel() {
 
     companion object {
@@ -266,6 +268,11 @@ class RegisterViewModel @Inject constructor(
             when(val baseResponse = runnerRegister.invoke(data)) {
                 is ResponseRunner.Success -> {
                     _loading.value = Pair(false, "")
+                    with(preferencesManager) {
+                        userId = baseResponse.data?.id ?: -1
+                        email = baseResponse.data?.email ?: ""
+                        password = baseResponse.data?.pass ?: ""
+                    }
                     _registerFinishedEvent.value = true
                 }
                 is ResponseRunner.ApiError -> {

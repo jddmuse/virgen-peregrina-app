@@ -18,7 +18,6 @@ import javax.inject.Inject
 @HiltViewModel
 class ReplicaListViewModel @Inject constructor(
     private val resourceProvider: ResourceProvider,
-    private val preferencesManager: PreferencesManager,
     private val runnerReplicas: RunnerReplicas
 ) : ViewModel() {
 
