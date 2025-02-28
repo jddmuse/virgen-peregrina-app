@@ -126,6 +126,7 @@ Id en paz hijitos y llevad la paz a todos mis hijos confundidos y perdidos… En
     <string name="error_field_required" translatable="false">Este campo es requerido</string>
     <string name="label_separator_middle_point">&#8226;</string>
     <string name="locked_invoke_runner">LOCKED</string>
+    <string name="label_main_home_app_bar_title">¡Hola %1$s!</string>
 
     <!-- Pilgrimage -->
     <string name="pilgrimage_error_start_date" translatable="false">La fecha de inicio debe ser menor a la fecha de finalización</string>

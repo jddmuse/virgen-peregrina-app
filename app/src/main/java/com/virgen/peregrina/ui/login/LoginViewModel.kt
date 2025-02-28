@@ -120,6 +120,7 @@ class LoginViewModel @Inject constructor(
                         userId = response.data?.userId ?: -1
                         email = setEmail
                         password = setPassword
+                        userName = response.data?.userName ?: ""
                     }
                     _loginSuccessEvent.value = true
                 }

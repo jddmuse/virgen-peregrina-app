@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.virgen_peregrina_app.R
 import com.virgen.peregrina.data.model.pilgrimage.PilgrimageModel
 import com.virgen.peregrina.domain.RunnerPilgrimages
+import com.virgen.peregrina.util.camelCase
 import com.virgen.peregrina.util.manager.PreferencesManager
 import com.virgen.peregrina.util.provider.ResourceProvider
 import com.virgen.peregrina.util.response.ResponseRunner
@@ -40,6 +41,10 @@ class HomeViewModel @Inject constructor(
     /** Variables **/
     private var page = 0
 
+    fun defaultValues() {
+        _userNameTitle.value = resourceProvider
+            .getStringResource(R.string.label_main_home_app_bar_title, preferencesManager.userName?.camelCase() ?: "")
+    }
 
     fun pilgrimages() {
         viewModelScope.launch {

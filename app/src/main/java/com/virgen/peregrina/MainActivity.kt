@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityMainBinding
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.pilgrimage.PilgrimageModel
@@ -51,6 +52,7 @@ class MainActivity : AppCompatActivity(), IView {
 
     private fun defaultSettings() {
         viewModel.pilgrimages()
+        viewModel.defaultValues()
     }
 
     override fun initView() {

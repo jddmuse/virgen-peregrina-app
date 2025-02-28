@@ -272,6 +272,7 @@ class RegisterViewModel @Inject constructor(
                         userId = baseResponse.data?.id ?: -1
                         email = baseResponse.data?.email ?: ""
                         password = baseResponse.data?.pass ?: ""
+                        userName = baseResponse.data?.name ?: ""
                     }
                     _registerFinishedEvent.value = true
                 }

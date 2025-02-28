@@ -18,6 +18,7 @@ class PreferencesManager @Inject constructor(
         private const val KEY_USER_ID = "userId"
         private const val KEY_EMAIL = "email"
         private const val KEY_PASSWORD = "password"
+        private const val USER_NAME = "userName"
     }
 
     private val sharedPreferences = context.getSharedPreferences(PREFERENCES_NAME_PROD, 0)
@@ -71,6 +72,10 @@ class PreferencesManager @Inject constructor(
     var userId: Long
         get() = sharedPreferences.getLong(KEY_USER_ID, -1)
         set(value) = putLong(KEY_USER_ID, value)
+
+    var userName: String?
+        get() = sharedPreferences.getString(USER_NAME, "") ?: ""
+        set(value) = putString(USER_NAME, value ?: "")
 
 //    var userSessionData: UserSessionData?
 //        get() =  convertJsonString2DataClass(
