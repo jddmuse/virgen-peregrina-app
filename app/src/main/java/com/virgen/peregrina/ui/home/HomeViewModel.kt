@@ -37,19 +37,30 @@ class HomeViewModel @Inject constructor(
     private val _userNameTitle = MutableLiveData<String>()
     val userNameTitle: LiveData<String> get() = _userNameTitle
 
+    /** Variables **/
+    private var page = 0
+
 
     fun pilgrimages() {
         viewModelScope.launch {
-            when (val response = runnerPilgrimages.invoke()) {
+            when (val response = runnerPilgrimages.invoke(page)) {
                 is ResponseRunner.Success -> {
-                    val data = response.data?.content ?: listOf()
-                    _pilgrimages.value = data
+                    page++
+                    // val previousData = pilgrimages.value ?: listOf()
+                    val newData = response.data?.content ?: listOf()
+                    _pilgrimages.value = newData  // listOf(previousData, newData).flatten()
                 }
                 is ResponseRunner.ApiError -> {
                     _errorMsg.value = response.message
                 }
                 is ResponseRunner.NoInternetConnection -> {
                     _errorMsg.value = resourceProvider.getStringResource(R.string.error_no_internet_connection)
+                }
+                is ResponseRunner.NullOrEmptyData -> {
+                    if(response.message == resourceProvider.getStringResource(R.string.locked_invoke_runner)) {
+                        return@launch
+                    }
+                    _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)
                 }
                 else -> {
                     _errorMsg.value = resourceProvider.getStringResource(R.string.error_generic)

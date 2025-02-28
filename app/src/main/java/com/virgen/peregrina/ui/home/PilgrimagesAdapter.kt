@@ -12,23 +12,23 @@ import com.virgen.peregrina.util.camelCase
 import com.virgen.peregrina.util.enumerator.EnumDateFormat
 
 class PilgrimagesAdapter(
-    private var list: List<PilgrimageModel> = emptyList(),
+    private var list: MutableList<PilgrimageModel> = mutableListOf(),
     private val listener: (PilgrimageModel) -> Unit
-) : RecyclerView.Adapter<PilgrimagesAdapter.ViewHolder>() {
+) : RecyclerView.Adapter<PilgrimageViewHolder>() {
 
     companion object {
         private const val TAG = "PilgrimagesAdapter"
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PilgrimageViewHolder {
+        return PilgrimageViewHolder(
             LayoutInflater.from(parent.context).inflate(
                 R.layout.item_pilgrimage, parent, false
             )
         )
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: PilgrimageViewHolder, position: Int) {
         val item = list[position]
         holder.bind(item)
         holder.itemView.setOnClickListener {
@@ -38,17 +38,14 @@ class PilgrimagesAdapter(
 
     override fun getItemCount(): Int = list.size
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val binding = ItemPilgrimageBinding.bind(view)
 
-        fun bind(item: PilgrimageModel) {
-            // COMPLETE
-            binding.cityTextView.text = item.user.city.camelCase()
-            binding.startDateTextView.text = DateUtils.format(item.startDate, EnumDateFormat.WEEKDAY_DD_MMM).camelCase()
-            binding.intentionTextView.text = item.intention.camelCase()
-//            binding.statusTextView.text = item.status
 
-        }
+    /** Public functions ********************/
+    /****************************************/
+
+    fun addAll(items: List<PilgrimageModel>) {
+        val previousSize = list.size
+        list.addAll(items)
+        notifyItemRangeInserted(previousSize, items.size)
     }
-
 }

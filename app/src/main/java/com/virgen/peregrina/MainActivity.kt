@@ -30,6 +30,9 @@ class MainActivity : AppCompatActivity(), IView {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: HomeViewModel by viewModels()
 
+    /** Adapters */
+    private lateinit var pilgrimagesAdapter: PilgrimagesAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -47,18 +50,23 @@ class MainActivity : AppCompatActivity(), IView {
     }
 
     override fun initView() {
-        try {
-            var maxLinesActived = true
-            with(binding) {
-                monthMessageTextView.setOnClickListener {
-                    monthMessageTextView.apply {
-                        maxLinesActived = !maxLinesActived
-                        maxLines = if(maxLinesActived) 3 else Integer.MAX_VALUE
-                    }
-                }
+        var maxLinesActivated = true
+        binding.monthMessageTextView.setOnClickListener {
+            binding.monthMessageTextView.apply {
+                maxLinesActivated = !maxLinesActivated
+                maxLines = if(maxLinesActivated) 3 else Integer.MAX_VALUE
             }
-        } catch (ex: Exception) {
-            Log.e(TAG, "initUI(): Exception -> $ex")
+        }
+        pilgrimagesAdapter = PilgrimagesAdapter(
+            listener = { item: PilgrimageModel ->
+                val jsonObject = Gson().toJson(item.parcelable())
+                val intent = Intent(this@MainActivity, PilgrimageDetailsActivity::class.java)
+                startActivity(intent.apply { putExtra("pilgrimage", jsonObject) })
+            })
+        binding.pilgrimagesRecyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
+            visibility = View.VISIBLE
+            adapter = pilgrimagesAdapter
         }
     }
 
@@ -71,22 +79,12 @@ class MainActivity : AppCompatActivity(), IView {
                 Log.i(TAG, "viewModel.pilgrimages.observe = $data")
                 if(data.isNotEmpty()) {
                     binding.infoPilgrimages.visibility = View.GONE
-                    binding.pilgrimagesRecyclerView.apply {
-                        layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
-                        visibility = View.VISIBLE
-                        adapter = PilgrimagesAdapter(
-                            list = data,
-                            listener = { item: PilgrimageModel ->
-                                val jsonObject = Gson().toJson(item.parcelable())
-                                val intent = Intent(this@MainActivity, PilgrimageDetailsActivity::class.java)
-                                startActivity(intent.apply { putExtra("pilgrimage", jsonObject) })
-                            }
-                        )
-                    }
-                } else {
-                    binding.infoPilgrimages.visibility = View.VISIBLE
-                    binding.pilgrimagesRecyclerView.visibility = View.GONE
+                    pilgrimagesAdapter.addAll(data)
                 }
+//                else {
+//                    binding.infoPilgrimages.visibility = View.VISIBLE
+//                    binding.pilgrimagesRecyclerView.visibility = View.GONE
+//                }
             }
             viewModel.userNameTitle.observe(this) { value ->
                 binding.appBarLayout.textView.text = value
@@ -97,20 +95,26 @@ class MainActivity : AppCompatActivity(), IView {
     }
 
     override fun initListeners() {
-        try {
-            binding.peregrinacionCardView.setOnClickListener {
-                startActivity(
-                    Intent(this, ReplicasListActivity::class.java)
-                )
-            }
-            binding.guidelinesCardView.setOnClickListener {
-                startActivity(
-                    Intent(this, GuidelinesActivity::class.java)
-                )
-            }
-        } catch (ex: Exception) {
-            Log.e(TAG, "initListeners(): Exception -> $ex")
+        binding.peregrinacionCardView.setOnClickListener {
+            startActivity(
+                Intent(this, ReplicasListActivity::class.java)
+            )
         }
+        binding.guidelinesCardView.setOnClickListener {
+            startActivity(
+                Intent(this, GuidelinesActivity::class.java)
+            )
+        }
+        binding.pilgrimagesRecyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+                if (lastVisibleItem == layoutManager.itemCount - 1 && dy > 0){
+                    viewModel.pilgrimages()
+                }
+            }
+        })
     }
 
 }
