@@ -45,9 +45,9 @@ class LoginActivity : AppCompatActivity(), IView {
     private fun defaultSettings() {
         binding.rememberDataSwitch.isChecked = true
         viewModel.onCreate { email, password ->
-            with(binding) {
-                emailEditText.setText(email)
-                passwordEditText.setText(password)
+            if(email.isNotEmpty() && password.isNotEmpty()) {
+                binding.emailEditText.setText(email)
+                binding.passwordEditText.setText(password)
             }
         }
     }

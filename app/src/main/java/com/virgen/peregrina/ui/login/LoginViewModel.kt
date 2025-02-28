@@ -53,10 +53,8 @@ class LoginViewModel @Inject constructor(
 
     fun onCreate(callback: (String, String) -> Unit) {
         with(preferencesManager) {
-            setEmail = email ?: EMPTY_STRING
-            setPassword = password ?: EMPTY_STRING
+            callback(email ?: "", password ?: "")
         }
-        callback(setEmail, setPassword)
 //        callback("juliana@gmail.com", "123")
     }
 
@@ -120,8 +118,8 @@ class LoginViewModel @Inject constructor(
                     _loading.value = Pair(false, "")
                     with(preferencesManager) {
                         userId = response.data?.userId ?: -1
-                        email = response.data?.userEmail ?: ""
-                        password = response.data?.userEmail ?: ""
+                        email = setEmail
+                        password = setPassword
                     }
                     _loginSuccessEvent.value = true
                 }
