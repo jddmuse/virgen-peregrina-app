@@ -110,10 +110,12 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:textSize="@dimen/sp_14"
                         android:id="@+id/owner_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_8" />
+                        android:layout_marginTop="@dimen/dp_16"
+                        android:lineSpacingMultiplier="1.2" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

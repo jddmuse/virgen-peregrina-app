@@ -37,7 +37,7 @@ class RunnerPilgrimages @Inject constructor(
         }
         lockInvoke = true
         CoroutineScope(Dispatchers.IO).launch {
-            delay(8000L)
+            delay(5000L)
             lockInvoke = false
         }
         val response = repository.list(page, size, sort)

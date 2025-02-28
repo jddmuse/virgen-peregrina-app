@@ -5,12 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.example.virgen_peregrina_app.R
 import com.example.virgen_peregrina_app.databinding.ActivityReplicaDetailsBinding
 import com.google.gson.Gson
 import com.virgen.peregrina.data.model.replica.ReplicaModel
 import com.virgen.peregrina.data.model.replica.ReplicaParcelableModel
 import com.virgen.peregrina.ui.pilgrimage.PilgrimageActivity
 import com.virgen.peregrina.util.DateUtils
+import com.virgen.peregrina.util.camelCase
 import com.virgen.peregrina.util.enumerator.EnumDateFormat
 import com.virgen.peregrina.util.view.IView
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +49,12 @@ class ReplicaDetailsActivity : AppCompatActivity(), IView {
             val replica = Gson().fromJson(jsonObject, ReplicaParcelableModel::class.java)
             binding.codeTextView.text = replica.code
             replica.birthdate?.let { binding.birthdateTextView.text = DateUtils.format(it, EnumDateFormat.DD_MMM_YYYY) }
+            binding.ownerTextView.text = StringBuilder()
+                .append(replica.user?.nameAndLastName?.camelCase()).append(" ${getString(R.string.label_separator_middle_point)} ")
+                .append(replica.user?.city?.camelCase()).append(" ${getString(R.string.label_separator_middle_point)} ")
+                .append(replica.user?.country?.camelCase()).append(" ${getString(R.string.label_separator_middle_point)} ")
+                .append(replica.user?.email?.lowercase()).append(" ${getString(R.string.label_separator_middle_point)} ").toString()
+                // .append(replica.user?.cellphone?.lowercase()).toString()
         } catch (ex: Exception) {
             Log.e(TAG, "initView(): Exception -> $ex")
         }
