@@ -37,10 +37,14 @@ fun String.camelCase(delimiter: String = " "): String {
     return str.toString().trim()
 }
 
-fun AppCompatActivity.navigateToMainActivity() {
+fun AppCompatActivity.navigateToMainActivity(flag: Int = Intent.FLAG_ACTIVITY_CLEAR_TOP) {
     val intent = Intent(this, MainActivity::class.java)
-        .apply { flags = Intent.FLAG_ACTIVITY_CLEAR_TOP }
+        .apply { flags = flag }
     startActivity(intent)
+}
+
+fun AppCompatActivity.navigateToMainActivity(json: String) {
+
 }
 
 fun AppCompatActivity.navigateToLoginActivity() {

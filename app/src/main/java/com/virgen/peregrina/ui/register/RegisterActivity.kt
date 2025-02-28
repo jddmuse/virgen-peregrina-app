@@ -13,13 +13,14 @@ import com.hbb20.CountryCodePicker
 import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.ui.dialog.LoadingDialogView
 import com.virgen.peregrina.ui.register.enumerator.EnumRegisterInputType
+import com.virgen.peregrina.util.navigateToLoginActivity
+import com.virgen.peregrina.util.navigateToMainActivity
 import com.virgen.peregrina.util.view.IView
 import com.virgen.peregrina.util.view.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class RegisterActivity : AppCompatActivity(), IView,
-    CountryCodePicker.OnCountryChangeListener {
+class RegisterActivity : AppCompatActivity(), IView {
 
     companion object {
         private const val TAG = "RegisterActivity"
@@ -34,8 +35,8 @@ class RegisterActivity : AppCompatActivity(), IView,
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initView()
-        initListeners()
         initObservers()
+        initListeners()
     }
 
     override fun initView() {
@@ -57,13 +58,9 @@ class RegisterActivity : AppCompatActivity(), IView,
                     EnumRegisterInputType.COUNTRY_CODE -> {}
                 }
             }
-            viewModel.formValidatedEvent.observe(this) { value ->
-                if(value) {
-                    viewModel.register()
-                }
-            }
             viewModel.registerFinishedEvent.observe(this) {
-                startActivity(Intent(this, MainActivity::class.java))
+                val flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                navigateToMainActivity(flags)
             }
             viewModel.loading.observe(this) { value ->
                 if(value.first)
@@ -74,7 +71,7 @@ class RegisterActivity : AppCompatActivity(), IView,
             viewModel.error.observe(this) { value: String ->
                 MaterialAlertDialogBuilder(this)
                     .setMessage(value.ifEmpty { getString(R.string.error_generic) })
-                    .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which ->  }
+                    .setPositiveButton(getString(R.string.action_button_yes)) { dialog, which -> }
                     .show()
             }
         } catch (ex: Exception) {
@@ -86,19 +83,19 @@ class RegisterActivity : AppCompatActivity(), IView,
         try {
             with(binding) {
                 emailEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, EnumRegisterInputType.EMAIL)
+                    viewModel.onValueChanged(it?.toString() ?: "", EnumRegisterInputType.EMAIL)
                 }
                 passwordEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, EnumRegisterInputType.PASSWORD)
+                    viewModel.onValueChanged(it?.toString() ?: "", EnumRegisterInputType.PASSWORD)
                 }
                 nameEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, EnumRegisterInputType.NAME)
+                    viewModel.onValueChanged(it?.toString() ?: "", EnumRegisterInputType.NAME)
                 }
                 lastNameEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, EnumRegisterInputType.LAST_NAME)
+                    viewModel.onValueChanged(it?.toString() ?: "", EnumRegisterInputType.LAST_NAME)
                 }
                 addressEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, EnumRegisterInputType.ADDRESS)
+                    viewModel.onValueChanged(it?.toString() ?: "", EnumRegisterInputType.ADDRESS)
                 }
                 countryEditText.setOnClickListener {
                     with(binding) {
@@ -114,23 +111,21 @@ class RegisterActivity : AppCompatActivity(), IView,
                     }
                 }
                 cityEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, EnumRegisterInputType.CITY)
+                    viewModel.onValueChanged(it?.toString() ?: "", EnumRegisterInputType.CITY)
                 }
                 cellphoneEditText.addTextChangedListener {
-                    viewModel.onValueChanged(it, EnumRegisterInputType.CELLPHONE)
+                    viewModel.onValueChanged(it?.toString() ?: "", EnumRegisterInputType.CELLPHONE)
                 }
                 actionButton.setSafeOnClickListener {
-                    viewModel.validateForm()
+                    viewModel.register()
                 }
-                countryCodePicker.setOnCountryChangeListener(this@RegisterActivity)
+                countryCodePicker.setOnCountryChangeListener {
+                    //
+                }
 
             }
         } catch (ex: Exception) {
             Log.e(TAG, "initListeners(): Exception -> $ex")
         }
-    }
-
-    override fun onCountrySelected() {
-        //
     }
 }

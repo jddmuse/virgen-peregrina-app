@@ -37,9 +37,6 @@ class RegisterViewModel @Inject constructor(
     private var setAddress: String = EMPTY_STRING
 
     /************* Events ****************************/
-    private val _formValidatedEvent = MutableLiveData<Boolean>()
-    val formValidatedEvent: LiveData<Boolean> get() = _formValidatedEvent
-
     private val _registerFinishedEvent = MutableLiveData<Boolean>()
     val registerFinishedEvent: LiveData<Boolean> get() = _registerFinishedEvent
 
@@ -60,117 +57,198 @@ class RegisterViewModel @Inject constructor(
     val errorMsg: LiveData<String?> get() = _errorMsg
 
 
-    fun onValueChanged(value: Any?, inputType: EnumRegisterInputType) {
+    fun onValueChanged(value: String, inputType: EnumRegisterInputType) {
         try {
             Log.i(TAG, "METHOD CALLED: onValueChanged() PARAMS: $value, $inputType")
-            val valueAux = value as String? ?: EMPTY_STRING
-            if (valueAux.isEmpty())
-                _errorEditText.value = Pair(inputType, resourceProvider.getStringResource(R.string.error_field_required))
-            else
-                _errorEditText.value = Pair(inputType, null)
             when (inputType) {
-                EnumRegisterInputType.NAME -> setName = valueAux
-                EnumRegisterInputType.LAST_NAME -> setLastName = valueAux
-                EnumRegisterInputType.ADDRESS -> setAddress = valueAux
-                EnumRegisterInputType.COUNTRY -> setCountry = valueAux.uppercase()
-                EnumRegisterInputType.CITY -> setCity = valueAux.uppercase()
-                EnumRegisterInputType.COUNTRY_CODE -> setCountryCode = valueAux
-                EnumRegisterInputType.CELLPHONE -> setCellphone = valueAux
-                EnumRegisterInputType.EMAIL -> setEmail = valueAux
-                EnumRegisterInputType.PASSWORD -> setPassword = valueAux
+                EnumRegisterInputType.NAME -> {
+                    if(value.isEmpty()) {
+                        _errorEditText.value = Pair(
+                            EnumRegisterInputType.NAME,
+                            resourceProvider.getStringResource(R.string.error_field_required)
+                        )
+                        setName = ""
+                        return
+                    }
+                    setName = value.uppercase()
+                }
+                EnumRegisterInputType.LAST_NAME -> {
+                    if(value.isEmpty()) {
+                        _errorEditText.value = Pair(
+                            EnumRegisterInputType.LAST_NAME,
+                            resourceProvider.getStringResource(R.string.error_field_required)
+                        )
+                        setLastName = ""
+                        return
+                    }
+                    setLastName = value.uppercase()
+                }
+                EnumRegisterInputType.ADDRESS -> {
+                    if(value.isEmpty()) {
+                        _errorEditText.value = Pair(
+                            EnumRegisterInputType.ADDRESS,
+                            resourceProvider.getStringResource(R.string.error_field_required)
+                        )
+                        setAddress = ""
+                        return
+                    }
+                    setAddress = value.uppercase()
+                }
+                EnumRegisterInputType.COUNTRY -> {
+                    if(value.isEmpty()) {
+                        _errorEditText.value = Pair(
+                            EnumRegisterInputType.COUNTRY,
+                            resourceProvider.getStringResource(R.string.error_field_required)
+                        )
+                        setCountry = ""
+                        return
+                    }
+                    setCountry = value.uppercase()
+                }
+                EnumRegisterInputType.CITY -> {
+                    if(value.isEmpty()) {
+                        _errorEditText.value = Pair(
+                            EnumRegisterInputType.CITY,
+                            resourceProvider.getStringResource(R.string.error_field_required)
+                        )
+                        setCity = ""
+                        return
+                    }
+                    setCity = value.uppercase()
+                }
+                EnumRegisterInputType.COUNTRY_CODE -> {
+                    if(value.isEmpty()) {
+                        _errorEditText.value = Pair(
+                            EnumRegisterInputType.COUNTRY_CODE,
+                            resourceProvider.getStringResource(R.string.error_field_required)
+                        )
+                        setCountryCode = ""
+                        return
+                    }
+                    setCountryCode = value
+                }
+                EnumRegisterInputType.CELLPHONE -> {
+                    if(value.isEmpty()) {
+                        _errorEditText.value = Pair(
+                            EnumRegisterInputType.CELLPHONE,
+                            resourceProvider.getStringResource(R.string.error_field_required)
+                        )
+                        setCellphone = ""
+                        return
+                    }
+                    setCellphone = value
+                }
+                EnumRegisterInputType.EMAIL -> {
+                    if(value.isEmpty()) {
+                        _errorEditText.value = Pair(
+                            EnumRegisterInputType.EMAIL,
+                            resourceProvider.getStringResource(R.string.error_field_required)
+                        )
+                        setEmail = ""
+                        return
+                    }
+                    setEmail = value.uppercase()
+                }
+                EnumRegisterInputType.PASSWORD -> {
+                    if(value.isEmpty()) {
+                        _errorEditText.value = Pair(
+                            EnumRegisterInputType.PASSWORD,
+                            resourceProvider.getStringResource(R.string.error_field_required)
+                        )
+                        setPassword = ""
+                        return
+                    }
+                    setPassword = value
+                }
             }
         } catch (ex: Exception) {
             Log.e(TAG, "onValueChanged() -> $ex")
         }
     }
 
-    fun validateForm() {
-        if (setName.isEmpty())
-            _errorEditText.value = Pair(
-                EnumRegisterInputType.NAME,
-                resourceProvider.getStringResource(R.string.error_field_required)
-            )
-        else
-            _errorEditText.value = Pair(EnumRegisterInputType.NAME, null)
-
-        if (setLastName.isEmpty())
-            _errorEditText.value = Pair(
-                EnumRegisterInputType.LAST_NAME,
-                resourceProvider.getStringResource(R.string.error_field_required)
-            )
-        else
-            _errorEditText.value = Pair(EnumRegisterInputType.LAST_NAME, null)
-
-        if (setEmail.isEmpty())
-            _errorEditText.value = Pair(
-                EnumRegisterInputType.EMAIL,
-                resourceProvider.getStringResource(R.string.error_field_required)
-            )
-        else
-            _errorEditText.value = Pair(EnumRegisterInputType.EMAIL, null)
-
-        if (setCity.isEmpty())
-            _errorEditText.value = Pair(
-                EnumRegisterInputType.CITY,
-                resourceProvider.getStringResource(R.string.error_field_required)
-            )
-        else
-            _errorEditText.value = Pair(EnumRegisterInputType.CITY, null)
-
-        if (setCountry.isEmpty())
-            _errorEditText.value = Pair(
-                EnumRegisterInputType.COUNTRY,
-                resourceProvider.getStringResource(R.string.error_field_required)
-            )
-        else
-            _errorEditText.value = Pair(EnumRegisterInputType.COUNTRY, null)
-
-        if (setCountryCode.isEmpty())
-            _errorEditText.value = Pair(
-                EnumRegisterInputType.COUNTRY,
-                resourceProvider.getStringResource(R.string.error_field_required)
-            )
-        else
-            _errorEditText.value = Pair(EnumRegisterInputType.COUNTRY, null)
-
-        if (setCellphone.isEmpty())
-            _errorEditText.value = Pair(
-                EnumRegisterInputType.CELLPHONE,
-                resourceProvider.getStringResource(R.string.error_field_required)
-            )
-        else
-            _errorEditText.value = Pair(EnumRegisterInputType.CELLPHONE, null)
-
-        if (setAddress.isEmpty())
-            _errorEditText.value = Pair(
-                EnumRegisterInputType.ADDRESS,
-                resourceProvider.getStringResource(R.string.error_field_required)
-            )
-        else
-            _errorEditText.value = Pair(EnumRegisterInputType.ADDRESS, null)
-
-        if (setPassword.isEmpty())
-            _errorEditText.value = Pair(
-                EnumRegisterInputType.PASSWORD,
-                resourceProvider.getStringResource(R.string.error_field_required)
-            )
-        else
-            _errorEditText.value = Pair(EnumRegisterInputType.PASSWORD, null)
-
-        if(setName.isNotEmpty()
-            && setLastName.isNotEmpty()
-            && setEmail.isNotEmpty()
-            && setCity.isNotEmpty()
-            && setCountry.isNotEmpty()
-            && setCountryCode.isNotEmpty()
-            && setCellphone.isNotEmpty()
-            && setAddress.isNotEmpty()
-            && setPassword.isNotEmpty()) {
-            _formValidatedEvent.value = true
+    private fun valid(): Boolean {
+        return when {
+            setName.isEmpty() -> {
+                _errorEditText.value = Pair(
+                    EnumRegisterInputType.NAME,
+                    resourceProvider.getStringResource(R.string.error_field_required)
+                )
+                false
+            }
+            setLastName.isEmpty() -> {
+                _errorEditText.value = Pair(
+                    EnumRegisterInputType.LAST_NAME,
+                    resourceProvider.getStringResource(R.string.error_field_required)
+                )
+                false
+            }
+            setEmail.isEmpty() -> {
+                _errorEditText.value = Pair(
+                    EnumRegisterInputType.EMAIL,
+                    resourceProvider.getStringResource(R.string.error_field_required)
+                )
+                false
+            }
+            setCity.isEmpty() -> {
+                _errorEditText.value = Pair(
+                    EnumRegisterInputType.CITY,
+                    resourceProvider.getStringResource(R.string.error_field_required)
+                )
+                false
+            }
+            setCountry.isEmpty() -> {
+                _errorEditText.value = Pair(
+                    EnumRegisterInputType.COUNTRY,
+                    resourceProvider.getStringResource(R.string.error_field_required)
+                )
+                false
+            }
+            setCountryCode.isEmpty() -> {
+                _errorEditText.value = Pair(
+                    EnumRegisterInputType.COUNTRY,
+                    resourceProvider.getStringResource(R.string.error_field_required)
+                )
+                false
+            }
+            setCellphone.isEmpty() -> {
+                _errorEditText.value = Pair(
+                    EnumRegisterInputType.CELLPHONE,
+                    resourceProvider.getStringResource(R.string.error_field_required)
+                )
+                false
+            }
+            setAddress.isEmpty() -> {
+                _errorEditText.value = Pair(
+                    EnumRegisterInputType.ADDRESS,
+                    resourceProvider.getStringResource(R.string.error_field_required)
+                )
+                false
+            }
+            setPassword.isEmpty() -> {
+                _errorEditText.value = Pair(
+                    EnumRegisterInputType.PASSWORD,
+                    resourceProvider.getStringResource(R.string.error_field_required)
+                )
+                false
+            }
+            else -> {
+                _errorEditText.value = Pair(EnumRegisterInputType.NAME, null)
+                _errorEditText.value = Pair(EnumRegisterInputType.LAST_NAME, null)
+                _errorEditText.value = Pair(EnumRegisterInputType.EMAIL, null)
+                _errorEditText.value = Pair(EnumRegisterInputType.CITY, null)
+                _errorEditText.value = Pair(EnumRegisterInputType.COUNTRY, null)
+                _errorEditText.value = Pair(EnumRegisterInputType.COUNTRY_CODE, null)
+                _errorEditText.value = Pair(EnumRegisterInputType.CELLPHONE, null)
+                _errorEditText.value = Pair(EnumRegisterInputType.ADDRESS, null)
+                _errorEditText.value = Pair(EnumRegisterInputType.PASSWORD, null)
+                true
+            }
         }
     }
 
     fun register() {
+        if(!valid()) return
+
         _loading.value = Pair(true, "")
         val data = CreateUserRequest(
             name = setName,

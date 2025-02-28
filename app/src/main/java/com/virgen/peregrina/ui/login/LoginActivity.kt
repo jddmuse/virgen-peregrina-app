@@ -15,6 +15,7 @@ import com.virgen.peregrina.MainActivity
 import com.virgen.peregrina.ui.dialog.LoadingDialogView
 import com.virgen.peregrina.ui.login.enumerator.EnumLoginInputType
 import com.virgen.peregrina.ui.register.RegisterActivity
+import com.virgen.peregrina.util.navigateToMainActivity
 import com.virgen.peregrina.util.view.IView
 import com.virgen.peregrina.util.view.setSafeOnClickListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,7 +60,8 @@ class LoginActivity : AppCompatActivity(), IView {
     override fun initObservers() {
         viewModel.loginSuccessEvent.observe(this) {
             Log.i(TAG, "LOGIN SUCCESSFULLY!!!")
-            startActivity(Intent(this, MainActivity::class.java))
+            val flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            navigateToMainActivity(flags)
         }
         viewModel.errorEditText.observe(this) { pair ->
             when (pair.first) {

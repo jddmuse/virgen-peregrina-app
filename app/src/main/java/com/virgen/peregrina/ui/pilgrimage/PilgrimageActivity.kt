@@ -55,13 +55,13 @@ class PilgrimageActivity : AppCompatActivity(), IView {
 
     override fun initView() {
         loadingDialog = LoadingDialogView(this)
-        val daysOff = replica.pilgrimages?.filter { it.startDate != null && it.endDate != null }?.map { DatePickerDaysOffRange(it.startDate!!, it.endDate!!) } ?: emptyList()
-        binding.startDatePicker
-            .setDaysOff(daysOff)
-            .build()
-        binding.endDatePicker
-            .setDaysOff(daysOff)
-            .build()
+
+        val daysOff = replica.pilgrimages
+            ?.filter { it.startDate != null && it.endDate != null }
+            ?.map { DatePickerDaysOffRange(it.startDate!!, it.endDate!!) } ?: emptyList()
+
+        binding.startDatePicker.setDaysOff(daysOff).build()
+        binding.endDatePicker.setDaysOff(daysOff).build()
     }
 
     override fun initObservers() {
